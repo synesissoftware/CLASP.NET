@@ -1,0 +1,24 @@
+
+# directories (by name)
+
+bin/
+obj/
+TestResults/
+
+# directories (by pattern)
+
+# files (by name)
+
+Local.testsettings
+TraceAndTestImpact.testsettings
+
+# files (by pattern)
+
+*.*~
+
+*.csproj.user
+*.scc
+*.suo
+*.swp
+
+
