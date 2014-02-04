@@ -1,7 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FDAF50C-594F-4A9C-B688-5FB617C56AFD}"
+	ProjectSection(SolutionItems) = preProject
+		CLASP.NET.vsmdi = CLASP.NET.vsmdi
+		design-notes.txt = design-notes.txt
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit.CLASP.1", "test\unit\Test.Unit.CLASP.1\Test.Unit.CLASP.1.csproj", "{194CB5A0-973D-48C7-9A93-558540723167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLASP.Core", "src\CLASP.Core\CLASP.Core.csproj", "{7923339F-23C3-42B8-8D9F-7D3ABC297091}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = CLASP.NET.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{194CB5A0-973D-48C7-9A93-558540723167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{194CB5A0-973D-48C7-9A93-558540723167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{194CB5A0-973D-48C7-9A93-558540723167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{194CB5A0-973D-48C7-9A93-558540723167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7923339F-23C3-42B8-8D9F-7D3ABC297091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7923339F-23C3-42B8-8D9F-7D3ABC297091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7923339F-23C3-42B8-8D9F-7D3ABC297091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7923339F-23C3-42B8-8D9F-7D3ABC297091}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
