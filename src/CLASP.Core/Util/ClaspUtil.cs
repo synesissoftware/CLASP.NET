@@ -14,6 +14,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
 	public static class ClaspUtil
 	{
+		#region Boolean parsing methods
+
 		public static bool ParseBool(string s)
 		{
 			Debug.Assert(null != s);
@@ -21,10 +23,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 			switch(s.ToLower())
 			{
 				case "yes":
-				case "true":
 					return true;
 				case "no":
-				case "false":
 					return false;
 				default:
 					return bool.Parse(s);
@@ -47,6 +47,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 					return bool.TryParse(s, out value);
 			}
 		}
+
+		#endregion
+
+		#region Usage methods
 
 		public static void ShowUsageAndQuit(Arguments args, int exitCode)
 		{
@@ -99,7 +103,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 			}
 		}
 
+		#endregion
+
 		#region Flags and Options Operations
+
 		public static bool FlagSpecified(Arguments args, string flagName)
 		{
 			foreach(Argument arg in args.Flags)
@@ -168,9 +175,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 		{
 			value = SearchOption<string>(args, optionName, (arg) => arg.Value);
 		}
+
 		#endregion
 
 		#region Implementation
+
 		delegate T Translate<T>(Argument arg);
 
 		private static T SearchOption<T>(Arguments args, string optionName, Translate<T> f)
@@ -187,6 +196,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
 			throw new MissingOptionException("option not specified", optionName);
 		}
+
 		private static T SearchOptionOrDefault<T>(Arguments args, string optionName, T defaultValue, Translate<T> f)
 		{
 			foreach(Argument arg in args.Options)
@@ -212,6 +222,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 				}
 			}
 		}
+
 		#endregion
 	}
 }
