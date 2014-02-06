@@ -54,7 +54,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
 		public static void ShowUsageAndQuit(Arguments args, int exitCode)
 		{
-			TextWriter o = Console.Out;
+			TextWriter writer = Console.Out;
 
 			if(null != args.Aliases)
 			{
@@ -65,26 +65,26 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 						case ArgumentType.Flag:
 							if(!String.IsNullOrEmpty(alias.GivenName))
 							{
-								o.WriteLine("  {0}", alias.GivenName);
+								writer.WriteLine("  {0}", alias.GivenName);
 							}
 							if(!String.IsNullOrEmpty(alias.ResolvedName))
 							{
-								o.WriteLine("  {0}", alias.ResolvedName);
+								writer.WriteLine("  {0}", alias.ResolvedName);
 							}
-							o.WriteLine("    {0}", alias.Description);
-							o.WriteLine();
+							writer.WriteLine("    {0}", alias.Description);
+							writer.WriteLine();
 							break;
 						case ArgumentType.Option:
 							if(!String.IsNullOrEmpty(alias.GivenName))
 							{
-								o.WriteLine("  {0}", alias.GivenName);
+								writer.WriteLine("  {0}", alias.GivenName);
 							}
 							if(!String.IsNullOrEmpty(alias.ResolvedName))
 							{
-								o.WriteLine("  {0}", alias.ResolvedName);
+								writer.WriteLine("  {0}", alias.ResolvedName);
 							}
-							o.WriteLine("    {0}", alias.Description);
-							o.WriteLine();
+							writer.WriteLine("    {0}", alias.Description);
+							writer.WriteLine();
 							break;
 					}
 				}
