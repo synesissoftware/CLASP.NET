@@ -8,11 +8,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 	using SynesisSoftware.SystemTools.Clasp.Internal;
 
 	using System;
-	//using System.Collections.Generic;
+	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.IO;
-	//using System.Linq;
-	//using System.Text;
 
 	public static class ClaspUtil
 	{
@@ -54,43 +52,53 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
 		public static void ShowUsageAndQuit(Arguments args, int exitCode)
 		{
-			TextWriter o = Console.Out;
+			ShowUsageAndQuit(args.Aliases, exitCode);
+		}
 
-			if(null != args.Aliases)
+		public static void ShowUsageAndQuit(IEnumerable<Alias> aliases, int exitCode)
+		{
+			TextWriter writer = (0 == exitCode) ? Console.Out : Console.Error;
+
+			ShowUsage(aliases, writer);
+
+			Environment.Exit(exitCode);
+		}
+
+		public static void ShowUsage(IEnumerable<Alias> aliases, TextWriter writer)
+		{
+			if(null != aliases)
 			{
-				foreach(Alias alias in args.Aliases)
+				foreach(Alias alias in aliases)
 				{
 					switch(alias.Type)
 					{
 						case ArgumentType.Flag:
 							if(!String.IsNullOrEmpty(alias.GivenName))
 							{
-								o.WriteLine("  {0}", alias.GivenName);
+								writer.WriteLine("  {0}", alias.GivenName);
 							}
 							if(!String.IsNullOrEmpty(alias.ResolvedName))
 							{
-								o.WriteLine("  {0}", alias.ResolvedName);
+								writer.WriteLine("  {0}", alias.ResolvedName);
 							}
-							o.WriteLine("    {0}", alias.Description);
-							o.WriteLine();
+							writer.WriteLine("    {0}", alias.Description);
+							writer.WriteLine();
 							break;
 						case ArgumentType.Option:
 							if(!String.IsNullOrEmpty(alias.GivenName))
 							{
-								o.WriteLine("  {0}", alias.GivenName);
+								writer.WriteLine("  {0}", alias.GivenName);
 							}
 							if(!String.IsNullOrEmpty(alias.ResolvedName))
 							{
-								o.WriteLine("  {0}", alias.ResolvedName);
+								writer.WriteLine("  {0}", alias.ResolvedName);
 							}
-							o.WriteLine("    {0}", alias.Description);
-							o.WriteLine();
+							writer.WriteLine("    {0}", alias.Description);
+							writer.WriteLine();
 							break;
 					}
 				}
 			}
-
-			Environment.Exit(exitCode);
 		}
 
 		#region Flags and Options Operations
