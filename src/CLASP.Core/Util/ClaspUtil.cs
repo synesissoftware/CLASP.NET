@@ -35,14 +35,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 		{
 			Debug.Assert(null != s);
 
-			switch(s)
+			switch(s.ToLower())
 			{
 				case "yes":
-				case "Yes":
 					value = true;
 					return true;
 				case "no":
-				case "No":
 					value = false;
 					return true;
 				default:
