@@ -10,6 +10,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 	public sealed class Alias
 	{
 		#region Construction
+
 		public Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validOptions)
 		{
 			Debug.Assert(null != givenName || null != resolvedName);
@@ -23,16 +24,29 @@ namespace SynesisSoftware.SystemTools.Clasp
 			: this(type, shortName, longName, null)
 		{
 		}
+
+		#endregion
+
+		#region Creator methods
+
+		public static Alias Flag(string givenName, string resolvedName, string description)
+		{
+			return new Alias(ArgumentType.Flag, givenName, resolvedName, description);
+		}
+
 		#endregion
 
 		#region Operations
+
 		public override string ToString()
 		{
 			return String.Format("{{{0}, {1}, {2}, {3}}}", Type, GivenName, ResolvedName, Description);
 		}
+
 		#endregion
 
 		#region Properties
+
 		/// <summary>
 		///  The alias type.
 		/// </summary>
@@ -65,6 +79,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 			get;
 			set;
 		}
+
 		#endregion
 	}
 }
