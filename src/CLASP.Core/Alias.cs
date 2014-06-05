@@ -1,6 +1,6 @@
 ﻿
 // Created: 
-// Updated: 3rd February 2014
+// Updated: 2nd June 2014
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -25,6 +25,16 @@ namespace SynesisSoftware.SystemTools.Clasp
 		{
 		}
 
+		private Alias(string description)
+		{
+			Debug.Assert(!String.IsNullOrEmpty(description));
+
+			Type = ArgumentType.None;
+			GivenName = null;
+			ResolvedName = null;
+			Description = description;
+		}
+
 		#endregion
 
 		#region Creator methods
@@ -32,6 +42,11 @@ namespace SynesisSoftware.SystemTools.Clasp
 		public static Alias Flag(string givenName, string resolvedName, string description)
 		{
 			return new Alias(ArgumentType.Flag, givenName, resolvedName, description);
+		}
+
+		public static Alias SectionSeparator(string description)
+		{
+			return new Alias(description);
 		}
 
 		#endregion
