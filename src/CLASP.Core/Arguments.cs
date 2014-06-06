@@ -216,6 +216,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 											}
 										}
 										else
+										if(ArgumentType.Flag == alias.Type)
 										{
 											if(null == alias.ResolvedName)
 											{
@@ -261,6 +262,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 													lastOption = AddOption(Argument.NewOption(arg, alias2.ResolvedName, null, i));
 												}
 												else
+												if(ArgumentType.Flag == alias2.Type)
 												{
 													AddFlag(Argument.NewFlag(arg, alias2.ResolvedName, i));
 												}
