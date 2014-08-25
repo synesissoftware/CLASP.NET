@@ -420,6 +420,39 @@ namespace SynesisSoftware.SystemTools.Clasp
 			return false;
 		}
 
+		public bool CheckOption(string resolvedName, out string value)
+		{
+			value = null;
+
+			foreach(Argument arg in this.options)
+			{
+				if(arg.ResolvedName == resolvedName)
+				{
+					value = arg.Value;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool CheckOption(string resolvedName, out int value)
+		{
+			string value_s;
+
+			value = 0;
+
+			if(CheckOption(resolvedName, out value_s))
+			{
+				value = int.Parse(value_s);
+
+				return true;
+			}
+
+			return false;
+		}
+
 		/// <summary>
 		///  Searches the flags for the given argument name
 		/// </summary>
