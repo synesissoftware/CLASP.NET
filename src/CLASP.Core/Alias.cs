@@ -1,6 +1,6 @@
 ﻿
 // Created: 
-// Updated: 2nd June 2014
+// Updated: 4th April 2015
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -11,7 +11,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     {
         #region Construction
 
-        public Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validOptions)
+        public Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
         {
             Debug.Assert(null != givenName || null != resolvedName);
 
@@ -19,6 +19,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             GivenName       =   givenName;
             ResolvedName    =   resolvedName;
             Description     =   description;
+            ValidValues     =   validValues;
         }
         public Alias(ArgumentType type, string shortName, string longName)
             : this(type, shortName, longName, null)
@@ -42,6 +43,16 @@ namespace SynesisSoftware.SystemTools.Clasp
         public static Alias Flag(string givenName, string resolvedName, string description)
         {
             return new Alias(ArgumentType.Flag, givenName, resolvedName, description);
+        }
+
+        public static Alias Option(string givenName, string resolvedName, string description, params string[] validOptions)
+        {
+            return new Alias(ArgumentType.Option, givenName, resolvedName, description, validOptions);
+        }
+
+        public static Alias Option(string givenName, string resolvedName, string description)
+        {
+            return new Alias(ArgumentType.Option, givenName, resolvedName, description);
         }
 
         public static Alias SectionSeparator(string description)
@@ -90,6 +101,15 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The description of the alias.
         /// </summary>
         public string Description
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///  The valid values for an option.
+        /// </summary>
+        public string[] ValidValues
         {
             get;
             set;
