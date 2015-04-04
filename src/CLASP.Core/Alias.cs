@@ -15,10 +15,10 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             Debug.Assert(null != givenName || null != resolvedName);
 
-            Type = type;
-            GivenName = givenName;
-            ResolvedName = resolvedName;
-            Description = description;
+            Type            =   type;
+            GivenName       =   givenName;
+            ResolvedName    =   resolvedName;
+            Description     =   description;
         }
         public Alias(ArgumentType type, string shortName, string longName)
             : this(type, shortName, longName, null)
@@ -29,10 +29,10 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
 
-            Type = ArgumentType.None;
-            GivenName = null;
-            ResolvedName = null;
-            Description = description;
+            Type            =   ArgumentType.None;
+            GivenName       =   null;
+            ResolvedName    =   null;
+            Description     =   description;
         }
 
         #endregion
