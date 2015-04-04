@@ -4,11 +4,11 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
-	public class UnusedArgumentException
-		: ArgumentException
-	{
-		public UnusedArgumentException(string message, string optionName)
-			: base(message, optionName)
-		{ }
-	}
+    public class UnusedArgumentException
+        : ArgumentException
+    {
+        public UnusedArgumentException(string message, string optionName)
+            : base(message, optionName)
+        {}
+    }
 }

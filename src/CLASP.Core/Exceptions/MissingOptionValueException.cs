@@ -4,13 +4,13 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
-	using System;
+    using System;
 
-	public class MissingOptionValueException
-		: ArgumentException
-	{
-		public MissingOptionValueException(string message, string optionName)
-			: base(message, optionName)
-		{ }
-	}
+    public class MissingOptionValueException
+        : ArgumentException
+    {
+        public MissingOptionValueException(string message, string optionName)
+            : base(message, optionName)
+        {}
+    }
 }

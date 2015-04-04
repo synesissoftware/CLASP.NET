@@ -4,13 +4,13 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
-	using System;
+    using System;
 
-	public abstract class ClaspException
-		: Exception
-	{
-		public ClaspException(string message)
-			: base(message)
-		{}
-	}
+    public abstract class ClaspException
+        : Exception
+    {
+        public ClaspException(string message)
+            : base(message)
+        {}
+    }
 }

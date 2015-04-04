@@ -4,11 +4,11 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
-	public class InvalidOptionValueException
-		: ArgumentException
-	{
-		public InvalidOptionValueException(string message, string optionName)
-			: base(message, optionName)
-		{ }
-	}
+    public class InvalidOptionValueException
+        : ArgumentException
+    {
+        public InvalidOptionValueException(string message, string optionName)
+            : base(message, optionName)
+        {}
+    }
 }
