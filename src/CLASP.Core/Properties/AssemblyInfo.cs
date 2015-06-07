@@ -1,6 +1,6 @@
 ﻿
 // Created: 
-// Updated: 3rd February 2014
+// Updated: 7th June 2015
 
 #pragma warning disable 1607
 
@@ -12,8 +12,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
-[assembly: AssemblyProduct("CLASP.Core")]
-[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2009-2014")]
+[assembly: AssemblyProduct("CLASP.NET")]
+[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2009-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
