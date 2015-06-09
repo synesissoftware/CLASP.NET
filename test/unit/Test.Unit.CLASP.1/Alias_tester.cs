@@ -32,11 +32,24 @@ namespace Test.Unit.CLASP._1
                     string  resolvedName    =   splits[1];
                     string  description     =   splits[2];
 
-                    givenName = String.IsNullOrEmpty(givenName) ? null : givenName;
-                    resolvedName = String.IsNullOrEmpty(resolvedName) ? null : resolvedName;
-                    description = String.IsNullOrEmpty(description) ? null : description;
+                    givenName       =   String.IsNullOrEmpty(givenName) ? null : givenName;
+                    resolvedName    =   String.IsNullOrEmpty(resolvedName) ? null : resolvedName;
+                    description     =   String.IsNullOrEmpty(description) ? null : description;
 
-                    Alias alias = new Alias(argType, givenName, resolvedName, description);
+                    Alias alias = null;
+
+                    switch(argType)
+                    {
+                        case ArgumentType.Flag:
+                            alias = Alias.Flag(givenName, resolvedName, description);
+                            break;
+                        case ArgumentType.Option:
+                            alias = Alias.Option(givenName, resolvedName, description);
+                            break;
+                        case ArgumentType.Value:
+                        case ArgumentType.None:
+                            continue;
+                    }
 
                     Assert.AreEqual(argType, alias.Type);
                     Assert.AreEqual(givenName, alias.GivenName);

@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th June 2015
+// Updated: 9th June 2015
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -9,6 +9,9 @@ namespace SynesisSoftware.SystemTools.Clasp
     /// </summary>
     public enum ArgumentType
     {
+        /// <summary>
+        ///  The argument type is unspecified.
+        /// </summary>
         None    =   0,
         /// <summary>
         ///  The argument is a <b>flag</b>.

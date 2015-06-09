@@ -280,7 +280,7 @@ namespace Test.Unit.CLASP._1
         [TestMethod]
         public void Test_NextOption_1()
         {
-            Alias[] aliases = { new Alias(ArgumentType.Option, "--width", null) };
+            Alias[] aliases = { Alias.Option("--width", null) };
 
             string[] args = { "--width", "10" };
 
@@ -301,7 +301,7 @@ namespace Test.Unit.CLASP._1
         [TestMethod]
         public void Test_NextOption_2()
         {
-            Alias[] aliases = { new Alias(ArgumentType.Option, "--width", "--width") };
+            Alias[] aliases = { Alias.Option("--width", "--width") };
 
             string[] args = { "--width", "10" };
 
@@ -324,8 +324,8 @@ namespace Test.Unit.CLASP._1
         {
             Alias[] aliases =
             {
-                new Alias(ArgumentType.Option, "--width", null),
-                new Alias(ArgumentType.Option, "-W", "--width")
+                Alias.Option("--width", null),
+                Alias.Option("-W", "--width"),
             };
 
             string[] args = { "-W", "10" };
@@ -438,10 +438,10 @@ namespace Test.Unit.CLASP._1
         public void Test_Flag_5()
         {
             Alias[] aliases =
-                {
-                    new Alias(ArgumentType.Flag, "-a", "--append"),
-                    new Alias(ArgumentType.Flag, "-i", "--ignore-interrupts"),
-                };
+            {
+                Alias.Flag("-a", "--append"),
+                Alias.Flag("-i", "--ignore-interrupts"),
+            };
 
             string[] args = { "-a" };
 
@@ -464,7 +464,7 @@ namespace Test.Unit.CLASP._1
         [TestMethod]
         public void Test_Aliases_1()
         {
-            Alias[] aliases = { new Alias(ArgumentType.Flag, "-D", "--debug=on") };
+            Alias[] aliases = { Alias.Flag("-D", "--debug=on") };
 
             string[] args = { "-D" };
 
@@ -554,7 +554,7 @@ namespace Test.Unit.CLASP._1
         [TestMethod]
         public void Test_Aliases_3()
         {
-            Alias[] aliases = { new Alias(ArgumentType.Flag, "-c", "--capture") };
+            Alias[] aliases = { Alias.Flag("-c", "--capture") };
 
             string[] args = { "-classpath" };
 
@@ -623,7 +623,7 @@ namespace Test.Unit.CLASP._1
         [TestMethod]
         public void Test_Aliases_4()
         {
-            Alias[] aliases = { new Alias(ArgumentType.Flag, "-D", "--debug=on") };
+            Alias[] aliases = { Alias.Flag("-D", "--debug=on") };
 
             string[] args = { "-D", "-h" };
 

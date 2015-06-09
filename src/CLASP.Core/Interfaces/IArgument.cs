@@ -1,9 +1,12 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th June 2015
+// Updated: 9th June 2015
 
 namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 {
+    /// <summary>
+    ///  Argument interface.
+    /// </summary>
     public interface IArgument
     {
         /// <summary>

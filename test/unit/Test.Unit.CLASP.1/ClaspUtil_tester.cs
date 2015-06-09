@@ -31,7 +31,7 @@ namespace Test.Unit.CLASP._1
             Assert.IsFalse(ClaspUtil.ParseBool("false"));
             Assert.IsFalse(ClaspUtil.ParseBool("False"));
             Assert.IsFalse(ClaspUtil.ParseBool("FALSE"));
-        
+
             Assert.IsTrue(ClaspUtil.ParseBool("yes"));
             Assert.IsTrue(ClaspUtil.ParseBool("Yes"));
             Assert.IsTrue(ClaspUtil.ParseBool("YES"));

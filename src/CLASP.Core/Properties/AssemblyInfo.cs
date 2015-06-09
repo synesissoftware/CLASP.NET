@@ -1,6 +1,6 @@
 ﻿
 // Created: 
-// Updated: 7th June 2015
+// Updated: 9th June 2015
 
 #pragma warning disable 1607
 
@@ -20,6 +20,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("edcef3a1-9147-4dc1-9d38-ef411157ccfe")]
 
-[assembly: AssemblyVersion("0.3.101.1")]
-[assembly: AssemblyFileVersion("0.3.101.1")]
-[assembly: AssemblyInformationalVersion("0.3 (public alpha 1)")]
+[assembly: AssemblyVersion("0.5.105.1")]
+[assembly: AssemblyFileVersion("0.5.105.1")]
+[assembly: AssemblyInformationalVersion("0.5 (public alpha 2)")]

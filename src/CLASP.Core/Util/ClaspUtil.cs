@@ -1,21 +1,36 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 5th June 2015
+// Updated: 9th June 2015
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
     using SynesisSoftware.SystemTools.Clasp.Exceptions;
     using SynesisSoftware.SystemTools.Clasp.Internal;
+    using SynesisSoftware.SystemTools.Clasp.Interfaces;
 
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
 
+    /// <summary>
+    ///  Utility class for additional CLASP-related functionality.
+    /// </summary>
     public static class ClaspUtil
     {
         #region Boolean parsing methods
-
+        /// <summary>
+        ///  Parses the given string for a <code>bool</code> value.
+        /// </summary>
+        /// <param name="s">
+        ///  The string to be parsed. May not be <code>null</code>.
+        /// </param>
+        /// <returns>
+        ///  The boolean value.
+        /// </returns>
+        /// <exception cref="System.FormatException">
+        ///  Thrown if the string cannot be parsed as boolean.
+        /// </exception>
         public static bool ParseBool(string s)
         {
             Debug.Assert(null != s);
@@ -31,6 +46,20 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
         }
 
+        /// <summary>
+        ///  Attemps to parse the given string for a <code>bool</code>
+        ///  value.
+        /// </summary>
+        /// <param name="s">
+        ///  The string to be parsed. May not be <code>null</code>.
+        /// </param>
+        /// <param name="value">
+        ///  The boolean value.
+        /// </param>
+        /// <returns>
+        ///  <b>true</b> if the string can be parsed; <b>false</b>
+        ///  otherwise.
+        /// </returns>
         public static bool TryParseBool(string s, out bool value)
         {
             Debug.Assert(null != s);
@@ -47,16 +76,30 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                     return bool.TryParse(s, out value);
             }
         }
-
         #endregion
 
         #region Usage methods
-
+        /// <summary>
+        ///  Shows usage for the attached aliases and exits the process
+        ///  with the given exit code.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated.
+        /// </param>
         public static void ShowUsageAndQuit(Arguments args, int exitCode)
         {
             ShowUsageAndQuit(args.Aliases, exitCode);
         }
 
+        /// <summary>
+        ///  Shows usage for the aliases and exits the process
+        ///  with the given exit code.
+        /// </summary>
+        /// <param name="aliases"></param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated.
+        /// </param>
         public static void ShowUsageAndQuit(IEnumerable<Alias> aliases, int exitCode)
         {
             TextWriter writer = (0 == exitCode) ? Console.Out : Console.Error;
@@ -66,6 +109,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             Environment.Exit(exitCode);
         }
 
+        /// <summary>
+        ///  Writes the usage to the given writer.
+        /// </summary>
+        /// <param name="aliases"></param>
+        /// <param name="writer"></param>
         public static void ShowUsage(IEnumerable<Alias> aliases, TextWriter writer)
         {
             if(null != aliases)
@@ -106,11 +154,19 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 }
             }
         }
-
         #endregion
 
-        #region Flags and Options Operations
-
+        #region Flags and options operations
+        /// <summary>
+        ///  Determines whether the given flag is specified.
+        /// </summary>
+        /// <param name="args">
+        /// </param>
+        /// <param name="flagName">
+        /// </param>
+        /// <returns>
+        ///
+        /// </returns>
         public static bool FlagSpecified(Arguments args, string flagName)
         {
             foreach(Argument arg in args.Flags)
@@ -124,27 +180,81 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             return false;
         }
 
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or returns the default value.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static short CheckOption(Arguments args, string optionName, short defaultValue)
         {
             return SearchOptionOrDefault(args, optionName, defaultValue, (arg) => short.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or returns the default value.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static int CheckOption(Arguments args, string optionName, int defaultValue)
         {
             return SearchOptionOrDefault(args, optionName, defaultValue, (arg) => int.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or returns the default value.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static long CheckOption(Arguments args, string optionName, long defaultValue)
         {
             return SearchOptionOrDefault(args, optionName, defaultValue, (arg) => long.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or returns the default value.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static bool CheckOption(Arguments args, string optionName, bool defaultValue)
         {
             return SearchOptionOrDefault(args, optionName, defaultValue, (arg) => ParseBool(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or returns the default value.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static string CheckOption(Arguments args, string optionName, string defaultValue)
         {
             return SearchOptionOrDefault(args, optionName, defaultValue, (arg) => arg.Value);
         }
-
 
         //public static short RequireOption(Arguments args, string optionName)
         //{
@@ -163,28 +273,98 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         //    return SearchOption(args, optionName, (arg) => arg.Value);
         //}
 
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or throws an exception.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="value"></param>
+        /// <exception cref="MissingOptionException">
+        ///  Thrown if the given option does not exist.
+        /// </exception>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static void RequireOption(Arguments args, string optionName, out short value)
         {
             value = SearchOption<short>(args, optionName, (arg) => short.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or throws an exception.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="value"></param>
+        /// <exception cref="MissingOptionException">
+        ///  Thrown if the given option does not exist.
+        /// </exception>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static void RequireOption(Arguments args, string optionName, out int value)
         {
             value = SearchOption<int>(args, optionName, (arg) => int.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or throws an exception.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="value"></param>
+        /// <exception cref="MissingOptionException">
+        ///  Thrown if the given option does not exist.
+        /// </exception>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static void RequireOption(Arguments args, string optionName, out long value)
         {
             value = SearchOption<long>(args, optionName, (arg) => long.Parse(arg.Value));
         }
+        /// <summary>
+        ///  Checks for the presence, and obtains the value, of the given
+        ///  option, or throws an exception.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="optionName"></param>
+        /// <param name="value"></param>
+        /// <exception cref="MissingOptionException">
+        ///  Thrown if the given option does not exist.
+        /// </exception>
+        /// <exception cref="InvalidOptionValueException">
+        ///  Thrown if the value cannot be converted to the required type.
+        /// </exception>
         public static void RequireOption(Arguments args, string optionName, out string value)
         {
             value = SearchOption<string>(args, optionName, (arg) => arg.Value);
         }
 
+        /// <summary>
+        ///  Verifies that all flags and options have been used, or throws
+        ///  an exception.
+        /// </summary>
+        /// <param name="args">
+        /// </param>
+        /// <exception cref="UnusedArgumentException">
+        ///  Thrown if any flags/options are not used.
+        /// </exception>
+        public static void VerifyAllOptionsUsed(Arguments args)
+        {
+            foreach(Argument arg in args.FlagsAndOptions)
+            {
+                if(!arg.Used)
+                {
+                    throw new UnusedArgumentException(arg.ResolvedName);
+                }
+            }
+        }
         #endregion
 
         #region Implementation
-
-        delegate T Translate<T>(Argument arg);
+        private delegate T Translate<T>(IArgument arg);
 
         private static T SearchOption<T>(Arguments args, string optionName, Translate<T> f)
         {
@@ -194,11 +374,18 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 {
                     arg.Used = true;
 
-                    return f(arg);
+                    try
+                    {
+                        return f(arg);
+                    }
+                    catch(System.FormatException x)
+                    {
+                        throw new InvalidOptionValueException(arg, optionName, typeof(T), x);
+                    }
                 }
             }
 
-            throw new MissingOptionException("option not specified", optionName);
+            throw new MissingOptionException(optionName);
         }
 
         private static T SearchOptionOrDefault<T>(Arguments args, string optionName, T defaultValue, Translate<T> f)
@@ -209,24 +396,19 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 {
                     arg.Used = true;
 
-                    return f(arg);
+                    try
+                    {
+                        return f(arg);
+                    }
+                    catch(System.FormatException x)
+                    {
+                        throw new InvalidOptionValueException(arg, optionName, typeof(T), x);
+                    }
                 }
             }
 
             return defaultValue;
         }
-
-        public static void VerifyAllOptionsUsed(Arguments args)
-        {
-            foreach(Argument arg in args.FlagsAndOptions)
-            {
-                if(!arg.Used)
-                {
-                    throw new UnusedArgumentException("unused argument", arg.ResolvedName);
-                }
-            }
-        }
-
         #endregion
     }
 }
