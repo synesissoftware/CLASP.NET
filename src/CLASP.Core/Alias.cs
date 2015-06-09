@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 8th June 2015
+// Updated: 9th April 2015
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -25,10 +25,16 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             Debug.Assert(null != givenName || null != resolvedName);
 
+            if(null == validValues)
+            {
+                validValues =   new string[0];
+            }
+
             Type            =   type;
             GivenName       =   givenName;
             ResolvedName    =   resolvedName;
             Description     =   description;
+            ValidValues     =   validValues;
         }
 
         /// <summary>
@@ -54,12 +60,12 @@ namespace SynesisSoftware.SystemTools.Clasp
             GivenName       =   null;
             ResolvedName    =   null;
             Description     =   description;
-        }
 
+            ValidValues     =   new string[0];
+        }
         #endregion
 
         #region Creator methods
-
         /// <summary>
         ///  Creates a flag alias.
         /// </summary>
@@ -140,18 +146,16 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             return String.Format("{{{0}, {1}, {2}, {3}}}", Type, GivenName, ResolvedName, Description);
         }
-
         #endregion
 
         #region Properties
-
         /// <summary>
         ///  The alias type.
         /// </summary>
         public ArgumentType Type
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The given name of the alias.
@@ -159,7 +163,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string GivenName
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The resolved name of the alias.
@@ -167,7 +171,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string ResolvedName
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The description of the alias.
@@ -175,9 +179,17 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string Description
         {
             get;
-            set;
+            private set;
         }
 
+        /// <summary>
+        ///  The valid values for an option.
+        /// </summary>
+        public string[] ValidValues
+        {
+            get;
+            private set;
+        }
         #endregion
     }
 }

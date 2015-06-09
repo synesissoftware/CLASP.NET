@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th June 2015
+// Updated: 9th June 2015
 
 namespace SynesisSoftware.SystemTools.Clasp.Internal
 {
@@ -14,11 +14,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         #region Construction
         private Argument(ArgumentType type, string givenName, string resolvedName, string value, int numHyphens, int index)
         {
-            Type = type;
-            GivenName = givenName;
-            ResolvedName = resolvedName;
-            Value = value;
-            Index = index;
+            Type            =   type;
+            GivenName       =   givenName;
+            ResolvedName    =   resolvedName;
+            Value           =   value;
+            Index           =   index;
         }
 
         internal static Argument NewValue(string value, int index)
@@ -58,17 +58,17 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
             get;
             private set;
         }
-        public string  GivenName
+        public string GivenName
         {
             get;
             private set;
         }
-        public string  Value
+        public string Value
         {
             get;
             internal set;
         }
-        public int  Index
+        public int Index
         {
             get;
             private set;

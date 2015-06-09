@@ -338,7 +338,6 @@ namespace SynesisSoftware.SystemTools.Clasp
         #endregion
 
         #region Operations
-
         /// <summary>
         ///  Parses the given program arguments, according to the given
         ///  <paramref name="aliases"/>,
@@ -572,35 +571,50 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </summary>
         public ICollection<Alias> Aliases
         {
-            get { return aliases; }
+            get
+            {
+                return aliases;
+            }
         }
         /// <summary>
         ///  A collection of all parsed flags.
         /// </summary>
         public ReadOnlyCollection<IArgument> Flags
         {
-            get { return new ReadOnlyCollection<IArgument>(flags); }
+            get
+            {
+                return new ReadOnlyCollection<IArgument>(flags);
+            }
         }
         /// <summary>
         ///  A collection of all parsed options
         /// </summary>
         public ReadOnlyCollection<IArgument> Options
         {
-            get { return new ReadOnlyCollection<IArgument>(options); }
+            get
+            {
+                return new ReadOnlyCollection<IArgument>(options);
+            }
         }
         /// <summary>
         ///  A collection of all parsed flags and options.
         /// </summary>
         public ReadOnlyCollection<IArgument> FlagsAndOptions
         {
-            get { return new ReadOnlyCollection<IArgument>(flagsAndOptions); }
+            get
+            {
+                return new ReadOnlyCollection<IArgument>(flagsAndOptions);
+            }
         }
         /// <summary>
         ///  A collection of all parsed values.
         /// </summary>
         public ReadOnlyCollection<IArgument> Values
         {
-            get { return new ReadOnlyCollection<IArgument>(values); }
+            get
+            {
+                return new ReadOnlyCollection<IArgument>(values);
+            }
         }
         #endregion
 
@@ -625,6 +639,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             arguments.Add(arg);
             values.Add(arg);
         }
+
         private void AddFlag(Argument arg)
         {
             Debug.Assert(arg.Type == ArgumentType.Flag);
@@ -633,6 +648,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             flagsAndOptions.Add(arg);
             flags.Add(arg);
         }
+
         private Argument AddOption(Argument arg)
         {
             Debug.Assert(arg.Type == ArgumentType.Option);
@@ -642,6 +658,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             options.Add(arg);
             return arg;
         }
+
         private static Alias FindAlias(ICollection<Alias> aliases, string name)
         {
             Debug.Assert(null != name);

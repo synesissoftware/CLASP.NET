@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -10,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
 [assembly: AssemblyProduct("Test.Unit.CLASP.1")]
-[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2014")]
+[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2014-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

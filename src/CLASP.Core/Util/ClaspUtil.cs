@@ -122,7 +122,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 {
                     switch(alias.Type)
                     {
-                        case    ArgumentType.None:
+                        case ArgumentType.None:
                             writer.WriteLine("  {0}", alias.Description);
                             writer.WriteLine();
                             break;
