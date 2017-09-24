@@ -1,19 +1,35 @@
 ﻿
-// Created: 
-// Updated: 4th April 2015
+// Created: 23rd July 2009
+// Updated: 19th June 2017
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
     using System;
     using System.Diagnostics;
 
-    public sealed class Alias
+    /// <summary>
+    ///  Represents an alias.
+    /// </summary>
+    public abstract class Alias
     {
-        #region Construction
+        #region construction
 
-        public Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
+        /// <summary>
+        ///  Constructs an instance of the class.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="givenName"></param>
+        /// <param name="resolvedName"></param>
+        /// <param name="description"></param>
+        /// <param name="validValues"></param>
+        protected internal Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
         {
             Debug.Assert(null != givenName || null != resolvedName);
+
+            if(null == validValues)
+            {
+                validValues =   new string[0];
+            }
 
             Type            =   type;
             GivenName       =   givenName;
@@ -21,12 +37,23 @@ namespace SynesisSoftware.SystemTools.Clasp
             Description     =   description;
             ValidValues     =   validValues;
         }
-        public Alias(ArgumentType type, string shortName, string longName)
+
+        /// <summary>
+        ///  Constructs an instance of the class.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="shortName"></param>
+        /// <param name="longName"></param>
+        protected internal Alias(ArgumentType type, string shortName, string longName)
             : this(type, shortName, longName, null)
         {
         }
 
-        private Alias(string description)
+        /// <summary>
+        ///  Constructs an instance of the class.
+        /// </summary>
+        /// <param name="description"></param>
+        protected internal Alias(string description)
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
 
@@ -34,44 +61,102 @@ namespace SynesisSoftware.SystemTools.Clasp
             GivenName       =   null;
             ResolvedName    =   null;
             Description     =   description;
-        }
 
+            ValidValues     =   new string[0];
+        }
         #endregion
 
-        #region Creator methods
+        #region creator methods
 
-        public static Alias Flag(string givenName, string resolvedName, string description)
+        /// <summary>
+        ///  Creates a flag alias.
+        /// </summary>
+        /// <param name="givenName"></param>
+        /// <param name="resolvedName"></param>
+        /// <param name="description"></param>
+        /// <returns>
+        ///  An alias.
+        /// </returns>
+        public static Flag Flag(string givenName, string resolvedName, string description)
         {
-            return new Alias(ArgumentType.Flag, givenName, resolvedName, description);
+            return new Flag(givenName, resolvedName, description);
         }
 
-        public static Alias Option(string givenName, string resolvedName, string description, params string[] validOptions)
+        /// <summary>
+        ///  Creates a flag alias.
+        /// </summary>
+        /// <param name="givenName"></param>
+        /// <param name="resolvedName"></param>
+        /// <returns>
+        ///  An alias.
+        /// </returns>
+        public static Flag Flag(string givenName, string resolvedName)
         {
-            return new Alias(ArgumentType.Option, givenName, resolvedName, description, validOptions);
+            return new Flag(givenName, resolvedName, null);
         }
 
-        public static Alias Option(string givenName, string resolvedName, string description)
+        /// <summary>
+        ///  Creates an option alias.
+        /// </summary>
+        /// <param name="shortName"></param>
+        /// <param name="longName"></param>
+        /// <returns>
+        ///  An alias.
+        /// </returns>
+        public static Option Option(string shortName, string longName)
         {
-            return new Alias(ArgumentType.Option, givenName, resolvedName, description);
+            return new Option(shortName, longName);
         }
 
-        public static Alias SectionSeparator(string description)
+        /// <summary>
+        ///  Creates an option alias.
+        /// </summary>
+        /// <param name="givenName"></param>
+        /// <param name="resolvedName"></param>
+        /// <param name="description"></param>
+        /// <param name="validValues"></param>
+        /// <returns>
+        ///  An alias.
+        /// </returns>
+        public static Option Option(string givenName, string resolvedName, string description, params string[] validValues)
         {
-            return new Alias(description);
+            return new Option(givenName, resolvedName, description, validValues);
         }
 
+        /// <summary>
+        ///  Creates a section separator alias.
+        /// </summary>
+        /// <param name="sectionName">
+        ///  The name of the section.
+        /// </param>
+        /// <returns>
+        ///  An alias.
+        /// </returns>
+        public static SectionSeparator Section(string sectionName)
+        {
+            return new SectionSeparator(sectionName);
+        }
+
+        /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Alias.Section"/>
+        public static SectionSeparator SectionSeparator(string sectionName)
+        {
+            return new SectionSeparator(sectionName);
+        }
         #endregion
 
-        #region Operations
+        #region overrides
 
+        /// <summary>
+        ///  A string representation of the alias.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return String.Format("{{{0}, {1}, {2}, {3}}}", Type, GivenName, ResolvedName, Description);
         }
-
         #endregion
 
-        #region Properties
+        #region properties
 
         /// <summary>
         ///  The alias type.
@@ -79,7 +164,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public ArgumentType Type
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The given name of the alias.
@@ -87,7 +172,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string GivenName
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The resolved name of the alias.
@@ -95,7 +180,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string ResolvedName
         {
             get;
-            set;
+            private set;
         }
         /// <summary>
         ///  The description of the alias.
@@ -103,7 +188,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string Description
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
@@ -112,9 +197,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         public string[] ValidValues
         {
             get;
-            set;
+            private set;
         }
-
         #endregion
     }
 }

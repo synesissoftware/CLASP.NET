@@ -1,13 +1,60 @@
 ﻿
-// Created: 
-// Updated: 3rd February 2014
+// Created: 22nd June 2010
+// Updated: 24th September 2017
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
-	/// <summary>
-	///  Delegate defining the main processing function to be invoked
-	///  by <see cref="Arguments.Invoke"/>
-	/// </summary>
-	/// <param name="args"></param>
-	public delegate void ToolMain(Arguments args);
+    /// <summary>
+    ///  Delegate describing the program entry point as a function
+    ///  taking an array of strings and returning <code>int</code>.
+    /// </summary>
+    /// <param name="args">
+    ///  The arguments passed to the program's <c>Main()</c> entry point.
+    /// </param>
+    /// <returns>
+    ///  The return value to be returned by the enclosing <c>Main()</c>
+    ///  entry point.
+    /// </returns>
+    /// <remarks>
+    ///  Due to the limitations of .NET's overload resolution with respect
+    ///  to delegates that differ only by return types, CLASP.NET supports
+    ///  only two program-main signatures:
+    ///  (i) a method taking an array of <code>string</code> and returning
+    ///   <code>int</code>; and
+    ///  (ii) a method taking an array of <code>string</code> and having a
+    ///   return type of <code>void</code>.
+    ///  The first is considered the "proper" form.
+    /// </remarks>
+    public delegate int ToolMain(Arguments args);
+
+    /// <summary>
+    ///  Delegate describing the program entry point as a function
+    ///  having no parameters and returning <code>void</code>.
+    /// </summary>
+    /// <param name="args">
+    ///  The arguments passed to the program's <c>Main()</c> entry point.
+    /// </param>
+    /// <remarks>
+    ///  Due to the limitations of .NET's overload resolution with respect
+    ///  to delegates that differ only by return types, CLASP.NET supports
+    ///  only two program-main signatures:
+    ///  (i) a method taking an array of <code>string</code> and returning
+    ///   <code>int</code>; and
+    ///  (ii) a method taking an array of <code>string</code> and having a
+    ///   return type of <code>void</code>.
+    ///  The first is considered the "proper" form.
+    /// </remarks>
+    public delegate void ToolMainVA(Arguments args);
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="boundArgs"></param>
+    /// <param name="args"></param>
+    /// <returns>
+    /// </returns>
+    /// <example>
+    /// </example>
+    public delegate int ToolMainWithBoundArguments<T>(T boundArgs, Arguments args) where T : new();
 }

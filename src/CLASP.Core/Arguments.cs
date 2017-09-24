@@ -1,9 +1,10 @@
 ﻿
-// Created: 
-// Updated: 4th April 2015
+// Created: 17th July 2009
+// Updated: 19th June 2017
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
+    using SynesisSoftware.SystemTools.Clasp.Exceptions;
     using SynesisSoftware.SystemTools.Clasp.Interfaces;
     using SynesisSoftware.SystemTools.Clasp.Internal;
 
@@ -13,12 +14,17 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Diagnostics;
     using System.IO;
 
+    /// <summary>
+    ///  This class, the main API class for the library, represents a parsed
+    ///  set of command-line arguments.
+    /// </summary>
     public sealed class Arguments
     {
-        #region Constants
-        private static readonly char[]	WildcardCharacters	=	new char[] { '*', '?' };
-        private static readonly char[]	PathNameSeparators	=	new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
-        private static readonly bool	PlatformIsWindows	=	PlatformIsWindows_;
+        #region constants
+
+        private static readonly char[]  WildcardCharacters  =   new char[] { '*', '?' };
+        private static readonly char[]  PathNameSeparators  =   new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+        private static readonly bool    PlatformIsWindows   =   PlatformIsWindows_;
 
         private static bool PlatformIsWindows_
         {
@@ -43,16 +49,18 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Fields
-        readonly ICollection<Alias> aliases			=	null;
-        readonly List<IArgument>	arguments		=	new List<IArgument>();
-        readonly List<IArgument>	flags			=	new List<IArgument>();
-        readonly List<IArgument>	options			=	new List<IArgument>();
-        readonly List<IArgument>	flagsAndOptions	=	new List<IArgument>();
-        readonly List<IArgument>	values			=	new List<IArgument>();
+        #region fields
+
+        readonly ICollection<Alias> aliases         =   null;
+        readonly List<IArgument>    arguments       =   new List<IArgument>();
+        readonly List<IArgument>    flags           =   new List<IArgument>();
+        readonly List<IArgument>    options         =   new List<IArgument>();
+        readonly List<IArgument>    flagsAndOptions =   new List<IArgument>();
+        readonly List<IArgument>    values          =   new List<IArgument>();
         #endregion
 
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments
@@ -113,14 +121,15 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </param>
         public Arguments(string[] args, ICollection<Alias> aliases, ParseOptions options)
         {
-            bool			treatAllAsValues	=	false;
-            Argument		lastOption			=	null;
-            List<string>	wildargs			=	new List<string>();
+            bool            treatAllAsValues    =   false;
+            Argument        lastOption          =   null;
+            List<string>    wildargs            =   new List<string>();
+            string          cwd                 =   Environment.CurrentDirectory;
 
             for(int i = 0; i != args.Length; ++i)
             {
-                string	arg			=	TrimSingleQuotes(args[i]);
-                int		numHyphens	=	Argument.CountHyphens(arg);
+                string  arg         =   TrimSingleQuotes(args[i]);
+                int     numHyphens  =   Argument.CountHyphens(arg);
 
                 // 1. Ignore null/empty arguments
 
@@ -172,8 +181,8 @@ namespace SynesisSoftware.SystemTools.Clasp
                             {
                                 // 2. Contains '=', so Option
 
-                                string name		=	arg.Substring(0, equal);
-                                string value	=	arg.Substring(1 + equal);
+                                string name     =   arg.Substring(0, equal);
+                                string value    =   arg.Substring(1 + equal);
 
                                 Alias alias = FindAlias(aliases, name);
 
@@ -197,8 +206,8 @@ namespace SynesisSoftware.SystemTools.Clasp
                                     if(equal >= 0)
                                     {
                                         // An option
-                                        string name		=	alias.ResolvedName.Substring(0, equal);
-                                        string value	=	alias.ResolvedName.Substring(1 + equal);
+                                        string name     =   alias.ResolvedName.Substring(0, equal);
+                                        string value    =   alias.ResolvedName.Substring(1 + equal);
 
                                         AddOption(Argument.NewOption(arg, name, value, i));
                                     }
@@ -216,17 +225,17 @@ namespace SynesisSoftware.SystemTools.Clasp
                                             }
                                         }
                                         else
-                                            if(ArgumentType.Flag == alias.Type)
+                                        if(ArgumentType.Flag == alias.Type)
+                                        {
+                                            if(null == alias.ResolvedName)
                                             {
-                                                if(null == alias.ResolvedName)
-                                                {
-                                                    AddFlag(Argument.NewFlag(arg, i));
-                                                }
-                                                else
-                                                {
-                                                    AddFlag(Argument.NewFlag(arg, alias.ResolvedName, i));
-                                                }
+                                                AddFlag(Argument.NewFlag(arg, i));
                                             }
+                                            else
+                                            {
+                                                AddFlag(Argument.NewFlag(arg, alias.ResolvedName, i));
+                                            }
+                                        }
                                     }
                                 }
                                 else if(null != aliases && 1 == numHyphens)
@@ -250,8 +259,8 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                             if(equal3 >= 0)
                                             {
-                                                string name2	=	alias2.ResolvedName.Substring(0, equal);
-                                                string value2	=	alias2.ResolvedName.Substring(1 + equal);
+                                                string name2    =   alias2.ResolvedName.Substring(0, equal);
+                                                string value2   =   alias2.ResolvedName.Substring(1 + equal);
 
                                                 AddFlag(Argument.NewOption(arg, name2, value2, i));
                                             }
@@ -262,10 +271,10 @@ namespace SynesisSoftware.SystemTools.Clasp
                                                     lastOption = AddOption(Argument.NewOption(arg, alias2.ResolvedName, null, i));
                                                 }
                                                 else
-                                                    if(ArgumentType.Flag == alias2.Type)
-                                                    {
-                                                        AddFlag(Argument.NewFlag(arg, alias2.ResolvedName, i));
-                                                    }
+                                                if(ArgumentType.Flag == alias2.Type)
+                                                {
+                                                    AddFlag(Argument.NewFlag(arg, alias2.ResolvedName, i));
+                                                }
                                             }
                                         }
                                         else
@@ -294,21 +303,40 @@ namespace SynesisSoftware.SystemTools.Clasp
                         {
                             if(arg.IndexOfAny(WildcardCharacters) >= 0)
                             {
-                                DirectoryInfo di = new DirectoryInfo(Environment.CurrentDirectory);
+                                // There's a "vulnerability" in DirectoryInfo.GetFileSystemInfos() insofar
+                                // as it cannot accept a non-relative path - it throws ArgumentException -
+                                // so we do some jiggery-pokery to make sure that can't happen
 
-                                FileSystemInfo[] matches = di.GetFileSystemInfos(arg);
+                                string              fullPath    =   Path.Combine(cwd, arg);
+                                string              dirPath     =   Path.GetDirectoryName(fullPath);
+                                string              fileName    =   Path.GetFileName(fullPath);
+
+                                DirectoryInfo       di      =   new DirectoryInfo(dirPath);
+
+                                FileSystemInfo[]    matches =   di.GetFileSystemInfos(fileName);
 
                                 foreach(FileSystemInfo info in matches)
                                 {
-                                    string	path		=	info.FullName;
-#if NONE
-									int		lastSlash	=	path.LastIndexOfAny(PathNameSeparators);
-									string	file		=	(lastSlash < 0) ? path : path.Substring(lastSlash + 1);
-#else
-                                    string	file		=	path.Substring(di.FullName.Length + 1);
-#endif
+                                    string  path        =   info.FullName;
 
-                                    wildargs.Add(file);
+                                    if(0 == String.Compare(cwd, 0, path, 0, cwd.Length))
+                                    {
+                                        int len = cwd.Length;
+
+                                        switch(cwd[len - 1])
+                                        {
+                                        case '\\':
+                                        case '/':
+                                            break;
+                                        default:
+                                            ++len;
+                                            break;
+                                        }
+
+                                        path = path.Substring(len);
+                                    }
+
+                                    wildargs.Add(path);
                                 }
                             }
                         }
@@ -332,80 +360,41 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Operations
-        /// <summary>
-        ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>,
-        ///  and then invokes the program main entry point specified by
-        ///  <paramref name="toolMain"/>.
-        /// </summary>
-        /// <param name="args">
-        ///  The program arguments
-        /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
-        ///  arguments
-        /// </param>
-        /// <param name="toolMain">
-        ///  The entry point to the main program logic
-        /// </param>
-        public static void InvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
-        {
-            InvokeMain(args, aliases, ParseOptions.None, toolMain);
-        }
-
-        /// <summary>
-        ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>
-        ///  and
-        ///  <paramref name="options"/>,
-        ///  and then invokes the program main entry point specified by
-        ///  <paramref name="toolMain"/>.
-        /// </summary>
-        /// <param name="args">
-        ///  The program arguments
-        /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
-        ///  arguments
-        /// </param>
-        /// <param name="options">
-        ///  A combination of <see cref="ParseOptions">options</see> that
-        ///  control the parsing behaviour
-        /// </param>
-        /// <param name="toolMain">
-        ///  The entry point to the main program logic
-        /// </param>
-        public static void InvokeMain(string[] args, Alias[] aliases, ParseOptions options, ToolMain toolMain)
-        {
-            Debug.Assert(null != args);
-            Debug.Assert(null != toolMain);
-
-            Arguments arguments = new Arguments(args, aliases);
-
-            toolMain(arguments);
-        }
+        #region operations
 
         /// <summary>
         ///  Searches the flags for the given argument name and, if found,
         ///  sets the given <paramref name="flag"/> value to the given
         ///  <paramref name="variable"/>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="resolvedName"></param>
-        /// <param name="flag"></param>
-        /// <param name="?"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">
+        ///  The flag type, which must a <code>struct</code>.
+        /// </typeparam>
+        /// <param name="resolvedName">
+        ///  The resolved name of the flag.
+        /// </param>
+        /// <param name="flag">
+        ///  The flag.
+        /// </param>
+        /// <param name="variable">
+        ///  An in/out variable (of the same type as the <code>flag</code>
+        ///  variable) whose value will be modified in respect of the
+        ///  presence of the flag.
+        /// </param>
+        /// <returns>
+        ///  <b>true</b> if the named flag is present in the command-line
+        ///  arguments; <b>false</b> otherwise.
+        /// </returns>
         public bool CheckFlag<T>(string resolvedName, T flag, ref T variable) where T : struct
         {
             Debug.Assert(typeof(T).IsEnum, "flag and variable arguments must both be of enumeration type!");
 
-            foreach(Argument arg in this.flags)
+            foreach(IArgument arg in this.flags)
             {
                 if(arg.ResolvedName == resolvedName)
                 {
-                    int	v0	=	FromEnum(flag);
-                    int	v1	=	FromEnum(variable);
+                    int v0  =   FromEnum(flag);
+                    int v1  =   FromEnum(variable);
 
                     Debug.Assert(0 != v0, "flag should not be 0");
 
@@ -420,41 +409,80 @@ namespace SynesisSoftware.SystemTools.Clasp
             return false;
         }
 
+        /// <summary>
+        ///  Checks whether a given option is present, and obtain its
+        ///  value as a string.
+        /// </summary>
+        /// <param name="resolvedName">
+        ///  The resolved name of the option.
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <returns>
+        ///  <b>true</b> if the named option is present in the command-line
+        ///  arguments; <b>false</b> otherwise.
+        /// </returns>
         public bool CheckOption(string resolvedName, out string value)
         {
-            value = null;
+            IArgument arg = FindOption_(resolvedName);
 
-            foreach(Argument arg in this.options)
+            if(null != arg)
             {
-                if(arg.ResolvedName == resolvedName)
-                {
-                    value = arg.Value;
-
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool CheckOption(string resolvedName, out int value)
-        {
-            string value_s;
-
-            value = 0;
-
-            if(CheckOption(resolvedName, out value_s))
-            {
-                value = int.Parse(value_s);
+                value = arg.Value;
 
                 return true;
             }
+
+            value = null;
 
             return false;
         }
 
         /// <summary>
-        ///  Searches the flags for the given argument name
+        ///  Checks whether a given option is present, and obtain its
+        ///  value as an integer.
+        /// </summary>
+        /// <param name="resolvedName">
+        ///  The resolved name of the option.
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <returns>
+        ///  <b>true</b> if the named option is present in the command-line
+        ///  arguments; <b>false</b> otherwise.
+        /// </returns>
+        /// <exception cref="System.FormatException">
+        ///  Thrown if the given option's value cannot be converted to
+        ///  <code>int</code>.
+        /// </exception>
+        public bool CheckOption(string resolvedName, out int value)
+        {
+            IArgument arg = FindOption_(resolvedName);
+
+            if(null != arg)
+            {
+                if(String.IsNullOrEmpty(arg.Value))
+                {
+                    throw new MissingOptionValueException(arg);
+                }
+
+                if(!int.TryParse(arg.Value, out value))
+                {
+                    throw new InvalidOptionValueException(arg, typeof(int));
+                }
+
+                return true;
+            }
+
+            value = 0;
+
+            return false;
+        }
+
+        /// <summary>
+        ///  Checks whether the given flag is present.
         /// </summary>
         /// <param name="resolvedName">
         ///  The resolved name of the flag to search for.
@@ -465,7 +493,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </returns>
         public bool HasFlag(string resolvedName)
         {
-            foreach(Argument arg in this.flags)
+            foreach(IArgument arg in this.flags)
             {
                 if(arg.ResolvedName == resolvedName)
                 {
@@ -474,6 +502,21 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
 
             return false;
+        }
+
+        /// <summary>
+        ///  Checks whether the given flag is present.
+        /// </summary>
+        /// <param name="flag">
+        ///  The flag to search for.
+        /// </param>
+        /// <returns>
+        ///  <b>true</b> if a flag of that name is found; <b>false</b>
+        ///  otherwise.
+        /// </returns>
+        public bool HasFlag(Flag flag)
+        {
+            return HasFlag(flag.ResolvedName);
         }
 
         /// <summary>
@@ -486,7 +529,19 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Properties
+        #region properties
+
+        /// <summary>
+        ///  The inferred program name
+        /// </summary>
+        public static string ProgramName
+        {
+            get
+            {
+                return Process.GetCurrentProcess().ProcessName;
+            }
+        }
+
         /// <summary>
         ///  The aliases specified to the constructor, or <b>null</b> if
         ///  none were specified.
@@ -498,6 +553,9 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return aliases;
             }
         }
+        /// <summary>
+        ///  A collection of all parsed flags.
+        /// </summary>
         public ReadOnlyCollection<IArgument> Flags
         {
             get
@@ -505,6 +563,9 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return new ReadOnlyCollection<IArgument>(flags);
             }
         }
+        /// <summary>
+        ///  A collection of all parsed options
+        /// </summary>
         public ReadOnlyCollection<IArgument> Options
         {
             get
@@ -512,6 +573,9 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return new ReadOnlyCollection<IArgument>(options);
             }
         }
+        /// <summary>
+        ///  A collection of all parsed flags and options.
+        /// </summary>
         public ReadOnlyCollection<IArgument> FlagsAndOptions
         {
             get
@@ -519,6 +583,9 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return new ReadOnlyCollection<IArgument>(flagsAndOptions);
             }
         }
+        /// <summary>
+        ///  A collection of all parsed values.
+        /// </summary>
         public ReadOnlyCollection<IArgument> Values
         {
             get
@@ -528,7 +595,21 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Implementation
+        #region implementation
+
+        private IArgument FindOption_(string resolvedName)
+        {
+            foreach(IArgument arg in this.options)
+            {
+                if(arg.ResolvedName == resolvedName)
+                {
+                    return arg;
+                }
+            }
+
+            return null;
+        }
+
         private void AddValue(Argument arg)
         {
             Debug.Assert(arg.Type == ArgumentType.Value);
@@ -536,6 +617,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             arguments.Add(arg);
             values.Add(arg);
         }
+
         private void AddFlag(Argument arg)
         {
             Debug.Assert(arg.Type == ArgumentType.Flag);
@@ -544,6 +626,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             flagsAndOptions.Add(arg);
             flags.Add(arg);
         }
+
         private Argument AddOption(Argument arg)
         {
             Debug.Assert(arg.Type == ArgumentType.Option);
@@ -553,6 +636,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             options.Add(arg);
             return arg;
         }
+
         private static Alias FindAlias(ICollection<Alias> aliases, string name)
         {
             Debug.Assert(null != name);
@@ -582,7 +666,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             return CastTo<int>(value);
         }
 
-        public static T CastTo<T>(object o)
+        private static T CastTo<T>(object o)
         {
             return (T)o;
         }

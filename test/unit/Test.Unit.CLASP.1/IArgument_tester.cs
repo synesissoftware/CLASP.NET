@@ -1,8 +1,8 @@
 ﻿
 // Created: 
-// Updated: 3rd February 2014
+// Updated: 24th September 2017
 
-namespace Test.Unit.CLASP._1
+namespace Test.Unit.CLASP.ns_1
 {
     using global::SynesisSoftware.SystemTools.Clasp;
     using global::SynesisSoftware.SystemTools.Clasp.Interfaces;

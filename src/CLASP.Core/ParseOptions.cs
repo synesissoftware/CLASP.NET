@@ -1,6 +1,6 @@
 ﻿
-// Created: 
-// Updated: 3rd February 2014
+// Created: 9th August 2009
+// Updated: 5th June 2015
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -18,7 +18,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  the automatic expansion of wildcard values (but not currently
         ///  option' values)
         /// </summary>
-        None = 0x00000000,
+        None                                        =   0x00000000,
 
         /// <summary>
         /// Prevents the double-hyphen argument <c>"--"</c> from being
@@ -30,7 +30,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// filenames (or other values) that contain leading hyphens to be
         /// interpreted correctly.
         /// </summary>
-        DontRecogniseDoublehyphenToStartValues = 0x00000001,
+        DontRecogniseDoublehyphenToStartValues      =   0x00000001,
 
         /// <summary>
         /// Cause the single-hyphen argument <c>"-"</c> to be recognised as
@@ -48,7 +48,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// have non-empty <c>ResolvedName</c> and <c>GivenName</c>
         /// properties.
         /// </summary>
-        TreatSinglehyphenAsValue = 0x00000002,
+        TreatSinglehyphenAsValue                    =   0x00000002,
 
         /// <summary>
         /// [Windows-only] clasp_parseArguments() flag that prevents the expansion of
@@ -64,7 +64,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///   Windows executables. To do that, define the pre-processor symbol
         ///   ClaspCmdlineArgsNoReclsOnWindows during compilation clasp.
         /// </summary>
-        DontExpandWildcardsOnWindows = 0x00000100,
+        DontExpandWildcardsOnWindows                =   0x00000100,
 
         /// <summary>
         /// [Windows-only] clasp_parseArguments() flag that causes the expansion of
@@ -74,7 +74,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// not expanded. Specifying this flag causes such values to be expanded on
         /// Windows.
         /// </summary>
-        DoExpandWildcardsInAposquotesOnWindows = 0x00000200,
+        DoExpandWildcardsInAposquotesOnWindows      =   0x00000200,
 
         ///// <summary>
         ///// Prevents the results from being into groups of

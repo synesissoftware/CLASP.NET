@@ -1,6 +1,6 @@
 ﻿
-// Created: 
-// Updated: 3rd February 2014
+// Created: 17th July 2009
+// Updated: 19th June 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Internal
 {
@@ -11,14 +11,15 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
     internal sealed class Argument
         : IArgument
     {
-        #region Construction
+        #region construction
+
         private Argument(ArgumentType type, string givenName, string resolvedName, string value, int numHyphens, int index)
         {
-            Type = type;
-            GivenName = givenName;
-            ResolvedName = resolvedName;
-            Value = value;
-            Index = index;
+            Type            =   type;
+            GivenName       =   givenName;
+            ResolvedName    =   resolvedName;
+            Value           =   value;
+            Index           =   index;
         }
 
         internal static Argument NewValue(string value, int index)
@@ -47,7 +48,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         }
         #endregion
 
-        #region IArgument Members
+        #region IArgument members
+
         public ArgumentType Type
         {
             get;
@@ -75,7 +77,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         internal bool Used
         {
             get;
@@ -83,14 +86,16 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         }
         #endregion
 
-        #region Operations
+        #region operations
+
         public override string ToString()
         {
             return String.Format("{{{0}, {1}, {2}, {3}, {4}}}", Type, GivenName, ResolvedName, Value, Index);
         }
         #endregion
 
-        #region Implementation
+        #region implementation
+
         internal static int CountHyphens(string arg)
         {
             int n = 0;

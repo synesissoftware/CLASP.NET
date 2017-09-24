@@ -1,16 +1,23 @@
 ﻿
-// Created: 
-// Updated: 3rd February 2014
+// Created: 23rd June 2010
+// Updated: 19th June 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
-    using System;
-
+    /// <summary>
+    ///  Exception thrown to indicate a missing option.
+    /// </summary>
     public class MissingOptionException
-        : ArgumentException
+        : FlagOrOptionArgumentException
     {
-        public MissingOptionException(string message, string optionName)
-            : base(message, optionName)
-        {}
+        /// <summary>
+        ///  Constructs an instance of the exception type.
+        /// </summary>
+        /// <param name="optionName">
+        /// </param>
+        public MissingOptionException(string optionName)
+            : base(null, "option not specified", optionName, null)
+        {
+        }
     }
 }

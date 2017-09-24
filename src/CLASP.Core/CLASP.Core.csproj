@@ -9,9 +9,10 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SynesisSoftware.SystemTools.Clasp</RootNamespace>
-    <AssemblyName>CLASP.Core</AssemblyName>
+    <AssemblyName>CLASP.NET.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CLASP.NET.Core.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,32 +32,48 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\CLASP.NET.Core.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alias.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="ArgumentType.cs" />
+    <Compile Include="Binding\BoundFieldAttribute.cs" />
+    <Compile Include="Binding\BoundFlagAttribute.cs" />
+    <Compile Include="Binding\BoundOptionAttribute.cs" />
+    <Compile Include="Binding\BoundTypeAttribute.cs" />
+    <Compile Include="Binding\BoundValueAttribute.cs" />
+    <Compile Include="Binding\BoundValuesAttribute.cs" />
+    <Compile Include="BoundArgumentParseOptions.cs" />
+    <Compile Include="enumerations.cs" />
     <Compile Include="delegates.cs" />
     <Compile Include="Exceptions\ArgumentException.cs" />
     <Compile Include="Exceptions\ClaspException.cs" />
+    <Compile Include="Exceptions\FlagOrOptionArgumentException.cs" />
     <Compile Include="Exceptions\InvalidOptionValueException.cs" />
     <Compile Include="Exceptions\MissingOptionException.cs" />
     <Compile Include="Exceptions\MissingOptionValueException.cs" />
+    <Compile Include="Exceptions\MissingValueException.cs" />
     <Compile Include="Exceptions\UnusedArgumentException.cs" />
+    <Compile Include="Extensions\Options.cs" />
+    <Compile Include="FailureOptions.cs" />
+    <Compile Include="Flag.cs" />
     <Compile Include="Interfaces\IArgument.cs" />
     <Compile Include="Internal\Argument.cs" />
+    <Compile Include="Invoker.cs" />
+    <Compile Include="Option.cs" />
     <Compile Include="ParseOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\ClaspUtil.cs" />
+    <Compile Include="SectionSeparator.cs" />
+    <Compile Include="Util\ArgumentUtil.cs" />
+    <Compile Include="Util\ParseUtil.cs" />
+    <Compile Include="Util\ReflectionUtil.cs" />
+    <Compile Include="Util\UsageUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
