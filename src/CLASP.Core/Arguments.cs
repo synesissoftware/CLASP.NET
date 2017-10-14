@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 19th June 2017
+// Updated: 14th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp
 {

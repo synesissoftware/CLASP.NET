@@ -1,6 +1,6 @@
 ﻿
 // Created: 
-// Updated: 24th September 2017
+// Updated: 14th October 2017
 
 #pragma warning disable 1607
 
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
-[assembly: AssemblyProduct("Test.Unit.CLASP.1")]
+[assembly: AssemblyProduct("CLASP.NET")]
 [assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2014-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,6 +21,6 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.8.*")]
+[assembly: AssemblyInformationalVersion("0.8 (public alpha 6)")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
