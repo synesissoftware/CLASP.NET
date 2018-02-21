@@ -22,6 +22,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     {
         #region constants
 
+        private static readonly char[]  InvalidCharacters   =   Path.GetInvalidPathChars();
         private static readonly char[]  WildcardCharacters  =   new char[] { '*', '?' };
         private static readonly char[]  PathNameSeparators  =   new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
         private static readonly bool    PlatformIsWindows   =   PlatformIsWindows_;
@@ -301,43 +302,52 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         if(PlatformIsWindows)
                         {
-                            if(arg.IndexOfAny(WildcardCharacters) >= 0)
+                            if(arg.IndexOfAny(WildcardCharacters) >= 0 && arg.IndexOfAny(InvalidCharacters) < 0)
                             {
                                 // There's a "vulnerability" in DirectoryInfo.GetFileSystemInfos() insofar
                                 // as it cannot accept a non-relative path - it throws ArgumentException -
                                 // so we do some jiggery-pokery to make sure that can't happen
 
-                                string              fullPath    =   Path.Combine(cwd, arg);
-                                string              dirPath     =   Path.GetDirectoryName(fullPath);
-                                string              fileName    =   Path.GetFileName(fullPath);
-
-                                DirectoryInfo       di      =   new DirectoryInfo(dirPath);
-
-                                FileSystemInfo[]    matches =   di.GetFileSystemInfos(fileName);
-
-                                foreach(FileSystemInfo info in matches)
+                                try
                                 {
-                                    string  path        =   info.FullName;
+                                    string              fullPath    =   Path.Combine(cwd, arg);
+                                    string              dirPath     =   Path.GetDirectoryName(fullPath);
+                                    string              fileName    =   Path.GetFileName(fullPath);
 
-                                    if(0 == String.Compare(cwd, 0, path, 0, cwd.Length))
+                                    DirectoryInfo       di          =   new DirectoryInfo(dirPath);
+
+                                    FileSystemInfo[]    matches     =   di.GetFileSystemInfos(fileName);
+
+                                    foreach(FileSystemInfo info in matches)
                                     {
-                                        int len = cwd.Length;
+                                        string  path        =   info.FullName;
 
-                                        switch(cwd[len - 1])
+                                        if(0 == String.Compare(cwd, 0, path, 0, cwd.Length))
                                         {
-                                        case '\\':
-                                        case '/':
-                                            break;
-                                        default:
-                                            ++len;
-                                            break;
+                                            int len = cwd.Length;
+
+                                            switch(cwd[len - 1])
+                                            {
+                                            case '\\':
+                                            case '/':
+                                                break;
+                                            default:
+                                                ++len;
+                                                break;
+                                            }
+
+                                            path = path.Substring(len);
                                         }
 
-                                        path = path.Substring(len);
+                                        wildargs.Add(path);
                                     }
-
-                                    wildargs.Add(path);
                                 }
+                                catch(System.IO.PathTooLongException)
+                                {}
+                                catch(System.ArgumentException)
+                                {}
+                                catch(System.NotSupportedException)
+                                {}
                             }
                         }
                     }
