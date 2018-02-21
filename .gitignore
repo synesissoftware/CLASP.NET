@@ -1,13 +1,21 @@
 
 # directories (by name)
 
+build/
+buildsrc/
+keys/
+scripts/
+
 bin/
 obj/
+
 TestResults/
 
 # directories (by pattern)
 
 # files (by name)
+
+build.cmd
 
 Local.testsettings
 TraceAndTestImpact.testsettings
@@ -16,7 +24,9 @@ TraceAndTestImpact.testsettings
 
 *.*~
 
-*.csproj.user
+*.csproj*.user
+*.nupkg
+*.proj
 *.scc
 *.suo
 *.swp
