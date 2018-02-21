@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 19th June 2017
+// Updated: 21st February 2018
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -31,13 +31,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         #region properties
 
         /// <summary>
-        ///  The parse options specified in with the attribute
+        ///  The binding options specified with the attribute
         /// </summary>
-        public BoundArgumentParseOptions ParseOptions { get; set; }
+        public ArgumentBindingOptions BindingOptions { get; set; }
 
         /// <summary>
         ///  If <c>true</c> the attribute's parse options take precedence
-        ///  over any passed to InvokeMainAndParseBoundArgumentOfType()
+        ///  over any passed to InvokeMainWithBoundArgumentOfType()
         /// </summary>
         public bool AttributeOptionsHavePrecedence { get; set; }
         #endregion

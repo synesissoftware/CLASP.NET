@@ -25,7 +25,7 @@ namespace Example.ShowUsage
 
         static void Main(string[] args)
         {
-            Invoker.InvokeMainVA(args, aliases, (Arguments clargs) =>
+            Invoker.ParseAndInvokeMainVA(args, aliases, (Arguments clargs) =>
 
                     UsageUtil.ShowUsageAndQuit(clargs, Invoker.Constants.ExitCode_Success, null)
                 );

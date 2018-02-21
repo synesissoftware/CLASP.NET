@@ -124,7 +124,7 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new MissingValueException(1);
 
-            Assert.AreEqual("value not specified at the required index", x.Message);
+            Assert.AreEqual("required value not specified", x.Message);
         }
 
         [TestMethod]

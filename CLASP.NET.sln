@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.ShowUsageAndQuit", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.ShowVersionAndQuit", "examples\Example.ShowVersionAndQuit\Example.ShowVersionAndQuit.csproj", "{0D7A0F27-AA46-428C-9CA5-F8FB32FACD93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Scratch.CLASP.BoundStructure.2", "test\scratch\Test.Scratch.CLASP.BoundStructure.2\Test.Scratch.CLASP.BoundStructure.2.csproj", "{1D5E21DF-F5BA-4336-AD75-874056B2C4CF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = CLASP.NET.vsmdi
@@ -113,6 +115,10 @@ Global
 		{0D7A0F27-AA46-428C-9CA5-F8FB32FACD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7A0F27-AA46-428C-9CA5-F8FB32FACD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7A0F27-AA46-428C-9CA5-F8FB32FACD93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5E21DF-F5BA-4336-AD75-874056B2C4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5E21DF-F5BA-4336-AD75-874056B2C4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5E21DF-F5BA-4336-AD75-874056B2C4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5E21DF-F5BA-4336-AD75-874056B2C4CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,5 +141,6 @@ Global
 		{600DA875-282C-4F90-BCF8-BBBC4D469C48} = {F9878C96-6DDD-4795-B552-FCB037F30857}
 		{54ADB9BC-074F-40E8-943F-562D8B0931BB} = {F9878C96-6DDD-4795-B552-FCB037F30857}
 		{C6056F30-4DFB-44F5-8A3B-C8AD5C843D99} = {F9878C96-6DDD-4795-B552-FCB037F30857}
+		{1D5E21DF-F5BA-4336-AD75-874056B2C4CF} = {F9878C96-6DDD-4795-B552-FCB037F30857}
 	EndGlobalSection
 EndGlobal

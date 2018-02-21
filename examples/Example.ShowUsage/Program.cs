@@ -25,7 +25,7 @@ namespace Example.ShowUsage
 
         static int Main(string[] args)
         {
-            return Invoker.InvokeMain(args, aliases, (Arguments clargs) =>
+            return Invoker.ParseAndInvokeMain(args, aliases, (Arguments clargs) =>
                 {
                     UsageUtil.ShowUsage(clargs.Aliases, System.Console.Out, null);
 

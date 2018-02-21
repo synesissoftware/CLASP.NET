@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 19th June 2017
+// Updated: 15th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -17,7 +17,17 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     {
         #region constants
 
-        private const string    MessagePrompt   =   "invalid value for option";
+        /// <summary>
+        ///  Constants class
+        /// </summary>
+        public static class Constants
+        {
+            /// <summary>
+            ///  The default message used by
+            ///  <see cref="InvalidOptionValueException"/>
+            /// </summary>
+            public const string     DefaultMessage  =   @"invalid value for option";
+        }
         #endregion
 
         #region fields
@@ -38,7 +48,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         ///  The expected type.
         /// </param>
         public InvalidOptionValueException(IArgument option, Type expectedType)
-            : base(option, MessagePrompt, null, null)
+            : base(option, Constants.DefaultMessage, null, null)
         {
             _expectedType = expectedType;
         }
@@ -57,7 +67,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         ///  Inner exception, or <code>null</code>.
         /// </param>
         public InvalidOptionValueException(IArgument option, Type expectedType, FormatException innerException)
-            : base(option, MessagePrompt, null, innerException)
+            : base(option, Constants.DefaultMessage, null, innerException)
         {
             _expectedType = expectedType;
         }

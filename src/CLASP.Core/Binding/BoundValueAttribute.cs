@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 15th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -52,6 +52,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         ///  optional
         /// </summary>
         public string DefaultValue { get; set; }
+
+        /// <summary>
+        ///  Optional usage lable - e.g. "&lt;source-dir>" - to be used
+        ///  in thrown exception.
+        /// </summary>
+        public string UsageLabel { get; set; }
         #endregion
     }
 }

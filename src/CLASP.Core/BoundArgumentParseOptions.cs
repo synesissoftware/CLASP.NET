@@ -10,7 +10,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     ///  Flags that control the parsing of bound arguments
     /// </summary>
     [Flags]
-    public enum BoundArgumentParseOptions
+    public enum ArgumentBindingOptions
     {
         /// <summary>
         ///  No options specified

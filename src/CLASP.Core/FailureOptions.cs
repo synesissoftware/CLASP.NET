@@ -36,5 +36,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <summary>
         /// </summary>
         SetExitCodeForVV                            =   0x00020000,
+
+        /// <summary>
+        ///  Appends the string
+        ///  <c>"; use --help for usage"</c>
+        ///  to contingent reports
+        /// </summary>
+        AppendStandardUsagePromptToContingentReport =   0x00000100,
     }
 }

@@ -13,7 +13,7 @@ namespace Example.ShowVersionAndQuit
     {
         static void Main(string[] args)
         {
-            Invoker.InvokeMainVA(args, null, (Arguments clargs) =>
+            Invoker.ParseAndInvokeMainVA(args, null, (Arguments clargs) =>
                 {
                     UsageUtil.ShowVersionAndQuit(clargs, Invoker.Constants.ExitCode_Success);
                 });

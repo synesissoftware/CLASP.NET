@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 19th June 2017
+// Updated: 15th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -195,6 +195,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         {
             value = SearchOption<short>(args, optionName, (arg) => short.Parse(arg.Value));
         }
+
         /// <summary>
         ///  Checks for the presence, and obtains the value, of the given
         ///  option, or throws an exception.
@@ -212,6 +213,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         {
             value = SearchOption<int>(args, optionName, (arg) => int.Parse(arg.Value));
         }
+
         /// <summary>
         ///  Checks for the presence, and obtains the value, of the given
         ///  option, or throws an exception.
@@ -229,6 +231,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         {
             value = SearchOption<long>(args, optionName, (arg) => long.Parse(arg.Value));
         }
+
         /// <summary>
         ///  Checks for the presence, and obtains the value, of the given
         ///  option, or throws an exception.
@@ -252,6 +255,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  an exception.
         /// </summary>
         /// <param name="args">
+        ///  The arguments object
         /// </param>
         /// <exception cref="UnusedArgumentException">
         ///  Thrown if any flags/options are not used.
@@ -268,9 +272,34 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
+        ///  Verifies that all flags and options have been used, or throws
+        ///  an exception carrying the custom <paramref name="message"/>
+        /// </summary>
+        /// <param name="args">
+        ///  The arguments object
+        /// </param>
+        /// <param name="message">
+        ///  The message to be associated with the exception if thrown
+        /// </param>
+        /// <exception cref="UnusedArgumentException">
+        ///  Thrown if any flags/options are not used.
+        /// </exception>
+        public static void VerifyAllFlagsAndOptionsUsed(Arguments args, string message)
+        {
+            foreach(Argument arg in args.FlagsAndOptions)
+            {
+                if(!arg.Used)
+                {
+                    throw new UnusedArgumentException(arg, message);
+                }
+            }
+        }
+
+        /// <summary>
         ///  Verifies that all flags have been used, or throws an exception
         /// </summary>
         /// <param name="args">
+        ///  The arguments object
         /// </param>
         /// <exception cref="UnusedArgumentException">
         ///  Thrown if any flags are not used.
@@ -287,9 +316,34 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
+        ///  Verifies that all flags have been used, or throws an exception
+        ///  carrying the custom <paramref name="message"/>
+        /// </summary>
+        /// <param name="args">
+        ///  The arguments object
+        /// </param>
+        /// <param name="message">
+        ///  The message to be associated with the exception if thrown
+        /// </param>
+        /// <exception cref="UnusedArgumentException">
+        ///  Thrown if any flags are not used.
+        /// </exception>
+        public static void VerifyAllFlagsUsed(Arguments args, string message)
+        {
+            foreach(Argument arg in args.Flags)
+            {
+                if(!arg.Used)
+                {
+                    throw new UnusedArgumentException(arg, message);
+                }
+            }
+        }
+
+        /// <summary>
         ///  Verifies that all options have been used, or throws an exception
         /// </summary>
         /// <param name="args">
+        ///  The arguments object
         /// </param>
         /// <exception cref="UnusedArgumentException">
         ///  Thrown if any options are not used.
@@ -305,6 +359,29 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
         }
 
+        /// <summary>
+        ///  Verifies that all options have been used, or throws an exception
+        ///  carrying the custom <paramref name="message"/>
+        /// </summary>
+        /// <param name="args">
+        ///  The arguments object
+        /// </param>
+        /// <param name="message">
+        ///  The message to be associated with the exception if thrown
+        /// </param>
+        /// <exception cref="UnusedArgumentException">
+        ///  Thrown if any options are not used.
+        /// </exception>
+        public static void VerifyAllOptionsUsed(Arguments args, string message)
+        {
+            foreach(Argument arg in args.Options)
+            {
+                if(!arg.Used)
+                {
+                    throw new UnusedArgumentException(arg, message);
+                }
+            }
+        }
         #endregion
 
         #region implementation

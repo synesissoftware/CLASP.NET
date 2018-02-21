@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 15th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -80,7 +80,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
                 }
             }
 
-            return String.Format("{0}: {1}", message, optionName);
+            if(null != optionName)
+            {
+                return String.Format(@"{0}: {1}", message, optionName);
+            }
+
+            return message;
         }
         #endregion
     }

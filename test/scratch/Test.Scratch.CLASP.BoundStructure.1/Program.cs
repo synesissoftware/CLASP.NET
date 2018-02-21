@@ -46,7 +46,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_1
 
         static int Main(string[] args)
         {
-            return Invoker.InvokeMainAndParseBoundArgumentOfType<ArgumentSet>(args, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMainWithBoundArgumentOfType<ArgumentSet>(args, Aliases, ToolMain);
         }
 
         private static int ToolMain(ArgumentSet argSet, Arguments args)

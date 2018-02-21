@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 19th June 2017
+// Updated: 15th October 2017
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -61,12 +61,12 @@ namespace SynesisSoftware.SystemTools.Clasp
             /// <summary>
             ///  The default failure options
             /// </summary>
-            public const FailureOptions             FailureOptions_Default  =    FailureOptions.HandleClaspExceptions | FailureOptions.SetExitCodeForVV;
+            public const FailureOptions             FailureOptions_Default  =   FailureOptions.HandleClaspExceptions | FailureOptions.SetExitCodeForVV | FailureOptions.AppendStandardUsagePromptToContingentReport;
 
             /// <summary>
             ///  The default parse options
             /// </summary>
-            public const BoundArgumentParseOptions  ParseOptions_Default    =   BoundArgumentParseOptions.None;
+            public const ArgumentBindingOptions     BindingOptions_Default  =   ArgumentBindingOptions.None;
             /// <summary>
             ///  Exit-code indicating success
             /// </summary>
@@ -76,6 +76,9 @@ namespace SynesisSoftware.SystemTools.Clasp
             ///  Exit-code indicating failure
             /// </summary>
             public const int                        ExitCode_Failure        =   1;
+
+
+            internal const string                   StandardUsagePrompt     =   @"; use --help for usage";
         }
         #endregion
 
@@ -100,10 +103,20 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <code>toolMain</code>.
         /// </returns>
+        public static int ParseAndInvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
+        {
+            return ParseAndInvokeMain(args, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+        }
+
+        #region obsolete operations
+
+        /// Obsolete
+        [Obsolete("Use ParseAndInvokeMain instead")]
         public static int InvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
         {
             return InvokeMain(args, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
+        #endregion
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
@@ -121,10 +134,20 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="toolMain">
         ///  The entry point to the main program logic
         /// </param>
+        public static void ParseAndInvokeMainVA(string[] args, Alias[] aliases, ToolMainVA toolMain)
+        {
+            ParseAndInvokeMainVA(args, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+        }
+
+        #region obsolete operations
+
+        /// Obsolete
+        [Obsolete("Use ParseAndInvokeMainVA instead")]
         public static void InvokeMainVA(string[] args, Alias[] aliases, ToolMainVA toolMain)
         {
             InvokeMainVA(args, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
+        #endregion
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
@@ -135,7 +158,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <paramref name="toolMain"/>.
         /// </summary>
         /// <param name="args">
-        ///  The program arguments
+        ///  The program arguments, as obtained from <c>Main()</c>
         /// </param>
         /// <param name="aliases">
         ///  Zero or more aliases that control the interpretation of the
@@ -155,6 +178,20 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <code>toolMain</code>.
         /// </returns>
+        public static int ParseAndInvokeMain(string[] args, Alias[] aliases, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        {
+            Debug.Assert(null != args);
+            Debug.Assert(null != toolMain);
+
+            Arguments arguments = new Arguments(args, aliases, parseOptions);
+
+            return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
+        }
+
+        #region obsolete operations
+
+        /// Obsolete
+        [Obsolete("Use ParseAndInvokeMain instead")]
         public static int InvokeMain(string[] args, Alias[] aliases, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != args);
@@ -162,8 +199,9 @@ namespace SynesisSoftware.SystemTools.Clasp
 
             Arguments arguments = new Arguments(args, aliases, parseOptions);
 
-            return DoInvoke_IA_(toolMain, arguments, failureOptions);
+            return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
+        #endregion
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
@@ -191,6 +229,20 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Options that control behaviour in the event of
         ///  <paramref name="toolMain"/> throwing an exception
         /// </param>
+        public static void ParseAndInvokeMainVA(string[] args, Alias[] aliases, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        {
+            Debug.Assert(null != args);
+            Debug.Assert(null != toolMain);
+
+            Arguments arguments = new Arguments(args, aliases, parseOptions);
+
+            Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
+        }
+
+        #region obsolete operations
+
+        /// Obsolete
+        [Obsolete("Use ParseAndInvokeMainVA instead")]
         public static void InvokeMainVA(string[] args, Alias[] aliases, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != args);
@@ -198,11 +250,11 @@ namespace SynesisSoftware.SystemTools.Clasp
 
             Arguments arguments = new Arguments(args, aliases, parseOptions);
 
-            DoInvoke_VA_(toolMain, arguments, failureOptions);
+            Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
         }
+        #endregion
 
         /// <summary>
-        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="args"></param>
@@ -211,31 +263,121 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns></returns>
         /// <example>
         /// </example>
-        public static int InvokeMainAndParseBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(args, aliases, toolMain, null);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(args, aliases, toolMain, null, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
         /// <summary>
-        ///
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="aliases"/>
+        ///  into an instance of the bound argument type
+        ///  <typeparamref name="T"/>,
+        ///  according to the
+        ///  <paramref name="bindingOptions"/>,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type.
+        /// </typeparam>
+        /// <param name="args">
+        ///  The program arguments, as obtained from <c>Main()</c>.
+        /// </param>
+        /// <param name="aliases">
+        ///  Zero or more aliases that control the interpretation of the
+        ///  arguments.
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic.
+        /// </param>
+        /// <param name="bindingOptions">
+        ///  A combination of <see cref="ArgumentBindingOptions"/>
+        ///  that control the binding behaviour.
+        /// </param>
+        /// <returns>
+        ///  The return value from <code>toolMain</code>.
+        /// </returns>
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
+        {
+            return InvokeMainAndParseBoundArgumentOfType_<T>(args, aliases, toolMain, bindingOptions, ParseOptions.None, Constants.FailureOptions_Default);
+        }
+
+        /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="aliases"/>,
+        ///  <paramref name="parseOptions"/>,
+        ///  and
+        ///  <paramref name="failureOptions"/>
+        ///  into an instance of the bound argument type
+        ///  <typeparamref name="T"/>,
+        ///  according to the
+        ///  <paramref name="bindingOptions"/>,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type.
+        /// </typeparam>
+        /// <param name="args">
+        ///  The program arguments, as obtained from <c>Main()</c>.
+        /// </param>
+        /// <param name="aliases">
+        ///  Zero or more aliases that control the interpretation of the
+        ///  arguments.
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic.
+        /// </param>
+        /// <param name="bindingOptions">
+        ///  A combination of <see cref="ArgumentBindingOptions"/>
+        ///  that control the binding behaviour.
+        /// </param>
+        /// <param name="parseOptions">
+        ///  A combination of <see cref="ParseOptions">parseOptions</see>
+        ///  that control the parsing behaviour
+        /// </param>
+        /// <param name="failureOptions">
+        ///  Options that control behaviour in the event of
+        ///  <paramref name="toolMain"/> throwing an exception
+        /// </param>
+        /// <returns>
+        ///  The return value from <code>toolMain</code>.
+        /// </returns>
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        {
+            return InvokeMainAndParseBoundArgumentOfType_<T>(args, aliases, toolMain, bindingOptions, parseOptions, failureOptions);
+        }
+
+        /// <summary>
+        ///  .
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="args"></param>
-        /// <param name="aliases"></param>
         /// <param name="toolMain"></param>
-        /// <param name="parseOptions"></param>
         /// <returns></returns>
-        /// <example>
-        /// </example>
-        public static int InvokeMainAndParseBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, BoundArgumentParseOptions parseOptions) where T : new()
+        public static int InvokeMainWithBoundArgumentOfType<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(args, aliases, toolMain, parseOptions);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, null);
+        }
+
+        /// <summary>
+        ///  .
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="args"></param>
+        /// <param name="toolMain"></param>
+        /// <param name="bindingOptions"></param>
+        /// <returns></returns>
+        public static int InvokeMainWithBoundArgumentOfType<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
+        {
+            return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, bindingOptions);
         }
         #endregion
 
         #region implementation
 
-        private static int DoInvoke_IA_(ToolMain toolMain, Arguments arguments, FailureOptions failureOptions)
+        private static int Do_ParseAndInvokeMain_IA_(ToolMain toolMain, Arguments arguments, FailureOptions failureOptions)
         {
             int r = do_invoke_(arguments, failureOptions, (Arguments args) => {
 
@@ -245,7 +387,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             return r;
         }
 
-        private static void DoInvoke_VA_(ToolMainVA toolMain, Arguments arguments, FailureOptions failureOptions)
+        private static void Do_ParseAndInvokeMain_VA_(ToolMainVA toolMain, Arguments arguments, FailureOptions failureOptions)
         {
             int r = do_invoke_(arguments, failureOptions, (Arguments args) => {
 
@@ -265,11 +407,11 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
 
-        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, BoundArgumentParseOptions? parseOptions) where T : new()
+        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {
-            return Invoker.InvokeMain(args, aliases, (Arguments args2) => {
+            return Invoker.ParseAndInvokeMain(args, aliases, (Arguments args2) => {
 
-                RetVal<T> r = ParseBoundArguments_<T>(args2, parseOptions);
+                RetVal<T> r = ParseBoundArguments_<T>(args2, bindingOptions);
 
                 if(!r.Succeeded)
                 {
@@ -277,7 +419,19 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
 
                 return toolMain(Util.ReflectionUtil.CastTo<T>(r.BoundArguments), args2);
-            });
+            }, parseOptions, failureOptions);
+        }
+
+        private static int InvokeMainAndParseBoundArgumentOfType_<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions) where T : new()
+        {
+            RetVal<T> r = ParseBoundArguments_<T>(args, bindingOptions);
+
+            if(!r.Succeeded)
+            {
+                return r.ExitCode;
+            }
+
+            return toolMain(Util.ReflectionUtil.CastTo<T>(r.BoundArguments), args);
         }
 
         private static int do_invoke_(Arguments arguments, FailureOptions failureOptions, Func<Arguments, int> f)
@@ -325,7 +479,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                     Trace.WriteLine(string.Format("exception ({0}): {1}", x.GetType().FullName, x.Message));
 
-                    Console.Error.WriteLine("{0}: {1}", Arguments.ProgramName, x.Message);
+                    Console.Error.WriteLine("{0}: {1}{2}", Arguments.ProgramName, x.Message, 0 != (FailureOptions.AppendStandardUsagePromptToContingentReport & failureOptions) ? Constants.StandardUsagePrompt : String.Empty);
                 }
                 catch(Exception x)
                 {
@@ -334,7 +488,9 @@ namespace SynesisSoftware.SystemTools.Clasp
                         throw;
                     }
 
-                    Trace.WriteLine(string.Format("exception ({0}): {1}", x.GetType().FullName, x.Message));
+                    string traceMessage = string.Format("exception ({0}): {1}", x.GetType().FullName, x.Message);
+
+                    Trace.WriteLine(traceMessage);
 
                     Console.Error.WriteLine("{0}: {1}", Arguments.ProgramName, x.Message);
                 }
@@ -343,7 +499,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
 
-        private static RetVal<T> ParseBoundArguments_<T>(Arguments args, BoundArgumentParseOptions? parseOptions) where T : new()
+        private static RetVal<T> ParseBoundArguments_<T>(Arguments args, ArgumentBindingOptions? bindingOptions) where T : new()
         {
             RetVal<T>       retVal      =   new RetVal<T>();
 
@@ -357,13 +513,13 @@ namespace SynesisSoftware.SystemTools.Clasp
 
             Binding.BoundTypeAttribute  typeAttribute               =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-            BoundArgumentParseOptions   effectiveParseOptions       =   parseOptions ?? Constants.ParseOptions_Default;
+            ArgumentBindingOptions      effectiveParseOptions       =   bindingOptions ?? Constants.BindingOptions_Default;
 
             if(null != typeAttribute)
             {
-                if(typeAttribute.AttributeOptionsHavePrecedence || !parseOptions.HasValue)
+                if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
                 {
-                    effectiveParseOptions = typeAttribute.ParseOptions;
+                    effectiveParseOptions = typeAttribute.BindingOptions;
                 }
             }
 
@@ -503,7 +659,16 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         if(null == valueAttribute.DefaultValue)
                         {
-                            throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
+                            if(String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
+                            {
+                                throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
+                            }
+                            else
+                            {
+                                string message = String.Format(@"value {0} not specified", valueAttribute.UsageLabel);
+
+                                throw new Exceptions.MissingValueException(valueAttribute.ValueIndex, message);
+                            }
                         }
                         else
                         {
@@ -595,23 +760,23 @@ namespace SynesisSoftware.SystemTools.Clasp
             // /////////////////////
             // type & options
 
-            if(0 == (BoundArgumentParseOptions.IgnoreOtherFlags & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveParseOptions))
             {
-                Util.ArgumentUtil.VerifyAllFlagsUsed(args);
+                Util.ArgumentUtil.VerifyAllFlagsUsed(args, @"unrecognised flag");
             }
 
-            if(0 == (BoundArgumentParseOptions.IgnoreOtherOptions & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveParseOptions))
             {
-                Util.ArgumentUtil.VerifyAllOptionsUsed(args);
+                Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
             }
 
-            if(0 == (BoundArgumentParseOptions.IgnoreOtherValues & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherValues & effectiveParseOptions))
             {
                 for(int i = 0; i != usedValues.Length; ++i)
                 {
                     if(!usedValues[i])
                     {
-                        throw new Exceptions.UnusedArgumentException(args.Values[i]);
+                        throw new Exceptions.UnusedArgumentException(args.Values[i], @"too many values specified");
                     }
                 }
             }

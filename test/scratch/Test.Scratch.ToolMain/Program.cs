@@ -17,7 +17,7 @@ namespace Test.Scratch.ToolMain
 
         static int Main(string[] args)
         {
-            return Invoker.InvokeMain(args, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMain(args, Aliases, ToolMain);
         }
 
         private static int ToolMain(Arguments args)

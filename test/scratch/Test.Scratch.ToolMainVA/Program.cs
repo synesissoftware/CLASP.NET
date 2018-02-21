@@ -17,7 +17,7 @@ namespace Test.Scratch.ToolMainVA
 
         static void Main(string[] args)
         {
-            Invoker.InvokeMainVA(args, Aliases, ToolMain);
+            Invoker.ParseAndInvokeMainVA(args, Aliases, ToolMain);
         }
 
         private static void ToolMain(Arguments args)

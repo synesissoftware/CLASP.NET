@@ -19,25 +19,25 @@ namespace Test.Unit.CLASP.Versions
         static Type forcedLoadReference = typeof(IArgument);
 
         [TestMethod]
-        public void test_Pantheios_Interfaces_version()
+        public void test_CLASP_Interfaces_version()
         {
             Assembly assembly = forcedLoadReference.Assembly;
 
             Version version = assembly.GetName().Version;
 
             Assert.AreEqual(0, version.Major);
-            Assert.AreEqual(8, version.Minor);
+            Assert.AreEqual(9, version.Minor);
         }
 
         [TestMethod]
-        public void test_Pantheios_Interfaces_file_version()
+        public void test_CLASP_Interfaces_file_version()
         {
             Assembly assembly = forcedLoadReference.Assembly;
 
             FileVersionInfo fversion = FileVersionInfo.GetVersionInfo(assembly.Location);
 
             Assert.AreEqual(0, fversion.FileMajorPart);
-            Assert.AreEqual(8, fversion.FileMinorPart);
+            Assert.AreEqual(9, fversion.FileMinorPart);
         }
     }
 }

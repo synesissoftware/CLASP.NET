@@ -4,6 +4,8 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
+    using global::SynesisSoftware.SystemTools.Clasp;
+
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -82,9 +84,56 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 /// </summary>
                 public const string UseProductVersion           =   "use-product-version";
             }
+
+            /// <summary>
+            ///  Constants associated with the standard aliases.
+            /// </summary>
+            /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>
+            /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>
+            public static class StandardAliases
+            {
+                /// <summary>
+                ///  The resolved name of
+                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>.
+                /// </summary>
+                public const string Help_ResolvedName       =   @"--help";
+                /// <summary>
+                ///  The description of
+                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>.
+                /// </summary>
+                public const string Help_Description        =   @"shows this help and terminates";
+
+                /// <summary>
+                ///  The resolved name of
+                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>.
+                /// </summary>
+                public const string Version_ResolvedName    =   @"--version";
+                /// <summary>
+                ///  The description of
+                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>.
+                /// </summary>
+                public const string Version_Description     =   @"shows version information and terminates";
+            }
         }
 
         private static readonly IDictionary<string, object> EmptyOptions = new Dictionary<string, object>();
+        #endregion
+
+        #region properties
+
+        /// <summary>
+        ///  An instance of
+        ///  <see cref="SynesisSoftware.SystemTools.Clasp.Flag"/>
+        ///  that provides default '--help' information.
+        /// </summary>
+        public static Flag Help = new Flag(null, Constants.StandardAliases.Help_ResolvedName, Constants.StandardAliases.Help_Description);
+
+        /// <summary>
+        ///  An instance of
+        ///  <see cref="SynesisSoftware.SystemTools.Clasp.Flag"/>
+        ///  that provides default '--version' information.
+        /// </summary>
+        public static Flag Version = new Flag(null, Constants.StandardAliases.Version_ResolvedName, Constants.StandardAliases.Version_Description);
         #endregion
 
         #region usage methods
@@ -207,6 +256,16 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         {
             ShowVersionAndQuit_(args, exitCode, options);
         }
+
+        /// <summary>
+        ///  .
+        /// </summary>
+        /// <param name="aliases"></param>
+        /// <param name="options"></param>
+        public static void ShowVersion(IEnumerable<Alias> aliases, IDictionary<string, object> options)
+        {
+            ShowVersion_(null, options);
+        }
         #endregion
 
         #region utility methods
@@ -256,7 +315,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
         private static void ShowVersionAndQuit_(Arguments args, int? exitCode, IDictionary<string, object> options)
         {
-            ShowVersion_(args.Aliases, exitCode, options);
+            ShowVersion_(exitCode, options);
 
             if(exitCode.HasValue)
             {
@@ -310,7 +369,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
         }
 
-        private static void ShowVersion_(IEnumerable<Alias> aliases, int? exitCode, IDictionary<string, object> options)
+        private static void ShowVersion_(int? exitCode, IDictionary<string, object> options)
         {
             options = InferOptions_(exitCode, options);
 
