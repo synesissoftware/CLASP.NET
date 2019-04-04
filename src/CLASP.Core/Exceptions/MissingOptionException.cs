@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 15th October 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {

@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 19th June 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -34,6 +34,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         ///  Constructs an instance of the exception type.
         /// </summary>
         /// <param name="option">
+        ///  The argument
         /// </param>
         public MissingOptionValueException(IArgument option)
             : base(option, Constants.DefaultMessage, null, null)

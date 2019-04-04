@@ -46,16 +46,6 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 
         #region properties
 
-        /// <summary>
-        ///  The option name associated with
-        /// </summary>
-        public string OptionName
-        {
-            get
-            {
-                return _optionName;
-            }
-        }
         #endregion
 
         #region implementation

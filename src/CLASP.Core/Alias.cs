@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 19th June 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -137,7 +137,11 @@ namespace SynesisSoftware.SystemTools.Clasp
             return new SectionSeparator(sectionName);
         }
 
-        /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Alias.Section"/>
+        /// <summary>
+        ///  [DEPRECATED] Instead use <see cref="Section(string)"/>.
+        /// </summary>
+        /// <param name="sectionName"></param>
+        /// <returns></returns>
         public static SectionSeparator SectionSeparator(string sectionName)
         {
             return new SectionSeparator(sectionName);

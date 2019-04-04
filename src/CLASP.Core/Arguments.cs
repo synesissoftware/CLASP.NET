@@ -373,6 +373,65 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region operations
 
         /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="aliases"/>,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <param name="args">
+        ///  The program arguments
+        /// </param>
+        /// <param name="aliases">
+        ///  Zero or more aliases that control the interpretation of the
+        ///  arguments
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
+        public static int InvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
+        {
+            return InvokeMain(args, aliases, ParseOptions.None, toolMain);
+        }
+
+        /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="aliases"/>
+        ///  and
+        ///  <paramref name="options"/>,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <param name="args">
+        ///  The program arguments
+        /// </param>
+        /// <param name="aliases">
+        ///  Zero or more aliases that control the interpretation of the
+        ///  arguments
+        /// </param>
+        /// <param name="options">
+        ///  A combination of <see cref="ParseOptions">options</see> that
+        ///  control the parsing behaviour
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
+        public static int InvokeMain(string[] args, Alias[] aliases, ParseOptions options, ToolMain toolMain)
+        {
+            Debug.Assert(null != args);
+            Debug.Assert(null != toolMain);
+
+            Arguments arguments = new Arguments(args, aliases);
+
+            return toolMain(arguments);
+        }
+
+        /// <summary>
         ///  Searches the flags for the given argument name and, if found,
         ///  sets the given <paramref name="flag"/> value to the given
         ///  <paramref name="variable"/>.
