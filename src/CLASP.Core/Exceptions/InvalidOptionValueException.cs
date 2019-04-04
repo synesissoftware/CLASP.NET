@@ -32,7 +32,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 
         #region fields
 
-        private readonly Type   _expectedType;
+        private readonly Type   m_expectedType;
         #endregion
 
         #region construction
@@ -50,7 +50,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         public InvalidOptionValueException(IArgument option, Type expectedType)
             : base(option, Constants.DefaultMessage, null, null)
         {
-            _expectedType = expectedType;
+            m_expectedType = expectedType;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         public InvalidOptionValueException(IArgument option, Type expectedType, FormatException innerException)
             : base(option, Constants.DefaultMessage, null, innerException)
         {
-            _expectedType = expectedType;
+            m_expectedType = expectedType;
         }
         #endregion
 
@@ -82,7 +82,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         {
             get
             {
-                return _expectedType;
+                return m_expectedType;
             }
         }
         #endregion

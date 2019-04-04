@@ -16,7 +16,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     {
         #region fields
 
-        private readonly IArgument  _argument;
+        private readonly IArgument  m_argument;
         #endregion
 
         #region construction
@@ -37,7 +37,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         protected ClaspException(IArgument argument, string message, Exception innerException)
             : base(message, innerException)
         {
-            _argument = argument;
+            m_argument = argument;
         }
         #endregion
 
@@ -50,7 +50,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         {
             get
             {
-                return _argument;
+                return m_argument;
             }
         }
         #endregion

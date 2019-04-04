@@ -16,7 +16,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     {
         #region fields
 
-        private readonly string _optionName;
+        private readonly string m_optionName;
         #endregion
 
         #region construction
@@ -40,7 +40,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         protected FlagOrOptionArgumentException(IArgument argument, string message, string optionName, Exception innerException)
             : base(argument, MakeMessage_(argument, message, optionName), innerException)
         {
-            _optionName = optionName;
+            m_optionName = optionName;
         }
         #endregion
 

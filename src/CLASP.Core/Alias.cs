@@ -14,11 +14,11 @@ namespace SynesisSoftware.SystemTools.Clasp
     {
         #region fields
 
-        private readonly ArgumentType   _argumentType;
-        private readonly string         _givenName;
-        private readonly string         _resolvedName;
-        private readonly string         _description;
-        private readonly string[]       _validValues;
+        private readonly ArgumentType   m_argumentType;
+        private readonly string         m_givenName;
+        private readonly string         m_resolvedName;
+        private readonly string         m_description;
+        private readonly string[]       m_validValues;
         #endregion
 
         #region construction
@@ -40,11 +40,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                 validValues =   new string[0];
             }
 
-            _argumentType   =   type;
-            _givenName      =   givenName;
-            _resolvedName   =   resolvedName;
-            _description    =   description;
-            _validValues    =   validValues;
+            m_argumentType  =   type;
+            m_givenName     =   givenName;
+            m_resolvedName  =   resolvedName;
+            m_description   =   description;
+            m_validValues   =   validValues;
         }
 
         /// <summary>
@@ -66,12 +66,11 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
 
-            _argumentType   =   ArgumentType.None;
-            _givenName      =   null;
-            _resolvedName   =   null;
-            _description    =   description;
-
-            _validValues    =   new string[0];
+            m_argumentType  =   ArgumentType.None;
+            m_givenName     =   null;
+            m_resolvedName  =   null;
+            m_description   =   description;
+            m_validValues   =   new string[0];
         }
         #endregion
 
@@ -178,7 +177,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             get
             {
-                return _argumentType;
+                return m_argumentType;
             }
         }
         /// <summary>
@@ -188,7 +187,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             get
             {
-                return _givenName;
+                return m_givenName;
             }
         }
         /// <summary>
@@ -198,7 +197,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             get
             {
-                return _resolvedName;
+                return m_resolvedName;
             }
         }
         /// <summary>
@@ -208,7 +207,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             get
             {
-                return _description;
+                return m_description;
             }
         }
 
@@ -219,7 +218,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             get
             {
-                return _validValues;
+                return m_validValues;
             }
         }
         #endregion
