@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 19th June 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -25,13 +25,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         /// </summary>
         /// <param name="argument">
         ///  The argument associated with the condition that caused the
-        ///  exception to be thrown. May be <code>null</code>.
+        ///  exception to be thrown. May be <c>null</c>.
         /// </param>
         /// <param name="message">
         ///  The human-readable message to be associated with the exception.
         /// </param>
         /// <param name="innerException">
-        ///  Inner exception, or <code>null</code>.
+        ///  Inner exception, or <c>null</c>.
         /// </param>
         protected ArgumentException(IArgument argument, string message, Exception innerException)
             : base(argument, message, innerException)

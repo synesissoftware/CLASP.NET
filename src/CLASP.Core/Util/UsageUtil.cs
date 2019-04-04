@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 18th June 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -143,7 +143,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  with the given exit code.
         /// </summary>
         /// <param name="args">
-        ///  Parsed program arguments. May not be <code>null</code>
+        ///  Parsed program arguments. May not be <c>null</c>
         /// </param>
         /// <param name="exitCode">
         ///  The code by which the process will be terminated.
@@ -160,7 +160,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  with the given exit code
         /// </summary>
         /// <param name="args">
-        ///  Parsed program arguments. May not be <code>null</code>
+        ///  Parsed program arguments. May not be <c>null</c>
         /// </param>
         /// <param name="exitCode">
         ///  The code by which the process will be terminated
@@ -236,7 +236,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///
         /// </summary>
         /// <param name="args">
-        ///  Parsed program arguments. May not be <code>null</code>
+        ///  Parsed program arguments. May not be <c>null</c>
         /// </param>
         /// <param name="exitCode">
         ///  The code by which the process will be terminated.

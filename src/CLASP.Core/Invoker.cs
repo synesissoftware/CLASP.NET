@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 15th October 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -101,7 +101,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The entry point to the main program logic
         /// </param>
         /// <returns>
-        ///  The return value from <code>toolMain</code>.
+        ///  The return value from <c>toolMain</c>.
         /// </returns>
         public static int ParseAndInvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
         {
@@ -176,7 +176,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <paramref name="toolMain"/> throwing an exception
         /// </param>
         /// <returns>
-        ///  The return value from <code>toolMain</code>.
+        ///  The return value from <c>toolMain</c>.
         /// </returns>
         public static int ParseAndInvokeMain(string[] args, Alias[] aliases, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
@@ -296,7 +296,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  that control the binding behaviour.
         /// </param>
         /// <returns>
-        ///  The return value from <code>toolMain</code>.
+        ///  The return value from <c>toolMain</c>.
         /// </returns>
         public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
@@ -342,7 +342,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <paramref name="toolMain"/> throwing an exception
         /// </param>
         /// <returns>
-        ///  The return value from <code>toolMain</code>.
+        ///  The return value from <c>toolMain</c>.
         /// </returns>
         public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {

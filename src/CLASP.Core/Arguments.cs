@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 14th October 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -378,7 +378,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <paramref name="variable"/>.
         /// </summary>
         /// <typeparam name="T">
-        ///  The flag type, which must a <code>struct</code>.
+        ///  The flag type, which must a <c>struct</c>.
         /// </typeparam>
         /// <param name="resolvedName">
         ///  The resolved name of the flag.
@@ -387,7 +387,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The flag.
         /// </param>
         /// <param name="variable">
-        ///  An in/out variable (of the same type as the <code>flag</code>
+        ///  An in/out variable (of the same type as the <c>flag</c>
         ///  variable) whose value will be modified in respect of the
         ///  presence of the flag.
         /// </param>
@@ -465,7 +465,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </returns>
         /// <exception cref="System.FormatException">
         ///  Thrown if the given option's value cannot be converted to
-        ///  <code>int</code>.
+        ///  <c>int</c>.
         /// </exception>
         public bool CheckOption(string resolvedName, out int value)
         {

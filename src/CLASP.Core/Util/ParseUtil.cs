@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 19th June 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -35,10 +35,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         #region Boolean parsing methods
 
         /// <summary>
-        ///  Parses the given string for a <code>bool</code> value.
+        ///  Parses the given string for a <c>bool</c> value.
         /// </summary>
         /// <param name="s">
-        ///  The string to be parsed. May not be <code>null</code>.
+        ///  The string to be parsed. May not be <c>null</c>.
         /// </param>
         /// <returns>
         ///  The boolean value.
@@ -61,11 +61,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Attemps to parse the given string for a <code>bool</code>
+        ///  Attemps to parse the given string for a <c>bool</c>
         ///  value.
         /// </summary>
         /// <param name="s">
-        ///  The string to be parsed. May not be <code>null</code>.
+        ///  The string to be parsed. May not be <c>null</c>.
         /// </param>
         /// <param name="value">
         ///  The boolean value.
@@ -82,12 +82,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Attempts to parse the given string for a <code>bool</code>
+        ///  Attempts to parse the given string for a <c>bool</c>
         /// </summary>
         /// <param name="trueForms"></param>
         /// <param name="falseForms"></param>
         /// <param name="s">
-        ///  The string to be parsed. May not be <code>null</code>.
+        ///  The string to be parsed. May not be <c>null</c>.
         /// </param>
         /// <param name="comparisonType"></param>
         /// <param name="value">
@@ -126,12 +126,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Attempts to parse the given string for a <code>bool</code>
+        ///  Attempts to parse the given string for a <c>bool</c>
         /// </summary>
         /// <param name="trueForms"></param>
         /// <param name="falseForms"></param>
         /// <param name="s">
-        ///  The string to be parsed. May not be <code>null</code>.
+        ///  The string to be parsed. May not be <c>null</c>.
         /// </param>
         /// <param name="value">
         ///  The boolean value.

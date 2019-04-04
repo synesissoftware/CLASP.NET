@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 15th October 2017
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -42,7 +42,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         /// </summary>
         /// <param name="option">
         ///  The option argument associated with the condition that caused
-        ///  the exception to be thrown. May be <code>null</code>.
+        ///  the exception to be thrown. May be <c>null</c>.
         /// </param>
         /// <param name="expectedType">
         ///  The expected type.
@@ -58,13 +58,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         /// </summary>
         /// <param name="option">
         ///  The option argument associated with the condition that caused
-        ///  the exception to be thrown. May be <code>null</code>.
+        ///  the exception to be thrown. May be <c>null</c>.
         /// </param>
         /// <param name="expectedType">
         ///  The expected type.
         /// </param>
         /// <param name="innerException">
-        ///  Inner exception, or <code>null</code>.
+        ///  Inner exception, or <c>null</c>.
         /// </param>
         public InvalidOptionValueException(IArgument option, Type expectedType, FormatException innerException)
             : base(option, Constants.DefaultMessage, null, innerException)
