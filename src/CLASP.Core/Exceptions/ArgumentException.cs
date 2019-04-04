@@ -14,11 +14,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     public abstract class ArgumentException
         : ClaspException
     {
-        #region Fields
+        #region fields
+
         private readonly string _optionName;
         #endregion
 
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an instance of the class.
         /// </summary>
@@ -42,7 +44,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         /// <summary>
         ///  The option name associated with
         /// </summary>
@@ -55,7 +58,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         }
         #endregion
 
-        #region Implementation
+        #region implementation
+
         private static string MakeMessage_(string message, string optionName)
         {
             return String.Format("{0}: {1}", message, optionName);

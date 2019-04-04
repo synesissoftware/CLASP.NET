@@ -14,11 +14,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     public abstract class ClaspException
         : Exception
     {
-        #region Fields
+        #region fields
+
         private readonly IArgument  _argument;
         #endregion
 
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an instance of the class.
         /// </summary>
@@ -39,7 +41,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         /// <summary>
         ///  The argument associated with the exception.
         /// </summary>

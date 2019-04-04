@@ -15,11 +15,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
     public class InvalidOptionValueException
         : ArgumentException
     {
-        #region Fields
+        #region fields
+
         private readonly Type   _expectedType;
         #endregion
 
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an instance of the class.
         /// </summary>
@@ -62,7 +64,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         /// <summary>
         ///  The expected type of the option's value.
         /// </summary>

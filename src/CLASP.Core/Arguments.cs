@@ -20,7 +20,8 @@ namespace SynesisSoftware.SystemTools.Clasp
     /// </summary>
     public sealed class Arguments
     {
-        #region Constants
+        #region constants
+
         private static readonly char[]  WildcardCharacters  =   new char[] { '*', '?' };
         private static readonly char[]  PathNameSeparators  =   new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
         private static readonly bool    PlatformIsWindows   =   PlatformIsWindows_;
@@ -48,7 +49,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Fields
+        #region fields
+
         readonly ICollection<Alias> aliases         =   null;
         readonly List<IArgument>    arguments       =   new List<IArgument>();
         readonly List<IArgument>    flags           =   new List<IArgument>();
@@ -57,7 +59,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         readonly List<IArgument>    values          =   new List<IArgument>();
         #endregion
 
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments
@@ -337,7 +340,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Operations
+        #region operations
+
         /// <summary>
         ///  Parses the given program arguments, according to the given
         ///  <paramref name="aliases"/>,
@@ -564,7 +568,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         /// <summary>
         ///  The aliases specified to the constructor, or <b>null</b> if
         ///  none were specified.
@@ -618,7 +623,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Implementation
+        #region implementation
+
         private IArgument FindOption_(string resolvedName)
         {
             foreach(IArgument arg in this.options)

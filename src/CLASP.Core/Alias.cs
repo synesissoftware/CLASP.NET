@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 9th April 2015
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -12,7 +12,8 @@ namespace SynesisSoftware.SystemTools.Clasp
     /// </summary>
     public abstract class Alias
     {
-        #region Construction
+        #region construction
+
         /// <summary>
         ///  Constructs an instance of the class.
         /// </summary>
@@ -65,7 +66,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Creator methods
+        #region creator methods
+
         /// <summary>
         ///  Creates a flag alias.
         /// </summary>
@@ -137,7 +139,8 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         #endregion
 
-        #region Overrides
+        #region overrides
+
         /// <summary>
         ///  A string representation of the alias.
         /// </summary>
@@ -148,7 +151,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
         #endregion
 
-        #region Properties
+        #region properties
+
         /// <summary>
         ///  The alias type.
         /// </summary>

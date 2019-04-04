@@ -16,7 +16,8 @@ namespace Test.Unit.CLASP._1
             Assert.IsNotNull(typeof(Arguments));
         }
 
-        #region Value Tests
+        #region Value tests
+
         [TestMethod]
         public void Test_Value_1()
         {
@@ -169,7 +170,8 @@ namespace Test.Unit.CLASP._1
         }
         #endregion
 
-        #region Option Tests
+        #region Option tests
+
         [TestMethod]
         public void Test_Option_1()
         {
@@ -345,7 +347,8 @@ namespace Test.Unit.CLASP._1
         }
         #endregion
 
-        #region Flag Tests
+        #region Flag tests
+
         [TestMethod]
         public void Test_Flag_1()
         {
@@ -460,7 +463,8 @@ namespace Test.Unit.CLASP._1
         }
         #endregion
 
-        #region Aliases Tests
+        #region Aliases tests
+
         [TestMethod]
         public void Test_Aliases_1()
         {

@@ -19,6 +19,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
     public static class ClaspUtil
     {
         #region Boolean parsing methods
+
         /// <summary>
         ///  Parses the given string for a <c>bool</c> value.
         /// </summary>
@@ -78,7 +79,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
         #endregion
 
-        #region Usage methods
+        #region usage methods
+
         /// <summary>
         ///  Shows usage for the attached aliases and exits the process
         ///  with the given exit code.
@@ -156,7 +158,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
         #endregion
 
-        #region Flags and options operations
+        #region flags and options operations
+
         /// <summary>
         ///  Determines whether the given flag is specified.
         /// </summary>
@@ -363,7 +366,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
         #endregion
 
-        #region Implementation
+        #region implementation
+
         private delegate T Translate<T>(IArgument arg);
 
         private static T SearchOption<T>(Arguments args, string optionName, Translate<T> f)
