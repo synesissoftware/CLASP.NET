@@ -12,6 +12,15 @@ namespace SynesisSoftware.SystemTools.Clasp
     /// </summary>
     public abstract class Alias
     {
+        #region fields
+
+        private readonly ArgumentType   _argumentType;
+        private readonly string         _givenName;
+        private readonly string         _resolvedName;
+        private readonly string         _description;
+        private readonly string[]       _validValues;
+        #endregion
+
         #region construction
 
         /// <summary>
@@ -31,11 +40,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                 validValues =   new string[0];
             }
 
-            Type            =   type;
-            GivenName       =   givenName;
-            ResolvedName    =   resolvedName;
-            Description     =   description;
-            ValidValues     =   validValues;
+            _argumentType   =   type;
+            _givenName      =   givenName;
+            _resolvedName   =   resolvedName;
+            _description    =   description;
+            _validValues    =   validValues;
         }
 
         /// <summary>
@@ -57,12 +66,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
 
-            Type            =   ArgumentType.None;
-            GivenName       =   null;
-            ResolvedName    =   null;
-            Description     =   description;
+            _argumentType   =   ArgumentType.None;
+            _givenName      =   null;
+            _resolvedName   =   null;
+            _description    =   description;
 
-            ValidValues     =   new string[0];
+            _validValues    =   new string[0];
         }
         #endregion
 
@@ -167,32 +176,40 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </summary>
         public ArgumentType Type
         {
-            get;
-            private set;
+            get
+            {
+                return _argumentType;
+            }
         }
         /// <summary>
         ///  The given name of the alias.
         /// </summary>
         public string GivenName
         {
-            get;
-            private set;
+            get
+            {
+                return _givenName;
+            }
         }
         /// <summary>
         ///  The resolved name of the alias.
         /// </summary>
         public string ResolvedName
         {
-            get;
-            private set;
+            get
+            {
+                return _resolvedName;
+            }
         }
         /// <summary>
         ///  The description of the alias.
         /// </summary>
         public string Description
         {
-            get;
-            private set;
+            get
+            {
+                return _description;
+            }
         }
 
         /// <summary>
@@ -200,8 +217,10 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </summary>
         public string[] ValidValues
         {
-            get;
-            private set;
+            get
+            {
+                return _validValues;
+            }
         }
         #endregion
     }
