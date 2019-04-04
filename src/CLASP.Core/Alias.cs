@@ -5,6 +5,7 @@
 namespace SynesisSoftware.SystemTools.Clasp
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     /// <summary>
@@ -14,11 +15,12 @@ namespace SynesisSoftware.SystemTools.Clasp
     {
         #region fields
 
-        private readonly ArgumentType   m_argumentType;
-        private readonly string         m_givenName;
-        private readonly string         m_resolvedName;
-        private readonly string         m_description;
-        private readonly string[]       m_validValues;
+        private readonly ArgumentType                   m_argumentType;
+        private readonly string                         m_givenName;
+        private readonly string                         m_resolvedName;
+        private readonly string                         m_description;
+        private readonly string[]                       m_validValues;
+        private readonly IDictionary<string, object>    m_extras;
         #endregion
 
         #region construction
@@ -45,6 +47,8 @@ namespace SynesisSoftware.SystemTools.Clasp
             m_resolvedName  =   resolvedName;
             m_description   =   description;
             m_validValues   =   validValues;
+
+            m_extras        =   new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -219,6 +223,17 @@ namespace SynesisSoftware.SystemTools.Clasp
             get
             {
                 return m_validValues;
+            }
+        }
+
+        /// <summary>
+        ///  Extras
+        /// </summary>
+        public IDictionary<string, object> Extras
+        {
+            get
+            {
+                return m_extras;
             }
         }
         #endregion

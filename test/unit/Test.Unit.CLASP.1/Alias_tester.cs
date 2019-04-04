@@ -58,6 +58,7 @@ namespace Test.Unit.CLASP.ns_1
                     Assert.AreEqual(givenName, alias.GivenName);
                     Assert.AreEqual(resolvedName, alias.ResolvedName);
                     Assert.AreEqual(description, alias.Description);
+                    Assert.IsTrue(0 == alias.Extras.Count, "Extras property must be empty");
                 }
             }
         }
