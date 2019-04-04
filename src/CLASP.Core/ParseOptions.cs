@@ -1,6 +1,6 @@
 ﻿
 // Created: 9th August 2009
-// Updated: 5th June 2015
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -80,12 +80,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///// Prevents the results from being into groups of
         ///// flags, options and values.
         /////
-        ///// \note The structure members <code>numFlagsAndOptions</code>,
-        /////   <code>flagsAndOptions</code>, <code>numFlags</code>,
-        /////   <code>flags</code>, <code>numOptions</code>, <code>options</code>,
-        /////   <code>numValues</code> and <code>values</code> are not valid when this
-        /////   flag is used. Client code should only use <code>numArguments</code> and
-        /////   <code>arguments</code>.
+        ///// \note The structure members <c>numFlagsAndOptions</c>,
+        /////   <c>flagsAndOptions</c>, <c>numFlags</c>,
+        /////   <c>flags</c>, <c>numOptions</c>, <c>options</c>,
+        /////   <c>numValues</c> and <c>values</c> are not valid when this
+        /////   flag is used. Client code should only use <c>numArguments</c> and
+        /////   <c>arguments</c>.
         ///// </summary>
         //PreserveOriginalArgumentOrder                (0x00000400)
     }

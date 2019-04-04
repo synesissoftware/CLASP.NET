@@ -1,6 +1,6 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 8th June 2015
+// Updated: 4th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -14,12 +14,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Constructs an instance of the class.
         /// </summary>
         /// <param name="givenName">
-        ///  The given name of the flag. May be <code>null</code> except
-        ///  when <code>resolvedName</code> is <code>null</code>.
+        ///  The given name of the flag. May be <c>null</c> except
+        ///  when <c>resolvedName</c> is <c>null</c>.
         /// </param>
         /// <param name="resolvedName">
-        ///  The resolved name of the flag. May not be <code>null</code>
-        ///  unless <code>givenName</code> is non-<code>null</code>.
+        ///  The resolved name of the flag. May not be <c>null</c>
+        ///  unless <c>givenName</c> is non-<c>null</c>.
         /// </param>
         /// <param name="description">
         ///  The description of the flag, to be displayed in usage.
