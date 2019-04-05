@@ -13,6 +13,9 @@ TestResults/
 
 # directories (by pattern)
 
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
 # files (by name)
 
 build.cmd
@@ -20,15 +23,24 @@ build.cmd
 Local.testsettings
 TraceAndTestImpact.testsettings
 
+project.lock.json
+project.assets.json
+
 # files (by pattern)
 
+*~
 *.*~
-
-*.csproj*.user
 *.nupkg
 *.proj
 *.scc
 *.suo
 *.swp
 
+*.nuget.props
+*.nuget.targets
 
+*.csproj*.user
+*.vcproj.user
+*.vcxproj.user
+TestResult*.xml
+UpgradeLog*.XML
