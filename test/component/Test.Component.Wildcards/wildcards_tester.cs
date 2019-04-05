@@ -5,8 +5,6 @@ namespace Test.Component.Wildcards
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//    using Recls;
-
     [TestClass]
     public class wildcards_tester
     {
