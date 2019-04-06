@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 4th April 2019
+// Updated: 6th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -260,10 +260,10 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                             if(equal3 >= 0)
                                             {
-                                                string name2    =   alias2.ResolvedName.Substring(0, equal);
-                                                string value2   =   alias2.ResolvedName.Substring(1 + equal);
+                                                string name2    =   alias2.ResolvedName.Substring(0, equal3);
+                                                string value2   =   alias2.ResolvedName.Substring(1 + equal3);
 
-                                                AddFlag(Argument.NewOption(arg, name2, value2, i));
+                                                AddOption(Argument.NewOption(arg, name2, value2, i));
                                             }
                                             else
                                             {

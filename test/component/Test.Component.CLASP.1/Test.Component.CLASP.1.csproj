@@ -34,9 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CLASP.NET.Core, Version=0.10.119.0, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CLASP.NET.0.10.119\lib\net40\CLASP.NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="recls.NET.Core">
+    <Reference Include="recls.NET.Core, Version=2.1.1103.1, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\recls.NET.2.1.1103.1\lib\net40\recls.NET.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -51,12 +56,6 @@
   <ItemGroup>
     <Compile Include="test_component_CLASP_tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\src\CLASP.Core\CLASP.Core.csproj">
-      <Project>{7923339F-23C3-42B8-8D9F-7D3ABC297091}</Project>
-      <Name>CLASP.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
