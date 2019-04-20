@@ -1,5 +1,8 @@
 #  **CLASP.NET** Changes
 
+## 0.13.126.1 - 20th April 2019
+
+* ~ changed (almost) all Argument properties to be backed by private readonly field
 
 ## 0.13.125.0 - 20th April 2019
 

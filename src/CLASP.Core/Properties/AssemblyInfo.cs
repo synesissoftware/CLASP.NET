@@ -21,8 +21,8 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.13.125.0")]
-[assembly: AssemblyFileVersion("0.13.125.0")]
+[assembly: AssemblyVersion("0.13.126.1")]
+[assembly: AssemblyFileVersion("0.13.126.1")]
 [assembly: AssemblyInformationalVersion("0.13")]
 
 /* ///////////////////////////// end of file //////////////////////////// */

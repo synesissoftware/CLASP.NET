@@ -17,6 +17,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         #region fields
 
         private readonly Specification  m_specification;
+        private readonly ArgumentType   m_argumentType;
+        private readonly string         m_resolvedName;
+        private readonly string         m_givenName;
+        private readonly int            m_index;
         #endregion
 
         #region construction
@@ -24,11 +28,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         private Argument(Specification specification, ArgumentType type, string givenName, string resolvedName, string value, int numHyphens, int index)
         {
             m_specification =   specification;
-            Type            =   type;
-            GivenName       =   givenName;
-            ResolvedName    =   resolvedName;
+            m_argumentType  =   type;
+            m_resolvedName  =   resolvedName;
+            m_givenName     =   givenName;
             Value           =   value;
-            Index           =   index;
+            m_index         =   index;
         }
 
         internal static Argument NewValue(string value, int index)
@@ -51,18 +55,24 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
 
         public ArgumentType Type
         {
-            get;
-            private set;
+            get
+            {
+                return m_argumentType;
+            }
         }
         public string ResolvedName
         {
-            get;
-            private set;
+            get
+            {
+                return m_resolvedName;
+            }
         }
         public string GivenName
         {
-            get;
-            private set;
+            get
+            {
+                return m_givenName;
+            }
         }
         public string Value
         {
@@ -71,8 +81,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         }
         public int Index
         {
-            get;
-            private set;
+            get
+            {
+                return m_index;
+            }
         }
         #endregion
 
