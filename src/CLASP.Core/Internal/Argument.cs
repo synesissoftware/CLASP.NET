@@ -8,6 +8,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
 
     using System;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     internal sealed class Argument
         : IArgument
     {
@@ -27,24 +30,34 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
             return new Argument(ArgumentType.Value, null, null, value, 0, index);
         }
 
+        internal static Argument NewFlag_(Specification specification, string givenName, string resolvedName, int index)
+        {
+            return new Argument(ArgumentType.Flag, givenName, resolvedName, null, CountHyphens(givenName), index);
+        }
+
+        internal static Argument NewOption_(Specification specification, string givenName, string resolvedName, string value, int index)
+        {
+            return new Argument(ArgumentType.Option, givenName, resolvedName, value, CountHyphens(givenName), index);
+        }
+
         internal static Argument NewFlag(string arg, int i)
         {
-            return new Argument(ArgumentType.Flag, arg, arg, null, CountHyphens(arg), i);
+            return NewFlag_(null, arg, arg, i);
         }
 
         internal static Argument NewFlag(string givenName, string name, int i)
         {
-            return new Argument(ArgumentType.Flag, givenName, name, null, CountHyphens(givenName), i);
+            return NewFlag_(null, givenName, name, i);
         }
 
         internal static Argument NewOption(string arg, int i)
         {
-            return new Argument(ArgumentType.Option, arg, arg, null, CountHyphens(arg), i);
+            return NewOption_(null, arg, arg, null, i);
         }
 
         internal static Argument NewOption(string givenName, string name, string value, int i)
         {
-            return new Argument(ArgumentType.Option, givenName, name, value, CountHyphens(givenName), i);
+            return NewOption_(null, givenName, name, value, i);
         }
         #endregion
 
