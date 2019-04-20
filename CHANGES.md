@@ -1,5 +1,8 @@
 #  **CLASP.NET** Changes
 
+## 0.11.123.2 - 20th April 2019
+
+* ~ corrected Aargument.ToString() for flags, options, values (and unknown)
 
 ## 0.11.122.1 - 20th April 2019
 

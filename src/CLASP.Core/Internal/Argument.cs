@@ -90,7 +90,21 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
 
         public override string ToString()
         {
-            return String.Format("{{{0}, {1}, {2}, {3}, {4}}}", Type, GivenName, ResolvedName, Value, Index);
+            switch(Type)
+            {
+            case ArgumentType.Flag:
+
+                return ResolvedName;
+            case ArgumentType.Option:
+
+                return String.Format("{0}={1}", ResolvedName, Value);
+            case ArgumentType.Value:
+
+                return Value;
+            default:
+
+                return String.Format("{{{0}, {1}, {2}, {3}, {4}}}", Type, GivenName, ResolvedName, Value, Index);
+            }
         }
         #endregion
 
