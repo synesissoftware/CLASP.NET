@@ -60,11 +60,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(1, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[0].Type);
-            Assert.AreEqual(null, arguments.Values[0].GivenName);
-            Assert.AreEqual(null, arguments.Values[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Values[0].Index);
-            Assert.AreEqual("abc", arguments.Values[0].Value);
+            var value0 = arguments.Values[0];
+
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.AreEqual(null, value0.GivenName);
+            Assert.AreEqual(null, value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("abc", value0.Value);
         }
 
         [TestMethod]
@@ -79,23 +81,29 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(3, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[0].Type);
-            Assert.AreEqual(null, arguments.Values[0].GivenName);
-            Assert.AreEqual(null, arguments.Values[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Values[0].Index);
-            Assert.AreEqual("abc", arguments.Values[0].Value);
+            var value0 = arguments.Values[0];
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[1].Type);
-            Assert.AreEqual(null, arguments.Values[1].GivenName);
-            Assert.AreEqual(null, arguments.Values[1].ResolvedName);
-            Assert.AreEqual(1, arguments.Values[1].Index);
-            Assert.AreEqual("def", arguments.Values[1].Value);
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.AreEqual(null, value0.GivenName);
+            Assert.AreEqual(null, value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("abc", value0.Value);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[2].Type);
-            Assert.AreEqual(null, arguments.Values[2].GivenName);
-            Assert.AreEqual(null, arguments.Values[2].ResolvedName);
-            Assert.AreEqual(2, arguments.Values[2].Index);
-            Assert.AreEqual("ghi", arguments.Values[2].Value);
+            var value1 = arguments.Values[1];
+
+            Assert.AreEqual(ArgumentType.Value, value1.Type);
+            Assert.AreEqual(null, value1.GivenName);
+            Assert.AreEqual(null, value1.ResolvedName);
+            Assert.AreEqual(1, value1.Index);
+            Assert.AreEqual("def", value1.Value);
+
+            var value2 = arguments.Values[2];
+
+            Assert.AreEqual(ArgumentType.Value, value2.Type);
+            Assert.AreEqual(null, value2.GivenName);
+            Assert.AreEqual(null, value2.ResolvedName);
+            Assert.AreEqual(2, value2.Index);
+            Assert.AreEqual("ghi", value2.Value);
         }
 
         [TestMethod]
@@ -110,17 +118,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(2, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[0].Type);
-            Assert.AreEqual(null, arguments.Values[0].GivenName);
-            Assert.AreEqual(null, arguments.Values[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Values[0].Index);
-            Assert.AreEqual("abc", arguments.Values[0].Value);
+            var value0 = arguments.Values[0];
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[1].Type);
-            Assert.AreEqual(null, arguments.Values[1].GivenName);
-            Assert.AreEqual(null, arguments.Values[1].ResolvedName);
-            Assert.AreEqual(2, arguments.Values[1].Index);
-            Assert.AreEqual("-x", arguments.Values[1].Value);
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.AreEqual(null, value0.GivenName);
+            Assert.AreEqual(null, value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("abc", value0.Value);
+
+            var value1 = arguments.Values[1];
+
+            Assert.AreEqual(ArgumentType.Value, value1.Type);
+            Assert.AreEqual(null, value1.GivenName);
+            Assert.AreEqual(null, value1.ResolvedName);
+            Assert.AreEqual(2, value1.Index);
+            Assert.AreEqual("-x", value1.Value);
         }
 
         [TestMethod]
@@ -135,17 +147,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(2, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[0].Type);
-            Assert.AreEqual(null, arguments.Values[0].GivenName);
-            Assert.AreEqual(null, arguments.Values[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Values[0].Index);
-            Assert.AreEqual("abc", arguments.Values[0].Value);
+            var value0 = arguments.Values[0];
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[1].Type);
-            Assert.AreEqual(null, arguments.Values[1].GivenName);
-            Assert.AreEqual(null, arguments.Values[1].ResolvedName);
-            Assert.AreEqual(2, arguments.Values[1].Index);
-            Assert.AreEqual("-", arguments.Values[1].Value);
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.AreEqual(null, value0.GivenName);
+            Assert.AreEqual(null, value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("abc", value0.Value);
+
+            var value1 = arguments.Values[1];
+
+            Assert.AreEqual(ArgumentType.Value, value1.Type);
+            Assert.AreEqual(null, value1.GivenName);
+            Assert.AreEqual(null, value1.ResolvedName);
+            Assert.AreEqual(2, value1.Index);
+            Assert.AreEqual("-", value1.Value);
         }
 
         [TestMethod]
@@ -160,17 +176,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(2, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[0].Type);
-            Assert.AreEqual(null, arguments.Values[0].GivenName);
-            Assert.AreEqual(null, arguments.Values[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Values[0].Index);
-            Assert.AreEqual("abc", arguments.Values[0].Value);
+            var value0 = arguments.Values[0];
 
-            Assert.AreEqual(ArgumentType.Value, arguments.Values[1].Type);
-            Assert.AreEqual(null, arguments.Values[1].GivenName);
-            Assert.AreEqual(null, arguments.Values[1].ResolvedName);
-            Assert.AreEqual(2, arguments.Values[1].Index);
-            Assert.AreEqual("--", arguments.Values[1].Value);
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.AreEqual(null, value0.GivenName);
+            Assert.AreEqual(null, value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("abc", value0.Value);
+
+            var value1 = arguments.Values[1];
+
+            Assert.AreEqual(ArgumentType.Value, value1.Type);
+            Assert.AreEqual(null, value1.GivenName);
+            Assert.AreEqual(null, value1.ResolvedName);
+            Assert.AreEqual(2, value1.Index);
+            Assert.AreEqual("--", value1.Value);
         }
         #endregion
 
@@ -188,10 +208,12 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("-", arguments.Options[0].GivenName);
-            Assert.AreEqual("-", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("-", option0.GivenName);
+            Assert.AreEqual("-", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
             Assert.IsNull(arguments.Options[0].Value);
         }
 
@@ -207,11 +229,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("--x", arguments.Options[0].GivenName);
-            Assert.AreEqual("--x", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("--x", option0.GivenName);
+            Assert.AreEqual("--x", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
         }
 
         [TestMethod]
@@ -226,11 +250,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("-x", arguments.Options[0].GivenName);
-            Assert.AreEqual("-x", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("-x", option0.GivenName);
+            Assert.AreEqual("-x", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
         }
 
         [TestMethod]
@@ -245,17 +271,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("--width", arguments.Options[0].GivenName);
-            Assert.AreEqual("--width", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[1].Type);
-            Assert.AreEqual("--height", arguments.Options[1].GivenName);
-            Assert.AreEqual("--height", arguments.Options[1].ResolvedName);
-            Assert.AreEqual(1, arguments.Options[1].Index);
-            Assert.AreEqual("20", arguments.Options[1].Value);
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("--width", option0.GivenName);
+            Assert.AreEqual("--width", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
+
+            var option1 = arguments.Options[1];
+
+            Assert.AreEqual(ArgumentType.Option, option1.Type);
+            Assert.AreEqual("--height", option1.GivenName);
+            Assert.AreEqual("--height", option1.ResolvedName);
+            Assert.AreEqual(1, option1.Index);
+            Assert.AreEqual("20", option1.Value);
         }
 
         [TestMethod]
@@ -270,17 +300,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("--width", arguments.Options[0].GivenName);
-            Assert.AreEqual("--width", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("--height", arguments.Flags[0].GivenName);
-            Assert.AreEqual("--height", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(1, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("--width", option0.GivenName);
+            Assert.AreEqual("--width", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
+
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("--height", flag0.GivenName);
+            Assert.AreEqual("--height", flag0.ResolvedName);
+            Assert.AreEqual(1, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
         }
 
         [TestMethod]
@@ -297,11 +331,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("--width", arguments.Options[0].GivenName);
-            Assert.AreEqual("--width", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("--width", option0.GivenName);
+            Assert.AreEqual("--width", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
         }
 
         [TestMethod]
@@ -318,11 +354,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("--width", arguments.Options[0].GivenName);
-            Assert.AreEqual("--width", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("--width", option0.GivenName);
+            Assert.AreEqual("--width", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
         }
 
         [TestMethod]
@@ -343,11 +381,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("-W", arguments.Options[0].GivenName);
-            Assert.AreEqual("--width", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("10", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("-W", option0.GivenName);
+            Assert.AreEqual("--width", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("10", option0.Value);
         }
         #endregion
 
@@ -365,11 +405,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-x", arguments.Flags[0].GivenName);
-            Assert.AreEqual("-x", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-x", flag0.GivenName);
+            Assert.AreEqual("-x", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
         }
 
         [TestMethod]
@@ -384,11 +426,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("--X", arguments.Flags[0].GivenName);
-            Assert.AreEqual("--X", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("--X", flag0.GivenName);
+            Assert.AreEqual("--X", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
         }
 
         [TestMethod]
@@ -403,17 +447,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-x", arguments.Flags[0].GivenName);
-            Assert.AreEqual("-x", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            var flag0 = arguments.Flags[0];
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[1].Type);
-            Assert.AreEqual("--X", arguments.Flags[1].GivenName);
-            Assert.AreEqual("--X", arguments.Flags[1].ResolvedName);
-            Assert.AreEqual(1, arguments.Flags[1].Index);
-            Assert.AreEqual(null, arguments.Flags[1].Value);
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-x", flag0.GivenName);
+            Assert.AreEqual("-x", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
+
+            var flag1 = arguments.Flags[1];
+
+            Assert.AreEqual(ArgumentType.Flag, flag1.Type);
+            Assert.AreEqual("--X", flag1.GivenName);
+            Assert.AreEqual("--X", flag1.ResolvedName);
+            Assert.AreEqual(1, flag1.Index);
+            Assert.AreEqual(null, flag1.Value);
         }
 
         [TestMethod]
@@ -428,17 +476,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-w", arguments.Flags[0].GivenName);
-            Assert.AreEqual("-w", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            var flag0 = arguments.Flags[0];
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[1].Type);
-            Assert.AreEqual("-h", arguments.Flags[1].GivenName);
-            Assert.AreEqual("-h", arguments.Flags[1].ResolvedName);
-            Assert.AreEqual(1, arguments.Flags[1].Index);
-            Assert.AreEqual(null, arguments.Flags[1].Value);
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-w", flag0.GivenName);
+            Assert.AreEqual("-w", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
+
+            var flag1 = arguments.Flags[1];
+
+            Assert.AreEqual(ArgumentType.Flag, flag1.Type);
+            Assert.AreEqual("-h", flag1.GivenName);
+            Assert.AreEqual("-h", flag1.ResolvedName);
+            Assert.AreEqual(1, flag1.Index);
+            Assert.AreEqual(null, flag1.Value);
         }
 
         [TestMethod]
@@ -459,11 +511,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-a", arguments.Flags[0].GivenName);
-            Assert.AreEqual("--append", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-a", flag0.GivenName);
+            Assert.AreEqual("--append", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
         }
         #endregion
 
@@ -483,11 +537,13 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("-D", arguments.Options[0].GivenName);
-            Assert.AreEqual("--debug", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("on", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
+
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("-D", option0.GivenName);
+            Assert.AreEqual("--debug", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("on", option0.Value);
         }
 
         [TestMethod]
@@ -504,58 +560,76 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(9, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[0].GivenName);
-            Assert.AreEqual("-c", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-classpath", flag0.GivenName);
+            Assert.AreEqual("-c", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
             Assert.IsNull(arguments.Flags[0].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[1].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[1].GivenName);
-            Assert.AreEqual("-l", arguments.Flags[1].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[1].Index);
+            var flag1 = arguments.Flags[1];
+
+            Assert.AreEqual(ArgumentType.Flag, flag1.Type);
+            Assert.AreEqual("-classpath", flag1.GivenName);
+            Assert.AreEqual("-l", flag1.ResolvedName);
+            Assert.AreEqual(0, flag1.Index);
             Assert.IsNull(arguments.Flags[1].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[2].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[2].GivenName);
-            Assert.AreEqual("-a", arguments.Flags[2].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[2].Index);
+            var flag2 = arguments.Flags[2];
+
+            Assert.AreEqual(ArgumentType.Flag, flag2.Type);
+            Assert.AreEqual("-classpath", flag2.GivenName);
+            Assert.AreEqual("-a", flag2.ResolvedName);
+            Assert.AreEqual(0, flag2.Index);
             Assert.IsNull(arguments.Flags[2].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[3].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[3].GivenName);
-            Assert.AreEqual("-s", arguments.Flags[3].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[3].Index);
+            var flag3 = arguments.Flags[3];
+
+            Assert.AreEqual(ArgumentType.Flag, flag3.Type);
+            Assert.AreEqual("-classpath", flag3.GivenName);
+            Assert.AreEqual("-s", flag3.ResolvedName);
+            Assert.AreEqual(0, flag3.Index);
             Assert.IsNull(arguments.Flags[3].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[4].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[4].GivenName);
-            Assert.AreEqual("-s", arguments.Flags[4].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[4].Index);
+            var flag4 = arguments.Flags[4];
+
+            Assert.AreEqual(ArgumentType.Flag, flag4.Type);
+            Assert.AreEqual("-classpath", flag4.GivenName);
+            Assert.AreEqual("-s", flag4.ResolvedName);
+            Assert.AreEqual(0, flag4.Index);
             Assert.IsNull(arguments.Flags[4].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[5].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[5].GivenName);
-            Assert.AreEqual("-p", arguments.Flags[5].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[5].Index);
+            var flag5 = arguments.Flags[5];
+
+            Assert.AreEqual(ArgumentType.Flag, flag5.Type);
+            Assert.AreEqual("-classpath", flag5.GivenName);
+            Assert.AreEqual("-p", flag5.ResolvedName);
+            Assert.AreEqual(0, flag5.Index);
             Assert.IsNull(arguments.Flags[5].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[6].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[6].GivenName);
-            Assert.AreEqual("-a", arguments.Flags[6].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[6].Index);
+            var flag6 = arguments.Flags[6];
+
+            Assert.AreEqual(ArgumentType.Flag, flag6.Type);
+            Assert.AreEqual("-classpath", flag6.GivenName);
+            Assert.AreEqual("-a", flag6.ResolvedName);
+            Assert.AreEqual(0, flag6.Index);
             Assert.IsNull(arguments.Flags[6].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[7].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[7].GivenName);
-            Assert.AreEqual("-t", arguments.Flags[7].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[7].Index);
+            var flag7 = arguments.Flags[7];
+
+            Assert.AreEqual(ArgumentType.Flag, flag7.Type);
+            Assert.AreEqual("-classpath", flag7.GivenName);
+            Assert.AreEqual("-t", flag7.ResolvedName);
+            Assert.AreEqual(0, flag7.Index);
             Assert.IsNull(arguments.Flags[7].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[8].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[8].GivenName);
-            Assert.AreEqual("-h", arguments.Flags[8].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[8].Index);
+            var flag8 = arguments.Flags[8];
+
+            Assert.AreEqual(ArgumentType.Flag, flag8.Type);
+            Assert.AreEqual("-classpath", flag8.GivenName);
+            Assert.AreEqual("-h", flag8.ResolvedName);
+            Assert.AreEqual(0, flag8.Index);
             Assert.IsNull(arguments.Flags[8].Value);
         }
 
@@ -573,58 +647,76 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(9, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[0].GivenName);
-            Assert.AreEqual("--capture", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[0].Index);
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-classpath", flag0.GivenName);
+            Assert.AreEqual("--capture", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
             Assert.IsNull(arguments.Flags[0].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[1].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[1].GivenName);
-            Assert.AreEqual("-l", arguments.Flags[1].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[1].Index);
+            var flag1 = arguments.Flags[1];
+
+            Assert.AreEqual(ArgumentType.Flag, flag1.Type);
+            Assert.AreEqual("-classpath", flag1.GivenName);
+            Assert.AreEqual("-l", flag1.ResolvedName);
+            Assert.AreEqual(0, flag1.Index);
             Assert.IsNull(arguments.Flags[1].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[2].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[2].GivenName);
-            Assert.AreEqual("-a", arguments.Flags[2].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[2].Index);
+            var flag2 = arguments.Flags[2];
+
+            Assert.AreEqual(ArgumentType.Flag, flag2.Type);
+            Assert.AreEqual("-classpath", flag2.GivenName);
+            Assert.AreEqual("-a", flag2.ResolvedName);
+            Assert.AreEqual(0, flag2.Index);
             Assert.IsNull(arguments.Flags[2].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[3].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[3].GivenName);
-            Assert.AreEqual("-s", arguments.Flags[3].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[3].Index);
+            var flag3 = arguments.Flags[3];
+
+            Assert.AreEqual(ArgumentType.Flag, flag3.Type);
+            Assert.AreEqual("-classpath", flag3.GivenName);
+            Assert.AreEqual("-s", flag3.ResolvedName);
+            Assert.AreEqual(0, flag3.Index);
             Assert.IsNull(arguments.Flags[3].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[4].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[4].GivenName);
-            Assert.AreEqual("-s", arguments.Flags[4].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[4].Index);
+            var flag4 = arguments.Flags[4];
+
+            Assert.AreEqual(ArgumentType.Flag, flag4.Type);
+            Assert.AreEqual("-classpath", flag4.GivenName);
+            Assert.AreEqual("-s", flag4.ResolvedName);
+            Assert.AreEqual(0, flag4.Index);
             Assert.IsNull(arguments.Flags[4].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[5].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[5].GivenName);
-            Assert.AreEqual("-p", arguments.Flags[5].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[5].Index);
+            var flag5 = arguments.Flags[5];
+
+            Assert.AreEqual(ArgumentType.Flag, flag5.Type);
+            Assert.AreEqual("-classpath", flag5.GivenName);
+            Assert.AreEqual("-p", flag5.ResolvedName);
+            Assert.AreEqual(0, flag5.Index);
             Assert.IsNull(arguments.Flags[5].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[6].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[6].GivenName);
-            Assert.AreEqual("-a", arguments.Flags[6].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[6].Index);
+            var flag6 = arguments.Flags[6];
+
+            Assert.AreEqual(ArgumentType.Flag, flag6.Type);
+            Assert.AreEqual("-classpath", flag6.GivenName);
+            Assert.AreEqual("-a", flag6.ResolvedName);
+            Assert.AreEqual(0, flag6.Index);
             Assert.IsNull(arguments.Flags[6].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[7].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[7].GivenName);
-            Assert.AreEqual("-t", arguments.Flags[7].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[7].Index);
+            var flag7 = arguments.Flags[7];
+
+            Assert.AreEqual(ArgumentType.Flag, flag7.Type);
+            Assert.AreEqual("-classpath", flag7.GivenName);
+            Assert.AreEqual("-t", flag7.ResolvedName);
+            Assert.AreEqual(0, flag7.Index);
             Assert.IsNull(arguments.Flags[7].Value);
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[8].Type);
-            Assert.AreEqual("-classpath", arguments.Flags[8].GivenName);
-            Assert.AreEqual("-h", arguments.Flags[8].ResolvedName);
-            Assert.AreEqual(0, arguments.Flags[8].Index);
+            var flag8 = arguments.Flags[8];
+
+            Assert.AreEqual(ArgumentType.Flag, flag8.Type);
+            Assert.AreEqual("-classpath", flag8.GivenName);
+            Assert.AreEqual("-h", flag8.ResolvedName);
+            Assert.AreEqual(0, flag8.Index);
             Assert.IsNull(arguments.Flags[8].Value);
         }
 
@@ -642,17 +734,21 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            Assert.AreEqual(ArgumentType.Option, arguments.Options[0].Type);
-            Assert.AreEqual("-D", arguments.Options[0].GivenName);
-            Assert.AreEqual("--debug", arguments.Options[0].ResolvedName);
-            Assert.AreEqual(0, arguments.Options[0].Index);
-            Assert.AreEqual("on", arguments.Options[0].Value);
+            var option0 = arguments.Options[0];
 
-            Assert.AreEqual(ArgumentType.Flag, arguments.Flags[0].Type);
-            Assert.AreEqual("-h", arguments.Flags[0].GivenName);
-            Assert.AreEqual("-h", arguments.Flags[0].ResolvedName);
-            Assert.AreEqual(1, arguments.Flags[0].Index);
-            Assert.AreEqual(null, arguments.Flags[0].Value);
+            Assert.AreEqual(ArgumentType.Option, option0.Type);
+            Assert.AreEqual("-D", option0.GivenName);
+            Assert.AreEqual("--debug", option0.ResolvedName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("on", option0.Value);
+
+            var flag0 = arguments.Flags[0];
+
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-h", flag0.GivenName);
+            Assert.AreEqual("-h", flag0.ResolvedName);
+            Assert.AreEqual(1, flag0.Index);
+            Assert.AreEqual(null, flag0.Value);
         }
         #endregion
     }
