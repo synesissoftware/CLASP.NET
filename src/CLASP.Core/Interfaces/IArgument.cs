@@ -44,6 +44,22 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
         ///  none is associated
         /// </summary>
         Specification Specification { get; }
+
+        /// <summary>
+        ///  Indicates whether the argument has been used, such as having
+        ///  been found in a call to <see cref="Arguments.HasFlag(string)"/>
+        ///  or <see cref="Arguments.CheckOption(string, out string)"/>
+        /// </summary>
+        bool Used { get; }
+        #endregion
+
+        #region Operations
+
+        /// <summary>
+        ///  Causes an argument to be marked as used
+        /// </summary>
+        /// <seealso cref="IArgument.Used"/>
+        void Use();
         #endregion
     }
 }

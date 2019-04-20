@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.14.127.0 - 20th April 2019
+
+* + added IArgument.Used property and IArgument.Use() method
+
 ## 0.13.126.1 - 20th April 2019
 
 * ~ changed (almost) all Argument properties to be backed by private readonly field
@@ -16,7 +20,7 @@
 
 ## 0.11.123.2 - 20th April 2019
 
-* ~ corrected Aargument.ToString() for flags, options, values (and unknown)
+* ~ corrected Argument.ToString() for flags, options, values (and unknown)
 
 ## 0.11.122.1 - 20th April 2019
 

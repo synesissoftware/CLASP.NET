@@ -52,7 +52,6 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         #endregion
 
         #region IArgument members
-
         public ArgumentType Type
         {
             get
@@ -86,11 +85,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
                 return m_index;
             }
         }
-        #endregion
 
-        #region properties
-
-        Specification IArgument.Specification
+        public Specification Specification
         {
             get
             {
@@ -98,10 +94,15 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
             }
         }
 
-        internal bool Used
+        public bool Used
         {
             get;
-            set;
+            internal set;
+        }
+
+        public void Use()
+        {
+            Used = true;
         }
         #endregion
 

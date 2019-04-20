@@ -89,6 +89,19 @@ namespace Test.Unit.CLASP.ns_1
                     return null;
                 }
             }
+
+            bool IArgument.Used
+            {
+                get
+                {
+                    return true;
+                }
+            }
+
+            void IArgument.Use()
+            {
+                ;
+            }
             #endregion
         }
 

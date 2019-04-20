@@ -21,7 +21,7 @@ namespace Test.Unit.CLASP.Versions
             internal static class Expectations
             {
                 internal const int  VersionMajor    =   0;
-                internal const int  VersionMinor    =   13;
+                internal const int  VersionMinor    =   14;
             }
         }
 
