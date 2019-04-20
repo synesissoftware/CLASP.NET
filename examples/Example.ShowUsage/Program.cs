@@ -1,9 +1,6 @@
 ﻿
 // Purpose: Illustrates use of ShowUsage()
 
-// Created: 14th October 2017
-// Updated: 14th October 2017
-
 namespace Example.ShowUsage
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -23,9 +20,9 @@ namespace Example.ShowUsage
             UsageUtil.Version,
         };
 
-        static int Main(string[] args)
+        static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(args, aliases, (Arguments clargs) =>
+            return Invoker.ParseAndInvokeMain(argv, aliases, (Arguments clargs) =>
                 {
                     UsageUtil.ShowUsage(clargs.Aliases, System.Console.Out, null);
 

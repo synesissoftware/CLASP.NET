@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 6th April 2019
+// Updated: 20th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -66,41 +66,41 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
-        public Arguments(string[] args)
-            : this(args, null, ParseOptions.None)
+        public Arguments(string[] argv)
+            : this(argv, null, ParseOptions.None)
         {}
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="options"/>
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
         /// <param name="options">
         ///  A combination of <see cref="ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
-        public Arguments(string[] args, ParseOptions options)
-            : this(args, null, options)
+        public Arguments(string[] argv, ParseOptions options)
+            : this(argv, null, options)
         {}
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="aliases"/>
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
         /// <param name="aliases">
         ///  Zero or more aliases that control the interpretation of the
         ///  arguments
         /// </param>
-        public Arguments(string[] args, ICollection<Alias> aliases)
-            : this(args, aliases, ParseOptions.None)
+        public Arguments(string[] argv, ICollection<Alias> aliases)
+            : this(argv, aliases, ParseOptions.None)
         {}
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
@@ -109,7 +109,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  and
         ///  <paramref name="options"/>
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
         /// <param name="aliases">
@@ -120,16 +120,16 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  A combination of <see cref="ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
-        public Arguments(string[] args, ICollection<Alias> aliases, ParseOptions options)
+        public Arguments(string[] argv, ICollection<Alias> aliases, ParseOptions options)
         {
             bool            treatAllAsValues    =   false;
             Argument        lastOption          =   null;
             List<string>    wildargs            =   new List<string>();
             string          cwd                 =   Environment.CurrentDirectory;
 
-            for(int i = 0; i != args.Length; ++i)
+            for(int i = 0; i != argv.Length; ++i)
             {
-                string  arg         =   TrimSingleQuotes(args[i]);
+                string  arg         =   TrimSingleQuotes(argv[i]);
                 int     numHyphens  =   Argument.CountHyphens(arg);
 
                 // 1. Ignore null/empty arguments
@@ -378,7 +378,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  and then invokes the program main entry point specified by
         ///  <paramref name="toolMain"/>.
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
         /// <param name="aliases">
@@ -391,9 +391,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] args, Alias[] aliases, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain)
         {
-            return InvokeMain(args, aliases, ParseOptions.None, toolMain);
+            return InvokeMain(argv, aliases, ParseOptions.None, toolMain);
         }
 
         /// <summary>
@@ -404,7 +404,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  and then invokes the program main entry point specified by
         ///  <paramref name="toolMain"/>.
         /// </summary>
-        /// <param name="args">
+        /// <param name="argv">
         ///  The program arguments
         /// </param>
         /// <param name="aliases">
@@ -421,12 +421,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] args, Alias[] aliases, ParseOptions options, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Alias[] aliases, ParseOptions options, ToolMain toolMain)
         {
-            Debug.Assert(null != args);
+            Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(args, aliases);
+            Arguments arguments = new Arguments(argv, aliases);
 
             return toolMain(arguments);
         }

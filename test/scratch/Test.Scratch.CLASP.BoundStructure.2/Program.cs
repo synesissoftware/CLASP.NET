@@ -4,9 +4,6 @@
 //
 //  { --help | --version | [ --verbose ] <input-file-path> }
 
-// Created: 14th October 2017
-// Updated: 15th October 2017
-
 namespace Test.Scratch.CLASP.BoundStructure.ns_2
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -56,7 +53,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
             UsageUtil.Version,
         };
 
-        static int Main(string[] args)
+        static int Main(string[] argv)
         {
             try
             {
@@ -65,7 +62,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                 //
                 //  1. 
 
-                return Invoker.ParseAndInvokeMain(args, Aliases, (Arguments clargs) =>
+                return Invoker.ParseAndInvokeMain(argv, Aliases, (Arguments clargs) =>
                     {
                         // check '--help'
 

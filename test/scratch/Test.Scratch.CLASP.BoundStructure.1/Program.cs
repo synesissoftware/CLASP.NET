@@ -1,7 +1,4 @@
 ﻿
-// Created: 
-// Updated: 24th September 2017
-
 namespace Test.Scratch.CLASP.BoundStructure.ns_1
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -44,9 +41,9 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_1
         {
         };
 
-        static int Main(string[] args)
+        static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMainWithBoundArgumentOfType<ArgumentSet>(args, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMainWithBoundArgumentOfType<ArgumentSet>(argv, Aliases, ToolMain);
         }
 
         private static int ToolMain(ArgumentSet argSet, Arguments args)

@@ -15,9 +15,9 @@ namespace Test.Scratch.ToolMain
             Alias.Flag(null, @"--help", @"shows this help and exits")
         };
 
-        static int Main(string[] args)
+        static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(args, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMain(argv, Aliases, ToolMain);
         }
 
         private static int ToolMain(Arguments args)

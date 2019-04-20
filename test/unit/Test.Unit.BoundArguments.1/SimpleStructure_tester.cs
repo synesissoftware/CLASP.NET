@@ -38,14 +38,14 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_required()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
             };
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(args, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -61,7 +61,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_required_with_values_designator()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--",
@@ -69,7 +69,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(args, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -85,13 +85,13 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_insufficient()
         {
-            string[] args =
+            string[] argv =
             {
             };
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(args, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -107,7 +107,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -115,7 +115,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(args, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -129,7 +129,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus_but_ignore()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -137,7 +137,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(args, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -151,7 +151,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus_but_ignore_via_structure()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -159,7 +159,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(args, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -173,7 +173,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus_but_ignore_via_structure_overridden()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -181,7 +181,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(args, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -195,7 +195,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus_but_ignore_via_structure_with_precendence()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -203,7 +203,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(args, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -217,7 +217,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [TestMethod]
         public void Test_1_pass_surplus_but_ignore_via_structure_with_precendence_ignoring_overridden()
         {
-            string[] args =
+            string[] argv =
             {
                 @"--verbose",
                 @"--silent",
@@ -225,7 +225,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(args, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 

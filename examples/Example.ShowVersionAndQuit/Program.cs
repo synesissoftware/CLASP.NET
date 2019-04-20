@@ -1,9 +1,6 @@
 ﻿
 // Purpose: Illustrates use of ShowVersionAndQuit()
 
-// Created: 14th October 2017
-// Updated: 14th October 2017
-
 namespace Example.ShowVersionAndQuit
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -11,9 +8,9 @@ namespace Example.ShowVersionAndQuit
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] argv)
         {
-            Invoker.ParseAndInvokeMainVA(args, null, (Arguments clargs) =>
+            Invoker.ParseAndInvokeMainVA(argv, null, (Arguments clargs) =>
                 {
                     UsageUtil.ShowVersionAndQuit(clargs, Invoker.Constants.ExitCode_Success);
                 });

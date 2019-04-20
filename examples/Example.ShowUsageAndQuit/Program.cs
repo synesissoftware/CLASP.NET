@@ -1,9 +1,6 @@
 ﻿
 // Purpose: Illustrates use of ShowUsageAndQuit()
 
-// Created: 14th October 2017
-// Updated: 14th October 2017
-
 namespace Example.ShowUsage
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -23,9 +20,9 @@ namespace Example.ShowUsage
             UsageUtil.Version,
         };
 
-        static void Main(string[] args)
+        static void Main(string[] argv)
         {
-            Invoker.ParseAndInvokeMainVA(args, aliases, (Arguments clargs) =>
+            Invoker.ParseAndInvokeMainVA(argv, aliases, (Arguments clargs) =>
 
                     UsageUtil.ShowUsageAndQuit(clargs, Invoker.Constants.ExitCode_Success, null)
                 );
