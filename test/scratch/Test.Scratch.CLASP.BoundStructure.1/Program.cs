@@ -37,13 +37,13 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_1
 
     class Program
     {
-        internal static readonly Alias[]    Aliases =
+        internal static readonly Alias[]    Specifications =
         {
         };
 
         static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMainWithBoundArgumentOfType<ArgumentSet>(argv, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMainWithBoundArgumentOfType<ArgumentSet>(argv, Specifications, ToolMain);
         }
 
         private static int ToolMain(ArgumentSet argSet, Arguments args)

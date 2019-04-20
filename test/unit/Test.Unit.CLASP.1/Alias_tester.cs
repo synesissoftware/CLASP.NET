@@ -39,26 +39,26 @@ namespace Test.Unit.CLASP.ns_1
                     resolvedName    =   String.IsNullOrEmpty(resolvedName) ? null : resolvedName;
                     description     =   String.IsNullOrEmpty(description) ? null : description;
 
-                    Alias alias = null;
+                    Alias specification = null;
 
                     switch(argType)
                     {
                         case ArgumentType.Flag:
-                            alias = Alias.Flag(givenName, resolvedName, description);
+                            specification = Alias.Flag(givenName, resolvedName, description);
                             break;
                         case ArgumentType.Option:
-                            alias = Alias.Option(givenName, resolvedName, description);
+                            specification = Alias.Option(givenName, resolvedName, description);
                             break;
                         case ArgumentType.Value:
                         case ArgumentType.None:
                             continue;
                     }
 
-                    Assert.AreEqual(argType, alias.Type);
-                    Assert.AreEqual(givenName, alias.GivenName);
-                    Assert.AreEqual(resolvedName, alias.ResolvedName);
-                    Assert.AreEqual(description, alias.Description);
-                    Assert.IsTrue(0 == alias.Extras.Count, "Extras property must be empty");
+                    Assert.AreEqual(argType, specification.Type);
+                    Assert.AreEqual(givenName, specification.GivenName);
+                    Assert.AreEqual(resolvedName, specification.ResolvedName);
+                    Assert.AreEqual(description, specification.Description);
+                    Assert.IsTrue(0 == specification.Extras.Count, "Extras property must be empty");
                 }
             }
         }

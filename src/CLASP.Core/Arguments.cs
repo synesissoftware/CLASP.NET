@@ -52,7 +52,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         #region fields
 
-        readonly ICollection<Alias> aliases         =   null;
+        readonly ICollection<Alias> specifications  =   null;
         readonly List<IArgument>    arguments       =   new List<IArgument>();
         readonly List<IArgument>    flags           =   new List<IArgument>();
         readonly List<IArgument>    options         =   new List<IArgument>();
@@ -90,37 +90,37 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
-        public Arguments(string[] argv, ICollection<Alias> aliases)
-            : this(argv, aliases, ParseOptions.None)
+        public Arguments(string[] argv, ICollection<Alias> specifications)
+            : this(argv, specifications, ParseOptions.None)
         {}
         /// <summary>
         ///  Constructs an <see cref="Arguments"/> collection from the given
         ///  program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         ///  and
         ///  <paramref name="options"/>
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="options">
         ///  A combination of <see cref="ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
-        public Arguments(string[] argv, ICollection<Alias> aliases, ParseOptions options)
+        public Arguments(string[] argv, ICollection<Alias> specifications, ParseOptions options)
         {
             bool            treatAllAsValues    =   false;
             Argument        lastOption          =   null;
@@ -165,7 +165,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                         // 2. If contains '=', then Option, checking alias, else
                         // 3. If an alias recognises the whole argument, then process it, else
                         // 4. If it has two (or more) hyphens, then Option, else
-                        // 5. If have aliases, treat each character in a one-hyphen argument as a flag, and process its alias (if defined), else
+                        // 5. If have specifications, treat each character in a one-hyphen argument as a flag, and process its alias (if defined), else
                         // 6. Treat as flag
 
                         if("-" == arg)
@@ -185,7 +185,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                                 string name     =   arg.Substring(0, equal);
                                 string value    =   arg.Substring(1 + equal);
 
-                                Alias alias = FindAlias(aliases, name);
+                                Alias alias = FindSpecification_(specifications, name);
 
                                 if(null != alias)
                                 {
@@ -198,7 +198,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                             }
                             else
                             {
-                                Alias alias = FindAlias(aliases, arg);
+                                Alias alias = FindSpecification_(specifications, arg);
 
                                 if(null != alias)
                                 {
@@ -239,7 +239,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                                         }
                                     }
                                 }
-                                else if(null != aliases && 1 == numHyphens)
+                                else if(null != specifications && 1 == numHyphens)
                                 {
                                     // 5. Treat each character in the argument as a flag, and process its alias (if defined)
                                     char[] flag = new char[2];
@@ -252,7 +252,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                         string arg2 = new string(flag);
 
-                                        Alias alias2 = FindAlias(aliases, arg2);
+                                        Alias alias2 = FindSpecification_(specifications, arg2);
 
                                         if(null != alias2)
                                         {
@@ -366,7 +366,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
             }
 
-            this.aliases = aliases;
+            this.specifications = specifications;
         }
         #endregion
 
@@ -374,15 +374,15 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>,
+        ///  <paramref name="specifications"/>,
         ///  and then invokes the program main entry point specified by
         ///  <paramref name="toolMain"/>.
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="toolMain">
@@ -391,14 +391,14 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
         {
-            return InvokeMain(argv, aliases, ParseOptions.None, toolMain);
+            return InvokeMain(argv, specifications, ParseOptions.None, toolMain);
         }
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         ///  and
         ///  <paramref name="options"/>,
         ///  and then invokes the program main entry point specified by
@@ -407,8 +407,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="options">
@@ -421,12 +421,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] argv, Alias[] aliases, ParseOptions options, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Alias[] specifications, ParseOptions options, ToolMain toolMain)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             return toolMain(arguments);
         }
@@ -612,14 +612,14 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  The aliases specified to the constructor, or <b>null</b> if
+        ///  The specifications specified to the constructor, or <b>null</b> if
         ///  none were specified.
         /// </summary>
         public ICollection<Alias> Aliases
         {
             get
             {
-                return aliases;
+                return specifications;
             }
         }
         /// <summary>
@@ -706,17 +706,17 @@ namespace SynesisSoftware.SystemTools.Clasp
             return arg;
         }
 
-        private static Alias FindAlias(ICollection<Alias> aliases, string name)
+        private static Alias FindSpecification_(ICollection<Alias> specifications, string name)
         {
             Debug.Assert(null != name);
 
-            if(null == aliases)
+            if(null == specifications)
             {
                 return null;
             }
             else
             {
-                foreach(Alias alias in aliases)
+                foreach(Alias alias in specifications)
                 {
                     if(alias.GivenName == name)
                     {

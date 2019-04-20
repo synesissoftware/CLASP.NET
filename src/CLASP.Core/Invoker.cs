@@ -86,15 +86,15 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>,
+        ///  <paramref name="specifications"/>,
         ///  and then invokes the program main entry point specified by
         ///  <paramref name="toolMain"/>.
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="toolMain">
@@ -103,55 +103,55 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain)
+        public static int ParseAndInvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
         {
-            return ParseAndInvokeMain(argv, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+            return ParseAndInvokeMain(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
         #region obsolete operations
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMain instead")]
-        public static int InvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
         {
-            return InvokeMain(argv, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+            return InvokeMain(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
         #endregion
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>,
+        ///  <paramref name="specifications"/>,
         ///  and then invokes the program main entry point specified by
         ///  <paramref name="toolMain"/>.
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="toolMain">
         ///  The entry point to the main program logic
         /// </param>
-        public static void ParseAndInvokeMainVA(string[] argv, Alias[] aliases, ToolMainVA toolMain)
+        public static void ParseAndInvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain)
         {
-            ParseAndInvokeMainVA(argv, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+            ParseAndInvokeMainVA(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
         #region obsolete operations
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMainVA instead")]
-        public static void InvokeMainVA(string[] argv, Alias[] aliases, ToolMainVA toolMain)
+        public static void InvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain)
         {
-            InvokeMainVA(argv, aliases, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+            InvokeMainVA(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
         #endregion
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         ///  and
         ///  <paramref name="parseOptions"/>,
         ///  and then invokes the program main entry point specified by
@@ -160,8 +160,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="argv">
         ///  The program arguments, as obtained from <c>Main()</c>
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="toolMain">
@@ -178,12 +178,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static int ParseAndInvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, aliases, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -192,12 +192,12 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMain instead")]
-        public static int InvokeMain(string[] argv, Alias[] aliases, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, aliases, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -205,7 +205,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         ///  and
         ///  <paramref name="parseOptions"/>,
         ///  and then invokes the program main entry point specified by
@@ -214,8 +214,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="argv">
         ///  The program arguments
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
         /// <param name="toolMain">
@@ -229,12 +229,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Options that control behaviour in the event of
         ///  <paramref name="toolMain"/> throwing an exception
         /// </param>
-        public static void ParseAndInvokeMainVA(string[] argv, Alias[] aliases, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static void ParseAndInvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, aliases, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions);
 
             Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
         }
@@ -243,12 +243,12 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMainVA instead")]
-        public static void InvokeMainVA(string[] argv, Alias[] aliases, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static void InvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, aliases, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions);
 
             Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
         }
@@ -258,19 +258,19 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="argv"></param>
-        /// <param name="aliases"></param>
+        /// <param name="specifications"></param>
         /// <param name="toolMain"></param>
         /// <returns></returns>
         /// <example>
         /// </example>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, aliases, toolMain, null, ParseOptions.None, Constants.FailureOptions_Default);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, null, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>
+        ///  <paramref name="specifications"/>
         ///  into an instance of the bound argument type
         ///  <typeparamref name="T"/>,
         ///  according to the
@@ -284,8 +284,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="argv">
         ///  The program arguments, as obtained from <c>Main()</c>.
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments.
         /// </param>
         /// <param name="toolMain">
@@ -298,14 +298,14 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, aliases, toolMain, bindingOptions, ParseOptions.None, Constants.FailureOptions_Default);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
         /// <summary>
         ///  Parses the given program arguments, according to the given
-        ///  <paramref name="aliases"/>,
+        ///  <paramref name="specifications"/>,
         ///  <paramref name="parseOptions"/>,
         ///  and
         ///  <paramref name="failureOptions"/>
@@ -322,8 +322,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="argv">
         ///  The program arguments, as obtained from <c>Main()</c>.
         /// </param>
-        /// <param name="aliases">
-        ///  Zero or more aliases that control the interpretation of the
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
         ///  arguments.
         /// </param>
         /// <param name="toolMain">
@@ -344,9 +344,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, aliases, toolMain, bindingOptions, parseOptions, failureOptions);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, parseOptions, failureOptions);
         }
 
         /// <summary>
@@ -407,9 +407,9 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
 
-        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] args, Alias[] aliases, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {
-            return Invoker.ParseAndInvokeMain(args, aliases, (Arguments args2) => {
+            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args2) => {
 
                 RetVal<T> r = ParseBoundArguments_<T>(args2, bindingOptions);
 

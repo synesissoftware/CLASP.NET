@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 6th April 2019
+// Updated: 20th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -86,7 +86,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
 
             /// <summary>
-            ///  Constants associated with the standard aliases.
+            ///  Constants associated with the standard specifications.
             /// </summary>
             /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>
             /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>
@@ -139,7 +139,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         #region usage methods
 
         /// <summary>
-        ///  Shows usage for the attached aliases and exits the process
+        ///  Shows usage for the attached specifications and exits the process
         ///  with the given exit code.
         /// </summary>
         /// <param name="args">
@@ -156,7 +156,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Shows usage for the attached aliases and exits the process
+        ///  Shows usage for the attached specifications and exits the process
         ///  with the given exit code
         /// </summary>
         /// <param name="args">
@@ -176,57 +176,57 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Shows usage for the aliases and exits the process
+        ///  Shows usage for the specifications and exits the process
         ///  with the given exit code
         /// </summary>
-        /// <param name="aliases">
-        ///  The aliases used to list the usage
+        /// <param name="specifications">
+        ///  The specifications used to list the usage
         /// </param>
         /// <param name="exitCode">
         ///  The code by which the process will be terminated
         /// </param>
         [Obsolete("This method is obsolete. Use ShowUsageAndQuit(Arguments, int) instead")]
-        public static void ShowUsageAndQuit(IEnumerable<Alias> aliases, int exitCode)
+        public static void ShowUsageAndQuit(IEnumerable<Alias> specifications, int exitCode)
         {
-            ShowUsageAndQuit_(aliases, exitCode, null);
+            ShowUsageAndQuit_(specifications, exitCode, null);
         }
 
         /// <summary>
         ///  Writes the usage to the given writer.
         /// </summary>
-        /// <param name="aliases"></param>
+        /// <param name="specifications"></param>
         /// <param name="writer"></param>
         [Obsolete("This method is obsolete. Use ShowUsage(Arguments, IDictionary<string, options>) instead")]
-        public static void ShowUsage(IEnumerable<Alias> aliases, TextWriter writer)
+        public static void ShowUsage(IEnumerable<Alias> specifications, TextWriter writer)
         {
             if(null == writer)
             {
-                ShowUsage_(aliases, null, null);
+                ShowUsage_(specifications, null, null);
             }
             else
             {
                 IDictionary<string, object> options = AddOption_(null, Constants.OptionKeys.Writer, writer);
 
-                ShowUsage_(aliases, null, options);
+                ShowUsage_(specifications, null, options);
             }
         }
 
         /// <summary>
-        ///  Shows usage, based on the given <paramref name="aliases"/>m
+        ///  Shows usage, based on the given <paramref name="specifications"/>m
         ///  to the given <paramref name="writer"/>, according to the
         ///  given <paramref name="options"/>
         /// </summary>
-        /// <param name="aliases">
+        /// <param name="specifications">
         /// </param>
         /// <param name="writer">
         /// </param>
         /// <param name="options">
         /// </param>
-        public static void ShowUsage(IEnumerable<Alias> aliases, TextWriter writer, IDictionary<string, object> options)
+        public static void ShowUsage(IEnumerable<Alias> specifications, TextWriter writer, IDictionary<string, object> options)
         {
             options = AddOption_(options, Constants.OptionKeys.Writer, writer);
 
-            ShowUsage_(aliases, null, options);
+            ShowUsage_(specifications, null, options);
         }
         #endregion
 
@@ -260,9 +260,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <summary>
         ///  .
         /// </summary>
-        /// <param name="aliases"></param>
+        /// <param name="specifications"></param>
         /// <param name="options"></param>
-        public static void ShowVersion(IEnumerable<Alias> aliases, IDictionary<string, object> options)
+        public static void ShowVersion(IEnumerable<Alias> specifications, IDictionary<string, object> options)
         {
             ShowVersion_(null, options);
         }
@@ -303,9 +303,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             ShowUsageAndQuit_(args.Aliases, exitCode, options);
         }
 
-        private static void ShowUsageAndQuit_(IEnumerable<Alias> aliases, int? exitCode, IDictionary<string, object> options)
+        private static void ShowUsageAndQuit_(IEnumerable<Alias> specifications, int? exitCode, IDictionary<string, object> options)
         {
-            ShowUsage_(aliases, exitCode, options);
+            ShowUsage_(specifications, exitCode, options);
 
             if(exitCode.HasValue)
             {
@@ -323,49 +323,49 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
         }
 
-        private static void ShowUsage_(IEnumerable<Alias> aliases, int? exitCode, IDictionary<string, object> options)
+        private static void ShowUsage_(IEnumerable<Alias> specifications, int? exitCode, IDictionary<string, object> options)
         {
             options = InferOptions_(exitCode, options);
 
             string      separator   =   GetOptionOrDefault_(options, Constants.OptionKeys.Separator, Constants.UsageSeparator_Default);
             TextWriter  writer      =   GetOptionOrDefault_(options, Constants.OptionKeys.Writer, Console.Out);
 
-            if(null != aliases)
+            if(null != specifications)
             {
-                foreach(Alias alias in aliases)
+                foreach(Alias specification in specifications)
                 {
-                    switch(alias.Type)
+                    switch(specification.Type)
                     {
                         case ArgumentType.None:
-                            writer.WriteLine("{1}{0}", alias.Description, separator);
+                            writer.WriteLine("{1}{0}", specification.Description, separator);
                             writer.WriteLine();
                             break;
                         case ArgumentType.Flag:
-                            if(!String.IsNullOrEmpty(alias.GivenName))
+                            if(!String.IsNullOrEmpty(specification.GivenName))
                             {
-                                writer.WriteLine("{1}{0}", alias.GivenName, separator);
+                                writer.WriteLine("{1}{0}", specification.GivenName, separator);
                             }
-                            if(!String.IsNullOrEmpty(alias.ResolvedName))
+                            if(!String.IsNullOrEmpty(specification.ResolvedName))
                             {
-                                writer.WriteLine("{1}{0}", alias.ResolvedName, separator);
+                                writer.WriteLine("{1}{0}", specification.ResolvedName, separator);
                             }
-                            writer.WriteLine("{1}{1}{0}", alias.Description, separator);
+                            writer.WriteLine("{1}{1}{0}", specification.Description, separator);
                             writer.WriteLine();
                             break;
                         case ArgumentType.Option:
-                            if(!String.IsNullOrEmpty(alias.GivenName))
+                            if(!String.IsNullOrEmpty(specification.GivenName))
                             {
-                                writer.WriteLine("{1}{0} <value>", alias.GivenName, separator);
+                                writer.WriteLine("{1}{0} <value>", specification.GivenName, separator);
                             }
-                            if(!String.IsNullOrEmpty(alias.ResolvedName))
+                            if(!String.IsNullOrEmpty(specification.ResolvedName))
                             {
-                                writer.WriteLine("{1}{0}=<value>", alias.ResolvedName, separator);
+                                writer.WriteLine("{1}{0}=<value>", specification.ResolvedName, separator);
                             }
-                            writer.WriteLine("{1}{1}{0}", alias.Description, separator);
-                            if(0 != alias.ValidValues.Length)
+                            writer.WriteLine("{1}{1}{0}", specification.Description, separator);
+                            if(0 != specification.ValidValues.Length)
                             {
                                 writer.WriteLine("{0}{0}where <value> one of:", separator);
-                                foreach(string value in alias.ValidValues)
+                                foreach(string value in specification.ValidValues)
                                 {
                                     writer.WriteLine("{1}{1}{1}{0}", value, separator);
                                 }

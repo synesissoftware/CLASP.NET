@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 9th June 2015
+// Updated: 20th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 {
@@ -9,6 +9,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
     /// </summary>
     public interface IArgument
     {
+        #region properties
+
         /// <summary>
         ///  The type of the argument
         /// </summary>
@@ -33,5 +35,6 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
         ///  The original command-line index
         /// </summary>
         int Index { get; }
+        #endregion
     }
 }

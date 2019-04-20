@@ -27,6 +27,7 @@ namespace Test.Unit.CLASP.ns_1
             readonly string         m_value;
             #endregion
 
+            #region construction
             internal Argument(ArgumentType type, int index, string resolvedName, string givenName, string value)
             {
                 m_type          =   type;
@@ -35,7 +36,9 @@ namespace Test.Unit.CLASP.ns_1
                 m_giveName      =   givenName;
                 m_value         =   value;
             }
+            #endregion
 
+            #region IArgument
             ArgumentType IArgument.Type
             {
                 get
@@ -75,6 +78,7 @@ namespace Test.Unit.CLASP.ns_1
                     return m_index;
                 }
             }
+            #endregion
         }
 
         [TestMethod]

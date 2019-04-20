@@ -15,7 +15,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
     [BoundType]
     struct ProgramArguments
     {
-        [BoundFlag(Program.Constants.Aliases.Flag_Verbose_ResolvedName)]
+        [BoundFlag(Program.Constants.Specifications.Flag_Verbose_ResolvedName)]
         public bool Verbose;
 
         [BoundValue(0, UsageLabel=@"<input-file-path>")]
@@ -35,7 +35,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
     {
         public static class Constants
         {
-            public static class Aliases
+            public static class Specifications
             {
                 public const string Flag_Verbose_ResolvedName       =   @"--verbose";
             }
@@ -43,7 +43,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
 
         internal static readonly Flag       Flag_Verbose    =   new Flag(@"-v", @"--verbose", @"runs with verbose output");
 
-        internal static readonly Alias[]    Aliases         =
+        internal static readonly Alias[]    Specifications         =
         {
             Alias.Section("Behaviour:"),
             Flag_Verbose,
@@ -62,13 +62,13 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                 //
                 //  1. 
 
-                return Invoker.ParseAndInvokeMain(argv, Aliases, (Arguments clargs) =>
+                return Invoker.ParseAndInvokeMain(argv, Specifications, (Arguments clargs) =>
                     {
                         // check '--help'
 
                         if(clargs.HasFlag(UsageUtil.Help))
                         {
-                            UsageUtil.ShowVersion(Aliases, null);
+                            UsageUtil.ShowVersion(Specifications, null);
 
                             Console.Out.WriteLine();
                             Console.Out.WriteLine(@"USAGE: {0} {{ --help | --version | [ --verbose ] <input-file-path> }}", UsageUtil.InferProgramName(null));
@@ -76,7 +76,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                             Console.Out.WriteLine(@"Flags & options:");
                             Console.Out.WriteLine();
 
-                            UsageUtil.ShowUsage(Aliases, Console.Out, null);
+                            UsageUtil.ShowUsage(Specifications, Console.Out, null);
 
                             return 0;
                         }
@@ -85,7 +85,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
 
                         if(clargs.HasFlag(UsageUtil.Version))
                         {
-                            UsageUtil.ShowVersion(Aliases, null);
+                            UsageUtil.ShowVersion(Specifications, null);
 
                             return 0;
                         }

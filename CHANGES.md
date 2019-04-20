@@ -1,5 +1,10 @@
 #  **CLASP.NET** Changes
 
+
+## 0.11.122.1 - 20th April 2019
+
+* ~ significant preparatory refactoring, changing parameter names and documentation, along with internal fields and methods, in readiness for breaking change to rename *Alias types/attributes/methods to *Specification
+
 ## 0.11.121.0 - 20th April 2019
 
 * + ShowUsage() now lists an option's values (if specified)

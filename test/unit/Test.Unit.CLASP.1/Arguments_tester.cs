@@ -283,11 +283,11 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_1()
         {
-            Alias[] aliases = { Alias.Option("--width", null) };
+            Alias[] specifications = { Alias.Option("--width", null) };
 
             string[] argv = { "--width", "10" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(1, arguments.Options.Count);
@@ -304,11 +304,11 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_2()
         {
-            Alias[] aliases = { Alias.Option("--width", "--width") };
+            Alias[] specifications = { Alias.Option("--width", "--width") };
 
             string[] argv = { "--width", "10" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(1, arguments.Options.Count);
@@ -325,7 +325,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_3()
         {
-            Alias[] aliases =
+            Alias[] specifications =
             {
                 Alias.Option("--width", null),
                 Alias.Option("-W", "--width"),
@@ -333,7 +333,7 @@ namespace Test.Unit.CLASP.ns_1
 
             string[] argv = { "-W", "10" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(1, arguments.Options.Count);
@@ -441,7 +441,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Flag_5()
         {
-            Alias[] aliases =
+            Alias[] specifications =
             {
                 Alias.Flag("-a", "--append"),
                 Alias.Flag("-i", "--ignore-interrupts"),
@@ -449,7 +449,7 @@ namespace Test.Unit.CLASP.ns_1
 
             string[] argv = { "-a" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(0, arguments.Options.Count);
@@ -464,16 +464,16 @@ namespace Test.Unit.CLASP.ns_1
         }
         #endregion
 
-        #region Aliases tests
+        #region Specifications tests
 
         [TestMethod]
-        public void Test_Aliases_1()
+        public void Test_Specifications_1()
         {
-            Alias[] aliases = { Alias.Flag("-D", "--debug=on") };
+            Alias[] specifications = { Alias.Flag("-D", "--debug=on") };
 
             string[] argv = { "-D" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(1, arguments.Options.Count);
@@ -488,13 +488,13 @@ namespace Test.Unit.CLASP.ns_1
         }
 
         [TestMethod]
-        public void Test_Aliases_2()
+        public void Test_Specifications_2()
         {
-            Alias[] aliases = { };
+            Alias[] specifications = { };
 
             string[] argv = { "-classpath" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(9, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(0, arguments.Options.Count);
@@ -557,13 +557,13 @@ namespace Test.Unit.CLASP.ns_1
         }
 
         [TestMethod]
-        public void Test_Aliases_3()
+        public void Test_Specifications_3()
         {
-            Alias[] aliases = { Alias.Flag("-c", "--capture") };
+            Alias[] specifications = { Alias.Flag("-c", "--capture") };
 
             string[] argv = { "-classpath" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(9, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(0, arguments.Options.Count);
@@ -626,13 +626,13 @@ namespace Test.Unit.CLASP.ns_1
         }
 
         [TestMethod]
-        public void Test_Aliases_4()
+        public void Test_Specifications_4()
         {
-            Alias[] aliases = { Alias.Flag("-D", "--debug=on") };
+            Alias[] specifications = { Alias.Flag("-D", "--debug=on") };
 
             string[] argv = { "-D", "-h" };
 
-            Arguments arguments = new Arguments(argv, aliases);
+            Arguments arguments = new Arguments(argv, specifications);
 
             Assert.AreEqual(2, arguments.FlagsAndOptions.Count);
             Assert.AreEqual(1, arguments.Options.Count);

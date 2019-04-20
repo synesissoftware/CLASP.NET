@@ -9,7 +9,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Diagnostics;
 
     /// <summary>
-    ///  Represents an alias.
+    ///  Represents an argument specification.
     /// </summary>
     public abstract class Alias
     {
@@ -81,13 +81,13 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region creator methods
 
         /// <summary>
-        ///  Creates a flag alias.
+        ///  Creates a flag specification.
         /// </summary>
         /// <param name="givenName"></param>
         /// <param name="resolvedName"></param>
         /// <param name="description"></param>
         /// <returns>
-        ///  An alias.
+        ///  A flag specification.
         /// </returns>
         public static Flag Flag(string givenName, string resolvedName, string description)
         {
@@ -95,12 +95,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  Creates a flag alias.
+        ///  Creates a flag specification.
         /// </summary>
         /// <param name="givenName"></param>
         /// <param name="resolvedName"></param>
         /// <returns>
-        ///  An alias.
+        ///  A flag specification.
         /// </returns>
         public static Flag Flag(string givenName, string resolvedName)
         {
@@ -108,12 +108,12 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  Creates an option alias.
+        ///  Creates an option specification.
         /// </summary>
         /// <param name="shortName"></param>
         /// <param name="longName"></param>
         /// <returns>
-        ///  An alias.
+        ///  An option specification.
         /// </returns>
         public static Option Option(string shortName, string longName)
         {
@@ -121,14 +121,14 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  Creates an option alias.
+        ///  Creates an option specification.
         /// </summary>
         /// <param name="givenName"></param>
         /// <param name="resolvedName"></param>
         /// <param name="description"></param>
         /// <param name="validValues"></param>
         /// <returns>
-        ///  An alias.
+        ///  An option specification.
         /// </returns>
         public static Option Option(string givenName, string resolvedName, string description, params string[] validValues)
         {
@@ -136,13 +136,13 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  Creates a section separator alias.
+        ///  Creates a section separator specification.
         /// </summary>
         /// <param name="sectionName">
         ///  The name of the section.
         /// </param>
         /// <returns>
-        ///  An alias.
+        ///  A section separator specification.
         /// </returns>
         public static SectionSeparator Section(string sectionName)
         {
@@ -163,7 +163,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region overrides
 
         /// <summary>
-        ///  A string representation of the alias.
+        ///  A string representation of the specification.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -175,7 +175,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region properties
 
         /// <summary>
-        ///  The alias type.
+        ///  The specification type.
         /// </summary>
         public ArgumentType Type
         {
@@ -185,7 +185,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
         /// <summary>
-        ///  The given name of the alias.
+        ///  The given name of the specification.
         /// </summary>
         public string GivenName
         {
@@ -195,7 +195,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
         /// <summary>
-        ///  The resolved name of the alias.
+        ///  The resolved name of the specification.
         /// </summary>
         public string ResolvedName
         {
@@ -205,7 +205,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
         /// <summary>
-        ///  The description of the alias.
+        ///  The description of the specification.
         /// </summary>
         public string Description
         {

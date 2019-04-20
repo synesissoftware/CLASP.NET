@@ -10,7 +10,7 @@ namespace Example.ShowUsage
     {
         static Flag Flag_Verbose    =   new Flag(@"-v", @"--verbose", @"runs with verbose output");
 
-        static Alias[] aliases =
+        static Alias[] specifications =
         {
             Alias.Section("Verbosity:"),
             Flag_Verbose,
@@ -22,7 +22,7 @@ namespace Example.ShowUsage
 
         static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(argv, aliases, (Arguments clargs) =>
+            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments clargs) =>
                 {
                     UsageUtil.ShowUsage(clargs.Aliases, System.Console.Out, null);
 

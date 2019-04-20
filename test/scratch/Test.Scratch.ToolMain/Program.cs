@@ -10,14 +10,14 @@ namespace Test.Scratch.ToolMain
 
     class Program
     {
-        private static readonly Alias[] Aliases =
+        private static readonly Alias[] Specifications =
         {
             Alias.Flag(null, @"--help", @"shows this help and exits")
         };
 
         static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(argv, Aliases, ToolMain);
+            return Invoker.ParseAndInvokeMain(argv, Specifications, ToolMain);
         }
 
         private static int ToolMain(Arguments args)
