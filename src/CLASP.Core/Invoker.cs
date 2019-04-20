@@ -9,6 +9,9 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Diagnostics;
     using System.Reflection;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     /// <summary>
     ///  Class that provides ExecuteAroundMethod functionality for
     ///  implementing CLI entry points
@@ -103,7 +106,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
+        public static int ParseAndInvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain)
         {
             return ParseAndInvokeMain(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -112,7 +115,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMain instead")]
-        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain)
         {
             return InvokeMain(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -134,7 +137,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="toolMain">
         ///  The entry point to the main program logic
         /// </param>
-        public static void ParseAndInvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain)
+        public static void ParseAndInvokeMainVA(string[] argv, Specification[] specifications, ToolMainVA toolMain)
         {
             ParseAndInvokeMainVA(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -143,7 +146,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMainVA instead")]
-        public static void InvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain)
+        public static void InvokeMainVA(string[] argv, Specification[] specifications, ToolMainVA toolMain)
         {
             InvokeMainVA(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -178,7 +181,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static int ParseAndInvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
@@ -192,7 +195,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMain instead")]
-        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static int InvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
@@ -229,7 +232,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Options that control behaviour in the event of
         ///  <paramref name="toolMain"/> throwing an exception
         /// </param>
-        public static void ParseAndInvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static void ParseAndInvokeMainVA(string[] argv, Specification[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
@@ -243,7 +246,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// Obsolete
         [Obsolete("Use ParseAndInvokeMainVA instead")]
-        public static void InvokeMainVA(string[] argv, Alias[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        public static void InvokeMainVA(string[] argv, Specification[] specifications, ToolMainVA toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
@@ -263,7 +266,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns></returns>
         /// <example>
         /// </example>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, null, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -298,7 +301,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, ParseOptions.None, Constants.FailureOptions_Default);
         }
@@ -344,7 +347,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, parseOptions, failureOptions);
         }
@@ -407,7 +410,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
 
-        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] argv, Alias[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
         {
             return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args2) => {
 

@@ -8,11 +8,14 @@ namespace Test.Scratch.ToolMainVA
     using System.Linq;
     using System.Text;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     class Program
     {
-        private static readonly Alias[] Specifications =
+        private static readonly Specification[] Specifications =
         {
-            Alias.Flag(null, @"--help", @"shows this help and exits")
+            Specification.Flag(null, @"--help", @"shows this help and exits")
         };
 
         static void Main(string[] argv)

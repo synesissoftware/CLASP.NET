@@ -8,6 +8,9 @@ namespace Test.Unit.CLASP.ns_1
 
     using System;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     [TestClass]
     public class Arguments_tester
     {
@@ -283,7 +286,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_1()
         {
-            Alias[] specifications = { Alias.Option("--width", null) };
+            Specification[] specifications = { Specification.Option("--width", null) };
 
             string[] argv = { "--width", "10" };
 
@@ -304,7 +307,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_2()
         {
-            Alias[] specifications = { Alias.Option("--width", "--width") };
+            Specification[] specifications = { Specification.Option("--width", "--width") };
 
             string[] argv = { "--width", "10" };
 
@@ -325,10 +328,10 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_NextOption_3()
         {
-            Alias[] specifications =
+            Specification[] specifications =
             {
-                Alias.Option("--width", null),
-                Alias.Option("-W", "--width"),
+                Specification.Option("--width", null),
+                Specification.Option("-W", "--width"),
             };
 
             string[] argv = { "-W", "10" };
@@ -441,10 +444,10 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Flag_5()
         {
-            Alias[] specifications =
+            Specification[] specifications =
             {
-                Alias.Flag("-a", "--append"),
-                Alias.Flag("-i", "--ignore-interrupts"),
+                Specification.Flag("-a", "--append"),
+                Specification.Flag("-i", "--ignore-interrupts"),
             };
 
             string[] argv = { "-a" };
@@ -469,7 +472,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Specifications_1()
         {
-            Alias[] specifications = { Alias.Flag("-D", "--debug=on") };
+            Specification[] specifications = { Specification.Flag("-D", "--debug=on") };
 
             string[] argv = { "-D" };
 
@@ -490,7 +493,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Specifications_2()
         {
-            Alias[] specifications = { };
+            Specification[] specifications = { };
 
             string[] argv = { "-classpath" };
 
@@ -559,7 +562,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Specifications_3()
         {
-            Alias[] specifications = { Alias.Flag("-c", "--capture") };
+            Specification[] specifications = { Specification.Flag("-c", "--capture") };
 
             string[] argv = { "-classpath" };
 
@@ -628,7 +631,7 @@ namespace Test.Unit.CLASP.ns_1
         [TestMethod]
         public void Test_Specifications_4()
         {
-            Alias[] specifications = { Alias.Flag("-D", "--debug=on") };
+            Specification[] specifications = { Specification.Flag("-D", "--debug=on") };
 
             string[] argv = { "-D", "-h" };
 

@@ -1,7 +1,4 @@
 ﻿
-// Created: 
-// Updated: 24th September 2017
-
 namespace Test.Unit.CLASP.ns_1
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -10,13 +7,16 @@ namespace Test.Unit.CLASP.ns_1
 
     using System;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     [TestClass]
     public class Alias_tester
     {
         [TestMethod]
         public void test_Alias_type_exists()
         {
-            Assert.IsNotNull(typeof(Alias));
+            Assert.IsNotNull(typeof(Specification));
         }
 
         [TestMethod]
@@ -39,15 +39,15 @@ namespace Test.Unit.CLASP.ns_1
                     resolvedName    =   String.IsNullOrEmpty(resolvedName) ? null : resolvedName;
                     description     =   String.IsNullOrEmpty(description) ? null : description;
 
-                    Alias specification = null;
+                    Specification specification = null;
 
                     switch(argType)
                     {
                         case ArgumentType.Flag:
-                            specification = Alias.Flag(givenName, resolvedName, description);
+                            specification = Specification.Flag(givenName, resolvedName, description);
                             break;
                         case ArgumentType.Option:
-                            specification = Alias.Option(givenName, resolvedName, description);
+                            specification = Specification.Option(givenName, resolvedName, description);
                             break;
                         case ArgumentType.Value:
                         case ArgumentType.None:

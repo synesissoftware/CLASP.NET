@@ -6,16 +6,19 @@ namespace Example.ShowUsage
     using global::SynesisSoftware.SystemTools.Clasp;
     using global::SynesisSoftware.SystemTools.Clasp.Util;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     class Program
     {
         static Flag Flag_Verbose    =   new Flag(@"-v", @"--verbose", @"runs with verbose output");
 
-        static Alias[] specifications =
+        static Specification[] specifications =
         {
-            Alias.Section("Verbosity:"),
+            Specification.Section("Verbosity:"),
             Flag_Verbose,
 
-            Alias.Section("Standard:"),
+            Specification.Section("Standard:"),
             UsageUtil.Help,
             UsageUtil.Version,
         };

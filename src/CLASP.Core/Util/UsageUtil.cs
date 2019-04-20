@@ -12,6 +12,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
     using System.IO;
     using System.Reflection;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     /// <summary>
     ///  Utility class for additional CLASP-related functionality.
     /// </summary>
@@ -186,7 +189,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  The code by which the process will be terminated
         /// </param>
         [Obsolete("This method is obsolete. Use ShowUsageAndQuit(Arguments, int) instead")]
-        public static void ShowUsageAndQuit(IEnumerable<Alias> specifications, int exitCode)
+        public static void ShowUsageAndQuit(IEnumerable<Specification> specifications, int exitCode)
         {
             ShowUsageAndQuit_(specifications, exitCode, null);
         }
@@ -197,7 +200,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="specifications"></param>
         /// <param name="writer"></param>
         [Obsolete("This method is obsolete. Use ShowUsage(Arguments, IDictionary<string, options>) instead")]
-        public static void ShowUsage(IEnumerable<Alias> specifications, TextWriter writer)
+        public static void ShowUsage(IEnumerable<Specification> specifications, TextWriter writer)
         {
             if(null == writer)
             {
@@ -222,7 +225,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// </param>
         /// <param name="options">
         /// </param>
-        public static void ShowUsage(IEnumerable<Alias> specifications, TextWriter writer, IDictionary<string, object> options)
+        public static void ShowUsage(IEnumerable<Specification> specifications, TextWriter writer, IDictionary<string, object> options)
         {
             options = AddOption_(options, Constants.OptionKeys.Writer, writer);
 
@@ -262,7 +265,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// </summary>
         /// <param name="specifications"></param>
         /// <param name="options"></param>
-        public static void ShowVersion(IEnumerable<Alias> specifications, IDictionary<string, object> options)
+        public static void ShowVersion(IEnumerable<Specification> specifications, IDictionary<string, object> options)
         {
             ShowVersion_(null, options);
         }
@@ -303,7 +306,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             ShowUsageAndQuit_(args.Aliases, exitCode, options);
         }
 
-        private static void ShowUsageAndQuit_(IEnumerable<Alias> specifications, int? exitCode, IDictionary<string, object> options)
+        private static void ShowUsageAndQuit_(IEnumerable<Specification> specifications, int? exitCode, IDictionary<string, object> options)
         {
             ShowUsage_(specifications, exitCode, options);
 
@@ -323,7 +326,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             }
         }
 
-        private static void ShowUsage_(IEnumerable<Alias> specifications, int? exitCode, IDictionary<string, object> options)
+        private static void ShowUsage_(IEnumerable<Specification> specifications, int? exitCode, IDictionary<string, object> options)
         {
             options = InferOptions_(exitCode, options);
 
@@ -332,7 +335,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
             if(null != specifications)
             {
-                foreach(Alias specification in specifications)
+                foreach(Specification specification in specifications)
                 {
                     switch(specification.Type)
                     {

@@ -14,6 +14,9 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Diagnostics;
     using System.IO;
 
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     /// <summary>
     ///  This class, the main API class for the library, represents a parsed
     ///  set of command-line arguments.
@@ -52,12 +55,12 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         #region fields
 
-        readonly ICollection<Alias> specifications  =   null;
-        readonly List<IArgument>    arguments       =   new List<IArgument>();
-        readonly List<IArgument>    flags           =   new List<IArgument>();
-        readonly List<IArgument>    options         =   new List<IArgument>();
-        readonly List<IArgument>    flagsAndOptions =   new List<IArgument>();
-        readonly List<IArgument>    values          =   new List<IArgument>();
+        readonly ICollection<Specification> specifications  =   null;
+        readonly List<IArgument>            arguments       =   new List<IArgument>();
+        readonly List<IArgument>            flags           =   new List<IArgument>();
+        readonly List<IArgument>            options         =   new List<IArgument>();
+        readonly List<IArgument>            flagsAndOptions =   new List<IArgument>();
+        readonly List<IArgument>            values          =   new List<IArgument>();
         #endregion
 
         #region construction
@@ -99,7 +102,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
-        public Arguments(string[] argv, ICollection<Alias> specifications)
+        public Arguments(string[] argv, ICollection<Specification> specifications)
             : this(argv, specifications, ParseOptions.None)
         {}
         /// <summary>
@@ -120,7 +123,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  A combination of <see cref="ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
-        public Arguments(string[] argv, ICollection<Alias> specifications, ParseOptions options)
+        public Arguments(string[] argv, ICollection<Specification> specifications, ParseOptions options)
         {
             bool            treatAllAsValues    =   false;
             Argument        lastOption          =   null;
@@ -185,11 +188,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                                 string name     =   arg.Substring(0, equal);
                                 string value    =   arg.Substring(1 + equal);
 
-                                Alias alias = FindSpecification_(specifications, name);
+                                Specification spec = FindSpecification_(specifications, name);
 
-                                if(null != alias)
+                                if(null != spec)
                                 {
-                                    AddOption(Argument.NewOption(alias.ResolvedName, name, value, i));
+                                    AddOption(Argument.NewOption(spec.ResolvedName, name, value, i));
                                 }
                                 else
                                 {
@@ -198,43 +201,43 @@ namespace SynesisSoftware.SystemTools.Clasp
                             }
                             else
                             {
-                                Alias alias = FindSpecification_(specifications, arg);
+                                Specification spec = FindSpecification_(specifications, arg);
 
-                                if(null != alias)
+                                if(null != spec)
                                 {
-                                    equal = (null == alias.ResolvedName) ? -1 : alias.ResolvedName.IndexOf('=');
+                                    equal = (null == spec.ResolvedName) ? -1 : spec.ResolvedName.IndexOf('=');
 
                                     if(equal >= 0)
                                     {
                                         // An option
-                                        string name     =   alias.ResolvedName.Substring(0, equal);
-                                        string value    =   alias.ResolvedName.Substring(1 + equal);
+                                        string name     =   spec.ResolvedName.Substring(0, equal);
+                                        string value    =   spec.ResolvedName.Substring(1 + equal);
 
                                         AddOption(Argument.NewOption(arg, name, value, i));
                                     }
                                     else
                                     {
-                                        if(ArgumentType.Option == alias.Type)
+                                        if(ArgumentType.Option == spec.Type)
                                         {
-                                            if(null == alias.ResolvedName)
+                                            if(null == spec.ResolvedName)
                                             {
                                                 lastOption = AddOption(Argument.NewOption(arg, i));
                                             }
                                             else
                                             {
-                                                lastOption = AddOption(Argument.NewOption(arg, alias.ResolvedName, null, i));
+                                                lastOption = AddOption(Argument.NewOption(arg, spec.ResolvedName, null, i));
                                             }
                                         }
                                         else
-                                        if(ArgumentType.Flag == alias.Type)
+                                        if(ArgumentType.Flag == spec.Type)
                                         {
-                                            if(null == alias.ResolvedName)
+                                            if(null == spec.ResolvedName)
                                             {
                                                 AddFlag(Argument.NewFlag(arg, i));
                                             }
                                             else
                                             {
-                                                AddFlag(Argument.NewFlag(arg, alias.ResolvedName, i));
+                                                AddFlag(Argument.NewFlag(arg, spec.ResolvedName, i));
                                             }
                                         }
                                     }
@@ -252,29 +255,29 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                         string arg2 = new string(flag);
 
-                                        Alias alias2 = FindSpecification_(specifications, arg2);
+                                        Specification spec2 = FindSpecification_(specifications, arg2);
 
-                                        if(null != alias2)
+                                        if(null != spec2)
                                         {
-                                            int equal3 = alias2.ResolvedName.IndexOf('=');
+                                            int equal3 = spec2.ResolvedName.IndexOf('=');
 
                                             if(equal3 >= 0)
                                             {
-                                                string name2    =   alias2.ResolvedName.Substring(0, equal3);
-                                                string value2   =   alias2.ResolvedName.Substring(1 + equal3);
+                                                string name2    =   spec2.ResolvedName.Substring(0, equal3);
+                                                string value2   =   spec2.ResolvedName.Substring(1 + equal3);
 
                                                 AddOption(Argument.NewOption(arg, name2, value2, i));
                                             }
                                             else
                                             {
-                                                if(ArgumentType.Option == alias2.Type)
+                                                if(ArgumentType.Option == spec2.Type)
                                                 {
-                                                    lastOption = AddOption(Argument.NewOption(arg, alias2.ResolvedName, null, i));
+                                                    lastOption = AddOption(Argument.NewOption(arg, spec2.ResolvedName, null, i));
                                                 }
                                                 else
-                                                if(ArgumentType.Flag == alias2.Type)
+                                                if(ArgumentType.Flag == spec2.Type)
                                                 {
-                                                    AddFlag(Argument.NewFlag(arg, alias2.ResolvedName, i));
+                                                    AddFlag(Argument.NewFlag(arg, spec2.ResolvedName, i));
                                                 }
                                             }
                                         }
@@ -391,7 +394,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] argv, Alias[] specifications, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain)
         {
             return InvokeMain(argv, specifications, ParseOptions.None, toolMain);
         }
@@ -421,7 +424,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The return value from <c>toolMain</c>.
         /// </returns>
-        public static int InvokeMain(string[] argv, Alias[] specifications, ParseOptions options, ToolMain toolMain)
+        public static int InvokeMain(string[] argv, Specification[] specifications, ParseOptions options, ToolMain toolMain)
         {
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
@@ -615,7 +618,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The specifications specified to the constructor, or <b>null</b> if
         ///  none were specified.
         /// </summary>
-        public ICollection<Alias> Aliases
+        public ICollection<Specification> Aliases
         {
             get
             {
@@ -706,7 +709,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             return arg;
         }
 
-        private static Alias FindSpecification_(ICollection<Alias> specifications, string name)
+        private static Specification FindSpecification_(ICollection<Specification> specifications, string name)
         {
             Debug.Assert(null != name);
 
@@ -716,11 +719,11 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
             else
             {
-                foreach(Alias alias in specifications)
+                foreach(Specification specification in specifications)
                 {
-                    if(alias.GivenName == name)
+                    if(specification.GivenName == name)
                     {
-                        return alias;
+                        return specification;
                     }
                 }
             }
