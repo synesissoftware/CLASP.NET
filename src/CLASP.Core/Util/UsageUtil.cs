@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 4th April 2019
+// Updated: 6th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -362,6 +362,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                                 writer.WriteLine("{1}{0}=<value>", alias.ResolvedName, separator);
                             }
                             writer.WriteLine("{1}{1}{0}", alias.Description, separator);
+                            if(0 != alias.ValidValues.Length)
+                            {
+                                writer.WriteLine("{0}{0}where <value> one of:", separator);
+                                foreach(string value in alias.ValidValues)
+                                {
+                                    writer.WriteLine("{1}{1}{1}{0}", value, separator);
+                                }
+                            }
                             writer.WriteLine();
                             break;
                     }

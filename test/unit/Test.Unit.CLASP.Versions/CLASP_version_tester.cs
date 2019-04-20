@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 20th April 2019
 
 namespace Test.Unit.CLASP.Versions
 {
@@ -26,7 +26,7 @@ namespace Test.Unit.CLASP.Versions
             Version version = assembly.GetName().Version;
 
             Assert.AreEqual(0, version.Major);
-            Assert.AreEqual(10, version.Minor);
+            Assert.AreEqual(11, version.Minor);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Test.Unit.CLASP.Versions
             FileVersionInfo fversion = FileVersionInfo.GetVersionInfo(assembly.Location);
 
             Assert.AreEqual(0, fversion.FileMajorPart);
-            Assert.AreEqual(10, fversion.FileMinorPart);
+            Assert.AreEqual(11, fversion.FileMinorPart);
         }
     }
 }
