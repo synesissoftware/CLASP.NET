@@ -1,5 +1,10 @@
 #  **CLASP.NET** Changes
 
+
+## 0.13.125.0 - 20th April 2019
+
+* + added IArgument.Specification property
+
 ## 0.12.124.0 - 20th April 2019
 
 * ~ fixed default interpretation of "-" to be Flag, rather than Option
@@ -21,5 +26,11 @@
 ## 0.10.120.1 - 6th April 2019
 
 * ~ fixed erroneous processing of alias to option-with-value
+
+
+
+## previous versions
+
+T.B.C.
 
 

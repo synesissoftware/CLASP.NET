@@ -16,6 +16,15 @@ namespace Test.Unit.CLASP.Versions
     [TestClass]
     public class CLASP_version_tester
     {
+        internal static class Constants
+        {
+            internal static class Expectations
+            {
+                internal const int  VersionMajor    =   0;
+                internal const int  VersionMinor    =   13;
+            }
+        }
+
         static Type forcedLoadReference = typeof(IArgument);
 
         [TestMethod]
@@ -25,8 +34,8 @@ namespace Test.Unit.CLASP.Versions
 
             Version version = assembly.GetName().Version;
 
-            Assert.AreEqual(0, version.Major);
-            Assert.AreEqual(12, version.Minor);
+            Assert.AreEqual(Constants.Expectations.VersionMajor, version.Major);
+            Assert.AreEqual(Constants.Expectations.VersionMinor, version.Minor);
         }
 
         [TestMethod]
@@ -36,8 +45,8 @@ namespace Test.Unit.CLASP.Versions
 
             FileVersionInfo fversion = FileVersionInfo.GetVersionInfo(assembly.Location);
 
-            Assert.AreEqual(0, fversion.FileMajorPart);
-            Assert.AreEqual(12, fversion.FileMinorPart);
+            Assert.AreEqual(Constants.Expectations.VersionMajor, fversion.FileMajorPart);
+            Assert.AreEqual(Constants.Expectations.VersionMinor, fversion.FileMinorPart);
         }
     }
 }

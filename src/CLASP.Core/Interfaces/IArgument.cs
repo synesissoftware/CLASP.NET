@@ -4,6 +4,9 @@
 
 namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 {
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     /// <summary>
     ///  Argument interface.
     /// </summary>
@@ -35,6 +38,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
         ///  The original command-line index
         /// </summary>
         int Index { get; }
+
+        /// <summary>
+        ///  The specification associated with the argument; <c>null</c> if
+        ///  none is associated
+        /// </summary>
+        Specification Specification { get; }
         #endregion
     }
 }

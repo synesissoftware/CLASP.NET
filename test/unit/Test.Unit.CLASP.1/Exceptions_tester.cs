@@ -81,6 +81,14 @@ namespace Test.Unit.CLASP.ns_1
                     return m_index;
                 }
             }
+
+            Specification IArgument.Specification
+            {
+                get
+                {
+                    return null;
+                }
+            }
             #endregion
         }
 

@@ -199,7 +199,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                 if(null != spec)
                                 {
-                                    AddOption(Argument.NewOption(null, spec.ResolvedName, name, value, i));
+                                    AddOption(Argument.NewOption(spec, spec.ResolvedName, name, value, i));
                                 }
                                 else
                                 {
@@ -220,7 +220,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                                         string name     =   spec.ResolvedName.Substring(0, equal);
                                         string value    =   spec.ResolvedName.Substring(1 + equal);
 
-                                        AddOption(Argument.NewOption(null, arg, name, value, i));
+                                        AddOption(Argument.NewOption(spec, arg, name, value, i));
                                     }
                                     else
                                     {
@@ -228,11 +228,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                                         {
                                             if(null == spec.ResolvedName)
                                             {
-                                                lastOption = AddOption(Argument.NewOption(null, arg, arg, null, i));
+                                                lastOption = AddOption(Argument.NewOption(spec, arg, arg, null, i));
                                             }
                                             else
                                             {
-                                                lastOption = AddOption(Argument.NewOption(null, arg, spec.ResolvedName, null, i));
+                                                lastOption = AddOption(Argument.NewOption(spec, arg, spec.ResolvedName, null, i));
                                             }
                                         }
                                         else
@@ -240,11 +240,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                                         {
                                             if(null == spec.ResolvedName)
                                             {
-                                                AddFlag(Argument.NewFlag(null, arg, arg, i));
+                                                AddFlag(Argument.NewFlag(spec, arg, arg, i));
                                             }
                                             else
                                             {
-                                                AddFlag(Argument.NewFlag(null, arg, spec.ResolvedName, i));
+                                                AddFlag(Argument.NewFlag(spec, arg, spec.ResolvedName, i));
                                             }
                                         }
                                     }
@@ -273,18 +273,18 @@ namespace SynesisSoftware.SystemTools.Clasp
                                                 string name2    =   spec2.ResolvedName.Substring(0, equal3);
                                                 string value2   =   spec2.ResolvedName.Substring(1 + equal3);
 
-                                                AddOption(Argument.NewOption(null, arg, name2, value2, i));
+                                                AddOption(Argument.NewOption(spec2, arg, name2, value2, i));
                                             }
                                             else
                                             {
                                                 if(ArgumentType.Option == spec2.Type)
                                                 {
-                                                    lastOption = AddOption(Argument.NewOption(null, arg, spec2.ResolvedName, null, i));
+                                                    lastOption = AddOption(Argument.NewOption(spec2, arg, spec2.ResolvedName, null, i));
                                                 }
                                                 else
                                                 if(ArgumentType.Flag == spec2.Type)
                                                 {
-                                                    AddFlag(Argument.NewFlag(null, arg, spec2.ResolvedName, i));
+                                                    AddFlag(Argument.NewFlag(spec2, arg, spec2.ResolvedName, i));
                                                 }
                                             }
                                         }

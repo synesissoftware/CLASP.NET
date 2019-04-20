@@ -68,6 +68,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, value0.Index);
             Assert.AreEqual("abc", value0.Value);
             Assert.AreEqual("abc", value0.ToString());
+            Assert.IsNull(value0.Specification);
         }
 
         [TestMethod]
@@ -90,6 +91,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, value0.Index);
             Assert.AreEqual("abc", value0.Value);
             Assert.AreEqual("abc", value0.ToString());
+            Assert.IsNull(value0.Specification);
 
             var value1 = arguments.Values[1];
 
@@ -99,6 +101,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, value1.Index);
             Assert.AreEqual("def", value1.Value);
             Assert.AreEqual("def", value1.ToString());
+            Assert.IsNull(value1.Specification);
 
             var value2 = arguments.Values[2];
 
@@ -108,6 +111,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, value2.Index);
             Assert.AreEqual("ghi", value2.Value);
             Assert.AreEqual("ghi", value2.ToString());
+            Assert.IsNull(value2.Specification);
         }
 
         [TestMethod]
@@ -130,6 +134,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, value0.Index);
             Assert.AreEqual("abc", value0.Value);
             Assert.AreEqual("abc", value0.ToString());
+            Assert.IsNull(value0.Specification);
 
             var value1 = arguments.Values[1];
 
@@ -139,6 +144,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, value1.Index);
             Assert.AreEqual("-x", value1.Value);
             Assert.AreEqual("-x", value1.ToString());
+            Assert.IsNull(value1.Specification);
         }
 
         [TestMethod]
@@ -161,6 +167,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, value0.Index);
             Assert.AreEqual("abc", value0.Value);
             Assert.AreEqual("abc", value0.ToString());
+            Assert.IsNull(value0.Specification);
 
             var value1 = arguments.Values[1];
 
@@ -170,6 +177,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, value1.Index);
             Assert.AreEqual("-", value1.Value);
             Assert.AreEqual("-", value1.ToString());
+            Assert.IsNull(value1.Specification);
         }
 
         [TestMethod]
@@ -192,6 +200,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, value0.Index);
             Assert.AreEqual("abc", value0.Value);
             Assert.AreEqual("abc", value0.ToString());
+            Assert.IsNull(value0.Specification);
 
             var value1 = arguments.Values[1];
 
@@ -201,6 +210,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(2, value1.Index);
             Assert.AreEqual("--", value1.Value);
             Assert.AreEqual("--", value1.ToString());
+            Assert.IsNull(value1.Specification);
         }
         #endregion
 
@@ -270,6 +280,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--x=10", option0.ToString());
+            Assert.IsNull(option0.Specification);
         }
 
         [TestMethod]
@@ -292,6 +303,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("-x=10", option0.ToString());
+            Assert.IsNull(option0.Specification);
         }
 
         [TestMethod]
@@ -314,6 +326,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
+            Assert.IsNull(option0.Specification);
 
             var option1 = arguments.Options[1];
 
@@ -323,6 +336,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, option1.Index);
             Assert.AreEqual("20", option1.Value);
             Assert.AreEqual("--height=20", option1.ToString());
+            Assert.IsNull(option1.Specification);
         }
 
         [TestMethod]
@@ -345,6 +359,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
+            Assert.IsNull(option0.Specification);
 
             var flag0 = arguments.Flags[0];
 
@@ -354,6 +369,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("--height", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
         }
 
         [TestMethod]
@@ -378,6 +394,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
+            Assert.AreEqual(specifications[0], option0.Specification);
         }
 
         [TestMethod]
@@ -402,6 +419,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
+            Assert.AreEqual(specifications[0], option0.Specification);
         }
 
         [TestMethod]
@@ -430,6 +448,10 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
+#if NON_EXISTENT
+
+            Assert.AreEqual(specifications[0], option0.Specification);
+#endif
         }
         #endregion
 
@@ -455,6 +477,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("-x", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
         }
 
         [TestMethod]
@@ -477,6 +500,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("--X", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
         }
 
         [TestMethod]
@@ -499,6 +523,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("-x", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
 
             var flag1 = arguments.Flags[1];
 
@@ -508,6 +533,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, flag1.Index);
             Assert.AreEqual(null, flag1.Value);
             Assert.AreEqual("--X", flag1.ToString());
+            Assert.IsNull(flag1.Specification);
         }
 
         [TestMethod]
@@ -530,6 +556,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("-w", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
 
             var flag1 = arguments.Flags[1];
 
@@ -539,6 +566,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, flag1.Index);
             Assert.AreEqual(null, flag1.Value);
             Assert.AreEqual("-h", flag1.ToString());
+            Assert.IsNull(flag1.Specification);
         }
 
         [TestMethod]
@@ -567,6 +595,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("--append", flag0.ToString());
+            Assert.AreEqual(specifications[0], flag0.Specification);
         }
         #endregion
 
@@ -594,6 +623,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("on", option0.Value);
             Assert.AreEqual("--debug=on", option0.ToString());
+            Assert.AreEqual(specifications[0], option0.Specification);
         }
 
         [TestMethod]
@@ -618,6 +648,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.IsNull(flag0.Value);
             Assert.AreEqual("-c", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
 
             var flag1 = arguments.Flags[1];
 
@@ -627,6 +658,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag1.Index);
             Assert.IsNull(flag1.Value);
             Assert.AreEqual("-l", flag1.ToString());
+            Assert.IsNull(flag1.Specification);
 
             var flag2 = arguments.Flags[2];
 
@@ -636,6 +668,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag2.Index);
             Assert.IsNull(flag2.Value);
             Assert.AreEqual("-a", flag2.ToString());
+            Assert.IsNull(flag2.Specification);
 
             var flag3 = arguments.Flags[3];
 
@@ -645,6 +678,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag3.Index);
             Assert.IsNull(flag3.Value);
             Assert.AreEqual("-s", flag3.ToString());
+            Assert.IsNull(flag3.Specification);
 
             var flag4 = arguments.Flags[4];
 
@@ -654,6 +688,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag4.Index);
             Assert.IsNull(flag4.Value);
             Assert.AreEqual("-s", flag4.ToString());
+            Assert.IsNull(flag4.Specification);
 
             var flag5 = arguments.Flags[5];
 
@@ -663,6 +698,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag5.Index);
             Assert.IsNull(flag5.Value);
             Assert.AreEqual("-p", flag5.ToString());
+            Assert.IsNull(flag5.Specification);
 
             var flag6 = arguments.Flags[6];
 
@@ -672,6 +708,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag6.Index);
             Assert.IsNull(flag6.Value);
             Assert.AreEqual("-a", flag6.ToString());
+            Assert.IsNull(flag6.Specification);
 
             var flag7 = arguments.Flags[7];
 
@@ -681,6 +718,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag7.Index);
             Assert.IsNull(flag7.Value);
             Assert.AreEqual("-t", flag7.ToString());
+            Assert.IsNull(flag7.Specification);
 
             var flag8 = arguments.Flags[8];
 
@@ -690,6 +728,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag8.Index);
             Assert.IsNull(flag8.Value);
             Assert.AreEqual("-h", flag8.ToString());
+            Assert.IsNull(flag8.Specification);
         }
 
         [TestMethod]
@@ -714,6 +753,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag0.Index);
             Assert.IsNull(flag0.Value);
             Assert.AreEqual("--capture", flag0.ToString());
+            Assert.AreEqual(specifications[0], flag0.Specification);
 
             var flag1 = arguments.Flags[1];
 
@@ -723,6 +763,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag1.Index);
             Assert.IsNull(flag1.Value);
             Assert.AreEqual("-l", flag1.ToString());
+            Assert.IsNull(flag1.Specification);
 
             var flag2 = arguments.Flags[2];
 
@@ -732,6 +773,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag2.Index);
             Assert.IsNull(flag2.Value);
             Assert.AreEqual("-a", flag2.ToString());
+            Assert.IsNull(flag2.Specification);
 
             var flag3 = arguments.Flags[3];
 
@@ -741,6 +783,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag3.Index);
             Assert.IsNull(flag3.Value);
             Assert.AreEqual("-s", flag3.ToString());
+            Assert.IsNull(flag3.Specification);
 
             var flag4 = arguments.Flags[4];
 
@@ -750,6 +793,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag4.Index);
             Assert.IsNull(flag4.Value);
             Assert.AreEqual("-s", flag4.ToString());
+            Assert.IsNull(flag4.Specification);
 
             var flag5 = arguments.Flags[5];
 
@@ -759,6 +803,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag5.Index);
             Assert.IsNull(flag5.Value);
             Assert.AreEqual("-p", flag5.ToString());
+            Assert.IsNull(flag5.Specification);
 
             var flag6 = arguments.Flags[6];
 
@@ -768,6 +813,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag6.Index);
             Assert.IsNull(flag6.Value);
             Assert.AreEqual("-a", flag6.ToString());
+            Assert.IsNull(flag6.Specification);
 
             var flag7 = arguments.Flags[7];
 
@@ -777,6 +823,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag7.Index);
             Assert.IsNull(flag7.Value);
             Assert.AreEqual("-t", flag7.ToString());
+            Assert.IsNull(flag7.Specification);
 
             var flag8 = arguments.Flags[8];
 
@@ -786,6 +833,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, flag8.Index);
             Assert.IsNull(flag8.Value);
             Assert.AreEqual("-h", flag8.ToString());
+            Assert.IsNull(flag8.Specification);
         }
 
         [TestMethod]
@@ -810,6 +858,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("on", option0.Value);
             Assert.AreEqual("--debug=on", option0.ToString());
+            Assert.AreEqual(specifications[0], option0.Specification);
 
             var flag0 = arguments.Flags[0];
 
@@ -819,6 +868,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(1, flag0.Index);
             Assert.AreEqual(null, flag0.Value);
             Assert.AreEqual("-h", flag0.ToString());
+            Assert.IsNull(flag0.Specification);
         }
         #endregion
     }

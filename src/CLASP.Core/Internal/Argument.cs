@@ -14,10 +14,16 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
     internal sealed class Argument
         : IArgument
     {
+        #region fields
+
+        private readonly Specification  m_specification;
+        #endregion
+
         #region construction
 
-        private Argument(ArgumentType type, string givenName, string resolvedName, string value, int numHyphens, int index)
+        private Argument(Specification specification, ArgumentType type, string givenName, string resolvedName, string value, int numHyphens, int index)
         {
+            m_specification =   specification;
             Type            =   type;
             GivenName       =   givenName;
             ResolvedName    =   resolvedName;
@@ -27,17 +33,17 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
 
         internal static Argument NewValue(string value, int index)
         {
-            return new Argument(ArgumentType.Value, null, null, value, 0, index);
+            return new Argument(null, ArgumentType.Value, null, null, value, 0, index);
         }
 
         internal static Argument NewFlag(Specification specification, string givenName, string resolvedName, int index)
         {
-            return new Argument(ArgumentType.Flag, givenName, resolvedName, null, CountHyphens(givenName), index);
+            return new Argument(specification, ArgumentType.Flag, givenName, resolvedName, null, CountHyphens(givenName), index);
         }
 
         internal static Argument NewOption(Specification specification, string givenName, string resolvedName, string value, int index)
         {
-            return new Argument(ArgumentType.Option, givenName, resolvedName, value, CountHyphens(givenName), index);
+            return new Argument(specification, ArgumentType.Option, givenName, resolvedName, value, CountHyphens(givenName), index);
         }
         #endregion
 
@@ -71,6 +77,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         #endregion
 
         #region properties
+
+        Specification IArgument.Specification
+        {
+            get
+            {
+                return m_specification;
+            }
+        }
 
         internal bool Used
         {
