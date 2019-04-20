@@ -31,8 +31,11 @@ project.assets.json
 *~
 *.*~
 *.nupkg
+*.opensdf
+*.org
 *.proj
 *.scc
+*.sdf
 *.suo
 *.swp
 
