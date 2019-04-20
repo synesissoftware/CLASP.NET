@@ -30,34 +30,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
             return new Argument(ArgumentType.Value, null, null, value, 0, index);
         }
 
-        internal static Argument NewFlag_(Specification specification, string givenName, string resolvedName, int index)
+        internal static Argument NewFlag(Specification specification, string givenName, string resolvedName, int index)
         {
             return new Argument(ArgumentType.Flag, givenName, resolvedName, null, CountHyphens(givenName), index);
         }
 
-        internal static Argument NewOption_(Specification specification, string givenName, string resolvedName, string value, int index)
+        internal static Argument NewOption(Specification specification, string givenName, string resolvedName, string value, int index)
         {
             return new Argument(ArgumentType.Option, givenName, resolvedName, value, CountHyphens(givenName), index);
-        }
-
-        internal static Argument NewFlag(string arg, int i)
-        {
-            return NewFlag_(null, arg, arg, i);
-        }
-
-        internal static Argument NewFlag(string givenName, string name, int i)
-        {
-            return NewFlag_(null, givenName, name, i);
-        }
-
-        internal static Argument NewOption(string arg, int i)
-        {
-            return NewOption_(null, arg, arg, null, i);
-        }
-
-        internal static Argument NewOption(string givenName, string name, string value, int i)
-        {
-            return NewOption_(null, givenName, name, value, i);
         }
         #endregion
 

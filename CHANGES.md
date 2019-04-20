@@ -1,5 +1,11 @@
 #  **CLASP.NET** Changes
 
+## 0.12.124.0 - 20th April 2019
+
+* ~ fixed default interpretation of "-" to be Flag, rather than Option
+* + added missing response to ParseOptions.TreatSinglehyphenAsValue
+* ~ more preparatory refactoring
+
 ## 0.11.123.2 - 20th April 2019
 
 * ~ corrected Aargument.ToString() for flags, options, values (and unknown)

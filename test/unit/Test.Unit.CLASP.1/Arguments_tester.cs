@@ -207,25 +207,47 @@ namespace Test.Unit.CLASP.ns_1
         #region Option tests
 
         [TestMethod]
-        public void Test_Option_1()
+        public void Test_Option_1_hyphen_as_flag()
         {
             string[] argv = { "-" };
 
             Arguments arguments = new Arguments(argv);
 
             Assert.AreEqual(1, arguments.FlagsAndOptions.Count);
-            Assert.AreEqual(1, arguments.Options.Count);
-            Assert.AreEqual(0, arguments.Flags.Count);
+            Assert.AreEqual(0, arguments.Options.Count);
+            Assert.AreEqual(1, arguments.Flags.Count);
             Assert.AreEqual(0, arguments.Values.Count);
 
-            var option0 = arguments.Options[0];
+            var flag0 = arguments.Flags[0];
 
-            Assert.AreEqual(ArgumentType.Option, option0.Type);
-            Assert.AreEqual("-", option0.GivenName);
-            Assert.AreEqual("-", option0.ResolvedName);
-            Assert.AreEqual(0, option0.Index);
-            Assert.IsNull(arguments.Options[0].Value);
-            Assert.AreEqual("-=", arguments.Options[0].ToString());
+            Assert.AreEqual(ArgumentType.Flag, flag0.Type);
+            Assert.AreEqual("-", flag0.GivenName);
+            Assert.AreEqual("-", flag0.ResolvedName);
+            Assert.AreEqual(0, flag0.Index);
+            Assert.IsNull(flag0.Value);
+            Assert.AreEqual("-", flag0.ToString());
+        }
+
+        [TestMethod]
+        public void Test_Option_1_hyphen_as_value()
+        {
+            string[] argv = { "-" };
+
+            Arguments arguments = new Arguments(argv, ParseOptions.TreatSinglehyphenAsValue);
+
+            Assert.AreEqual(0, arguments.FlagsAndOptions.Count);
+            Assert.AreEqual(0, arguments.Options.Count);
+            Assert.AreEqual(0, arguments.Flags.Count);
+            Assert.AreEqual(1, arguments.Values.Count);
+
+            var value0 = arguments.Values[0];
+
+            Assert.AreEqual(ArgumentType.Value, value0.Type);
+            Assert.IsNull(value0.GivenName);
+            Assert.IsNull(value0.ResolvedName);
+            Assert.AreEqual(0, value0.Index);
+            Assert.AreEqual("-", value0.Value);
+            Assert.AreEqual("-", value0.ToString());
         }
 
         [TestMethod]
