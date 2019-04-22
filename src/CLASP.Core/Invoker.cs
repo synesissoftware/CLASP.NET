@@ -70,11 +70,11 @@ namespace SynesisSoftware.SystemTools.Clasp
             ///  The default parse options
             /// </summary>
             public const ArgumentBindingOptions     BindingOptions_Default  =   ArgumentBindingOptions.None;
+
             /// <summary>
             ///  Exit-code indicating success
             /// </summary>
             public const int                        ExitCode_Success        =   0;
-
             /// <summary>
             ///  Exit-code indicating failure
             /// </summary>
