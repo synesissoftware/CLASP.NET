@@ -1,5 +1,5 @@
 ﻿
-// Suppresses warning that SimpleStructure elements never changed
+// Suppresses warning that SimpleFlagStructure elements never changed
 #pragma warning disable 0649
 
 namespace Test.Unit.BoundArguments.ns_1
@@ -12,26 +12,26 @@ namespace Test.Unit.BoundArguments.ns_1
     using System;
 
     [TestClass]
-    public class SimpleStructure_tester
+    public class Flag_tester
     {
         #region Structures
 
         [BoundType]
-        internal class SimpleStructure
+        internal class SimpleFlagStructure
         {
             [BoundFlag(@"--verbose")]
             public bool Verbose;
         }
 
         [BoundType(BindingOptions=ArgumentBindingOptions.IgnoreOtherFlags)]
-        internal class SimpleStructure_with_ignore
+        internal class SimpleFlagStructure_with_ignore
         {
             [BoundFlag(@"--verbose")]
             public bool Verbose;
         }
 
         [BoundType(BindingOptions=ArgumentBindingOptions.IgnoreOtherFlags, AttributeOptionsHavePrecedence=true)]
-        internal class SimpleStructure_with_ignore_and_precedence
+        internal class SimpleFlagStructure_with_ignore_and_precedence
         {
             [BoundFlag(@"--verbose")]
             public bool Verbose;
@@ -50,7 +50,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure>(argv, null, (SimpleFlagStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -74,7 +74,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure>(argv, null, (SimpleFlagStructure ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -96,7 +96,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure>(argv, null, (SimpleFlagStructure ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -120,7 +120,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure>(argv, null, (SimpleFlagStructure ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -142,7 +142,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure>(argv, null, (SimpleFlagStructure ss, Arguments args_UNUSED) =>
                 {
                     enteredMain = true;
 
@@ -164,7 +164,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure_with_ignore>(argv, null, (SimpleFlagStructure_with_ignore ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -186,7 +186,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure_with_ignore>(argv, null, (SimpleFlagStructure_with_ignore ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -210,7 +210,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure_with_ignore_and_precedence>(argv, null, (SimpleFlagStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 
@@ -232,7 +232,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleFlagStructure_with_ignore_and_precedence>(argv, null, (SimpleFlagStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
 
                 enteredMain = true;
 

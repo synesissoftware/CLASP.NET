@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.14.128.1 - 23rd April 2019
+
+* + bunch more testing to validate bound parsing of flags and options (in preparation for fixing of known defect in bound parsing of values)
+
 ## 0.14.127.0 - 20th April 2019
 
 * + added IArgument.Used property and IArgument.Use() method
