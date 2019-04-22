@@ -74,14 +74,14 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
 
-                    Assert.IsTrue(ss.Verbose);
+                enteredMain = true;
 
-                    return 12345;
-                });
+                Assert.IsTrue(ss.Verbose);
+
+                return 12345;
+            });
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
@@ -96,14 +96,14 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
 
-                    Assert.IsFalse(ss.Verbose);
+                enteredMain = true;
 
-                    return 12345;
-                });
+                Assert.IsFalse(ss.Verbose);
+
+                return 12345;
+            });
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
@@ -120,12 +120,12 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure>(argv, null, (SimpleStructure ss, Arguments args_UNUSED) => {
 
-                    return 12345;
-                });
+                enteredMain = true;
+
+                return 12345;
+            });
 
             Assert.IsFalse(enteredMain);
             Assert.AreEqual(Invoker.Constants.ExitCode_Failure, r);
@@ -164,12 +164,12 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) => {
 
-                    return 12345;
-                });
+                enteredMain = true;
+
+                return 12345;
+            });
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
@@ -186,12 +186,14 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore>(argv, null, (SimpleStructure_with_ignore ss, Arguments args_UNUSED) => {
 
-                    return 12345;
-                }, ArgumentBindingOptions.None);
+                enteredMain = true;
+
+                return 12345;
+            }
+            , ArgumentBindingOptions.None
+            );
 
             Assert.IsFalse(enteredMain);
             Assert.AreEqual(Invoker.Constants.ExitCode_Failure, r);
@@ -208,12 +210,12 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
 
-                    return 12345;
-                });
+                enteredMain = true;
+
+                return 12345;
+            });
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
@@ -230,12 +232,13 @@ namespace Test.Unit.BoundArguments.ns_1
 
             bool enteredMain = false;
 
-            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) =>
-                {
-                    enteredMain = true;
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleStructure_with_ignore_and_precedence>(argv, null, (SimpleStructure_with_ignore_and_precedence ss, Arguments args_UNUSED) => {
 
-                    return 12345;
-                }, ArgumentBindingOptions.None);
+                enteredMain = true;
+
+                return 12345;
+            }
+            , ArgumentBindingOptions.None);
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
