@@ -14,6 +14,8 @@ namespace Test.Unit.BoundArguments.ns_1
     [TestClass]
     public class SimpleStructure_tester
     {
+        #region Structures
+
         [BoundType]
         internal class SimpleStructure
         {
@@ -34,6 +36,9 @@ namespace Test.Unit.BoundArguments.ns_1
             [BoundFlag(@"--verbose")]
             public bool Verbose;
         }
+        #endregion
+
+        #region test methods
 
         [TestMethod]
         public void Test_1_pass_required()
@@ -235,6 +240,6 @@ namespace Test.Unit.BoundArguments.ns_1
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
         }
-
+        #endregion
     }
 }

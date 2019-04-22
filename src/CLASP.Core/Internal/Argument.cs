@@ -52,6 +52,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
         #endregion
 
         #region IArgument members
+
         public ArgumentType Type
         {
             get
@@ -59,6 +60,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
                 return m_argumentType;
             }
         }
+
         public string ResolvedName
         {
             get
@@ -66,6 +68,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
                 return m_resolvedName;
             }
         }
+
         public string GivenName
         {
             get
@@ -73,11 +76,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
                 return m_givenName;
             }
         }
+
         public string Value
         {
             get;
             internal set;
         }
+
         public int Index
         {
             get
