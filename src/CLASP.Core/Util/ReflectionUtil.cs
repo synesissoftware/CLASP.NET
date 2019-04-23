@@ -1,9 +1,10 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 23rd April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
@@ -149,6 +150,20 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             T[] ar = GetAttributes<T>(mi, reflectionLookup);
 
             return (1 == ar.Length) ? ar[0] : null;
+        }
+
+        /// <summary>
+        ///  Obtains the appropriate fields for a bound type
+        /// </summary>
+        /// <param name="type">
+        ///  .
+        /// </param>
+        /// <returns>
+        ///  .
+        /// </returns>
+        internal static FieldInfo[] GetTypeFields(Type type)
+        {
+            return type.GetFields();
         }
         #endregion
     }

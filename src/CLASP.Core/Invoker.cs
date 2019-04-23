@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 20th April 2019
+// Updated: 23rd April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -517,7 +517,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             RetVal<T>       retVal      =   new RetVal<T>();
 
             Type            type        =   typeof(T);
-            FieldInfo[]     fields      =   type.GetFields();
+            FieldInfo[]     fields      =   Util.ReflectionUtil.GetTypeFields(type);
             PropertyInfo[]  properties  =   type.GetProperties();
             bool[]          usedValues  =   new bool[args.Values.Count];
 
@@ -699,8 +699,15 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                 if(null != valuesAttribute)
                 {
+                    bool is_string_array = false;
+
                     Type typeOfCollectionOfStrings = typeof(ICollection<string>);
 
+                    if(fi.FieldType.FullName == "System.String[]")
+                    {
+                        is_string_array = true;
+                    }
+                    else
                     if(!typeOfCollectionOfStrings.IsAssignableFrom(fi.FieldType))
                     {
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' which may only be applied to fields and properties of types that are assignable from ICollection<string> (System.Collections.Generic<System.String>)", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
@@ -726,6 +733,16 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                     ICollection<string> collection  =   Util.ReflectionUtil.CastTo<ICollection<string>>(collection_);
 
+                    if(is_string_array)
+                    {
+                        if(null != collection)
+                        {
+                            Trace.Write(String.Format("The field '{0}' of type '{2}' (that is marked with the attribute '{1}') already has a value, which will be replaced", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
+                        }
+
+                        collection = new List<string>(valuesAttribute.Minimum);
+                    }
+                    else
                     if(null == collection)
                     {
                         if(fi.FieldType.IsAbstract)
@@ -738,7 +755,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                             if(null == ciDefault)
                             {
-                                Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' does not have an accessible default constructor, and so field binding is skipped", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
+                                Trace.Write(String.Format("The field '{0}' of type '{2}' (that is marked with the attribute '{1}') does not have an accessible default constructor, and so field binding is skipped", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
 
                                 continue;
                             }
@@ -763,6 +780,15 @@ namespace SynesisSoftware.SystemTools.Clasp
                         usedValues[index] = true;
                     }
 
+                    if(is_string_array)
+                    {
+                        string[] ar = new string[collection.Count];
+
+                        collection.CopyTo(ar, 0);
+
+                        fi.SetValue(retVal.BoundArguments, ar);
+                    }
+                    else
                     if(null == collection_)
                     {
                         fi.SetValue(retVal.BoundArguments, collection);

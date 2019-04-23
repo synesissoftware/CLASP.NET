@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.14.129.2 - 23rd April 2019
+
+* ~ now works with string[] for values
+
 ## 0.14.128.1 - 23rd April 2019
 
 * + bunch more testing to validate bound parsing of flags and options (in preparation for fixing of known defect in bound parsing of values)
