@@ -486,6 +486,16 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
                 catch(Exception x)
                 {
+                    Type x_type = x.GetType();
+
+                    switch(x_type.FullName)
+                    {
+                    case "NUnit.Framework.AssertionException":
+                    case "Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException":
+
+                        throw;
+                    }
+
                     if(0 == (FailureOptions.HandleSystemExceptions & failureOptions))
                     {
                         throw;
