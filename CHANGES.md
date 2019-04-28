@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.15.131.0 - 27th April 2019
+
+* ~ substantial improvements to ``ShowUsage()`` (and ``ShowVersion()``)
+
 ## 0.14.129.2 - 23rd April 2019
 
 * ~ now works with string[] for values

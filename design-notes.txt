@@ -1,0 +1,22 @@
+
+
+Pre 1.0 tasks:
+==============
+
+Definites:
+----------
+
+- highlighting 'default' value in ShowUsage()
+- change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
+- change ``Alias`` to ``Specification``
+- ``Required`` attribute
+- works with libCLImate.NET
+- dependency libraries - RubLE4, Diagnosticism - are in NuGet
+
+
+Maybes:
+-------
+
+- read from resources
+- read from config file (JSON, YAML, properties, ...)
+- Require groups

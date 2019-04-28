@@ -1,15 +1,20 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 4th April 2019
+// Updated: 27th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
+    // NOTE: this alias is temporary
+    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+
     /// <summary>
-    ///  An option alias.
+    ///  An option specification.
     /// </summary>
     public class Option
-        : Alias
+        : Specification
     {
+        #region construction
+
         /// <summary>
         ///  Constructs an instance of the class.
         /// </summary>
@@ -47,5 +52,6 @@ namespace SynesisSoftware.SystemTools.Clasp
             : base(ArgumentType.Option, shortName, longName)
         {
         }
+        #endregion
     }
 }

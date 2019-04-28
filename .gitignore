@@ -13,10 +13,11 @@ TestResults/
 
 # directories (by pattern)
 
-**/[Pp]ackages/*
-!**/[Pp]ackages/build/
+/packages/
 
 # files (by name)
+
+!.gitignore
 
 build.cmd
 
@@ -33,11 +34,14 @@ project.assets.json
 *.nupkg
 *.opensdf
 *.org
+*.pkg
 *.proj
 *.scc
 *.sdf
 *.suo
 *.swp
+*.tmp
+*.zip
 
 *.nuget.props
 *.nuget.targets
@@ -47,3 +51,4 @@ project.assets.json
 *.vcxproj.user
 TestResult*.xml
 UpgradeLog*.XML
+

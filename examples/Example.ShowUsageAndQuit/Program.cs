@@ -23,12 +23,20 @@ namespace Example.ShowUsage
             UsageUtil.Version,
         };
 
+        static string[] info_lines =
+        {
+            "CLASP.NET examples",
+            "",
+            ":version:",
+            null,
+        };
+
         static void Main(string[] argv)
         {
-            Invoker.ParseAndInvokeMainVA(argv, specifications, (Arguments clargs) =>
+            Invoker.ParseAndInvokeMainVA(argv, specifications, (Arguments args) =>
 
-                    UsageUtil.ShowUsageAndQuit(clargs, Invoker.Constants.ExitCode_Success, null)
-                );
+                UsageUtil.ShowUsageAndQuit(args, Invoker.Constants.ExitCode_Success, new UsageUtil.UsageParams{ InfoLines = info_lines })
+            );
         }
     }
 }

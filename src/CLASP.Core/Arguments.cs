@@ -625,13 +625,26 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The specifications specified to the constructor, or <b>null</b> if
         ///  none were specified.
         /// </summary>
-        public ICollection<Specification> Aliases
+        public ICollection<Specification> Specifications
         {
             get
             {
                 return specifications;
             }
         }
+
+        /// <summary>
+        ///  [DEPRECATED] Use <see cref="Specifications"/> instead
+        /// </summary>
+        [Obsolete("Use Specifications instead")]
+        public ICollection<Specification> Aliases
+        {
+            get
+            {
+                return this.Specifications;
+            }
+        }
+
         /// <summary>
         ///  A collection of all parsed flags.
         /// </summary>

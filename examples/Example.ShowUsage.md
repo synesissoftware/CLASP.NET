@@ -1,4 +1,12 @@
-﻿
+# CLASP.NET Example - **Example.ShowUsage**
+
+## Summary
+
+T.B.C.
+
+## Source
+
+```C#
 // Purpose: Illustrates use of ShowUsage()
 
 namespace Example.ShowUsage
@@ -40,3 +48,9 @@ namespace Example.ShowUsage
         }
     }
 }
+```
+
+## Usage
+
+T.B.C.
+

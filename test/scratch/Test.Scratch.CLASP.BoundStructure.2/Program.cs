@@ -65,36 +65,34 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                 //
                 //  1. 
 
-                return Invoker.ParseAndInvokeMain(argv, Specifications, (Arguments clargs) =>
+                return Invoker.ParseAndInvokeMain(argv, Specifications, (Arguments args) =>
                     {
                         // check '--help'
 
-                        if(clargs.HasFlag(UsageUtil.Help))
+                        if(args.HasFlag(UsageUtil.Help))
                         {
-                            UsageUtil.ShowVersion(Specifications, null);
+                            UsageUtil.UsageParams ups = new UsageUtil.UsageParams{ ValuesString = "<input-file-path>" };
 
-                            Console.Out.WriteLine();
-                            Console.Out.WriteLine(@"USAGE: {0} {{ --help | --version | [ --verbose ] <input-file-path> }}", UsageUtil.InferProgramName(null));
-                            Console.Out.WriteLine();
-                            Console.Out.WriteLine(@"Flags & options:");
-                            Console.Out.WriteLine();
-
-                            UsageUtil.ShowUsage(Specifications, Console.Out, null);
+                            UsageUtil.ShowUsage(args, ups, null);
 
                             return 0;
                         }
 
                         // check '--version'
 
-                        if(clargs.HasFlag(UsageUtil.Version))
+                        if(args.HasFlag(UsageUtil.Version))
                         {
-                            UsageUtil.ShowVersion(Specifications, null);
+                            UsageUtil.ShowVersion();
 
                             return 0;
                         }
 
-                        return Invoker.InvokeMainWithBoundArgumentOfType<ProgramArguments>(clargs, (ProgramArguments prargs, Arguments clargs_) =>
+                        return Invoker.InvokeMainWithBoundArgumentOfType<ProgramArguments>(args, (ProgramArguments prargs, Arguments clargs_) =>
                             {
+                                Console.Out.WriteLine("Verbose: {0}", prargs.Verbose);
+
+                                Console.Out.WriteLine("Input file path: {0}", prargs.InputFilePath);
+
                                 return Invoker.Constants.ExitCode_Success;
                             });
                     });

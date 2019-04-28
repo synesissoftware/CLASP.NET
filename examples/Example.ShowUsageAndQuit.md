@@ -1,5 +1,13 @@
-﻿
-// Purpose: Illustrates use of ShowUsage()
+# CLASP.NET Example - **Example.ShowUsageAndQuit**
+
+## Summary
+
+T.B.C.
+
+## Source
+
+```C#
+// Purpose: Illustrates use of ShowUsageAndQuit()
 
 namespace Example.ShowUsage
 {
@@ -31,12 +39,18 @@ namespace Example.ShowUsage
             null,
         };
 
-        static int Main(string[] argv)
+        static void Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args) =>
-                {
-                    return UsageUtil.ShowUsage(args, new UsageUtil.UsageParams{ InfoLines = info_lines });
-                });
+            Invoker.ParseAndInvokeMainVA(argv, specifications, (Arguments args) =>
+
+                UsageUtil.ShowUsageAndQuit(args, Invoker.Constants.ExitCode_Success, new UsageUtil.UsageParams{ InfoLines = info_lines })
+            );
         }
     }
 }
+```
+
+## Usage
+
+T.B.C.
+
