@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit.CLASP.1", "test\u
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit.CLASP.Versions", "test\unit\Test.Unit.CLASP.Versions\Test.Unit.CLASP.Versions.csproj", "{B29FECA6-CB34-4BBE-B7CB-9CC60DE6B002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit.ExampleTestCases", "test\unit\Test.Unit.ExampleTestCases\Test.Unit.ExampleTestCases.csproj", "{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit.Usage", "test\unit\Test.Unit.Usage\Test.Unit.Usage.csproj", "{74A427D8-AF31-4AFD-9EDE-AB9572EFB5B3}"
 EndProject
 Global
@@ -132,6 +134,10 @@ Global
 		{74A427D8-AF31-4AFD-9EDE-AB9572EFB5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74A427D8-AF31-4AFD-9EDE-AB9572EFB5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74A427D8-AF31-4AFD-9EDE-AB9572EFB5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,5 +163,6 @@ Global
 		{194CB5A0-973D-48C7-9A93-558540723167} = {AE4C1153-BE51-48D4-A09E-DC2F86D27168}
 		{B29FECA6-CB34-4BBE-B7CB-9CC60DE6B002} = {AE4C1153-BE51-48D4-A09E-DC2F86D27168}
 		{74A427D8-AF31-4AFD-9EDE-AB9572EFB5B3} = {AE4C1153-BE51-48D4-A09E-DC2F86D27168}
+		{835A1F08-CA45-4F3C-B7F0-BD1CFBFE55E6} = {AE4C1153-BE51-48D4-A09E-DC2F86D27168}
 	EndGlobalSection
 EndGlobal

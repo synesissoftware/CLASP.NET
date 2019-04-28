@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.15.133.1 - 28th April 2019
+
+* ~ fixed some subtle specification-finding defects
+
 ## 0.15.132.0 - 28th April 2019
 
 * ~ substantial improvements to ``ShowUsage()`` (and ``ShowVersion()``)

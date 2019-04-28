@@ -1,7 +1,4 @@
 ﻿
-// Created: 17th July 2009
-// Updated: 28th April 2019
-
 #pragma warning disable 1607
 
 using System;
@@ -9,20 +6,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CLASP.Core")]
+[assembly: AssemblyTitle("Test.Unit.ExampleTestCases")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
 [assembly: AssemblyProduct("CLASP.NET")]
-[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2009-2019")]
+[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2017-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.15.133.1")]
-[assembly: AssemblyFileVersion("0.15.133.1")]
 [assembly: AssemblyInformationalVersion("0.15")]
 
 /* ///////////////////////////// end of file //////////////////////////// */

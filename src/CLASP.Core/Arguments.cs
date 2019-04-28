@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 20th April 2019
+// Updated: 28th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -220,6 +220,13 @@ namespace SynesisSoftware.SystemTools.Clasp
                                         string name     =   spec.ResolvedName.Substring(0, equal);
                                         string value    =   spec.ResolvedName.Substring(1 + equal);
 
+                                        Specification spec2 = FindSpecification_(specifications, name);
+
+                                        if(null != spec2)
+                                        {
+                                            spec = spec2;
+                                        }
+
                                         AddOption(Argument.NewOption(spec, arg, name, value, i));
                                     }
                                     else
@@ -272,6 +279,13 @@ namespace SynesisSoftware.SystemTools.Clasp
                                             {
                                                 string name2    =   spec2.ResolvedName.Substring(0, equal3);
                                                 string value2   =   spec2.ResolvedName.Substring(1 + equal3);
+
+                                                Specification spec3 = FindSpecification_(specifications, name2);
+
+                                                if(null != spec3)
+                                                {
+                                                    spec2 = spec3;
+                                                }
 
                                                 AddOption(Argument.NewOption(spec2, arg, name2, value2, i));
                                             }
@@ -502,6 +516,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <b>true</b> if the named option is present in the command-line
         ///  arguments; <b>false</b> otherwise.
         /// </returns>
+        /// <remarks>
+        ///  Marks the argument as <see cref="IArgument.Used"/> if found
+        /// </remarks>
         public bool CheckOption(string resolvedName, out string value)
         {
             IArgument arg = FindOption_(resolvedName);
@@ -509,6 +526,8 @@ namespace SynesisSoftware.SystemTools.Clasp
             if(null != arg)
             {
                 value = arg.Value;
+
+                arg.Use();
 
                 return true;
             }
@@ -536,6 +555,10 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Thrown if the given option's value cannot be converted to
         ///  <c>int</c>.
         /// </exception>
+        /// <remarks>
+        ///  Marks the argument as <see cref="IArgument.Used"/> if found and
+        ///  the result is obtained
+        /// </remarks>
         public bool CheckOption(string resolvedName, out int value)
         {
             IArgument arg = FindOption_(resolvedName);
@@ -551,6 +574,8 @@ namespace SynesisSoftware.SystemTools.Clasp
                 {
                     throw new InvalidOptionValueException(arg, typeof(int));
                 }
+
+                arg.Use();
 
                 return true;
             }
@@ -576,6 +601,8 @@ namespace SynesisSoftware.SystemTools.Clasp
             {
                 if(arg.ResolvedName == resolvedName)
                 {
+                    arg.Use();
+
                     return true;
                 }
             }
@@ -742,6 +769,14 @@ namespace SynesisSoftware.SystemTools.Clasp
                 foreach(Specification specification in specifications)
                 {
                     if(specification.GivenName == name)
+                    {
+                        return specification;
+                    }
+                }
+
+                foreach(Specification specification in specifications)
+                {
+                    if(specification.ResolvedName == name)
                     {
                         return specification;
                     }

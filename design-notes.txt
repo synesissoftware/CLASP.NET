@@ -12,7 +12,7 @@ Definites:
 - ``Required`` attribute
 - works with libCLImate.NET
 - dependency libraries - RubLE4, Diagnosticism - are in NuGet
-
+- elimination of single alias and 3-param Flag() method, etc.
 
 Maybes:
 -------
