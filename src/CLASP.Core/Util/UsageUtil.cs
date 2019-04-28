@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 27th April 2019
+// Updated: 28th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -46,6 +46,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             ///  An array of names for the values. <b>NOT CURRENTLY USED</b>
             /// </summary>
             public string[]         ValueNames;
+            /// <summary>
+            ///  A string placed after the matching value in the listing of an
+            ///  option's range of values. If <c>null</c>, the default value
+            ///  of <c>"(default)"</c> is used; if the empty string, no default is
+            ///  used
+            /// </summary>
+            public string           DefaultIndicator;
         }
 
         private struct ShowUsageParams
@@ -610,6 +617,16 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
             if(null != sups.Specifications)
             {
+                string defaultIndicator = sups.UsageParams.DefaultIndicator;
+                if(null == defaultIndicator)
+                {
+                    defaultIndicator = "(default)";
+                }
+                if(0 == defaultIndicator.Length)
+                {
+                    defaultIndicator = null;
+                }
+
                 sups.Stream.WriteLine("flags/options:");
                 sups.Stream.WriteLine();
 
@@ -648,7 +665,16 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                                 sups.Stream.WriteLine("{0}{0}where <value> one of:", separator);
                                 foreach(string value in specification.ValidValues)
                                 {
-                                    sups.Stream.WriteLine("{1}{1}{1}{0}", value, separator);
+                                    Option optionSpecification = (Option)specification;
+
+                                    if(null != defaultIndicator && value == optionSpecification.DefaultValue)
+                                    {
+                                        sups.Stream.WriteLine("{1}{1}{1}{0}{1}{2}", value, separator, defaultIndicator);
+                                    }
+                                    else
+                                    {
+                                        sups.Stream.WriteLine("{1}{1}{1}{0}", value, separator);
+                                    }
                                 }
                             }
                             sups.Stream.WriteLine();

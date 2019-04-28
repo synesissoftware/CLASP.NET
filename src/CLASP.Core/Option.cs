@@ -13,6 +13,10 @@ namespace SynesisSoftware.SystemTools.Clasp
     public class Option
         : Specification
     {
+        #region fields
+
+        #endregion
+
         #region construction
 
         /// <summary>
@@ -51,6 +55,37 @@ namespace SynesisSoftware.SystemTools.Clasp
         public Option(string shortName, string longName)
             : base(ArgumentType.Option, shortName, longName)
         {
+        }
+        #endregion
+
+        #region properties
+
+        /// <summary>
+        ///  Default value for the option
+        /// </summary>
+        public string DefaultValue
+        {
+            get;
+            set;
+        }
+        #endregion
+
+        #region operations
+
+        /// <summary>
+        ///  Builder method that sets the <see cref="DefaultValue"/>
+        /// </summary>
+        /// <param name="value">
+        ///  The default value
+        /// </param>
+        /// <returns>
+        ///  The instance
+        /// </returns>
+        public Option WithDefaultValue(string value)
+        {
+            this.DefaultValue = value;
+
+            return this;
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 20th April 2019
+// Updated: 28th April 2019
 
 namespace Test.Unit.CLASP.Versions
 {
@@ -21,7 +21,7 @@ namespace Test.Unit.CLASP.Versions
             internal static class Expectations
             {
                 internal const int  VersionMajor    =   0;
-                internal const int  VersionMinor    =   15;
+                internal const int  VersionMinor    =   16;
             }
         }
 

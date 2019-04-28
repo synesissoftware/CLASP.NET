@@ -6,7 +6,7 @@ Pre 1.0 tasks:
 Definites:
 ----------
 
-- highlighting 'default' value in ShowUsage()
+# highlighting 'default' value in ShowUsage()
 - change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 - change ``Alias`` to ``Specification``
 - ``Required`` attribute

@@ -1,5 +1,12 @@
 #  **CLASP.NET** Changes
 
+## 0.16.134.0 - 28th April 2019
+
+* + now supports option default values
+* + added ``DefaultValue`` attribute for option specification
+* + added ``DefaultIndicator`` field for ``UsageUtil.UsageParams`` structure
+* ~ enhanced Usage_tester.cs adding cases testing default value behaviour
+
 ## 0.15.133.1 - 28th April 2019
 
 * ~ fixed some subtle specification-finding defects
