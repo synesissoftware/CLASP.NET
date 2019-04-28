@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.16.135.1 - 28th April 2019
+
+* ~ clearing up some corner cases in default value support
+
 ## 0.16.134.0 - 28th April 2019
 
 * + now supports option default values

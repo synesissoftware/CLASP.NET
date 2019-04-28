@@ -434,5 +434,138 @@ namespace Test.Unit.ExampleTestCases
             Assert.IsTrue(option0.Used);
             Assert.AreEqual("chatty", v);
         }
+
+        [TestMethod]
+        public void Test_one_option_that_has_default_with_empty_value()
+        {
+            Specification[] specifications = (Specification[])Specifications.Clone();
+
+            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+
+            string[] argv =
+            {
+                "--verbosity=",
+            };
+
+            Clasp.Arguments args = new Clasp.Arguments(argv, specifications);
+
+            string v;
+
+            Assert.AreSame(specifications, args.Aliases);
+            Assert.AreSame(specifications, args.Specifications);
+
+            Assert.AreEqual(0, args.Flags.Count);
+            Assert.AreEqual(1, args.Options.Count);
+            Assert.AreEqual(1, args.FlagsAndOptions.Count);
+            Assert.AreEqual(0, args.Values.Count);
+
+            var option0 = args.Options[0];
+
+            Assert.AreEqual("--verbosity", option0.GivenName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("--verbosity", option0.ResolvedName);
+            Assert.AreSame(Specifications[1], option0.Specification);
+            Assert.AreEqual(Clasp.ArgumentType.Option, option0.Type);
+            Assert.IsFalse(option0.Used);
+            Assert.AreEqual("terse", option0.Value);
+
+            Assert.IsFalse(args.HasFlag("--xyz"));
+            Assert.IsFalse(args.HasFlag("--debug"));
+
+            Assert.IsFalse(args.CheckOption("--abcd", out v));
+            Assert.IsTrue(args.CheckOption("--verbosity", out v));
+
+            Assert.IsTrue(option0.Used);
+            Assert.AreEqual("terse", v);
+        }
+
+        [TestMethod]
+        public void Test_one_option_that_has_default_with_missing_value()
+        {
+            Specification[] specifications = (Specification[])Specifications.Clone();
+
+            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+
+            string[] argv =
+            {
+                "--verbosity",
+            };
+
+            Clasp.Arguments args = new Clasp.Arguments(argv, specifications);
+
+            string v;
+
+            Assert.AreSame(specifications, args.Aliases);
+            Assert.AreSame(specifications, args.Specifications);
+
+            Assert.AreEqual(0, args.Flags.Count);
+            Assert.AreEqual(1, args.Options.Count);
+            Assert.AreEqual(1, args.FlagsAndOptions.Count);
+            Assert.AreEqual(0, args.Values.Count);
+
+            var option0 = args.Options[0];
+
+            Assert.AreEqual("--verbosity", option0.GivenName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("--verbosity", option0.ResolvedName);
+            Assert.AreSame(Specifications[1], option0.Specification);
+            Assert.AreEqual(Clasp.ArgumentType.Option, option0.Type);
+            Assert.IsFalse(option0.Used);
+            Assert.AreEqual("terse", option0.Value);
+
+            Assert.IsFalse(args.HasFlag("--xyz"));
+            Assert.IsFalse(args.HasFlag("--debug"));
+
+            Assert.IsFalse(args.CheckOption("--abcd", out v));
+            Assert.IsTrue(args.CheckOption("--verbosity", out v));
+
+            Assert.IsTrue(option0.Used);
+            Assert.AreEqual("terse", v);
+        }
+
+        [TestMethod]
+        public void Test_one_option_that_has_default_with_missing_value_and_values_designator()
+        {
+            Specification[] specifications = (Specification[])Specifications.Clone();
+
+            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+
+            string[] argv =
+            {
+                "--verbosity",
+                "--",
+            };
+
+            Clasp.Arguments args = new Clasp.Arguments(argv, specifications);
+
+            string v;
+
+            Assert.AreSame(specifications, args.Aliases);
+            Assert.AreSame(specifications, args.Specifications);
+
+            Assert.AreEqual(0, args.Flags.Count);
+            Assert.AreEqual(1, args.Options.Count);
+            Assert.AreEqual(1, args.FlagsAndOptions.Count);
+            Assert.AreEqual(0, args.Values.Count);
+
+            var option0 = args.Options[0];
+
+            Assert.AreEqual("--verbosity", option0.GivenName);
+            Assert.AreEqual(0, option0.Index);
+            Assert.AreEqual("--verbosity", option0.ResolvedName);
+            Assert.AreSame(Specifications[1], option0.Specification);
+            Assert.AreEqual(Clasp.ArgumentType.Option, option0.Type);
+            Assert.IsFalse(option0.Used);
+            Assert.AreEqual("terse", option0.Value);
+
+            Assert.IsFalse(args.HasFlag("--xyz"));
+            Assert.IsFalse(args.HasFlag("--debug"));
+
+            Assert.IsFalse(args.CheckOption("--abcd", out v));
+            Assert.IsTrue(args.CheckOption("--verbosity", out v));
+
+            Assert.IsTrue(option0.Used);
+            Assert.AreEqual("terse", v);
+        }
     }
 }

@@ -11,8 +11,11 @@ Definites:
 - change ``Alias`` to ``Specification``
 - ``Required`` attribute
 - works with libCLImate.NET
-- dependency libraries - RubLE4, Diagnosticism - are in NuGet
+# dependency libraries - RubLE4, Diagnosticism - are in NuGet
 - elimination of single alias and 3-param Flag() method, etc.
+- rename Flag to FlagSpecification, Option to OptionSpecification
+- move all the classes around to make the public API and common use cases simple
+
 
 Maybes:
 -------

@@ -146,14 +146,24 @@ namespace SynesisSoftware.SystemTools.Clasp
                     continue;
                 }
 
+                if("--" == arg)
+                {
+                    if(!treatAllAsValues)
+                    {
+                        treatAllAsValues = true;
+                        continue;
+                    }
+                }
+
                 if(null != lastOption)
                 {
-                    Debug.Assert(null != lastOption);
                     lastOption.Value = arg;
                     lastOption = null;
                 }
                 else if(!treatAllAsValues && 0 != numHyphens)
                 {
+#if NON_EXISTENT
+
                     if(2 == numHyphens && 2 == arg.Length)
                     {
                         // "--"
@@ -161,6 +171,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                         treatAllAsValues = true;
                     }
                     else
+#endif
                     {
                         // This is where the decision-making occurs:
                         //
@@ -199,6 +210,19 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                                 if(null != spec)
                                 {
+                                    if(String.IsNullOrEmpty(value))
+                                    {
+                                        Option optionSpec = spec as Option;
+
+                                        if(null != optionSpec)
+                                        {
+                                            if(!String.IsNullOrEmpty(optionSpec.DefaultValue))
+                                            {
+                                                value = optionSpec.DefaultValue;
+                                            }
+                                        }
+                                    }
+
                                     AddOption(Argument.NewOption(spec, spec.ResolvedName, name, value, i));
                                 }
                                 else
@@ -387,6 +411,18 @@ namespace SynesisSoftware.SystemTools.Clasp
                             AddValue(Argument.NewValue(warg, i));
                         }
                     }
+                }
+            }
+
+            if(null != lastOption)
+            {
+                Option optionSpec = lastOption.Specification as Option;
+
+                if(null != optionSpec)
+                {
+                    Debug.Assert(String.IsNullOrEmpty(lastOption.Value));
+
+                    lastOption.Value = optionSpec.DefaultValue;
                 }
             }
 
