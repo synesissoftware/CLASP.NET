@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.16.136.2 - 1st May 2019
+
+* ~ full and proper handling of ArgumentBindingOptions.IgnoreMissingValues
+
 ## 0.16.135.1 - 28th April 2019
 
 * ~ clearing up some corner cases in default value support
