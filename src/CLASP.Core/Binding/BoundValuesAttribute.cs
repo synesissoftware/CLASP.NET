@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -34,8 +34,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         ///  Constructs an instance
         /// </summary>
         /// <remarks>
-        ///  The <see cref="Minimum"/> value is set to 1.
-        ///  The <see cref="Maximum"/> value is set to <c>int.MaxValue</c>
+        ///  The <see cref="Clasp.Binding.BoundValuesAttribute.Minimum"/> value is set to 1.
+        ///  The <see cref="Clasp.Binding.BoundValuesAttribute.Maximum"/> value is set to <c>int.MaxValue</c>
         /// </remarks>
         public BoundValuesAttribute()
         {

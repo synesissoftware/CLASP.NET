@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 15th October 2017
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -21,7 +21,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         {
             /// <summary>
             ///  The default message used by
-            ///  <see cref="MissingValueException"/>
+            ///  <see cref="Clasp.Exceptions.MissingValueException"/>
             /// </summary>
             public const string     DefaultMessage  =   @"required value not specified";
         }

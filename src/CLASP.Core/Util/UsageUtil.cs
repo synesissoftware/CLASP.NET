@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 28th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -108,14 +108,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 ///  Option-key for specifying the program-name (of type
                 ///  <see cref="System.String"/>); if not specified then the
                 ///  program name will be inferred (via
-                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Arguments.ProgramName"/>
+                ///  <see cref="Clasp.Arguments.ProgramName"/>
                 ///  property)
                 /// </summary>
                 public const string ProgramName                 =   "program-name";
                 /// <summary>
                 ///  Option-key for specifying the separator (of type
                 ///  <see cref="System.String"/>); defaults to
-                ///  <see cref="UsageSeparator_Default"/>
+                ///  <see cref="Clasp.Util.UsageUtil.Constants.UsageSeparator_Default"/>
                 /// </summary>
                 public const string Separator                   =   "separator";
                 /// <summary>
@@ -130,7 +130,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 /// <summary>
                 ///  Option-key for specifying the usage version format
                 ///  string (of type <see cref="System.String"/>); defaults to
-                ///  <see cref="UsageVersionFormat_Default"/>
+                ///  <see cref="Clasp.Util.UsageUtil.Constants.UsageVersionFormat_Default"/>
                 /// </summary>
                 public const string VersionFormat               =   "version-format";
                 /// <summary>
@@ -145,29 +145,29 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             /// <summary>
             ///  Constants associated with the standard specifications.
             /// </summary>
-            /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>
-            /// <seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>
+            /// <seealso cref="Clasp.Util.UsageUtil.Help"/>
+            /// <seealso cref="Clasp.Util.UsageUtil.Version"/>
             public static class StandardSpecifications
             {
                 /// <summary>
                 ///  The resolved name of
-                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>.
+                ///  <see cref="Clasp.Util.UsageUtil.Help"/>.
                 /// </summary>
                 public const string Help_ResolvedName       =   @"--help";
                 /// <summary>
                 ///  The description of
-                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Help"/>.
+                ///  <see cref="Clasp.Util.UsageUtil.Help"/>.
                 /// </summary>
                 public const string Help_Description        =   @"shows this help and terminates";
 
                 /// <summary>
                 ///  The resolved name of
-                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>.
+                ///  <see cref="Clasp.Util.UsageUtil.Version"/>.
                 /// </summary>
                 public const string Version_ResolvedName    =   @"--version";
                 /// <summary>
                 ///  The description of
-                ///  <see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Version"/>.
+                ///  <see cref="Clasp.Util.UsageUtil.Version"/>.
                 /// </summary>
                 public const string Version_Description     =   @"shows version information and terminates";
             }
@@ -180,14 +180,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
         /// <summary>
         ///  An instance of
-        ///  <see cref="SynesisSoftware.SystemTools.Clasp.Flag"/>
+        ///  <see cref="Clasp.Flag"/>
         ///  that provides default '--help' information.
         /// </summary>
         public static Flag Help = new Flag(null, Constants.StandardSpecifications.Help_ResolvedName, Constants.StandardSpecifications.Help_Description);
 
         /// <summary>
         ///  An instance of
-        ///  <see cref="SynesisSoftware.SystemTools.Clasp.Flag"/>
+        ///  <see cref="Clasp.Flag"/>
         ///  that provides default '--version' information.
         /// </summary>
         public static Flag Version = new Flag(null, Constants.StandardSpecifications.Version_ResolvedName, Constants.StandardSpecifications.Version_Description);
@@ -245,7 +245,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  The code by which the process will be terminated
         /// </param>
         /// <param name="usageParams">
-        ///  An instance of the <see cref="UsageParams"/> structure containing
+        ///  An instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
         ///  elements that will be used to constitute the full usage
         ///  output
         /// </param>
@@ -270,7 +270,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  The code by which the process will be terminated
         /// </param>
         /// <param name="usageParams">
-        ///  A instance of the <see cref="UsageParams"/> structure containing
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
         ///  elements that will be used to constitute the full usage
         ///  output
         /// </param>
@@ -388,7 +388,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  Parsed program arguments. May not be <c>null</c>
         /// </param>
         /// <param name="usageParams">
-        ///  A instance of the <see cref="UsageParams"/> structure containing
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
         ///  elements that will be used to constitute the full usage
         ///  output
         /// </param>
@@ -413,7 +413,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         ///  Parsed program arguments. May not be <c>null</c>
         /// </param>
         /// <param name="usageParams">
-        ///  A instance of the <see cref="UsageParams"/> structure containing
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
         ///  elements that will be used to constitute the full usage
         ///  output
         /// </param>
@@ -461,7 +461,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// </param>
         /// <param name="options">
         ///  Options to modify behaviour
-        /// (<seealso cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Constants.OptionKeys"/>)
+        /// (<seealso cref="Clasp.Util.UsageUtil.Constants.OptionKeys"/>)
         /// </param>
         public static void ShowVersionAndQuit(Arguments args, int exitCode, IDictionary<string, object> options)
         {
@@ -491,7 +491,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// </param>
         /// <param name="options">
         ///  Options to modify behaviour
-        ///  (<see cref="SynesisSoftware.SystemTools.Clasp.Util.UsageUtil.Constants.OptionKeys"/>)
+        ///  (<see cref="Clasp.Util.UsageUtil.Constants.OptionKeys"/>)
         /// </param>
         public static int ShowVersion(Arguments args, IDictionary<string, object> options)
         {

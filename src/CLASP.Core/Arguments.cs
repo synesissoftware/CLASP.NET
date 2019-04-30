@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 28th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -66,7 +66,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region construction
 
         /// <summary>
-        ///  Constructs an <see cref="Arguments"/> collection from the given
+        ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
         ///  program arguments
         /// </summary>
         /// <param name="argv">
@@ -76,7 +76,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             : this(argv, null, ParseOptions.None)
         {}
         /// <summary>
-        ///  Constructs an <see cref="Arguments"/> collection from the given
+        ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="options"/>
         /// </summary>
@@ -84,14 +84,14 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The program arguments
         /// </param>
         /// <param name="options">
-        ///  A combination of <see cref="ParseOptions">options</see> that
+        ///  A combination of <see cref="Clasp.ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
         public Arguments(string[] argv, ParseOptions options)
             : this(argv, null, options)
         {}
         /// <summary>
-        ///  Constructs an <see cref="Arguments"/> collection from the given
+        ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="specifications"/>
         /// </summary>
@@ -106,7 +106,7 @@ namespace SynesisSoftware.SystemTools.Clasp
             : this(argv, specifications, ParseOptions.None)
         {}
         /// <summary>
-        ///  Constructs an <see cref="Arguments"/> collection from the given
+        ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="specifications"/>
         ///  and
@@ -120,7 +120,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  arguments
         /// </param>
         /// <param name="options">
-        ///  A combination of <see cref="ParseOptions">options</see> that
+        ///  A combination of <see cref="Clasp.ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
         public Arguments(string[] argv, ICollection<Specification> specifications, ParseOptions options)
@@ -472,7 +472,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  arguments
         /// </param>
         /// <param name="options">
-        ///  A combination of <see cref="ParseOptions">options</see> that
+        ///  A combination of <see cref="Clasp.ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
         /// <param name="toolMain">
@@ -553,7 +553,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  arguments; <b>false</b> otherwise.
         /// </returns>
         /// <remarks>
-        ///  Marks the argument as <see cref="IArgument.Used"/> if found
+        ///  Marks the argument as <see cref="Clasp.Interfaces.IArgument.Used"/> if found
         /// </remarks>
         public bool CheckOption(string resolvedName, out string value)
         {
@@ -592,7 +592,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <c>int</c>.
         /// </exception>
         /// <remarks>
-        ///  Marks the argument as <see cref="IArgument.Used"/> if found and
+        ///  Marks the argument as <see cref="Clasp.Interfaces.IArgument.Used"/> if found and
         ///  the result is obtained
         /// </remarks>
         public bool CheckOption(string resolvedName, out int value)
@@ -697,7 +697,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  [DEPRECATED] Use <see cref="Specifications"/> instead
+        ///  [DEPRECATED] Use <see cref="Clasp.Arguments.Specifications"/> instead
         /// </summary>
         [Obsolete("Use Specifications instead")]
         public ICollection<Specification> Aliases

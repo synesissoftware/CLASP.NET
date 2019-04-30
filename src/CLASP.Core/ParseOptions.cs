@@ -1,6 +1,6 @@
 ﻿
 // Created: 9th August 2009
-// Updated: 4th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -8,7 +8,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
     /// <summary>
     ///  Flags that control the parsing behaviour of the
-    ///  <see cref="Arguments"/> constructor(s)
+    ///  <see cref="Clasp.Arguments"/> constructor(s)
     /// </summary>
     [Flags]
     public enum ParseOptions

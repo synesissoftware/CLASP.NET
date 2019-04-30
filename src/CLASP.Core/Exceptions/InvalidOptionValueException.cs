@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 4th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -24,7 +24,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         {
             /// <summary>
             ///  The default message used by
-            ///  <see cref="InvalidOptionValueException"/>
+            ///  <see cref="Clasp.Exceptions.InvalidOptionValueException"/>
             /// </summary>
             public const string     DefaultMessage  =   @"invalid value for option";
         }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 19th June 2017
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -19,19 +19,19 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         /// <summary>
         ///  Unless specified, any additional flags will result in the
-        ///  throwing of <c>UnusedArgumentException</c>
+        ///  throwing of <see cref="Clasp.Exceptions.UnusedArgumentException"/>
         /// </summary>
         IgnoreOtherFlags            =   0x00000010,
 
         /// <summary>
         ///  Unless specified, any additional options will result in the
-        ///  throwing of <c>UnusedArgumentException</c>
+        ///  throwing of <see cref="Clasp.Exceptions.UnusedArgumentException"/>
         /// </summary>
         IgnoreOtherOptions          =   0x00000020,
 
         /// <summary>
         ///  Unless specified, any additional values will result in the
-        ///  throwing of <c>UnusedArgumentException</c>
+        ///  throwing of <see cref="Clasp.Exceptions.UnusedArgumentException"/>
         /// </summary>
         IgnoreOtherValues           =   0x00000040,
 

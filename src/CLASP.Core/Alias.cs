@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 4th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -150,7 +150,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  [DEPRECATED] Instead use <see cref="Section(string)"/>.
+        ///  [DEPRECATED] Instead use <see cref="Clasp.Alias.Section(string)"/>.
         /// </summary>
         /// <param name="sectionName"></param>
         /// <returns></returns>

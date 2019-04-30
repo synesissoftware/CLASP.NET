@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 20th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 {
@@ -47,8 +47,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 
         /// <summary>
         ///  Indicates whether the argument has been used, such as having
-        ///  been found in a call to <see cref="Arguments.HasFlag(string)"/>
-        ///  or <see cref="Arguments.CheckOption(string, out string)"/>
+        ///  been found in a call to <see cref="Clasp.Arguments.HasFlag(string)"/>
+        ///  or <see cref="Clasp.Arguments.CheckOption(string, out string)"/>
         /// </summary>
         bool Used { get; }
         #endregion
@@ -58,7 +58,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Interfaces
         /// <summary>
         ///  Causes an argument to be marked as used
         /// </summary>
-        /// <seealso cref="IArgument.Used"/>
+        /// <seealso cref="Clasp.Interfaces.IArgument.Used"/>
         void Use();
         #endregion
     }

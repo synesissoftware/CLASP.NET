@@ -1,6 +1,6 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 27th April 2019
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -73,7 +73,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region operations
 
         /// <summary>
-        ///  Builder method that sets the <see cref="DefaultValue"/>
+        ///  Builder method that sets the <see cref="Clasp.Option.DefaultValue"/>
         /// </summary>
         /// <param name="value">
         ///  The default value

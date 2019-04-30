@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 15th October 2017
+// Updated: 30th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -75,7 +75,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             return null;
         }
 
-        /// <see cref="SynesisSoftware.SystemTools.Clasp.Util.ArgumentUtil.FindOption(Arguments, string)"/>
+        /// <see cref="Clasp.Util.ArgumentUtil.FindOption(Arguments, string)"/>
         public static IArgument FindOption(Arguments args, Option option)
         {
             return FindOption(args, option.ResolvedName);
@@ -89,7 +89,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="optionName"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static short CheckOption(Arguments args, string optionName, short defaultValue)
@@ -105,7 +105,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="optionName"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static int CheckOption(Arguments args, string optionName, int defaultValue)
@@ -121,7 +121,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="optionName"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static long CheckOption(Arguments args, string optionName, long defaultValue)
@@ -137,7 +137,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="optionName"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static bool CheckOption(Arguments args, string optionName, bool defaultValue)
@@ -153,7 +153,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="optionName"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static string CheckOption(Arguments args, string optionName, string defaultValue)
@@ -185,10 +185,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args"></param>
         /// <param name="optionName"></param>
         /// <param name="value"></param>
-        /// <exception cref="MissingOptionException">
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
         ///  Thrown if the given option does not exist.
         /// </exception>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static void RequireOption(Arguments args, string optionName, out short value)
@@ -203,10 +203,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args"></param>
         /// <param name="optionName"></param>
         /// <param name="value"></param>
-        /// <exception cref="MissingOptionException">
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
         ///  Thrown if the given option does not exist.
         /// </exception>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static void RequireOption(Arguments args, string optionName, out int value)
@@ -221,10 +221,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args"></param>
         /// <param name="optionName"></param>
         /// <param name="value"></param>
-        /// <exception cref="MissingOptionException">
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
         ///  Thrown if the given option does not exist.
         /// </exception>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static void RequireOption(Arguments args, string optionName, out long value)
@@ -239,10 +239,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args"></param>
         /// <param name="optionName"></param>
         /// <param name="value"></param>
-        /// <exception cref="MissingOptionException">
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
         ///  Thrown if the given option does not exist.
         /// </exception>
-        /// <exception cref="InvalidOptionValueException">
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the value cannot be converted to the required type.
         /// </exception>
         public static void RequireOption(Arguments args, string optionName, out string value)
@@ -257,7 +257,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any flags/options are not used.
         /// </exception>
         public static void VerifyAllFlagsAndOptionsUsed(Arguments args)
@@ -281,7 +281,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any flags/options are not used.
         /// </exception>
         public static void VerifyAllFlagsAndOptionsUsed(Arguments args, string message)
@@ -301,7 +301,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any flags are not used.
         /// </exception>
         public static void VerifyAllFlagsUsed(Arguments args)
@@ -325,7 +325,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any flags are not used.
         /// </exception>
         public static void VerifyAllFlagsUsed(Arguments args, string message)
@@ -345,7 +345,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any options are not used.
         /// </exception>
         public static void VerifyAllOptionsUsed(Arguments args)
@@ -369,7 +369,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
         ///  Thrown if any options are not used.
         /// </exception>
         public static void VerifyAllOptionsUsed(Arguments args, string message)

@@ -171,7 +171,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The entry point to the main program logic
         /// </param>
         /// <param name="parseOptions">
-        ///  A combination of <see cref="ParseOptions">parseOptions</see>
+        ///  A combination of <see cref="Clasp.ParseOptions">parseOptions</see>
         ///  that control the parsing behaviour
         /// </param>
         /// <param name="failureOptions">
@@ -225,7 +225,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The entry point to the main program logic
         /// </param>
         /// <param name="parseOptions">
-        ///  A combination of <see cref="ParseOptions">parseOptions</see>
+        ///  A combination of <see cref="Clasp.ParseOptions">parseOptions</see>
         ///  that control the parsing behaviour
         /// </param>
         /// <param name="failureOptions">
@@ -295,7 +295,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The entry point to the main program logic.
         /// </param>
         /// <param name="bindingOptions">
-        ///  A combination of <see cref="ArgumentBindingOptions"/>
+        ///  A combination of <see cref="Clasp.ArgumentBindingOptions"/>
         ///  that control the binding behaviour.
         /// </param>
         /// <returns>
@@ -333,11 +333,11 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The entry point to the main program logic.
         /// </param>
         /// <param name="bindingOptions">
-        ///  A combination of <see cref="ArgumentBindingOptions"/>
+        ///  A combination of <see cref="Clasp.ArgumentBindingOptions"/>
         ///  that control the binding behaviour.
         /// </param>
         /// <param name="parseOptions">
-        ///  A combination of <see cref="ParseOptions">parseOptions</see>
+        ///  A combination of <see cref="Clasp.ParseOptions">parseOptions</see>
         ///  that control the parsing behaviour
         /// </param>
         /// <param name="failureOptions">
@@ -809,7 +809,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreOtherValues & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveParseOptions))
             {
                 for(int i = 0; i != usedValues.Length; ++i)
                 {
