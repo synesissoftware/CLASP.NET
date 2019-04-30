@@ -723,7 +723,10 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                         if(required > args.Values.Count)
                         {
-                            throw new Exceptions.MissingValueException(required);
+                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            {
+                                throw new Exceptions.MissingValueException(required);
+                            }
                         }
                     }
 

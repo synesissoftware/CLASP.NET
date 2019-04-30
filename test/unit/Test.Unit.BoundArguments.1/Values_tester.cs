@@ -95,6 +95,61 @@ namespace Test.Unit.BoundArguments.ns_1
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(global::SynesisSoftware.SystemTools.Clasp.Exceptions.MissingValueException))]
+        public void Test_has_too_few_values()
+        {
+            string[] argv =
+            {
+                @"--",
+                @"file-1",
+            };
+
+            bool enteredMain = false;
+
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleValueStructure_with_List_of_string>(argv, null, (SimpleValueStructure_with_List_of_string ss, Arguments args_UNUSED) => {
+
+                enteredMain = true;
+
+                return 1;
+            }
+            , ArgumentBindingOptions.None
+            , ParseOptions.None
+            , FailureOptions.HandleSystemExceptions
+            );
+
+            Assert.IsFalse(enteredMain);
+        }
+
+        [TestMethod]
+        public void Test_has_too_few_values_but_ignored()
+        {
+            string[] argv =
+            {
+                @"--",
+                @"file-1",
+            };
+
+            bool enteredMain = false;
+
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleValueStructure_with_List_of_string>(argv, null, (SimpleValueStructure_with_List_of_string ss, Arguments args_UNUSED) => {
+
+                enteredMain = true;
+
+                Assert.AreEqual(1, ((ICollection<string>)ss.FilePaths).Count);
+                Assert.AreEqual(@"file-1", ss.FilePaths[0]);
+
+                return 12345;
+            }
+            , ArgumentBindingOptions.IgnoreMissingValues
+            , ParseOptions.None
+            , FailureOptions.HandleSystemExceptions
+            );
+
+            Assert.IsTrue(enteredMain);
+            Assert.AreEqual(12345, r);
+        }
         #endregion
     }
 }

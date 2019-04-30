@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.17.136.0 - 30th April 2019
+
+* + added ``ArgumentBindingOptions.IgnoreMissingValues`` and associated tests
+
 ## 0.16.135.1 - 28th April 2019
 
 * ~ clearing up some corner cases in default value support

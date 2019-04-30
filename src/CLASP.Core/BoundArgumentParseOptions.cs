@@ -33,12 +33,24 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  Unless specified, any additional values will result in the
         ///  throwing of <see cref="Clasp.Exceptions.UnusedArgumentException"/>
         /// </summary>
-        IgnoreOtherValues           =   0x00000040,
+        IgnoreExtraValues           =   0x00000040,
+
+        /// <summary>
+        ///  [DEPRECATED] Use IgnoreExtraValues
+        /// </summary>
+        [Obsolete("Use IgnoreExtraValues")]
+        IgnoreOtherValues           =   IgnoreExtraValues,
+
+        /// <summary>
+        ///  Unless specified, too-few values will result in the throwing
+        ///  throwing of <see cref="Clasp.Exceptions.MissingValueException"/>
+        /// </summary>
+        IgnoreMissingValues         =   0x00000080,
 
         /// <summary>
         ///  Unless specified, any additional arguments will result in the
         ///  throwing of <c>UnusedArgumentException</c>
         /// </summary>
-        IgnoreOtherArguments        =   IgnoreOtherFlags | IgnoreOtherOptions | IgnoreOtherValues,
+        IgnoreOtherArguments        =   IgnoreOtherFlags | IgnoreOtherOptions | IgnoreExtraValues,
     }
 }
