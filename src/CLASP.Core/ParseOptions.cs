@@ -1,6 +1,6 @@
 ﻿
 // Created: 9th August 2009
-// Updated: 30th April 2019
+// Updated: 1st May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -75,18 +75,5 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// Windows.
         /// </summary>
         DoExpandWildcardsInAposquotesOnWindows      =   0x00000200,
-
-        ///// <summary>
-        ///// Prevents the results from being into groups of
-        ///// flags, options and values.
-        /////
-        ///// \note The structure members <c>numFlagsAndOptions</c>,
-        /////   <c>flagsAndOptions</c>, <c>numFlags</c>,
-        /////   <c>flags</c>, <c>numOptions</c>, <c>options</c>,
-        /////   <c>numValues</c> and <c>values</c> are not valid when this
-        /////   flag is used. Client code should only use <c>numArguments</c> and
-        /////   <c>arguments</c>.
-        ///// </summary>
-        //PreserveOriginalArgumentOrder                (0x00000400)
     }
 }

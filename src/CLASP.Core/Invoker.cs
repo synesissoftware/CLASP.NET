@@ -674,7 +674,14 @@ namespace SynesisSoftware.SystemTools.Clasp
                         {
                             if(String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
                             {
-                                throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
+                                if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                                {
+                                    throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                             else
                             {
@@ -723,7 +730,10 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                         if(required > args.Values.Count)
                         {
-                            throw new Exceptions.MissingValueException(required);
+                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            {
+                                throw new Exceptions.MissingValueException(required);
+                            }
                         }
                     }
 
