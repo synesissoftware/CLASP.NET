@@ -52,5 +52,11 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  throwing of <c>UnusedArgumentException</c>
         /// </summary>
         IgnoreOtherArguments        =   IgnoreOtherFlags | IgnoreOtherOptions | IgnoreExtraValues,
+
+        /// <summary>
+        ///  Default flags used in
+        ///  <see cref="Clasp.Invoker"/>
+        /// </summary>
+        Default                     =   0,
     }
 }
