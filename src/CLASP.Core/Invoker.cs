@@ -674,7 +674,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                         {
                             if(String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
                             {
-                                if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                                if(0 == (ArgumentBindingOptions.IgnoreOtherValues & bindingOptions))
                                 {
                                     throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
                                 }
@@ -730,7 +730,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                         if(required > args.Values.Count)
                         {
-                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            if(0 == (ArgumentBindingOptions.IgnoreOtherValues & bindingOptions))
                             {
                                 throw new Exceptions.MissingValueException(required);
                             }
@@ -819,7 +819,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherValues & effectiveParseOptions))
             {
                 for(int i = 0; i != usedValues.Length; ++i)
                 {
