@@ -672,7 +672,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         if(null == valueAttribute.DefaultValue)
                         {
-                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & effectiveParseOptions))
                             {
                                 continue;
                             }
@@ -728,7 +728,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                         if(required > args.Values.Count)
                         {
-                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & effectiveParseOptions))
                             {
                                 throw new Exceptions.MissingValueException(required);
                             }
