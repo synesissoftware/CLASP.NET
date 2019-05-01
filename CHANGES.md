@@ -1,8 +1,16 @@
 #  **CLASP.NET** Changes
 
+## 0.17.137.1 - 30th April 2019
+
+* ~ full and proper handling of ArgumentBindingOptions.IgnoreMissingValues
+
 ## 0.17.136.0 - 30th April 2019
 
 * + added ``ArgumentBindingOptions.IgnoreMissingValues`` and associated tests
+
+## 0.16.136.2 - 1st May 2019
+
+* ~ full and proper handling of ArgumentBindingOptions.IgnoreMissingValues
 
 ## 0.16.135.1 - 28th April 2019
 

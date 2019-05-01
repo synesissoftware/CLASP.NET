@@ -672,6 +672,11 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         if(null == valueAttribute.DefaultValue)
                         {
+                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & bindingOptions))
+                            {
+                                continue;
+                            }
+
                             if(String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
                             {
                                 throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
