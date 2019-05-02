@@ -1,5 +1,10 @@
 #  **CLASP.NET** Changes
 
+## 0.18.139.0 - 2nd May 2019
+
+* + added ``BoundEnumerationAttribute`` and ``BoundEnumeratorAttribute`` classes, supporting binding of command-line flags with enumerator values
+* + added Example.BoundValues.cat
+
 ## 0.17.137.1 - 30th April 2019
 
 * ~ full and proper handling of ArgumentBindingOptions.IgnoreMissingValues

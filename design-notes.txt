@@ -6,16 +6,19 @@ Pre 1.0 tasks:
 Definites:
 ----------
 
-# highlighting 'default' value in ShowUsage()
 - change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 - change ``Alias`` to ``Specification``
 - ``Required`` attribute
 - works with libCLImate.NET
-# dependency libraries - RubLE4, Diagnosticism - are in NuGet
 - elimination of single alias and 3-param Flag() method, etc.
 - rename Flag to FlagSpecification, Option to OptionSpecification
 - move all the classes around to make the public API and common use cases simple
+- sort out ParseOptions / ParsingOptions verb/noun inconsistencies
+- pick up usage information from bound attributes
 
+# highlighting 'default' value in ShowUsage()
+# dependency libraries - RubLE4, Diagnosticism - are in NuGet
+# enumerator/enumeration flag binding
 
 Maybes:
 -------

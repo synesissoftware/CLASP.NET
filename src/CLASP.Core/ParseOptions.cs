@@ -1,6 +1,6 @@
 ﻿
 // Created: 9th August 2009
-// Updated: 1st May 2019
+// Updated: 2nd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -75,5 +75,11 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// Windows.
         /// </summary>
         DoExpandWildcardsInAposquotesOnWindows      =   0x00000200,
+
+        /// <summary>
+        ///  Default flags used in
+        ///  <see cref="Clasp.Invoker"/>
+        /// </summary>
+        Default                                     =   None,
     }
 }

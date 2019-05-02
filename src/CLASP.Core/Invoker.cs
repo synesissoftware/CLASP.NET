@@ -64,12 +64,17 @@ namespace SynesisSoftware.SystemTools.Clasp
             /// <summary>
             ///  The default failure options
             /// </summary>
-            public const FailureOptions             FailureOptions_Default  =   FailureOptions.HandleClaspExceptions | FailureOptions.SetExitCodeForVV | FailureOptions.AppendStandardUsagePromptToContingentReport;
+            public const FailureOptions             FailureOptions_Default  =   FailureOptions.Default;
+
+            /// <summary>
+            ///  The default binding options
+            /// </summary>
+            public const ArgumentBindingOptions     BindingOptions_Default  =   ArgumentBindingOptions.Default;
 
             /// <summary>
             ///  The default parse options
             /// </summary>
-            public const ArgumentBindingOptions     BindingOptions_Default  =   ArgumentBindingOptions.None;
+            public const ParseOptions               ParseOptions_Default    =   ParseOptions.Default;
 
             /// <summary>
             ///  Exit-code indicating success
@@ -268,7 +273,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </example>
         public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, null, ParseOptions.None, Constants.FailureOptions_Default);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, null, null, Constants.FailureOptions_Default);
         }
 
         /// <summary>
@@ -303,7 +308,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// </returns>
         public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
-            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, ParseOptions.None, Constants.FailureOptions_Default);
+            return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, bindingOptions, null, Constants.FailureOptions_Default);
         }
 
         /// <summary>
@@ -380,6 +385,24 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         #region implementation
 
+        private static ParseOptions DeriveEffectiveParseOptions_<T>(ParseOptions? parsingOptions)
+        {
+            Type                        type                    =   typeof(T);
+            Binding.BoundTypeAttribute  typeAttribute           =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+
+            ParseOptions                effectiveParseOptions   =   parsingOptions ?? Constants.ParseOptions_Default;
+
+            if(null != typeAttribute)
+            {
+                if(typeAttribute.AttributeOptionsHavePrecedence || !parsingOptions.HasValue)
+                {
+                    effectiveParseOptions = typeAttribute.ParsingOptions;
+                }
+            }
+
+            return effectiveParseOptions;
+        }
+
         private static int Do_ParseAndInvokeMain_IA_(ToolMain toolMain, Arguments arguments, FailureOptions failureOptions)
         {
             int r = do_invoke_(arguments, failureOptions, (Arguments args) => {
@@ -410,8 +433,10 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
         }
 
-        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions parseOptions, FailureOptions failureOptions) where T : new()
+        private static int InvokeMainAndParseBoundArgumentOfType_<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions, ParseOptions? parseOptions, FailureOptions failureOptions) where T : new()
         {
+            ParseOptions effectiveParseOptions = DeriveEffectiveParseOptions_<T>(parseOptions);
+
             return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args2) => {
 
                 RetVal<T> r = ParseBoundArguments_<T>(args2, bindingOptions);
@@ -422,7 +447,10 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
 
                 return toolMain(Util.ReflectionUtil.CastTo<T>(r.BoundArguments), args2);
-            }, parseOptions, failureOptions);
+            }
+            , effectiveParseOptions
+            , failureOptions
+            );
         }
 
         private static int InvokeMainAndParseBoundArgumentOfType_<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions? bindingOptions) where T : new()
@@ -524,15 +552,15 @@ namespace SynesisSoftware.SystemTools.Clasp
             // /////////////////////
             // type & parse-options
 
-            Binding.BoundTypeAttribute  typeAttribute               =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+            Binding.BoundTypeAttribute  typeAttribute           =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-            ArgumentBindingOptions      effectiveParseOptions       =   bindingOptions ?? Constants.BindingOptions_Default;
+            ArgumentBindingOptions      effectiveBindingOptions =   bindingOptions ?? Constants.BindingOptions_Default;
 
             if(null != typeAttribute)
             {
                 if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
                 {
-                    effectiveParseOptions = typeAttribute.BindingOptions;
+                    effectiveBindingOptions = typeAttribute.BindingOptions;
                 }
             }
 
@@ -544,6 +572,53 @@ namespace SynesisSoftware.SystemTools.Clasp
                 // since we can't prevent BoundFlagAttribute and
                 // BoundOptionAttribute being applied to the same field, we
                 // search for them in turn
+
+                // /////////////////////
+                // Enum
+
+                Binding.BoundEnumerationAttribute  enumerationAttribute   =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundEnumerationAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+
+                if(null != enumerationAttribute)
+                {
+                    // field must be same as enumeration type
+
+                    if(enumerationAttribute.Type != fi.FieldType)
+                    {
+                        Trace.Write(String.Format("The field '{0}' of type '{1}' is marked with the attribute '{1}' of incompatible bound type '{3}' : binding is not performed for this field", fi.Name, fi.FieldType, typeof(Binding.BoundEnumerationAttribute), enumerationAttribute.Type));
+                        Debug.Assert(enumerationAttribute.Type != fi.FieldType);
+
+                        continue;
+                    }
+
+                    // Now find all the enumerator attributes
+                    Binding.BoundEnumeratorAttribute[] enumeratorAttributes = Util.ReflectionUtil.GetAttributes<Binding.BoundEnumeratorAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
+
+                    Debug.Assert(null != enumeratorAttributes);
+
+                    if(0 == enumeratorAttributes.Length)
+                    {
+                        // TODO: warn
+                    }
+                    else
+                    {
+                        int value = 0;
+
+                        foreach(Binding.BoundEnumeratorAttribute attr in enumeratorAttributes)
+                        {
+                            string  flagResolvedName    =   attr.ResolvedName;
+                            int     enumValue           =   attr.EnumeratorValue;
+
+                            if(args.HasFlag(flagResolvedName))
+                            {
+                                value |= enumValue;
+                            }
+                        }
+
+                        fi.SetValue(retVal.BoundArguments, Enum.ToObject(enumerationAttribute.Type, value));
+                    }
+
+                    continue;
+                }
 
                 // /////////////////////
                 // Flag
@@ -672,7 +747,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         if(null == valueAttribute.DefaultValue)
                         {
-                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & effectiveParseOptions))
+                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
                             {
                                 continue;
                             }
@@ -728,7 +803,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                         if(required > args.Values.Count)
                         {
-                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & effectiveParseOptions))
+                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
                             {
                                 throw new Exceptions.MissingValueException(required);
                             }
@@ -807,17 +882,17 @@ namespace SynesisSoftware.SystemTools.Clasp
             // /////////////////////
             // type & options
 
-            if(0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveBindingOptions))
             {
                 Util.ArgumentUtil.VerifyAllFlagsUsed(args, @"unrecognised flag");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveBindingOptions))
             {
                 Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveParseOptions))
+            if(0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveBindingOptions))
             {
                 for(int i = 0; i != usedValues.Length; ++i)
                 {

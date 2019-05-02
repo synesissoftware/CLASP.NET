@@ -6,12 +6,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Test.Scratch.ToolMain")]
+[assembly: AssemblyTitle("Example.BoundValues.cat")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
 [assembly: AssemblyProduct("CLASP.NET")]
-[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2017-2019")]
+[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,3 +21,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.18")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -216,7 +216,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
                 return expectedExitCode;
             }
-            , ArgumentBindingOptions.IgnoreOtherValues
+            , ArgumentBindingOptions.IgnoreExtraValues
             , ParseOptions.None
             , FailureOptions.HandleSystemExceptions
             );

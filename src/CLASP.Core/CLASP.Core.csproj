@@ -48,6 +48,7 @@
     <Compile Include="Alias.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="ArgumentType.cs" />
+    <Compile Include="Binding\BoundEnumAttribute.cs" />
     <Compile Include="Binding\BoundFieldAttribute.cs" />
     <Compile Include="Binding\BoundFlagAttribute.cs" />
     <Compile Include="Binding\BoundOptionAttribute.cs" />

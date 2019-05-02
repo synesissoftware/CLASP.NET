@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 21st February 2018
+// Updated: 1st May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -34,6 +34,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         ///  The binding options specified with the attribute
         /// </summary>
         public ArgumentBindingOptions BindingOptions { get; set; }
+
+        /// <summary>
+        ///  The parsing options specified with the attribute
+        /// </summary>
+        public ParseOptions ParsingOptions { get; set; }
 
         /// <summary>
         ///  If <c>true</c> the attribute's parse options take precedence
