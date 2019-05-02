@@ -725,6 +725,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                         value = ParseUInt64_(option, value.ToString());
                         break;
                     default:
+
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' but its type is not supported by the current version of the library", fi.Name, typeof(Binding.BoundOptionAttribute), fi.FieldType));
 
                         continue;

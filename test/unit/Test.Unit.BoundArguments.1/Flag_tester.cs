@@ -1,5 +1,5 @@
 ﻿
-// Suppresses warning that SimpleFlagStructure elements never changed
+// Suppresses warning that structure elements never changed
 #pragma warning disable 0649
 
 namespace Test.Unit.BoundArguments.ns_1
