@@ -1,5 +1,11 @@
 #  **CLASP.NET** Changes
 
+## XXXXXXXXXXXXXXXX
+
+* ~ changed internal logic of BoundOptionAttribute to make defaults sensible
+* + Invoker now enforces the AllowNegative (when false)
+* + added tests for above
+
 ## 0.18.139.0 - 2nd May 2019
 
 * + added ``BoundEnumerationAttribute`` and ``BoundEnumeratorAttribute`` classes, supporting binding of command-line flags with enumerator values

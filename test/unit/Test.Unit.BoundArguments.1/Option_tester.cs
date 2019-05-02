@@ -46,6 +46,16 @@ namespace Test.Unit.BoundArguments.ns_1
             [BoundOption(@"--verbosity")]
             public string Verbosity;
         }
+
+        [BoundType]
+        internal class Point
+        {
+            [BoundOption(@"--x", AllowNegative=false)]
+            public int X;
+
+            [BoundOption(@"--y", AllowNegative=false)]
+            public int Y;
+        }
         #endregion
 
         #region test methods
@@ -371,6 +381,49 @@ namespace Test.Unit.BoundArguments.ns_1
 
             Assert.IsTrue(enteredMain);
             Assert.AreEqual(12345, r);
+        }
+
+        [TestMethod]
+        public void Test_numeric_Point_at_12_34()
+        {
+            string[] argv =
+            {
+                "--x=12",
+                "--y=34",
+            };
+
+            int expectedExitCode = 123456;
+            bool enteredMain = false;
+
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<Point>(argv, null, (Point pt, Arguments clargs) => {
+
+                enteredMain = true;
+
+                return expectedExitCode;
+            });
+
+            Assert.IsTrue(enteredMain);
+            Assert.AreEqual(expectedExitCode, r);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClaspExceptions.InvalidOptionValueException))]
+        public void Test_numeric_Point_with_negative_X()
+        {
+            string[] argv =
+            {
+                "--x=-12",
+                "--y=34",
+            };
+
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<Point>(argv, null, (Point pt, Arguments clargs) => {
+
+                return 0;
+            }
+            , ArgumentBindingOptions.Default
+            , ParseOptions.Default
+            , FailureOptions.None
+            );
         }
         #endregion
     }

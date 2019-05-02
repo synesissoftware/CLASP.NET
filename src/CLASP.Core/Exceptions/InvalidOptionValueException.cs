@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 30th April 2019
+// Updated: 2nd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 {
@@ -66,7 +66,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         /// <param name="innerException">
         ///  Inner exception, or <c>null</c>.
         /// </param>
-        public InvalidOptionValueException(IArgument option, Type expectedType, FormatException innerException)
+        public InvalidOptionValueException(IArgument option, Type expectedType, Exception innerException)
             : base(option, Constants.DefaultMessage, null, innerException)
         {
             m_expectedType = expectedType;

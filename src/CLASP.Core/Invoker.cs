@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 23rd April 2019
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -699,16 +699,30 @@ namespace SynesisSoftware.SystemTools.Clasp
                         // Nothing to do
                         break;
                     case BoundFieldType.SignedInt32:
-                        value = int.Parse(value.ToString());
+                        int value32 = ParseInt32_(option, value.ToString());
+
+                        if(value32 < 0 && !alNeg)
+                        {
+                            throw new Exceptions.InvalidOptionValueException(option, value.GetType());
+                        }
+
+                        value = value32;
                         break;
                     case BoundFieldType.SignedInt64:
-                        value = long.Parse(value.ToString());
+                        long value64 = ParseInt64_(option, value.ToString());
+
+                        if(value64 < 0 && !alNeg)
+                        {
+                            throw new Exceptions.InvalidOptionValueException(option, value.GetType());
+                        }
+
+                        value = value64;
                         break;
                     case BoundFieldType.UnsignedInt32:
-                        value = uint.Parse(value.ToString());
+                        value = ParseUInt32_(option, value.ToString());
                         break;
                     case BoundFieldType.UnsignedInt64:
-                        value = ulong.Parse(value.ToString());
+                        value = ParseUInt64_(option, value.ToString());
                         break;
                     default:
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' but its type is not supported by the current version of the library", fi.Name, typeof(Binding.BoundOptionAttribute), fi.FieldType));
@@ -941,6 +955,49 @@ namespace SynesisSoftware.SystemTools.Clasp
             }
 
             return BoundFieldType.Unknown;
+        }
+
+        private delegate object ParseFunc(string s);
+
+        private static Int32 ParseInt32_(Interfaces.IArgument arg, string value)
+        {
+            return (Int32)Parse_T_(arg, value, typeof(Int32), (s) => Int32.Parse(s));
+        }
+
+        private static UInt32 ParseUInt32_(Interfaces.IArgument arg, string value)
+        {
+            return (UInt32)Parse_T_(arg, value, typeof(UInt32), (s) => UInt32.Parse(s));
+        }
+
+        private static Int64 ParseInt64_(Interfaces.IArgument arg, string value)
+        {
+            return (Int64)Parse_T_(arg, value, typeof(Int64), (s) => Int64.Parse(s));
+        }
+
+        private static UInt64 ParseUInt64_(Interfaces.IArgument arg, string value)
+        {
+            return (UInt64)Parse_T_(arg, value, typeof(UInt64), (s) => UInt64.Parse(s));
+        }
+
+        private static object Parse_T_(Interfaces.IArgument arg, string s, Type type, ParseFunc fn)
+        {
+            if(null == s)
+            {
+                s = arg.Value;
+            }
+
+            try
+            {
+                return fn(s);
+            }
+            catch(System.FormatException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(arg, type, x);
+            }
+            catch(System.OverflowException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(arg, type, x);
+            }
         }
         #endregion
     }

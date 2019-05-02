@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 19th June 2017
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -16,10 +16,10 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
     {
         #region fields
 
-        private bool m_allowEmpty;
-        private bool m_allowNegative;
-        private bool m_allowFraction;
-        private object m_defaultValue;
+        private bool                m_allowEmpty;
+        private bool                m_requirePositive;
+        private bool                m_requireWhole;
+        private object              m_defaultValue;
         #endregion
 
         #region construction
@@ -62,11 +62,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         {
             get
             {
-                return m_allowNegative;
+                return !m_requirePositive;
             }
             set
             {
-                m_allowNegative = value;
+                m_requirePositive = !value;
             }
         }
 
@@ -78,11 +78,11 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         {
             get
             {
-                return m_allowFraction;
+                return !m_requireWhole;
             }
             set
             {
-                m_allowFraction = value;
+                m_requireWhole = !value;
             }
         }
 
