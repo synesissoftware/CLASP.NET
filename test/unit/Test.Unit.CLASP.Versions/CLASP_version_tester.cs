@@ -1,7 +1,4 @@
 ﻿
-// Created: 19th June 2017
-// Updated: 30th April 2019
-
 namespace Test.Unit.CLASP.Versions
 {
     using global::SynesisSoftware.SystemTools.Clasp;

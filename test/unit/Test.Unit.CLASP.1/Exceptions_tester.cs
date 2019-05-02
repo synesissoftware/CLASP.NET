@@ -1,7 +1,4 @@
 ﻿
-// Created: 
-// Updated: 24th September 2017
-
 namespace Test.Unit.CLASP.ns_1
 {
     using global::SynesisSoftware.SystemTools.Clasp;

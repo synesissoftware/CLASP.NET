@@ -61,10 +61,6 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
             try
             {
 
-                // Options:
-                //
-                //  1. 
-
                 return Invoker.ParseAndInvokeMain(argv, Specifications, (Arguments args) =>
                     {
                         // check '--help'
@@ -73,18 +69,14 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                         {
                             UsageUtil.UsageParams ups = new UsageUtil.UsageParams{ ValuesString = "<input-file-path>" };
 
-                            UsageUtil.ShowUsage(args, ups, null);
-
-                            return 0;
+                            return UsageUtil.ShowUsage(args, ups, null);
                         }
 
                         // check '--version'
 
                         if(args.HasFlag(UsageUtil.Version))
                         {
-                            UsageUtil.ShowVersion();
-
-                            return 0;
+                            return UsageUtil.ShowVersion();
                         }
 
                         return Invoker.InvokeMainWithBoundArgumentOfType<ProgramArguments>(args, (ProgramArguments prargs, Arguments clargs_) =>
