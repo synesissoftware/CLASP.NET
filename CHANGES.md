@@ -1,9 +1,13 @@
 #  **CLASP.NET** Changes
 
-## XXXXXXXXXXXXXXXX
+## 0.19.140.0 - 3rd May 2019
 
-* ~ changed internal logic of BoundOptionAttribute to make defaults sensible
-* + Invoker now enforces the AllowNegative (when false)
+* + added support for ``Single`` and ``Double`` floating-point fields
+* + added ``BoundNumberConstraints`` enumeration
+* + added ``NumberTruncate`` enumeration
+* + added ``OptionValueOutOfRangeException`` exception class
+* ~ changed internal logic of ``BoundOptionAttribute`` to make defaults sensible
+* + ``Invoker`` now enforces integer range constraints
 * + added tests for above
 
 ## 0.18.139.0 - 2nd May 2019

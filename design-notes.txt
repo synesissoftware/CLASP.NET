@@ -19,6 +19,7 @@ Definites:
 # highlighting 'default' value in ShowUsage()
 # dependency libraries - RubLE4, Diagnosticism - are in NuGet
 # enumerator/enumeration flag binding
+# support floating-point fields in binding
 
 Maybes:
 -------

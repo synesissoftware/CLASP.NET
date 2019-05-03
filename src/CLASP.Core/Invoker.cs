@@ -4,6 +4,8 @@
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
+    using SynesisSoftware.SystemTools.Clasp.Internal;
+
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -41,12 +43,11 @@ namespace SynesisSoftware.SystemTools.Clasp
 
             #region properties
 
-            public object BoundArguments
+            public T BoundArguments
             {
                 get
                 {
-                    return m_boundArguments;
-                    //return Util.ReflectionUtil.CastTo<T>(m_boundArguments);
+                    return Util.ReflectionUtil.CastTo<T>(m_boundArguments);
                 }
             }
             #endregion
@@ -90,6 +91,24 @@ namespace SynesisSoftware.SystemTools.Clasp
             ///  [INTERNAL]
             /// </summary>
             internal const string                   StandardUsagePrompt     =   @"; use --help for usage";
+        }
+        #endregion
+
+        #region fields
+
+        private static readonly IDictionary<Binding.BoundNumberConstraints, string> sm_bnc_names;
+        #endregion
+
+        #region construction
+
+        static Invoker()
+        {
+            sm_bnc_names = new Dictionary<Binding.BoundNumberConstraints, string>();
+
+            sm_bnc_names[Binding.BoundNumberConstraints.MustBeNegative]     =   "must be negative";
+            sm_bnc_names[Binding.BoundNumberConstraints.MustBePositive]     =   "must be positive";
+            sm_bnc_names[Binding.BoundNumberConstraints.MustBeNonNegative]  =   "must not be negative";
+            sm_bnc_names[Binding.BoundNumberConstraints.MustBeNonPositive]  =   "must not be positive";
         }
         #endregion
 
@@ -201,7 +220,9 @@ namespace SynesisSoftware.SystemTools.Clasp
 
         #region obsolete operations
 
-        /// Obsolete
+        /// <summary>
+        ///  [DEPRECATED]
+        /// </summary>
         [Obsolete("Use ParseAndInvokeMain instead")]
         public static int InvokeMain(string[] argv, Specification[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
         {
@@ -266,14 +287,29 @@ namespace SynesisSoftware.SystemTools.Clasp
         #endregion
 
         /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="specifications"/>
+        ///  into an instance of the bound argument type
+        ///  <typeparamref name="T"/>,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="argv"></param>
-        /// <param name="specifications"></param>
-        /// <param name="toolMain"></param>
-        /// <returns></returns>
-        /// <example>
-        /// </example>
+        /// <typeparam name="T">
+        ///  The bound type.
+        /// </typeparam>
+        /// <param name="argv">
+        ///  The program arguments, as obtained from <c>Main()</c>.
+        /// </param>
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of the
+        ///  arguments.
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic.
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
         public static int ParseAndInvokeMainWithBoundArgumentOfType<T>(string[] argv, Specification[] specifications, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(argv, specifications, toolMain, null, null, Constants.FailureOptions_Default);
@@ -361,25 +397,66 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  .
+        ///  Invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>
+        ///  in respect of the previously-parsed
+        ///  <paramref name="args"/>
+        ///  as obtained from
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain, ParseOptions, FailureOptions)"/>
+        ///  (or
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain)"/>)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="args"></param>
-        /// <param name="toolMain"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">
+        ///  The bound type.
+        /// </typeparam>
+        /// <param name="args">
+        ///  The Clasp arguments obtained from
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain, ParseOptions, FailureOptions)"/>
+        ///  (or
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain)"/>)
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic.
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
         public static int InvokeMainWithBoundArgumentOfType<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, null);
         }
 
         /// <summary>
-        ///  .
+        ///  Invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>
+        ///  in respect of the previously-parsed
+        ///  <paramref name="args"/>
+        ///  as obtained from
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain, ParseOptions, FailureOptions)"/>
+        ///  (or
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain)"/>),
+        ///  according to the
+        ///  <paramref name="bindingOptions"/>
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="args"></param>
-        /// <param name="toolMain"></param>
-        /// <param name="bindingOptions"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">
+        ///  The bound type.
+        /// </typeparam>
+        /// <param name="args">
+        ///  The Clasp arguments obtained from
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain, ParseOptions, FailureOptions)"/>
+        ///  (or
+        ///  <see cref="Clasp.Invoker.ParseAndInvokeMain(string[], Specification[], ToolMain)"/>)
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic.
+        /// </param>
+        /// <param name="bindingOptions">
+        ///  A combination of <see cref="Clasp.ArgumentBindingOptions"/>
+        ///  that control the binding behaviour.
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
         public static int InvokeMainWithBoundArgumentOfType<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, bindingOptions);
@@ -449,7 +526,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                     return r.ExitCode;
                 }
 
-                return toolMain(Util.ReflectionUtil.CastTo<T>(r.BoundArguments), args2);
+                return toolMain(r.BoundArguments, args2);
             }
             , effectiveParseOptions
             , failureOptions
@@ -465,7 +542,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return r.ExitCode;
             }
 
-            return toolMain(Util.ReflectionUtil.CastTo<T>(r.BoundArguments), args);
+            return toolMain(r.BoundArguments, args);
         }
 
         private static int do_invoke_(Arguments arguments, FailureOptions failureOptions, Func<Arguments, int> f)
@@ -654,10 +731,11 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                 if(null != optionAttribute)
                 {
-                    bool                    alFra   =   optionAttribute.AllowFraction;
-                    bool                    alNeg   =   optionAttribute.AllowNegative;
-                    Interfaces.IArgument    option  =   Util.ArgumentUtil.FindOption(args, optionAttribute.ResolvedName);
-                    object                  value   =   null;
+                    Binding.BoundNumberConstraints  bnc     =   optionAttribute.EffectiveBoundNumberConstraints;
+                    Binding.NumberTruncate          nt      =   optionAttribute.NumberTruncate;
+
+                    Interfaces.IArgument            option  =   Util.ArgumentUtil.FindOption(args, optionAttribute.ResolvedName);
+                    object                          value   =   null;
 
                     if(null == option)
                     {
@@ -702,30 +780,22 @@ namespace SynesisSoftware.SystemTools.Clasp
                         // Nothing to do
                         break;
                     case BoundFieldType.SignedInt32:
-                        int value32 = ParseInt32_(option, value.ToString());
-
-                        if(value32 < 0 && !alNeg)
-                        {
-                            throw new Exceptions.InvalidOptionValueException(option, value.GetType());
-                        }
-
-                        value = value32;
+                        value = ParseInt32_(option, value.ToString(), bnc, nt);
                         break;
                     case BoundFieldType.SignedInt64:
-                        long value64 = ParseInt64_(option, value.ToString());
-
-                        if(value64 < 0 && !alNeg)
-                        {
-                            throw new Exceptions.InvalidOptionValueException(option, value.GetType());
-                        }
-
-                        value = value64;
+                        value = ParseInt64_(option, value.ToString(), bnc, nt);
                         break;
                     case BoundFieldType.UnsignedInt32:
-                        value = ParseUInt32_(option, value.ToString());
+                        value = ParseUInt32_(option, value.ToString(), bnc, nt);
                         break;
                     case BoundFieldType.UnsignedInt64:
-                        value = ParseUInt64_(option, value.ToString());
+                        value = ParseUInt64_(option, value.ToString(), bnc, nt);
+                        break;
+                    case BoundFieldType.Single:
+                        value = ParseSingle_(option, value.ToString(), bnc, nt);
+                        break;
+                    case BoundFieldType.Double:
+                        value = ParseDouble_(option, value.ToString(), bnc, nt);
                         break;
                     default:
 
@@ -958,49 +1028,296 @@ namespace SynesisSoftware.SystemTools.Clasp
                 return BoundFieldType.String;
             }
 
+            if(type == typeof(float))
+            {
+                return BoundFieldType.Single;
+            }
+
+            if(type == typeof(double))
+            {
+                return BoundFieldType.Double;
+            }
+
             return BoundFieldType.Unknown;
         }
 
         private delegate object ParseFunc(string s);
 
-        private static Int32 ParseInt32_(Interfaces.IArgument arg, string value)
+        private delegate T CastFunc<T>(object o);
+
+        private static Int32 ParseInt32_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
         {
-            return (Int32)Parse_T_(arg, value, typeof(Int32), (s) => Int32.Parse(s));
+            return ParseInteger_T_(option, value, typeof(Int32), bnc, nt, (s) => Int32.Parse(s), (d) => Convert.ToInt32(d));
         }
 
-        private static UInt32 ParseUInt32_(Interfaces.IArgument arg, string value)
+        private static UInt32 ParseUInt32_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
         {
-            return (UInt32)Parse_T_(arg, value, typeof(UInt32), (s) => UInt32.Parse(s));
+            return ParseInteger_T_(option, value, typeof(UInt32), bnc, nt, (s) => UInt32.Parse(s), (n) => Convert.ToUInt32(n));
         }
 
-        private static Int64 ParseInt64_(Interfaces.IArgument arg, string value)
+        private static Int64 ParseInt64_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
         {
-            return (Int64)Parse_T_(arg, value, typeof(Int64), (s) => Int64.Parse(s));
+            return ParseInteger_T_(option, value, typeof(Int64), bnc, nt, (s) => Int64.Parse(s), (n) => Convert.ToInt64(n));
         }
 
-        private static UInt64 ParseUInt64_(Interfaces.IArgument arg, string value)
+        private static UInt64 ParseUInt64_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
         {
-            return (UInt64)Parse_T_(arg, value, typeof(UInt64), (s) => UInt64.Parse(s));
+            return ParseInteger_T_(option, value, typeof(UInt64), bnc, nt, (s) => UInt64.Parse(s), (n) => Convert.ToUInt64(n));
         }
 
-        private static object Parse_T_(Interfaces.IArgument arg, string s, Type type, ParseFunc fn)
+        private static Single ParseSingle_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
         {
-            if(null == s)
+            return ParseReal_T_(option, value, typeof(Single), bnc, nt, (s) => Single.Parse(s), (n) => Convert.ToSingle(n));
+        }
+
+        private static Double ParseDouble_(Interfaces.IArgument option, string value, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt)
+        {
+            return ParseReal_T_(option, value, typeof(Double), bnc, nt, (s) => Double.Parse(s), (n) => Convert.ToDouble(n));
+        }
+
+        private static bool IsNegative_(object o)
+        {
+            Debug.Assert(null != o);
+
+            Type type = o.GetType();
+
+            if(false)
             {
-                s = arg.Value;
+                ;
             }
+            else if(typeof(Int32) == type)
+            {
+                return (Int32)o < 0;
+            }
+            else if(typeof(Int64) == type)
+            {
+                return (Int64)o < 0;
+            }
+
+            return false;
+        }
+
+        private static bool IsPositive_(object o)
+        {
+            Debug.Assert(null != o);
+
+            Type type = o.GetType();
+
+            if(false)
+            {
+                ;
+            }
+            else if(typeof(Int32) == type)
+            {
+                return (Int32)o > 0;
+            }
+            else if(typeof(UInt32) == type)
+            {
+                return (UInt32)o > 0;
+            }
+            else if(typeof(Int64) == type)
+            {
+                return (Int64)o > 0;
+            }
+            else if(typeof(UInt64) == type)
+            {
+                return (UInt64)o > 0;
+            }
+
+            return false;
+        }
+
+        private static bool IsNonNegative_(object o)
+        {
+            Debug.Assert(null != o);
+
+            Type type = o.GetType();
+
+            if(false)
+            {
+                ;
+            }
+            else if(typeof(Int32) == type)
+            {
+                return (Int32)o >= 0;
+            }
+            else if(typeof(Int64) == type)
+            {
+                return (Int64)o >= 0;
+            }
+
+            return true;
+        }
+
+        private static bool IsNonPositive_(object o)
+        {
+            Debug.Assert(null != o);
+
+            Type type = o.GetType();
+
+            if(false)
+            {
+                ;
+            }
+            else if(typeof(Int32) == type)
+            {
+                return (Int32)o < 1;
+            }
+            else if(typeof(UInt32) == type)
+            {
+                return (UInt32)o < 1;
+            }
+            else if(typeof(Int64) == type)
+            {
+                return (Int64)o < 1;
+            }
+            else if(typeof(UInt64) == type)
+            {
+                return (UInt64)o < 1;
+            }
+
+            return false;
+        }
+
+        private static T ParseInteger_T_<T>(Interfaces.IArgument option, string value, Type type, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt, ParseFunc pf, CastFunc<T> cf)
+        {
+            if(null == value)
+            {
+                value = option.Value;
+            }
+
+            bnc &= Binding.BoundNumberConstraints.RangeMask;
 
             try
             {
-                return fn(s);
+                object r = null;
+
+                try
+                {
+                    r = pf(value);
+                }
+                catch(System.FormatException x)
+                {
+                    double d;
+
+                    if(!Double.TryParse(value, out d))
+                    {
+                        throw;
+                    }
+                    else
+                    {
+                        switch(nt)
+                        {
+                        default:
+
+                            Debug.Assert(false, "unexpected");
+                            break;
+                        case Binding.NumberTruncate.None:
+
+                            throw new Exceptions.InvalidOptionValueException(option, type, x, "whole number required");
+                        case Binding.NumberTruncate.ToCeiling:
+
+                            d = Math.Ceiling(d);
+                            break;
+                        case Binding.NumberTruncate.ToFloor:
+
+                            d = Math.Floor(d);
+                            break;
+                        case Binding.NumberTruncate.ToNearest:
+
+                            d = Math.Round(d);
+                            break;
+                        case Binding.NumberTruncate.ToZero:
+
+                            d = Math.Truncate(d);
+                            break;
+                        }
+
+                        r = d;
+                    }
+                }
+
+                switch(bnc & Binding.BoundNumberConstraints.RangeMask)
+                {
+                default:
+
+                    Debug.Assert(false, "unexpected");
+                    break;
+                case Binding.BoundNumberConstraints.None:
+
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNegative:
+
+                    if(!IsNegative_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBePositive:
+
+                    if(!IsPositive_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNonNegative:
+
+                    if(!IsNonNegative_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNonPositive:
+
+                    if(!IsNonPositive_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                }
+
+                return cf(r);
             }
             catch(System.FormatException x)
             {
-                throw new Exceptions.InvalidOptionValueException(arg, type, x);
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+            }
+            catch(System.InvalidCastException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
             catch(System.OverflowException x)
             {
-                throw new Exceptions.InvalidOptionValueException(arg, type, x);
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+            }
+        }
+
+        private static T ParseReal_T_<T>(Interfaces.IArgument option, string value, Type type, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt, ParseFunc pf, CastFunc<T> cf)
+        {
+            if(null == value)
+            {
+                value = option.Value;
+            }
+
+            bnc &= Binding.BoundNumberConstraints.RangeMask;
+
+            try
+            {
+                object r = pf(value);
+
+                return cf(r);
+            }
+            catch(System.FormatException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+            }
+            catch(System.InvalidCastException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+            }
+            catch(System.OverflowException x)
+            {
+                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
         }
         #endregion

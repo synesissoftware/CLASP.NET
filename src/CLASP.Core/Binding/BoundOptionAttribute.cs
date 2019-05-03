@@ -16,10 +16,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
     {
         #region fields
 
-        private bool                m_allowEmpty;
-        private bool                m_requirePositive;
-        private bool                m_requireWhole;
-        private object              m_defaultValue;
+        private bool                    m_allowEmpty;
+        private bool                    m_requirePositive;
+        private bool                    m_requireWhole;
+        private object                  m_defaultValue;
+        private BoundNumberConstraints  m_numberConstraints;
+        private NumberTruncate          m_truncationOperation;
         #endregion
 
         #region construction
@@ -58,10 +60,28 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         ///  Determines whether negative values are allowed, when parsing
         ///  numeric values; ignored otherwise
         /// </summary>
+        /// <remarks>
+        ///  Ignored if <see cref="NumberConstraints"/> is not <c>None</c>
+        /// </remarks>
         public bool AllowNegative
         {
             get
             {
+                if(BoundNumberConstraints.None != m_numberConstraints)
+                {
+                    if(0 != (BoundNumberConstraints.MustBePositive & m_numberConstraints))
+                    {
+                        return false;
+                    }
+
+                    if(0 != (BoundNumberConstraints.MustBeNonNegative & m_numberConstraints))
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+
                 return !m_requirePositive;
             }
             set
@@ -74,10 +94,28 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         ///  Determines whether fractional values are allowed, when parsing
         ///  numeric values; ignored otherwise
         /// </summary>
+        /// <remarks>
+        ///  Ignored if <see cref="NumberConstraints"/> is not <c>None</c>
+        /// </remarks>
         public bool AllowFraction
         {
             get
             {
+                if(BoundNumberConstraints.None != m_numberConstraints)
+                {
+                    if(0 != (BoundNumberConstraints.MustBeIntegral & m_numberConstraints))
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                if(NumberTruncate.None != m_truncationOperation)
+                {
+                    return false;
+                }
+
                 return !m_requireWhole;
             }
             set
@@ -85,6 +123,58 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
                 m_requireWhole = !value;
             }
         }
+
+        /// <summary>
+        ///  Specifies numeric constraint (if not <c>None</c>)
+        /// </summary>
+        public BoundNumberConstraints NumberConstraints
+        {
+            get
+            {
+                return m_numberConstraints;
+            }
+            set
+            {
+                m_numberConstraints = value;
+            }
+        }
+
+        /// <summary>
+        ///  .
+        /// </summary>
+        public NumberTruncate NumberTruncate
+        {
+            get
+            {
+                return m_truncationOperation;
+            }
+            set
+            {
+                m_truncationOperation = value;
+            }
+        }
+
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
+        internal BoundNumberConstraints EffectiveBoundNumberConstraints
+        {
+            get
+            {
+                if(BoundNumberConstraints.None != m_numberConstraints)
+                {
+                    return m_numberConstraints;
+                }
+
+                if(m_requirePositive)
+                {
+                    return BoundNumberConstraints.MustBePositive;
+                }
+
+                return BoundNumberConstraints.None;
+            }
+        }
+
 
         /// <summary>
         ///  The default value to be used

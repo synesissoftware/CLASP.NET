@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmptyStructure_tester.cs" />
+    <Compile Include="NumberConstraint_tester.cs" />
     <Compile Include="Option_tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flag_tester.cs" />

@@ -71,6 +71,15 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         {
             m_expectedType = expectedType;
         }
+
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
+        protected internal InvalidOptionValueException(IArgument option, Type expectedType, Exception innerException, params string[] qualifiers)
+            : base(option, Constants.DefaultMessage, option.ResolvedName, innerException, qualifiers)
+        {
+            m_expectedType = expectedType;
+        }
         #endregion
 
         #region properties

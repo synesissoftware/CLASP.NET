@@ -37,8 +37,12 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
         /// <param name="innerException">
         ///  Inner exception, or <c>null</c>.
         /// </param>
-        protected FlagOrOptionArgumentException(IArgument argument, string message, string optionName, Exception innerException)
-            : base(argument, MakeMessage_(argument, message, optionName), innerException)
+        /// <param name="qualifiers">
+        ///  0+ qualifier strings, each to be separated from the evaluated
+        ///  message and each other by the separator <c>": "</c>
+        /// </param>
+        protected FlagOrOptionArgumentException(IArgument argument, string message, string optionName, Exception innerException, params string[] qualifiers)
+            : base(argument, MakeMessage_(argument, message, optionName, qualifiers), innerException)
         {
             m_optionName = optionName;
         }
@@ -50,7 +54,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
 
         #region implementation
 
-        private static string MakeMessage_(IArgument argument, string message, string optionName)
+        private static string MakeMessage_(IArgument argument, string message, string optionName, params string[] qualifiers)
         {
             if(null != argument)
             {
@@ -70,9 +74,14 @@ namespace SynesisSoftware.SystemTools.Clasp.Exceptions
                 }
             }
 
-            if(null != optionName)
+            if(!String.IsNullOrEmpty(optionName))
             {
-                return String.Format(@"{0}: {1}", message, optionName);
+                message = String.Format(@"{0}: {1}", message, optionName);
+            }
+
+            if(0 != qualifiers.Length)
+            {
+                message = message + ": " + String.Join(": ", qualifiers);
             }
 
             return message;

@@ -49,6 +49,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         SignedInt64                 =   (long)(BoundFieldTypeCharacteristics.Integral | BoundFieldTypeCharacteristics.SizeIs_64 | BoundFieldTypeCharacteristics.Signed),
         UnsignedInt64               =   (long)(BoundFieldTypeCharacteristics.Integral | BoundFieldTypeCharacteristics.SizeIs_64),
         String                      =   (long)(BoundFieldTypeCharacteristics.String),
+        Single                      =   (long)(BoundFieldTypeCharacteristics.FloatingPoint) | BoundFieldTypeCharacteristics.SizeIs_32 | BoundFieldTypeCharacteristics.Signed,
+        Double                      =   (long)(BoundFieldTypeCharacteristics.FloatingPoint) | BoundFieldTypeCharacteristics.SizeIs_64 | BoundFieldTypeCharacteristics.Signed,
     }
 }
 

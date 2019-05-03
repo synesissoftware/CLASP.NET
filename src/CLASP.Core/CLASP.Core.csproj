@@ -51,10 +51,12 @@
     <Compile Include="Binding\BoundEnumAttribute.cs" />
     <Compile Include="Binding\BoundFieldAttribute.cs" />
     <Compile Include="Binding\BoundFlagAttribute.cs" />
+    <Compile Include="Binding\BoundNumberConstraints.cs" />
     <Compile Include="Binding\BoundOptionAttribute.cs" />
     <Compile Include="Binding\BoundTypeAttribute.cs" />
     <Compile Include="Binding\BoundValueAttribute.cs" />
     <Compile Include="Binding\BoundValuesAttribute.cs" />
+    <Compile Include="Binding\NumberTruncate.cs" />
     <Compile Include="BoundArgumentParseOptions.cs" />
     <Compile Include="enumerations.cs" />
     <Compile Include="delegates.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Exceptions\MissingOptionException.cs" />
     <Compile Include="Exceptions\MissingOptionValueException.cs" />
     <Compile Include="Exceptions\MissingValueException.cs" />
+    <Compile Include="Exceptions\OptionValueOutOfRangeException.cs" />
     <Compile Include="Exceptions\UnusedArgumentException.cs" />
     <Compile Include="Extensions\Options.cs" />
     <Compile Include="FailureOptions.cs" />

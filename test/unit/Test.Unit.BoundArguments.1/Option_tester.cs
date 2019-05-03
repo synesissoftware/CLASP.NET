@@ -56,6 +56,16 @@ namespace Test.Unit.BoundArguments.ns_1
             [BoundOption(@"--y", AllowNegative=false)]
             public int Y;
         }
+
+        [BoundType]
+        internal class PointF
+        {
+            [BoundOption(@"--x")]
+            public float X;
+
+            [BoundOption(@"--y")]
+            public float Y;
+        }
         #endregion
 
         #region test methods
@@ -397,6 +407,9 @@ namespace Test.Unit.BoundArguments.ns_1
 
             int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<Point>(argv, null, (Point pt, Arguments clargs) => {
 
+                Assert.AreEqual(12, pt.X);
+                Assert.AreEqual(34, pt.Y);
+
                 enteredMain = true;
 
                 return expectedExitCode;
@@ -407,7 +420,7 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ClaspExceptions.InvalidOptionValueException))]
+        [ExpectedException(typeof(ClaspExceptions.OptionValueOutOfRangeException))]
         public void Test_numeric_Point_with_negative_X()
         {
             string[] argv =
@@ -417,6 +430,28 @@ namespace Test.Unit.BoundArguments.ns_1
             };
 
             int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<Point>(argv, null, (Point pt, Arguments clargs) => {
+
+                return 0;
+            }
+            , ArgumentBindingOptions.Default
+            , ParseOptions.Default
+            , FailureOptions.None
+            );
+        }
+
+        [TestMethod]
+        public void Test_numeric_PointF_at_123dot456_7dot89()
+        {
+            string[] argv =
+            {
+                "--x=-123.456",
+                "--y=7.89",
+            };
+
+            int r = Invoker.ParseAndInvokeMainWithBoundArgumentOfType<PointF>(argv, null, (PointF pt, Arguments clargs) => {
+
+                Assert.AreEqual(-123.456, pt.X, 0.00001);
+                Assert.AreEqual(7.89, pt.Y, 0.00001);
 
                 return 0;
             }
