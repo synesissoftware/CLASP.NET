@@ -1,6 +1,10 @@
 #  **CLASP.NET** Changes
 
-## 0.19.140.0 - 3rd May 2019
+## 0.18.141.2 - 3rd May 2019
+
+* ~ fixed missing range enforcement for floating-point fields
+
+## 0.18.140.1 - 3rd May 2019
 
 * + added support for ``Single`` and ``Double`` floating-point fields
 * + added ``BoundNumberConstraints`` enumeration

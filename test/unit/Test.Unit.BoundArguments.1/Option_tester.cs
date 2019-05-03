@@ -66,6 +66,16 @@ namespace Test.Unit.BoundArguments.ns_1
             [BoundOption(@"--y")]
             public float Y;
         }
+
+        [BoundType]
+        internal class PointFpos
+        {
+            [BoundOption(@"--x", NumberConstraints=BoundNumberConstraints.MustBePositive)]
+            public float X;
+
+            [BoundOption(@"--y", NumberConstraints=BoundNumberConstraints.MustBePositive)]
+            public float Y;
+        }
         #endregion
 
         #region test methods
@@ -459,6 +469,30 @@ namespace Test.Unit.BoundArguments.ns_1
             , ParseOptions.Default
             , FailureOptions.None
             );
+        }
+
+        [TestMethod]
+        public void Test_numeric_PointFpos_at_minus123dot456_7dot89()
+        {
+            string[] argv =
+            {
+                "--x=-123.456",
+                "--y=7.89",
+            };
+
+            try
+            {
+                Invoker.ParseAndInvokeMainWithBoundArgumentOfType<PointFpos>(argv, null, (PointFpos pt, Arguments clargs) => {
+
+                    Assert.Fail("should not get here");
+
+                    return 0;
+                });
+            }
+            catch(ClaspExceptions.OptionValueOutOfRangeException x)
+            {
+                ;
+            }
         }
         #endregion
     }

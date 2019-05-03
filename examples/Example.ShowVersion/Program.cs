@@ -5,7 +5,7 @@ namespace Example.ShowVersion
 
     class Program
     {
-        static int Main(string[] args)
+        static int Main(string[] argv)
         {
             return Usage.ShowVersion();
         }

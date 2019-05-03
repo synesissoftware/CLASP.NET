@@ -15,7 +15,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     /// <summary>
-    ///  Class that provides ExecuteAroundMethod functionality for
+    ///  Class that provides <b>ExecuteAroundMethod</b> functionality for
     ///  implementing CLI entry points
     /// </summary>
     public static class Invoker
@@ -1093,6 +1093,14 @@ namespace SynesisSoftware.SystemTools.Clasp
             {
                 return (Int64)o < 0;
             }
+            else if(typeof(Single) == type)
+            {
+                return (Single)o < 0;
+            }
+            else if(typeof(Double) == type)
+            {
+                return (Double)o < 0;
+            }
 
             return false;
         }
@@ -1123,6 +1131,14 @@ namespace SynesisSoftware.SystemTools.Clasp
             {
                 return (UInt64)o > 0;
             }
+            else if(typeof(Single) == type)
+            {
+                return (Single)o > 0;
+            }
+            else if(typeof(Double) == type)
+            {
+                return (Double)o > 0;
+            }
 
             return false;
         }
@@ -1144,6 +1160,14 @@ namespace SynesisSoftware.SystemTools.Clasp
             else if(typeof(Int64) == type)
             {
                 return (Int64)o >= 0;
+            }
+            else if(typeof(Single) == type)
+            {
+                return (Single)o >= 0;
+            }
+            else if(typeof(Double) == type)
+            {
+                return (Double)o >= 0;
             }
 
             return true;
@@ -1174,6 +1198,14 @@ namespace SynesisSoftware.SystemTools.Clasp
             else if(typeof(UInt64) == type)
             {
                 return (UInt64)o < 1;
+            }
+            else if(typeof(Single) == type)
+            {
+                return (Single)o < 1;
+            }
+            else if(typeof(Double) == type)
+            {
+                return (Double)o < 1;
             }
 
             return false;
@@ -1304,6 +1336,45 @@ namespace SynesisSoftware.SystemTools.Clasp
             try
             {
                 object r = pf(value);
+
+                switch(bnc & Binding.BoundNumberConstraints.RangeMask)
+                {
+                default:
+
+                    Debug.Assert(false, "unexpected");
+                    break;
+                case Binding.BoundNumberConstraints.None:
+
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNegative:
+
+                    if(!IsNegative_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBePositive:
+
+                    if(!IsPositive_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNonNegative:
+
+                    if(!IsNonNegative_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                case Binding.BoundNumberConstraints.MustBeNonPositive:
+
+                    if(!IsNonPositive_(r))
+                    {
+                        throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
+                    }
+                    break;
+                }
 
                 return cf(r);
             }
