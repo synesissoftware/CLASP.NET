@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 20th April 2019
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Internal
 {
@@ -11,6 +11,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
     // NOTE: this alias is temporary
     using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
+    /// <summary>
+    ///  [INTERNAL]
+    /// </summary>
     internal sealed class Argument
         : IArgument
     {
@@ -35,16 +38,25 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
             m_index         =   index;
         }
 
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
         internal static Argument NewValue(string value, int index)
         {
             return new Argument(null, ArgumentType.Value, null, null, value, 0, index);
         }
 
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
         internal static Argument NewFlag(Specification specification, string givenName, string resolvedName, int index)
         {
             return new Argument(specification, ArgumentType.Flag, givenName, resolvedName, null, CountHyphens(givenName), index);
         }
 
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
         internal static Argument NewOption(Specification specification, string givenName, string resolvedName, string value, int index)
         {
             return new Argument(specification, ArgumentType.Option, givenName, resolvedName, value, CountHyphens(givenName), index);
@@ -135,6 +147,9 @@ namespace SynesisSoftware.SystemTools.Clasp.Internal
 
         #region implementation
 
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
         internal static int CountHyphens(string arg)
         {
             int n = 0;

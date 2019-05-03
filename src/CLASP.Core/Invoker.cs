@@ -86,6 +86,9 @@ namespace SynesisSoftware.SystemTools.Clasp
             public const int                        ExitCode_Failure        =   1;
 
 
+            /// <summary>
+            ///  [INTERNAL]
+            /// </summary>
             internal const string                   StandardUsagePrompt     =   @"; use --help for usage";
         }
         #endregion

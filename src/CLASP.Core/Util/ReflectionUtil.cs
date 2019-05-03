@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 23rd April 2019
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -153,14 +153,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <summary>
-        ///  Obtains the appropriate fields for a bound type
+        ///  [INTERNAL]
         /// </summary>
-        /// <param name="type">
-        ///  .
-        /// </param>
-        /// <returns>
-        ///  .
-        /// </returns>
         internal static FieldInfo[] GetTypeFields(Type type)
         {
             return type.GetFields();

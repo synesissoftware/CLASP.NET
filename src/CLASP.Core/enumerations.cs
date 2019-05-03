@@ -1,11 +1,14 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 19th June 2017
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
     using System;
 
+    /// <summary>
+    ///  [INTERNAL]
+    /// </summary>
     [Flags]
     internal enum BoundFieldTypeCharacteristics : long
     {
@@ -34,6 +37,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         SizeIs_Unknown              =   0x0000800000000000,
     }
 
+    /// <summary>
+    ///  [INTERNAL]
+    /// </summary>
     internal enum BoundFieldType : long
     {
         Unknown                     =   (long)(BoundFieldTypeCharacteristics.None),

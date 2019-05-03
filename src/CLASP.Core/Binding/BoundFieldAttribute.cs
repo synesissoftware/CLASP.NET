@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 19th June 2017
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Binding
 {
@@ -20,9 +20,8 @@ namespace SynesisSoftware.SystemTools.Clasp.Binding
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the type from the given resolved name
+        ///  [INTERNAL]
         /// </summary>
-        /// <param name="resolvedName"></param>
         protected internal BoundFieldAttribute(string resolvedName)
         {
             m_resolvedName = resolvedName;

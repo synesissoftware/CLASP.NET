@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 30th April 2019
+// Updated: 3rd May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -26,13 +26,8 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  [INTERNAL]
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="givenName"></param>
-        /// <param name="resolvedName"></param>
-        /// <param name="description"></param>
-        /// <param name="validValues"></param>
         protected internal Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
         {
             Debug.Assert(null != givenName || null != resolvedName);
@@ -52,20 +47,16 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  [INTERNAL]
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="shortName"></param>
-        /// <param name="longName"></param>
         protected internal Alias(ArgumentType type, string shortName, string longName)
             : this(type, shortName, longName, null)
         {
         }
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  [INTERNAL]
         /// </summary>
-        /// <param name="description"></param>
         protected internal Alias(string description)
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
