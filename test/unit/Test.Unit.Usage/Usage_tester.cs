@@ -58,7 +58,7 @@ namespace Test.Unit.Usage
 
             CollectionAssert.AreEqual(
                 new string[]{
-		            "USAGE: myprog [ ... flags and options ... ]",
+                    "USAGE: myprog [ ... flags and options ... ]",
                 }
             ,   actual
             );
@@ -92,7 +92,7 @@ namespace Test.Unit.Usage
 
             CollectionAssert.AreEqual(
                 new string[]{
-		            "USAGE: myprog",
+                    "USAGE: myprog",
                 }
             ,   actual
             );
@@ -126,7 +126,7 @@ namespace Test.Unit.Usage
 
             CollectionAssert.AreEqual(
                 new string[]{
-		            "USAGE: myprog <input-path>",
+                    "USAGE: myprog <input-path>",
                 }
             ,   actual
             );
@@ -172,17 +172,17 @@ namespace Test.Unit.Usage
 
             CollectionAssert.AreEqual(
                 new string[]{
-		            "USAGE: myprog [ ... flags and options ... ]",
-		            "flags/options:",
-		            " Verbosity:",
-		            " -v",
-		            " --verbose",
-		            "  runs with verbose output",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Verbosity:",
+                    " -v",
+                    " --verbose",
+                    "  runs with verbose output",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );
@@ -238,17 +238,17 @@ namespace Test.Unit.Usage
                 new string[]{
                     "CLASP.NET examples",
                     "myprog version 0.1.2 (build 3)",
-		            "USAGE: myprog [ ... flags and options ... ] <input-path>",
-		            "flags/options:",
-		            " Verbosity:",
-		            " -v",
-		            " --verbose",
-		            "  runs with verbose output",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ] <input-path>",
+                    "flags/options:",
+                    " Verbosity:",
+                    " -v",
+                    " --verbose",
+                    "  runs with verbose output",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );
@@ -304,23 +304,23 @@ namespace Test.Unit.Usage
                 new string[]{
                     "CLASP.NET examples",
                     "myprog version 0.1.2 (build 3)",
-		            "USAGE: myprog [ ... flags and options ... ]",
-		            "flags/options:",
-		            " Custom:",
-		            " -v <value>",
-		            " --verbosity=<value>",
-		            "  sets program verbosity",
-		            "  where <value> one of:",
-		            "   silent",
-		            "   terse",
-		            "   normal",
-		            "   chatty",
-		            "   verbose",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Custom:",
+                    " -v <value>",
+                    " --verbosity=<value>",
+                    "  sets program verbosity",
+                    "  where <value> one of:",
+                    "   silent",
+                    "   terse",
+                    "   normal",
+                    "   chatty",
+                    "   verbose",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );
@@ -376,23 +376,23 @@ namespace Test.Unit.Usage
                 new string[]{
                     "CLASP.NET examples",
                     "myprog version 0.1.2 (build 3)",
-		            "USAGE: myprog [ ... flags and options ... ]",
-		            "flags/options:",
-		            " Custom:",
-		            " -v <value>",
-		            " --verbosity=<value>",
-		            "  sets program verbosity",
-		            "  where <value> one of:",
-		            "   silent",
-		            "   terse",
-		            "   normal",
-		            "   chatty (default)",
-		            "   verbose",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Custom:",
+                    " -v <value>",
+                    " --verbosity=<value>",
+                    "  sets program verbosity",
+                    "  where <value> one of:",
+                    "   silent",
+                    "   terse",
+                    "   normal",
+                    "   chatty (default)",
+                    "   verbose",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );
@@ -448,23 +448,23 @@ namespace Test.Unit.Usage
                 new string[]{
                     "CLASP.NET examples",
                     "myprog version 0.1.2 (build 3)",
-		            "USAGE: myprog [ ... flags and options ... ]",
-		            "flags/options:",
-		            " Custom:",
-		            " -v <value>",
-		            " --verbosity=<value>",
-		            "  sets program verbosity",
-		            "  where <value> one of:",
-		            "   silent",
-		            "   terse",
-		            "   normal",
-		            "   chatty **DEFAULT**",
-		            "   verbose",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Custom:",
+                    " -v <value>",
+                    " --verbosity=<value>",
+                    "  sets program verbosity",
+                    "  where <value> one of:",
+                    "   silent",
+                    "   terse",
+                    "   normal",
+                    "   chatty **DEFAULT**",
+                    "   verbose",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );
@@ -520,23 +520,23 @@ namespace Test.Unit.Usage
                 new string[]{
                     "CLASP.NET examples",
                     "myprog version 0.1.2 (build 3)",
-		            "USAGE: myprog [ ... flags and options ... ]",
-		            "flags/options:",
-		            " Custom:",
-		            " -v <value>",
-		            " --verbosity=<value>",
-		            "  sets program verbosity",
-		            "  where <value> one of:",
-		            "   silent",
-		            "   terse",
-		            "   normal",
-		            "   chatty",
-		            "   verbose",
-		            " Standard:",
-		            " --help",
-		            "  shows this help and terminates",
-		            " --version",
-		            "  shows version information and terminates",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Custom:",
+                    " -v <value>",
+                    " --verbosity=<value>",
+                    "  sets program verbosity",
+                    "  where <value> one of:",
+                    "   silent",
+                    "   terse",
+                    "   normal",
+                    "   chatty",
+                    "   verbose",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
                 }
             ,   actual
             );

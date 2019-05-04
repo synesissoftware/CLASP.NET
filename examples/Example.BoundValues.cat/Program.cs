@@ -25,14 +25,14 @@ namespace Example.BoundValues.cat
         }
 
         [Clasp.Binding.BoundType]
-		struct Arguments
-		{
+        struct Arguments
+        {
             /// <summary>
             ///  Array of input paths, which will be non-<c>null</c> and will
             ///  have at least one element
             /// </summary>
-			[Clasp.Binding.BoundValues(Minimum=1)]
-			public string[] InputPaths;
+            [Clasp.Binding.BoundValues(Minimum=1)]
+            public string[] InputPaths;
 
             /// <summary>
             ///  Combination of <see cref="CatOptions"/> from CLI flags
@@ -46,33 +46,33 @@ namespace Example.BoundValues.cat
             #region implementation
             internal void _suppress_warning_CS0469()
             {
-				this.InputPaths = null;
+                this.InputPaths = null;
                 this.Options = CatOptions.None;
             }
             #endregion
-		}
+        }
 
-		static int Main(string[] argv)
-		{
-			try
-			{
-				var specifications = new Clasp.Alias[] {
+        static int Main(string[] argv)
+        {
+            try
+            {
+                var specifications = new Clasp.Alias[] {
 
-					Clasp.Util.UsageUtil.Help,
-					Clasp.Util.UsageUtil.Version,
-				};
+                    Clasp.Util.UsageUtil.Help,
+                    Clasp.Util.UsageUtil.Version,
+                };
 
                 return Clasp.Invoker.ParseAndInvokeMain(argv, specifications, (Clasp.Arguments clargs) => {
 
-					if (clargs.HasFlag("--help"))
-					{
-						return Clasp.Util.UsageUtil.ShowUsage(clargs, null);
-					}
+                    if (clargs.HasFlag("--help"))
+                    {
+                        return Clasp.Util.UsageUtil.ShowUsage(clargs, null);
+                    }
 
-					if (clargs.HasFlag("--version"))
-					{
-						return Clasp.Util.UsageUtil.ShowVersion(clargs, null);
-					}
+                    if (clargs.HasFlag("--version"))
+                    {
+                        return Clasp.Util.UsageUtil.ShowVersion(clargs, null);
+                    }
 
                     return Clasp.Invoker.InvokeMainWithBoundArgumentOfType<Program.Arguments>(clargs, (Program.Arguments prargs, Clasp.Arguments _) => {
 
@@ -104,23 +104,23 @@ namespace Example.BoundValues.cat
                             }
                         }
 
-					    return 0;
+                        return 0;
                     });
                 }
                 , Clasp.ParseOptions.TreatSinglehyphenAsValue
                 , Clasp.FailureOptions.Default
                 );
             }
-			catch (System.OutOfMemoryException)
-			{
-				throw;
-			}
-			catch (System.Exception x)
-			{
-				System.Console.Error.WriteLine("{0}: exception({1}): {2}", Clasp.Arguments.ProgramName, x.GetType(), x);
+            catch (System.OutOfMemoryException)
+            {
+                throw;
+            }
+            catch (System.Exception x)
+            {
+                System.Console.Error.WriteLine("{0}: exception({1}): {2}", Clasp.Arguments.ProgramName, x.GetType(), x);
 
-			    return 1; // Non-normative exit code
-			}
+                return 1; // Non-normative exit code
+            }
         }
     }
 }
