@@ -1,7 +1,7 @@
 ﻿
 namespace Test.Component.Wildcards
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
+    using global::Clasp;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

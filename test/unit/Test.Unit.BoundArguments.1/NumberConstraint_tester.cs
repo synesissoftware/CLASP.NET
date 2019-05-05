@@ -4,9 +4,9 @@
 
 namespace Test.Unit.BoundArguments.ns_1
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Binding;
-    using ClaspExceptions = global::SynesisSoftware.SystemTools.Clasp.Exceptions;
+    using global::Clasp;
+    using global::Clasp.Binding;
+    using ClaspExceptions = global::Clasp.Exceptions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

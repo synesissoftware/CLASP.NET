@@ -1,8 +1,6 @@
 ﻿
 namespace Example.BoundValues.cat
 {
-    using Clasp = global::SynesisSoftware.SystemTools.Clasp;
-
     using System;
 
     class Program

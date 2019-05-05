@@ -1,7 +1,8 @@
 #  **CLASP.NET** Changes
 
-## XXXX - 5th May 2019
+## 0.19.144.0 - 5th May 2019
 
+* [BREAKING CHANGE] ~ namespace ``SynesisSoftware.SystemTools.Clasp`` => ``Clasp``
 * ~ change ``Alias`` to ``Specification``
 * ~ rename ``Flag`` to ``FlagSpecification``, ``Option`` to ``OptionSpecification``
 

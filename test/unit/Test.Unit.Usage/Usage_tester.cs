@@ -1,10 +1,9 @@
 ﻿
 namespace Test.Unit.Usage
 {
-    using Clasp = global::SynesisSoftware.SystemTools.Clasp;
-    using UsageUtil = global::SynesisSoftware.SystemTools.Clasp.Util.UsageUtil;
+    using UsageUtil = global::Clasp.Util.UsageUtil;
 
-    using global::SynesisSoftware.SystemTools.Clasp.Util;
+    using global::Clasp.Util;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

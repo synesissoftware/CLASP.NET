@@ -1,8 +1,8 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 9th June 2015
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
     /// <summary>
     ///  Denotes the type of the argument.

@@ -3,8 +3,8 @@
 
 namespace Example.ShowVersionAndQuit
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
-    using UsageUtil = global::SynesisSoftware.SystemTools.Clasp.Util.UsageUtil;
+    using global::Clasp;
+    using UsageUtil = global::Clasp.Util.UsageUtil;
 
     class Program
     {

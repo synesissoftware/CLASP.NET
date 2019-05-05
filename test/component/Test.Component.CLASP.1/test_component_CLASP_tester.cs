@@ -1,7 +1,7 @@
 ﻿
 namespace test_component_CLASP_1
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
+    using global::Clasp;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

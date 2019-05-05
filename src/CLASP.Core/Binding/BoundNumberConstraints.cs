@@ -1,8 +1,8 @@
 ﻿
 // Created: 2nd May 2019
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Binding
+namespace Clasp.Binding
 {
     using System;
 

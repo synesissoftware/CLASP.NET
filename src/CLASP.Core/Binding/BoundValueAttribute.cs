@@ -1,8 +1,8 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 15th October 2017
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Binding
+namespace Clasp.Binding
 {
     using System;
     using System.Diagnostics;

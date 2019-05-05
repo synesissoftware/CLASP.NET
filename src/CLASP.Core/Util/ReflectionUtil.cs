@@ -1,8 +1,8 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Util
+namespace Clasp.Util
 {
     using System;
     using System.Collections.Generic;

@@ -1,8 +1,8 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Exceptions
+namespace Clasp.Exceptions
 {
     /// <summary>
     ///  Exception thrown to indicate a missing option.

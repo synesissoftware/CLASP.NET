@@ -4,8 +4,8 @@
 
 namespace Test.Unit.BoundArguments.ns_1
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Binding;
+    using global::Clasp;
+    using global::Clasp.Binding;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -97,7 +97,7 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(global::SynesisSoftware.SystemTools.Clasp.Exceptions.MissingValueException))]
+        [ExpectedException(typeof(global::Clasp.Exceptions.MissingValueException))]
         public void Test_has_too_few_values()
         {
             string[] argv =

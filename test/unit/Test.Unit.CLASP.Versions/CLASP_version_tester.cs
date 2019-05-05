@@ -1,8 +1,8 @@
 ﻿
 namespace Test.Unit.CLASP.Versions
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Interfaces;
+    using global::Clasp;
+    using global::Clasp.Interfaces;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

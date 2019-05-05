@@ -1,12 +1,12 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Util
+namespace Clasp.Util
 {
-    using SynesisSoftware.SystemTools.Clasp.Exceptions;
-    using SynesisSoftware.SystemTools.Clasp.Internal;
-    using SynesisSoftware.SystemTools.Clasp.Interfaces;
+    using global::Clasp.Exceptions;
+    using global::Clasp.Internal;
+    using global::Clasp.Interfaces;
 
     /// <summary>
     ///  Utility class for additional CLASP-related functionality.

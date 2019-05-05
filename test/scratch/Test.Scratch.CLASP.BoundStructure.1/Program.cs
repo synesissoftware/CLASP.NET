@@ -1,8 +1,8 @@
 ﻿
 namespace Test.Scratch.CLASP.BoundStructure.ns_1
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Binding;
+    using global::Clasp;
+    using global::Clasp.Binding;
 
     using System;
 

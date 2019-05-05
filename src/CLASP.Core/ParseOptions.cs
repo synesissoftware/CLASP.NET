@@ -1,8 +1,8 @@
 ﻿
 // Created: 9th August 2009
-// Updated: 2nd May 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
     using System;
 

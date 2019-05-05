@@ -1,7 +1,7 @@
 ﻿
 namespace Example.ShowVersion
 {
-    using UsageUtil = global::SynesisSoftware.SystemTools.Clasp.Util.UsageUtil;
+    using UsageUtil = global::Clasp.Util.UsageUtil;
 
     class Program
     {

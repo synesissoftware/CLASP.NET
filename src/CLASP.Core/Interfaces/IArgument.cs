@@ -2,7 +2,7 @@
 // Created: 17th July 2009
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Interfaces
+namespace Clasp.Interfaces
 {
     /// <summary>
     ///  Argument interface.

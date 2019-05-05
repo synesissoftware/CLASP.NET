@@ -2,9 +2,9 @@
 // Created: 17th July 2009
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
-    using SynesisSoftware.SystemTools.Clasp.Internal;
+    using global::Clasp.Internal;
 
     using System;
     using System.Collections.Generic;

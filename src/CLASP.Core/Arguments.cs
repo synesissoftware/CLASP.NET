@@ -2,11 +2,11 @@
 // Created: 17th July 2009
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
-    using SynesisSoftware.SystemTools.Clasp.Exceptions;
-    using SynesisSoftware.SystemTools.Clasp.Interfaces;
-    using SynesisSoftware.SystemTools.Clasp.Internal;
+    using global::Clasp.Exceptions;
+    using global::Clasp.Interfaces;
+    using global::Clasp.Internal;
 
     using System;
     using System.Collections.Generic;

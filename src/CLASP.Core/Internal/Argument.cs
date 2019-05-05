@@ -2,9 +2,9 @@
 // Created: 17th July 2009
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Internal
+namespace Clasp.Internal
 {
-    using SynesisSoftware.SystemTools.Clasp.Interfaces;
+    using global::Clasp.Interfaces;
 
     using System;
 

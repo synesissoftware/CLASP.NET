@@ -2,7 +2,7 @@
 // Created: 22nd June 2010
 // Updated: 5th April 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
     /// <summary>
     ///  Delegate describing the program entry point as a function

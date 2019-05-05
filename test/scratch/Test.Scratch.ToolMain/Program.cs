@@ -1,7 +1,7 @@
 ﻿
 namespace Test.Scratch.ToolMain
 {
-    using global::SynesisSoftware.SystemTools.Clasp;
+    using global::Clasp;
 
     using System;
 

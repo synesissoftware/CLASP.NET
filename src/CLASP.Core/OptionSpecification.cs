@@ -2,7 +2,7 @@
 // Created: 8th June 2015
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
     /// <summary>
     ///  An option specification.

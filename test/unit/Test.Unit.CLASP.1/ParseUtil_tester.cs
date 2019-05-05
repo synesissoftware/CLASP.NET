@@ -1,7 +1,7 @@
 ﻿
 namespace Test.Unit.CLASP.ns_1
 {
-    using global::SynesisSoftware.SystemTools.Clasp.Util;
+    using global::Clasp.Util;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

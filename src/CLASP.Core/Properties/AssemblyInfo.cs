@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
 #pragma warning disable 1607
 
@@ -20,8 +20,8 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.19.143.0")]
-[assembly: AssemblyFileVersion("0.19.143.0")]
+[assembly: AssemblyVersion("0.19.144.0")]
+[assembly: AssemblyFileVersion("0.19.144.0")]
 [assembly: AssemblyInformationalVersion("0.19")]
 
 /* ///////////////////////////// end of file //////////////////////////// */

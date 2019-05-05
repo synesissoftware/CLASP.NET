@@ -1,8 +1,8 @@
 ﻿
 // Created: 17th June 2017
-// Updated: 24th September 2017
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Extensions
+namespace Clasp.Extensions
 {
     using System.Collections.Generic;
 

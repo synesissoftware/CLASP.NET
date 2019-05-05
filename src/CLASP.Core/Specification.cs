@@ -2,7 +2,7 @@
 // Created: 23rd July 2009
 // Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp
+namespace Clasp
 {
     using System;
     using System.Collections.Generic;

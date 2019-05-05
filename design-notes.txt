@@ -6,13 +6,13 @@ Pre 1.0 tasks:
 Definites:
 ----------
 
-- change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 - ``Required`` attribute
 - works with libCLImate.NET
 - elimination of single alias and 3-param Flag() method, etc.
 - move all the classes around to make the public API and common use cases simple
 - pick up usage information from bound attributes
 
+# change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 # change ``Alias`` to ``Specification``
 # rename ``Flag`` to ``FlagSpecification``, ``Option`` to ``OptionSpecification``
 

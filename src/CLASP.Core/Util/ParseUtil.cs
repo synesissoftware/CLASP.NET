@@ -1,8 +1,8 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 5th April 2019
+// Updated: 5th May 2019
 
-namespace SynesisSoftware.SystemTools.Clasp.Util
+namespace Clasp.Util
 {
     using System;
     using System.Diagnostics;
