@@ -1,15 +1,12 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Internal
 {
     using SynesisSoftware.SystemTools.Clasp.Interfaces;
 
     using System;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     /// <summary>
     ///  [INTERNAL]

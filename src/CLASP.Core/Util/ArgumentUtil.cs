@@ -76,7 +76,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         }
 
         /// <see cref="Clasp.Util.ArgumentUtil.FindOption(Arguments, string)"/>
-        public static IArgument FindOption(Arguments args, Option option)
+        public static IArgument FindOption(Arguments args, OptionSpecification option)
         {
             return FindOption(args, option.ResolvedName);
         }

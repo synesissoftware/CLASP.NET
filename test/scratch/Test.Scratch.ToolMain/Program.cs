@@ -1,15 +1,9 @@
 ﻿
 namespace Test.Scratch.ToolMain
 {
-    using SynesisSoftware.SystemTools.Clasp;
+    using global::SynesisSoftware.SystemTools.Clasp;
 
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     class Program
     {

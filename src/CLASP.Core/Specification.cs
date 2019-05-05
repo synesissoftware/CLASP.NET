@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -11,7 +11,7 @@ namespace SynesisSoftware.SystemTools.Clasp
     /// <summary>
     ///  Represents an argument specification.
     /// </summary>
-    public abstract class Alias
+    public abstract class Specification
     {
         #region fields
 
@@ -28,7 +28,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <summary>
         ///  [INTERNAL]
         /// </summary>
-        protected internal Alias(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
+        protected internal Specification(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
         {
             Debug.Assert(null != givenName || null != resolvedName);
 
@@ -49,7 +49,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <summary>
         ///  [INTERNAL]
         /// </summary>
-        protected internal Alias(ArgumentType type, string shortName, string longName)
+        protected internal Specification(ArgumentType type, string shortName, string longName)
             : this(type, shortName, longName, null)
         {
         }
@@ -57,7 +57,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <summary>
         ///  [INTERNAL]
         /// </summary>
-        protected internal Alias(string description)
+        protected internal Specification(string description)
         {
             Debug.Assert(!String.IsNullOrEmpty(description));
 
@@ -80,9 +80,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  A flag specification.
         /// </returns>
-        public static Flag Flag(string givenName, string resolvedName, string description)
+        public static FlagSpecification Flag(string givenName, string resolvedName, string description)
         {
-            return new Flag(givenName, resolvedName, description);
+            return new FlagSpecification(givenName, resolvedName, description);
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  A flag specification.
         /// </returns>
-        public static Flag Flag(string givenName, string resolvedName)
+        public static FlagSpecification Flag(string givenName, string resolvedName)
         {
-            return new Flag(givenName, resolvedName, null);
+            return new FlagSpecification(givenName, resolvedName, null);
         }
 
         /// <summary>
@@ -106,9 +106,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  An option specification.
         /// </returns>
-        public static Option Option(string shortName, string longName)
+        public static OptionSpecification Option(string shortName, string longName)
         {
-            return new Option(shortName, longName);
+            return new OptionSpecification(shortName, longName);
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  An option specification.
         /// </returns>
-        public static Option Option(string givenName, string resolvedName, string description, params string[] validValues)
+        public static OptionSpecification Option(string givenName, string resolvedName, string description, params string[] validValues)
         {
-            return new Option(givenName, resolvedName, description, validValues);
+            return new OptionSpecification(givenName, resolvedName, description, validValues);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         }
 
         /// <summary>
-        ///  [DEPRECATED] Instead use <see cref="Clasp.Alias.Section(string)"/>.
+        ///  [DEPRECATED] Instead use <see cref="Clasp.Specification.Section(string)"/>.
         /// </summary>
         /// <param name="sectionName"></param>
         /// <returns></returns>

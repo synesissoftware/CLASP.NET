@@ -1,5 +1,10 @@
 #  **CLASP.NET** Changes
 
+## XXXX - 5th May 2019
+
+* ~ change ``Alias`` to ``Specification``
+* ~ rename ``Flag`` to ``FlagSpecification``, ``Option`` to ``OptionSpecification``
+
 ## 0.18.141.2 - 3rd May 2019
 
 * ~ fixed missing range enforcement for floating-point fields

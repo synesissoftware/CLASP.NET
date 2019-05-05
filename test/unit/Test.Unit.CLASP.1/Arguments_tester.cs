@@ -1,5 +1,4 @@
 ﻿
-
 namespace Test.Unit.CLASP.ns_1
 {
     using global::SynesisSoftware.SystemTools.Clasp;
@@ -7,9 +6,6 @@ namespace Test.Unit.CLASP.ns_1
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using System;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     [TestClass]
     public class Arguments_tester
@@ -214,7 +210,7 @@ namespace Test.Unit.CLASP.ns_1
         }
         #endregion
 
-        #region Option tests
+        #region OptionSpecification tests
 
         [TestMethod]
         public void Test_Option_1_hyphen_as_flag()
@@ -455,7 +451,7 @@ namespace Test.Unit.CLASP.ns_1
         }
         #endregion
 
-        #region Flag tests
+        #region FlagSpecification tests
 
         [TestMethod]
         public void Test_Flag_1()

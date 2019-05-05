@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -11,9 +11,6 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     /// <summary>
     ///  Utility class for additional CLASP-related functionality.
@@ -93,19 +90,19 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             public static string    FlagsAndOptionsString_Default   =   "[ ... flags and options ... ]";
 
             /// <summary>
-            ///  Option keys
+            ///  OptionSpecification keys
             /// </summary>
             public static class OptionKeys
             {
                 /// <summary>
-                ///  Option-key for specifying the assembly (of type
+                ///  OptionSpecification-key for specifying the assembly (of type
                 ///  <see cref="System.Reflection.Assembly"/>) from which
                 ///  the program version information will be elicited; if
                 ///  not specified then the entry assembly will be used
                 /// </summary>
                 public const string Assembly                    =   "assembly";
                 /// <summary>
-                ///  Option-key for specifying the program-name (of type
+                ///  OptionSpecification-key for specifying the program-name (of type
                 ///  <see cref="System.String"/>); if not specified then the
                 ///  program name will be inferred (via
                 ///  <see cref="Clasp.Arguments.ProgramName"/>
@@ -113,13 +110,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 /// </summary>
                 public const string ProgramName                 =   "program-name";
                 /// <summary>
-                ///  Option-key for specifying the separator (of type
+                ///  OptionSpecification-key for specifying the separator (of type
                 ///  <see cref="System.String"/>); defaults to
                 ///  <see cref="Clasp.Util.UsageUtil.Constants.UsageSeparator_Default"/>
                 /// </summary>
                 public const string Separator                   =   "separator";
                 /// <summary>
-                ///  Option-key for specifying the writer (of type
+                ///  OptionSpecification-key for specifying the writer (of type
                 ///  <see cref="System.IO.TextWriter"/>); if not
                 ///  specified then the writer will be inferred as either
                 ///  <see cref="System.Console.Out"/> or
@@ -128,13 +125,13 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                 /// </summary>
                 public const string Writer                      =   "writer";
                 /// <summary>
-                ///  Option-key for specifying the usage version format
+                ///  OptionSpecification-key for specifying the usage version format
                 ///  string (of type <see cref="System.String"/>); defaults to
                 ///  <see cref="Clasp.Util.UsageUtil.Constants.UsageVersionFormat_Default"/>
                 /// </summary>
                 public const string VersionFormat               =   "version-format";
                 /// <summary>
-                ///  Option-key for requesting (of type
+                ///  OptionSpecification-key for requesting (of type
                 ///  <see cref="System.Boolean"/>)
                 ///  to cause product-version, rather than file-version, to be
                 ///  used when eliciting version information
@@ -180,17 +177,17 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
 
         /// <summary>
         ///  An instance of
-        ///  <see cref="Clasp.Flag"/>
+        ///  <see cref="Clasp.FlagSpecification"/>
         ///  that provides default '--help' information.
         /// </summary>
-        public static Flag Help = new Flag(null, Constants.StandardSpecifications.Help_ResolvedName, Constants.StandardSpecifications.Help_Description);
+        public static FlagSpecification Help = new FlagSpecification(null, Constants.StandardSpecifications.Help_ResolvedName, Constants.StandardSpecifications.Help_Description);
 
         /// <summary>
         ///  An instance of
-        ///  <see cref="Clasp.Flag"/>
+        ///  <see cref="Clasp.FlagSpecification"/>
         ///  that provides default '--version' information.
         /// </summary>
-        public static Flag Version = new Flag(null, Constants.StandardSpecifications.Version_ResolvedName, Constants.StandardSpecifications.Version_Description);
+        public static FlagSpecification Version = new FlagSpecification(null, Constants.StandardSpecifications.Version_ResolvedName, Constants.StandardSpecifications.Version_Description);
         #endregion
 
         #region usage methods
@@ -665,7 +662,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
                                 sups.Stream.WriteLine("{0}{0}where <value> one of:", separator);
                                 foreach(string value in specification.ValidValues)
                                 {
-                                    Option optionSpecification = (Option)specification;
+                                    OptionSpecification optionSpecification = (OptionSpecification)specification;
 
                                     if(null != defaultIndicator && value == optionSpecification.DefaultValue)
                                     {

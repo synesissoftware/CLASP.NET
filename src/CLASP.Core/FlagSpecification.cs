@@ -1,16 +1,13 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 27th April 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     /// <summary>
     ///  A flag specification.
     /// </summary>
-    public class Flag
+    public class FlagSpecification
         : Specification
     {
         /// <summary>
@@ -27,7 +24,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="description">
         ///  The description of the flag, to be displayed in usage.
         /// </param>
-        public Flag(string givenName, string resolvedName, string description)
+        public FlagSpecification(string givenName, string resolvedName, string description)
             : base(ArgumentType.Flag, givenName, resolvedName, description)
         {
         }

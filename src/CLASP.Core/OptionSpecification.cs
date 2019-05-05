@@ -1,16 +1,13 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     /// <summary>
     ///  An option specification.
     /// </summary>
-    public class Option
+    public class OptionSpecification
         : Specification
     {
         #region fields
@@ -36,7 +33,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <param name="validValues">
         ///  Zero or more valid option values.
         /// </param>
-        public Option(string givenName, string resolvedName, string description, params string[] validValues)
+        public OptionSpecification(string givenName, string resolvedName, string description, params string[] validValues)
             : base(ArgumentType.Option, givenName, resolvedName, description, validValues)
         {
         }
@@ -52,7 +49,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  The resolved name of the flag. May not be <c>null</c>
         ///  unless <c>shortName</c> is non-<c>null</c>.
         /// </param>
-        public Option(string shortName, string longName)
+        public OptionSpecification(string shortName, string longName)
             : base(ArgumentType.Option, shortName, longName)
         {
         }
@@ -73,7 +70,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         #region operations
 
         /// <summary>
-        ///  Builder method that sets the <see cref="Clasp.Option.DefaultValue"/>
+        ///  Builder method that sets the <see cref="Clasp.OptionSpecification.DefaultValue"/>
         /// </summary>
         /// <param name="value">
         ///  The default value
@@ -81,7 +78,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         /// <returns>
         ///  The instance
         /// </returns>
-        public Option WithDefaultValue(string value)
+        public OptionSpecification WithDefaultValue(string value)
         {
             this.DefaultValue = value;
 

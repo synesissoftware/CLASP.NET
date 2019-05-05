@@ -4,7 +4,7 @@
 namespace Example.ShowVersionAndQuit
 {
     using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Util;
+    using UsageUtil = global::SynesisSoftware.SystemTools.Clasp.Util.UsageUtil;
 
     class Program
     {

@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 3rd May 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -10,9 +10,6 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     /// <summary>
     ///  Class that provides <b>ExecuteAroundMethod</b> functionality for
@@ -701,7 +698,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
 
                 // /////////////////////
-                // Flag
+                // FlagSpecification
 
                 Binding.BoundFlagAttribute  flagAttribute   =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundFlagAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
@@ -725,7 +722,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                 }
 
                 // /////////////////////
-                // Option
+                // OptionSpecification
 
                 Binding.BoundOptionAttribute    optionAttribute    =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundOptionAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 

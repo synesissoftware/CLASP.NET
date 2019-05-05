@@ -13,9 +13,6 @@ namespace Test.Unit.Usage
     using System.Linq;
     using System.Reflection;
 
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     [TestClass]
     public class Usage_tester
     {
@@ -135,14 +132,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_default_usage_info()
         {
-            Clasp.Flag Flag_Verbose = new Clasp.Flag(@"-v", @"--verbose", @"runs with verbose output");
+            Clasp.FlagSpecification Flag_Verbose = new Clasp.FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Verbosity:"),
+                Clasp.Specification.Section("Verbosity:"),
                 Flag_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };
@@ -191,14 +188,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_custom_usage_info()
         {
-            Clasp.Flag Flag_Verbose = new Clasp.Flag(@"-v", @"--verbose", @"runs with verbose output");
+            Clasp.FlagSpecification Flag_Verbose = new Clasp.FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Verbosity:"),
+                Clasp.Specification.Section("Verbosity:"),
                 Flag_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };
@@ -257,14 +254,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_custom_usage_info_with_values_for_option()
         {
-            Clasp.Option Option_Verbose = new Clasp.Option(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose");
+            Clasp.OptionSpecification Option_Verbose = new Clasp.OptionSpecification(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Custom:"),
+                Clasp.Specification.Section("Custom:"),
                 Option_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };
@@ -329,14 +326,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_custom_usage_info_with_values_for_option_with_default_value_with_default_default_indicator()
         {
-            Clasp.Option Option_Verbose = new Clasp.Option(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
+            Clasp.OptionSpecification Option_Verbose = new Clasp.OptionSpecification(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Custom:"),
+                Clasp.Specification.Section("Custom:"),
                 Option_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };
@@ -401,14 +398,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_custom_usage_info_with_values_for_option_with_default_value_with_custom_default_indicator()
         {
-            Clasp.Option Option_Verbose = new Clasp.Option(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
+            Clasp.OptionSpecification Option_Verbose = new Clasp.OptionSpecification(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Custom:"),
+                Clasp.Specification.Section("Custom:"),
                 Option_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };
@@ -473,14 +470,14 @@ namespace Test.Unit.Usage
         [TestMethod]
         public void Test_specs_with_custom_usage_info_with_values_for_option_with_default_value_with_suppressed_default_indicator()
         {
-            Clasp.Option Option_Verbose = new Clasp.Option(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
+            Clasp.OptionSpecification Option_Verbose = new Clasp.OptionSpecification(@"-v", @"--verbosity", @"sets program verbosity", "silent", "terse", "normal", "chatty", "verbose").WithDefaultValue("chatty");
 
-            Specification[] specifications =
+            Clasp.Specification[] specifications =
             {
-                Specification.Section("Custom:"),
+                Clasp.Specification.Section("Custom:"),
                 Option_Verbose,
 
-                Specification.Section("Standard:"),
+                Clasp.Specification.Section("Standard:"),
                 UsageUtil.Help,
                 UsageUtil.Version,
             };

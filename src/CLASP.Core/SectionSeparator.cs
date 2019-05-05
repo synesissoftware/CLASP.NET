@@ -1,14 +1,14 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 9th June 2015
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
     /// <summary>
-    ///  A section-separator alias.
+    ///  A section-separator specification.
     /// </summary>
     public class SectionSeparator
-        : Alias
+        : Specification
     {
         /// <summary>
         ///  Constructs an instance of the class.

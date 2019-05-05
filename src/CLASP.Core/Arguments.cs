@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -13,9 +13,6 @@ namespace SynesisSoftware.SystemTools.Clasp
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
 
     /// <summary>
     ///  This class, the main API class for the library, represents a parsed
@@ -175,16 +172,16 @@ namespace SynesisSoftware.SystemTools.Clasp
                     {
                         // This is where the decision-making occurs:
                         //
-                        // 1. If "-", then Option, else
-                        // 2. If contains '=', then Option, checking alias, else
+                        // 1. If "-", then OptionSpecification, else
+                        // 2. If contains '=', then OptionSpecification, checking alias, else
                         // 3. If an alias recognises the whole argument, then process it, else
-                        // 4. If it has two (or more) hyphens, then Option, else
+                        // 4. If it has two (or more) hyphens, then OptionSpecification, else
                         // 5. If have specifications, treat each character in a one-hyphen argument as a flag, and process its alias (if defined), else
                         // 6. Treat as flag
 
                         if("-" == arg)
                         {
-                            // 1. If "-", then Option
+                            // 1. If "-", then OptionSpecification
 
                             if(0 != (ParseOptions.TreatSinglehyphenAsValue & options))
                             {
@@ -201,7 +198,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
                             if(equal >= 0)
                             {
-                                // 2. Contains '=', so Option
+                                // 2. Contains '=', so OptionSpecification
 
                                 string name     =   arg.Substring(0, equal);
                                 string value    =   arg.Substring(1 + equal);
@@ -212,7 +209,7 @@ namespace SynesisSoftware.SystemTools.Clasp
                                 {
                                     if(String.IsNullOrEmpty(value))
                                     {
-                                        Option optionSpec = spec as Option;
+                                        OptionSpecification optionSpec = spec as OptionSpecification;
 
                                         if(null != optionSpec)
                                         {
@@ -416,7 +413,7 @@ namespace SynesisSoftware.SystemTools.Clasp
 
             if(null != lastOption)
             {
-                Option optionSpec = lastOption.Specification as Option;
+                OptionSpecification optionSpec = lastOption.Specification as OptionSpecification;
 
                 if(null != optionSpec)
                 {
@@ -656,7 +653,7 @@ namespace SynesisSoftware.SystemTools.Clasp
         ///  <b>true</b> if a flag of that name is found; <b>false</b>
         ///  otherwise.
         /// </returns>
-        public bool HasFlag(Flag flag)
+        public bool HasFlag(FlagSpecification flag)
         {
             return HasFlag(flag.ResolvedName);
         }

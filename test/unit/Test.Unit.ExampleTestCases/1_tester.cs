@@ -13,18 +13,15 @@ namespace Test.Unit.ExampleTestCases
     using System.Collections.Generic;
     using System.Linq;
 
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     [TestClass]
     public class _1_tester
     {
-        Specification[] Specifications =
+        Clasp.Specification[] Specifications =
         {
-            Specification.Flag("-d", "--debug", "runs in Debug mode"),
+            Clasp.Specification.Flag("-d", "--debug", "runs in Debug mode"),
 
-            Specification.Option("-v", "--verbosity", "specifies the verbosity", "[s]ilent", "[t]erse", "[n]ormal", "[c]hatty", "[v]erbose"),
-            Specification.Flag("-c", "--verbosity=chatty", null),
+            Clasp.Specification.Option("-v", "--verbosity", "specifies the verbosity", "[s]ilent", "[t]erse", "[n]ormal", "[c]hatty", "[v]erbose"),
+            Clasp.Specification.Flag("-c", "--verbosity=chatty", null),
 
             Clasp.Util.UsageUtil.Help,
             Clasp.Util.UsageUtil.Version,
@@ -438,9 +435,9 @@ namespace Test.Unit.ExampleTestCases
         [TestMethod]
         public void Test_one_option_that_has_default_with_empty_value()
         {
-            Specification[] specifications = (Specification[])Specifications.Clone();
+            Clasp.Specification[] specifications = (Clasp.Specification[])Specifications.Clone();
 
-            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+            specifications[1] = ((Clasp.OptionSpecification)specifications[1]).WithDefaultValue("terse");
 
             string[] argv =
             {
@@ -482,9 +479,9 @@ namespace Test.Unit.ExampleTestCases
         [TestMethod]
         public void Test_one_option_that_has_default_with_missing_value()
         {
-            Specification[] specifications = (Specification[])Specifications.Clone();
+            Clasp.Specification[] specifications = (Clasp.Specification[])Specifications.Clone();
 
-            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+            specifications[1] = ((Clasp.OptionSpecification)specifications[1]).WithDefaultValue("terse");
 
             string[] argv =
             {
@@ -526,9 +523,9 @@ namespace Test.Unit.ExampleTestCases
         [TestMethod]
         public void Test_one_option_that_has_default_with_missing_value_and_values_designator()
         {
-            Specification[] specifications = (Specification[])Specifications.Clone();
+            Clasp.Specification[] specifications = (Clasp.Specification[])Specifications.Clone();
 
-            specifications[1] = ((Clasp.Option)specifications[1]).WithDefaultValue("terse");
+            specifications[1] = ((Clasp.OptionSpecification)specifications[1]).WithDefaultValue("terse");
 
             string[] argv =
             {

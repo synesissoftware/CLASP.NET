@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 4th April 2019
+// Updated: 5th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Util
 {
@@ -15,7 +15,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
         #region constants
 
         /// <summary>
-        ///  The default false-forms used for the comparisons
+        ///  The (lower-case) default false-forms used for the comparisons
         /// </summary>
         public static readonly string[] FalseForms =
         {
@@ -23,7 +23,7 @@ namespace SynesisSoftware.SystemTools.Clasp.Util
             "no"
         };
         /// <summary>
-        ///  The default true-forms used for the comparisons
+        ///  The (lower-case) default true-forms used for the comparisons
         /// </summary>
         public static readonly string[] TrueForms =
         {

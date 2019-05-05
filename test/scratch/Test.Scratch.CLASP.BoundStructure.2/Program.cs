@@ -12,9 +12,6 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
 
     using global::System;
 
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     [BoundType]
     struct ProgramArguments
     {
@@ -44,7 +41,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
             }
         }
 
-        internal static readonly Flag       Flag_Verbose    =   new Flag(@"-v", @"--verbose", @"runs with verbose output");
+        internal static readonly Specification       Flag_Verbose    =   new FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
 
         internal static readonly Specification[]    Specifications         =
         {

@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 4th April 2019
+// Updated: 5th April 2019
 
 namespace SynesisSoftware.SystemTools.Clasp
 {
@@ -47,14 +47,28 @@ namespace SynesisSoftware.SystemTools.Clasp
     public delegate void ToolMainVA(Arguments args);
 
     /// <summary>
-    ///
+    ///  Delegate describing the program entry point as a function taking an
+    ///  instance of <typeparamref name="T"/> and an instance of
+    ///  <see cref="Clasp.Arguments"/>, and returning <c>int</c>
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="boundArgs"></param>
-    /// <param name="args"></param>
+    /// <typeparam name="T">
+    ///  The type of the bound structure (or class)
+    /// </typeparam>
+    /// <param name="boundArgs">
+    ///  The instance of <typeparamref name="T"/> bound to the command-line
+    ///  arguments (as represented by <paramref name="args"/>)
+    /// </param>
+    /// <param name="args">
+    ///  The instance of <see cref="Clasp.Arguments"/> obtained from parsing
+    ///  the command-line
+    /// </param>
     /// <returns>
+    ///  The return value to be returned by the enclosing <c>Main()</c>
+    ///  entry point.
     /// </returns>
     /// <example>
+    ///  T.B.C. For now, look at the example <b>Example.BoundValues.cat</b>
+    ///  in the distribution
     /// </example>
     public delegate int ToolMainWithBoundArguments<T>(T boundArgs, Arguments args) where T : new();
 }

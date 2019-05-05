@@ -56,7 +56,7 @@ namespace Example.BoundValues.cat
         {
             try
             {
-                var specifications = new Clasp.Alias[] {
+                var specifications = new Clasp.Specification[] {
 
                     Clasp.Util.UsageUtil.Help,
                     Clasp.Util.UsageUtil.Version,

@@ -1,12 +1,9 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 30th April 2019
+// Updated: 5th May 2019
 
 namespace SynesisSoftware.SystemTools.Clasp.Interfaces
 {
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     /// <summary>
     ///  Argument interface.
     /// </summary>

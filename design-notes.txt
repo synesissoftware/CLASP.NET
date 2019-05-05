@@ -7,19 +7,20 @@ Definites:
 ----------
 
 - change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
-- change ``Alias`` to ``Specification``
 - ``Required`` attribute
 - works with libCLImate.NET
 - elimination of single alias and 3-param Flag() method, etc.
-- rename Flag to FlagSpecification, Option to OptionSpecification
 - move all the classes around to make the public API and common use cases simple
-- sort out ParseOptions / ParsingOptions verb/noun inconsistencies
 - pick up usage information from bound attributes
+
+# change ``Alias`` to ``Specification``
+# rename ``Flag`` to ``FlagSpecification``, ``Option`` to ``OptionSpecification``
 
 # highlighting 'default' value in ShowUsage()
 # dependency libraries - RubLE4, Diagnosticism - are in NuGet
 # enumerator/enumeration flag binding
 # support floating-point fields in binding
+? sort out ParseOptions / ParsingOptions verb/noun inconsistencies
 
 Maybes:
 -------

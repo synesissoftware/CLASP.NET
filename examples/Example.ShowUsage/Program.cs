@@ -4,14 +4,11 @@
 namespace Example.ShowUsage
 {
     using global::SynesisSoftware.SystemTools.Clasp;
-    using global::SynesisSoftware.SystemTools.Clasp.Util;
-
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
+    using UsageUtil = global::SynesisSoftware.SystemTools.Clasp.Util.UsageUtil;
 
     class Program
     {
-        static Flag Flag_Verbose    =   new Flag(@"-v", @"--verbose", @"runs with verbose output");
+        static Specification Flag_Verbose = new FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
 
         static Specification[] specifications =
         {

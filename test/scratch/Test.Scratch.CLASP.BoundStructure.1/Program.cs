@@ -6,9 +6,6 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_1
 
     using System;
 
-    // NOTE: this alias is temporary
-    using Specification = global::SynesisSoftware.SystemTools.Clasp.Alias;
-
     [BoundType]
     class ArgumentSet
     {

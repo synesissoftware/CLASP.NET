@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyInformationalVersion("0.18")]
+[assembly: AssemblyInformationalVersion("0.19")]
 
 // DO NOT CHANGE these version numbers!
 [assembly: AssemblyVersion("0.1.3.2")]
