@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("CLASP.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("CLASP.NET core API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Synesis Software Pty Ltd")]
 [assembly: AssemblyProduct("CLASP.NET")]
