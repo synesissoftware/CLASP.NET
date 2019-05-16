@@ -49,6 +49,32 @@ namespace Test.Unit.ExampleTestCases
 
             Assert.IsFalse(args.CheckOption("--abcd", out v));
             Assert.IsFalse(args.CheckOption("--verbosity", out v));
+
+            try
+            {
+                args.RequireOption("--abcd", out v);
+            }
+            catch(Clasp.Exceptions.MissingOptionException x)
+            {
+                Assert.IsTrue(x.Message.Contains("option not specified"));
+                Assert.IsTrue(x.Message.Contains("--abcd"));
+
+                Assert.IsNull(x.Argument);
+            }
+
+            try
+            {
+                int v2;
+
+                args.RequireOption("--verbosity", out v2);
+            }
+            catch(Clasp.Exceptions.MissingOptionException x)
+            {
+                Assert.IsTrue(x.Message.Contains("option not specified"));
+                Assert.IsTrue(x.Message.Contains("--verbosity"));
+
+                Assert.IsNull(x.Argument);
+            }
         }
 
         [TestMethod]
@@ -218,6 +244,36 @@ namespace Test.Unit.ExampleTestCases
 
             Assert.IsTrue(option0.Used);
             Assert.AreEqual("silent", v);
+
+            try
+            {
+                args.RequireOption("--abcd", out v);
+            }
+            catch(Clasp.Exceptions.MissingOptionException x)
+            {
+                Assert.IsTrue(x.Message.Contains("option not specified"));
+                Assert.IsTrue(x.Message.Contains("--abcd"));
+
+                Assert.IsNull(x.Argument);
+            }
+
+            args.RequireOption("--verbosity", out v);
+            Assert.AreEqual("silent", v);
+
+            try
+            {
+                int v2;
+
+                args.RequireOption("--verbosity", out v2);
+            }
+            catch(Clasp.Exceptions.InvalidOptionValueException x)
+            {
+                Assert.IsTrue(x.Message.Contains("invalid value for option"));
+                Assert.IsTrue(x.Message.Contains("--verbosity"));
+
+                Assert.IsNotNull(x.Argument);
+                Assert.AreEqual("--verbosity", x.Argument.ResolvedName);
+            }
         }
 
         [TestMethod]

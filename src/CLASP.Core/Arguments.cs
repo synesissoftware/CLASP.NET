@@ -584,7 +584,10 @@ namespace Clasp
         ///  <b>true</b> if the named option is present in the command-line
         ///  arguments; <b>false</b> otherwise.
         /// </returns>
-        /// <exception cref="System.FormatException">
+        /// <exception cref="Clasp.Exceptions.MissingOptionValueException">
+        ///  Thrown if the given option's value is missing
+        /// </exception>
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
         ///  Thrown if the given option's value cannot be converted to
         ///  <c>int</c>.
         /// </exception>
@@ -616,6 +619,59 @@ namespace Clasp
             value = 0;
 
             return false;
+        }
+
+        /// <summary>
+        ///  Obtains a required option
+        /// </summary>
+        /// <param name="resolvedName">
+        ///  The name of the option
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <returns>
+        ///  The option value
+        /// </returns>
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
+        ///  Thrown if the given option has not been specified
+        /// </exception>
+        public void RequireOption(string resolvedName, out string value)
+        {
+            if(!CheckOption(resolvedName, out value))
+            {
+                throw new MissingOptionException(resolvedName);
+            }
+        }
+
+        /// <summary>
+        ///  Obtains a required option
+        /// </summary>
+        /// <param name="resolvedName">
+        ///  The name of the option
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <returns>
+        ///  The option value
+        /// </returns>
+        /// <exception cref="Clasp.Exceptions.MissingOptionException">
+        ///  Thrown if the given option has not been specified
+        /// </exception>
+        /// <exception cref="Clasp.Exceptions.MissingOptionValueException">
+        ///  Thrown if the given option's value is missing
+        /// </exception>
+        /// <exception cref="Clasp.Exceptions.InvalidOptionValueException">
+        ///  Thrown if the given option's value cannot be converted to
+        ///  <c>int</c>.
+        /// </exception>
+        public void RequireOption(string resolvedName, out int value)
+        {
+            if(!CheckOption(resolvedName, out value))
+            {
+                throw new MissingOptionException(resolvedName);
+            }
         }
 
         /// <summary>
