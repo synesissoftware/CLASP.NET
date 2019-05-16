@@ -248,6 +248,8 @@ namespace Test.Unit.ExampleTestCases
             try
             {
                 args.RequireOption("--abcd", out v);
+
+                Assert.Fail("should not get here");
             }
             catch(Clasp.Exceptions.MissingOptionException x)
             {
@@ -265,6 +267,8 @@ namespace Test.Unit.ExampleTestCases
                 int v2;
 
                 args.RequireOption("--verbosity", out v2);
+
+                Assert.Fail("should not get here");
             }
             catch(Clasp.Exceptions.InvalidOptionValueException x)
             {
@@ -273,6 +277,57 @@ namespace Test.Unit.ExampleTestCases
 
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual("--verbosity", x.Argument.ResolvedName);
+            }
+
+            try
+            {
+                int v2;
+
+                args.RequireValue(0, out v2);
+
+                Assert.Fail("should not get here");
+            }
+            catch(Clasp.Exceptions.MissingValueException x)
+            {
+                Assert.IsTrue(x.Message.Contains("required value not specified"));
+
+                Assert.IsNull(x.Argument);
+            }
+        }
+
+        public void Test_invalid_value()
+        {
+            string[] argv =
+            {
+                "abc",
+                "123",
+                "a456",
+            };
+
+            Clasp.Arguments args = new Clasp.Arguments(argv, Specifications);
+
+            string  s;
+            int     i;
+
+            args.RequireValue(0, out s);
+            Assert.AreEqual("abc", s);
+
+            args.RequireValue(1, out i);
+            Assert.AreEqual(123, i);
+
+            try
+            {
+                args.RequireValue(2, out i);
+
+                Assert.Fail("should not get here");
+            }
+            catch(Clasp.Exceptions.InvalidValueException x)
+            {
+                Assert.IsTrue(x.Message.Contains("invalid value for value argument"));
+
+                Assert.IsNotNull(x.Argument);
+                Assert.AreEqual(2, x.Argument.Index);
+                Assert.AreEqual("a456", x.Argument.Value);
             }
         }
 

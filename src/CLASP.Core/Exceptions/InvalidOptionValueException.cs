@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 5th May 2019
+// Updated: 17th May 2019
 
 namespace Clasp.Exceptions
 {
@@ -26,7 +26,7 @@ namespace Clasp.Exceptions
             ///  The default message used by
             ///  <see cref="Clasp.Exceptions.InvalidOptionValueException"/>
             /// </summary>
-            public const string     DefaultMessage  =   @"invalid value for option";
+            public const string     DefaultMessage  =   @"invalid value for option argument";
         }
         #endregion
 

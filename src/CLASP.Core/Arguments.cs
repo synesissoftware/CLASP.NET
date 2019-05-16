@@ -715,6 +715,63 @@ namespace Clasp
         }
 
         /// <summary>
+        ///  Obtains a required value
+        /// </summary>
+        /// <param name="index">
+        ///  The index of the value
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///  Thrown if the given index is invalid
+        /// </exception>
+        /// <exception cref="Clasp.Exceptions.MissingValueException">
+        ///  Thrown if no value is available at the required index
+        /// </exception>
+        public void RequireValue(int index, out string value)
+        {
+            if(index < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("index", index, "index must be non-negative");
+            }
+
+            if(!(index < Values.Count))
+            {
+                throw new MissingValueException(index);
+            }
+
+            value = Values[index].Value;
+        }
+
+        /// <summary>
+        ///  Obtains a required value
+        /// </summary>
+        /// <param name="index">
+        ///  The index of the value
+        /// </param>
+        /// <param name="value">
+        ///  Variable into which the specified option's value is written.
+        /// </param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///  Thrown if the given index is invalid
+        /// </exception>
+        /// <exception cref="Clasp.Exceptions.MissingValueException">
+        ///  Thrown if no value is available at the required index
+        /// </exception>
+        public void RequireValue(int index, out int value)
+        {
+            string s;
+
+            RequireValue(index, out s);
+
+            if(!int.TryParse(s, out value))
+            {
+                throw new InvalidValueException(Values[index], typeof(int));
+            }
+        }
+
+        /// <summary>
         ///  Provides a string representation of the object
         /// </summary>
         /// <returns></returns>

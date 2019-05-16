@@ -106,12 +106,12 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new InvalidOptionValueException(new Argument(ArgumentType.Flag, -1, "--before", "-b", null), typeof(DateTime));
 
-            Assert.AreEqual("invalid value for option: -b", x.Message);
+            Assert.AreEqual("invalid value for option argument: -b", x.Message);
 
 
             x = new InvalidOptionValueException(new Argument(ArgumentType.Flag, -1, "--before", null, null), typeof(DateTime));
 
-            Assert.AreEqual("invalid value for option: --before", x.Message);
+            Assert.AreEqual("invalid value for option argument: --before", x.Message);
         }
 
         [TestMethod]

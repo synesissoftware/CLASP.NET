@@ -63,6 +63,7 @@
     <Compile Include="Exceptions\ClaspException.cs" />
     <Compile Include="Exceptions\FlagOrOptionArgumentException.cs" />
     <Compile Include="Exceptions\InvalidOptionValueException.cs" />
+    <Compile Include="Exceptions\InvalidValueException.cs" />
     <Compile Include="Exceptions\MissingOptionException.cs" />
     <Compile Include="Exceptions\MissingOptionValueException.cs" />
     <Compile Include="Exceptions\MissingValueException.cs" />

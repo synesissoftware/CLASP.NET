@@ -97,7 +97,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 Assert.IsNotNull(x.ExpectedType);
                 Assert.AreEqual(typeof(int), x.ExpectedType);
 
-                Assert.AreEqual("invalid value for option: --height: must not be negative", x.Message);
+                Assert.AreEqual("invalid value for option argument: --height: must not be negative", x.Message);
             }
         }
 
@@ -131,7 +131,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 Assert.IsNotNull(x.ExpectedType);
                 Assert.AreEqual(typeof(int), x.ExpectedType);
 
-                Assert.AreEqual("invalid value for option: --height: whole number required", x.Message);
+                Assert.AreEqual("invalid value for option argument: --height: whole number required", x.Message);
             }
         }
 
