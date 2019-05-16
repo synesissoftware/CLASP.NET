@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.19.146.0 - 17th May 2019
+
+* + added ``Arguments.RequireOption()`` method (overloads)
+
 ## 0.19.145.1 - 6th May 2019
 
 * [BREAKING CHANGE] ~ namespace ``SynesisSoftware.SystemTools.Clasp`` => ``Clasp``
