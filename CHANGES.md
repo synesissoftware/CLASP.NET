@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.21.148.0 - 18th May 2019
+
+* + added Clasp.Util assembly (formerly SynesisSoftware.SystemTools.Util)
+
 ## 0.20.147.1 - 17th May 2019
 
 * + added ``Arguments.RequireValue()`` method (overloads)

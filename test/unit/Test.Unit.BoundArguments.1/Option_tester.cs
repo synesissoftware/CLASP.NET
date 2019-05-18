@@ -487,11 +487,15 @@ namespace Test.Unit.BoundArguments.ns_1
                     Assert.Fail("should not get here");
 
                     return 0;
-                });
+                }
+                , ArgumentBindingOptions.Default
+                , ParseOptions.Default
+                , FailureOptions.None
+                );
             }
             catch(ClaspExceptions.OptionValueOutOfRangeException x)
             {
-                ;
+                Assert.IsNotNull(x.Argument);
             }
         }
         #endregion
