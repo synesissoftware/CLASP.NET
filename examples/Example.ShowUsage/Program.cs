@@ -30,10 +30,10 @@ namespace Example.ShowUsage
 
         static int Main(string[] argv)
         {
-            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args) =>
-                {
-                    return UsageUtil.ShowUsage(args, new UsageUtil.UsageParams{ InfoLines = info_lines });
-                });
+            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args) => {
+
+                return UsageUtil.ShowUsage(args, new UsageUtil.UsageParams{ InfoLines = info_lines });
+            });
         }
     }
 }

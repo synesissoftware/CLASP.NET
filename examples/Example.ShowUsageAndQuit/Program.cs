@@ -8,7 +8,7 @@ namespace Example.ShowUsage
 
     class Program
     {
-        static Specification Flag_Verbose    =   new FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
+        static Specification Flag_Verbose = new FlagSpecification(@"-v", @"--verbose", @"runs with verbose output");
 
         static Specification[] specifications =
         {
