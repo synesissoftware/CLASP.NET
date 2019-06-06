@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.21.149.1 - 6th June 2019
+
+* ~ fix to unit-test
+
 ## 0.21.148.0 - 18th May 2019
 
 * + added Clasp.Util assembly (formerly SynesisSoftware.SystemTools.Util)
