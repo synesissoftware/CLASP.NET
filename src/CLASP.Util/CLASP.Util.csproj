@@ -41,14 +41,17 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="recls.NET.Core, Version=2.1.1103.1, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\recls.NET.2.1.1103.1\lib\net40\recls.NET.Core.dll</HintPath>
+    <Reference Include="recls.NET.Core, Version=2.3.1110.1, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\recls.NET.2.3.1110.1\lib\net40\recls.NET.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="GatherOptions.cs" />
     <Compile Include="SearchSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

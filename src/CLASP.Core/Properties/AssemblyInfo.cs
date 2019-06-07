@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 6th June 2019
+// Updated: 7th June 2019
 
 #pragma warning disable 1607
 
@@ -10,19 +10,12 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("CLASP.Core")]
 [assembly: AssemblyDescription("CLASP.NET core API")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Synesis Software Pty Ltd")]
-[assembly: AssemblyProduct("CLASP.NET")]
-[assembly: AssemblyCopyright("Copyright © Synesis Software Pty Ltd 2009-2019")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.21.149.1")]
-[assembly: AssemblyFileVersion("0.21.149.1")]
-[assembly: AssemblyInformationalVersion("0.21")]
+[assembly: AssemblyVersion("0.21.150.2")]
+[assembly: AssemblyFileVersion("0.21.150.2")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -46,6 +46,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\src\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Alias_tester.cs" />
     <Compile Include="Arguments_tester.cs" />
     <Compile Include="ArgumentType_tester.cs" />

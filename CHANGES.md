@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.21.150.2 - 7th June 2019
+
+* + added SolutionInfo.cs
+
 ## 0.21.149.1 - 6th June 2019
 
 * ~ fix to unit-test

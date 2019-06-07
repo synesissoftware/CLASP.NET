@@ -45,6 +45,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="Arguments.cs" />
     <Compile Include="ArgumentType.cs" />
     <Compile Include="Binding\BoundEnumAttribute.cs" />

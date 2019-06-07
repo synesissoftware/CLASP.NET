@@ -45,6 +45,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\src\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="EmptyStructure_tester.cs" />
     <Compile Include="NumberConstraint_tester.cs" />
     <Compile Include="Option_tester.cs" />

@@ -50,6 +50,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\src\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="test_component_CLASP_tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
