@@ -1,9 +1,9 @@
 ﻿
 /* /////////////////////////////////////////////////////////////////////////
- * File:        AssemblyInfo.cs
+ * File:        SolutionInfo.cs
  *
  * Created:     17th July 2009
- * Updated:     7th June 2019
+ * Updated:     8th June 2019
  *
  * Home:        http://pantheios.org/
  *
@@ -46,7 +46,7 @@ using System.Reflection;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyInformationalVersion("0.22.151.0")]
+[assembly: AssemblyInformationalVersion("0.22.152.0")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
