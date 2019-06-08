@@ -77,6 +77,7 @@
     <Compile Include="FlagSpecification.cs" />
     <Compile Include="Interfaces\IArgument.cs" />
     <Compile Include="Internal\Argument.cs" />
+    <Compile Include="Internal\OrderedDictionary.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="OptionSpecification.cs" />
     <Compile Include="ParseOptions.cs" />
@@ -95,7 +96,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)../../scripts/register_for_skipped_verification.cmd "$(TargetPath)" "$(Configuration)"</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)/scripts/register_for_skipped_verification.cmd "$(TargetPath)" "$(Configuration)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

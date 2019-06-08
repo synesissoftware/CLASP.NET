@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 5th May 2019
+// Updated: 8th June 2019
 
 namespace Clasp
 {
@@ -20,6 +20,7 @@ namespace Clasp
         private readonly string                         m_resolvedName;
         private readonly string                         m_description;
         private readonly string[]                       m_validValues;
+        private readonly bool                           m_isSection;
         private readonly IDictionary<string, object>    m_extras;
         #endregion
 
@@ -42,6 +43,7 @@ namespace Clasp
             m_resolvedName  =   resolvedName;
             m_description   =   description;
             m_validValues   =   validValues;
+            m_isSection     =   false;
 
             m_extras        =   new Dictionary<string, object>();
         }
@@ -66,10 +68,24 @@ namespace Clasp
             m_resolvedName  =   null;
             m_description   =   description;
             m_validValues   =   new string[0];
+            m_isSection     =   true;
         }
         #endregion
 
         #region creator methods
+
+        /// <summary>
+        ///  Creates an aliases for a flag or option
+        /// </summary>
+        /// <param name="resolvedName">The resolved name</param>
+        /// <param name="aliasName">The alias name</param>
+        /// <returns>
+        ///  A specification representing the alias
+        /// </returns>
+        public static Clasp.Specification Alias(string resolvedName, string aliasName)
+        {
+            return new FlagSpecification(aliasName, resolvedName, null);
+        }
 
         /// <summary>
         ///  Creates a flag specification.
@@ -225,6 +241,23 @@ namespace Clasp
             get
             {
                 return m_extras;
+            }
+        }
+
+        /// <summary>
+        ///  Indicates whether it is a separator
+        /// </summary>
+        internal bool IsSection
+        {
+            get
+            {
+                if(m_isSection)
+                {
+                    Debug.Assert(String.IsNullOrWhiteSpace(ResolvedName));
+                    Debug.Assert(String.IsNullOrWhiteSpace(GivenName));
+                }
+
+                return m_isSection;
             }
         }
         #endregion

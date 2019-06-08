@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 5th May 2019
+// Updated: 7th June 2019
 
 namespace Clasp.Binding
 {
@@ -31,7 +31,7 @@ namespace Clasp.Binding
         #region properties
 
         /// <summary>
-        ///
+        ///  The resolved name
         /// </summary>
         public string ResolvedName
         {
@@ -40,6 +40,21 @@ namespace Clasp.Binding
                 return m_resolvedName;
             }
         }
+
+        /// <summary>
+        ///  The alias
+        /// </summary>
+        public string Alias { get; set; }
+
+        /// <summary>
+        ///  Help description string
+        /// </summary>
+        public string HelpDescription { get; set; }
+
+        /// <summary>
+        ///  Help description section
+        /// </summary>
+        public string HelpSection { get; set; }
         #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 5th May 2019
+// Updated: 7th June 2019
 
 namespace Clasp.Util
 {
@@ -427,6 +427,90 @@ namespace Clasp.Util
 
             return ShowUsage_(args.Specifications, null, usageParams, options);
         }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications, according to the given
+        ///  <paramref name="options"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="options">
+        ///  Options by which the operation's behaviour will be modified
+        /// </param>
+        /// <returns>
+        ///  The appropriate exit code for the process, which can be returned
+        ///  from <c>Main()</c>
+        /// </returns>
+        public static int ShowBoundUsage<T>(Arguments args, IDictionary<string, object> options)
+        {
+            Debug.Assert(null != args);
+
+            return ShowBoundUsage_<T>(args.Specifications, null, null, options);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications, according to the given
+        ///  <paramref name="usageParams"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="usageParams">
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
+        ///  elements that will be used to constitute the full usage
+        ///  output
+        /// </param>
+        /// <returns>
+        ///  The appropriate exit code for the process, which can be returned
+        ///  from <c>Main()</c>
+        /// </returns>
+        public static int ShowBoundUsage<T>(Arguments args, UsageParams usageParams)
+        {
+            Debug.Assert(null != args);
+
+            return ShowBoundUsage_<T>(args.Specifications, null, usageParams, null);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications, according to the given
+        ///  <paramref name="usageParams"/>
+        ///  and
+        ///  <paramref name="options"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="usageParams">
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
+        ///  elements that will be used to constitute the full usage
+        ///  output
+        /// </param>
+        /// <param name="options">
+        ///  Options by which the operation's behaviour will be modified
+        /// </param>
+        /// <returns>
+        ///  The appropriate exit code for the process, which can be returned
+        ///  from <c>Main()</c>
+        /// </returns>
+        public static int ShowBoundUsage<T>(Arguments args, UsageParams usageParams, IDictionary<string, object> options)
+        {
+            Debug.Assert(null != args);
+
+            return ShowBoundUsage_<T>(args.Specifications, null, usageParams, options);
+        }
         #endregion
 
         #region version methods
@@ -531,6 +615,13 @@ namespace Clasp.Util
         #endregion
 
         #region implementation
+
+        private static int ShowBoundUsage_<T>(IEnumerable<Specification> specs, int? exitCode, UsageParams? usageParams, IDictionary<string, object> options)
+        {
+            Specification[] mergedSpecs = Invoker.MergeSpecificationsForBoundType<T>(specs);
+
+            return ShowUsage_(mergedSpecs, exitCode, usageParams, options);
+        }
 
         private static int ShowUsage_(IEnumerable<Specification> specs, int? exitCode, UsageParams? usageParams, IDictionary<string, object> options)
         {

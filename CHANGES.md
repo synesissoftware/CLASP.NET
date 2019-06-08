@@ -1,5 +1,13 @@
 #  **CLASP.NET** Changes
 
+## 0.22.151.0 - 8th June 2019
+
+* + now supports binding of ``struct`` as well as ``class`` types
+* + now a bound type's attributes can contain ``Alias``, ``HelpSection``, and ``HelpDescription``, which may be merged with the ``Specification[]`` list for parsing and for showing usage
+* + added ``Invoker.ParseAndInvokeMain<T>()`` overloads, which now merges a bound type's attributes into the given specifications before parsing
+* + added ``UsageUtil.ShowBoundUsage<>``, which invokes help in respect of a bound structure, and merges a bound type's attributes into the given specifications before displaying usage
+* + added ``Specification.Alias()`` method, which defines aliases for flags or options
+
 ## 0.21.150.2 - 7th June 2019
 
 * + added SolutionInfo.cs

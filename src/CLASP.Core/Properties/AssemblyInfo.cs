@@ -1,11 +1,12 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 7th June 2019
+// Updated: 8th June 2019
 
 #pragma warning disable 1607
 
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("CLASP.Core")]
@@ -14,8 +15,13 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.21.150.2")]
-[assembly: AssemblyFileVersion("0.21.150.2")]
+[assembly: AssemblyVersion("0.22.151.0")]
+[assembly: AssemblyFileVersion("0.22.151.0")]
+
+#if DEBUG
+
+[assembly: InternalsVisibleTo("Test.Unit.OrderedDictionary")]
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

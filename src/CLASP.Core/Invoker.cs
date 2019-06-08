@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th May 2019
+// Updated: 8th June 2019
 
 namespace Clasp
 {
@@ -9,6 +9,7 @@ namespace Clasp
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
 
     /// <summary>
@@ -40,11 +41,28 @@ namespace Clasp
 
             #region properties
 
+            /// <summary>
+            ///  (Copy of) the bound arguments
+            /// </summary>
             public T BoundArguments
             {
                 get
                 {
                     return Util.ReflectionUtil.CastTo<T>(m_boundArguments);
+                }
+            }
+
+            /// <summary>
+            ///  This is required for internal assignment (via
+            ///  <see cref="System.Reflection.FieldInfo.SetValue"/>) to avoid
+            ///  boxing-related failure (to assign bound results to the final
+            ///  returned element).
+            /// </summary>
+            internal object BindingArgument
+            {
+                get
+                {
+                    return m_boundArguments;
                 }
             }
             #endregion
@@ -166,6 +184,37 @@ namespace Clasp
             ParseAndInvokeMainVA(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
         }
 
+        /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="specifications"/> combined with the help-related
+        ///  attributes (if any) of the bound type's fields,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type
+        /// </typeparam>
+        /// <param name="argv">
+        ///  The program arguments
+        /// </param>
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of
+        ///  the arguments, which will be supplemented by the help-related
+        ///  attributes (if any) of the bound type's fields
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
+        public static int ParseAndInvokeMain<T>(string[] argv, Specification[] specifications, ToolMain toolMain)
+        {
+            ParseOptions effectiveParseOptions = DeriveEffectiveParseOptions_<T>(null);
+
+            return ParseAndInvokeMain<T>(argv, specifications, toolMain, ParseOptions.None, Constants.FailureOptions_Default);
+        }
+
         #region obsolete operations
 
         /// Obsolete
@@ -211,6 +260,50 @@ namespace Clasp
             Debug.Assert(null != toolMain);
 
             Arguments arguments = new Arguments(argv, specifications, parseOptions);
+
+            return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
+        }
+
+        /// <summary>
+        ///  Parses the given program arguments, according to the given
+        ///  <paramref name="specifications"/> combined with the help-related
+        ///  attributes (if any) of the bound type's fields,
+        ///  and then invokes the program main entry point specified by
+        ///  <paramref name="toolMain"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type
+        /// </typeparam>
+        /// <param name="argv">
+        ///  The program arguments, as obtained from <c>Main()</c>
+        /// </param>
+        /// <param name="specifications">
+        ///  Zero or more specifications that control the interpretation of
+        ///  the arguments, which will be supplemented by the help-related
+        ///  attributes (if any) of the bound type's fields
+        /// </param>
+        /// <param name="toolMain">
+        ///  The entry point to the main program logic
+        /// </param>
+        /// <param name="parseOptions">
+        ///  A combination of <see cref="Clasp.ParseOptions">parseOptions</see>
+        ///  that control the parsing behaviour
+        /// </param>
+        /// <param name="failureOptions">
+        ///  Options that control behaviour in the event of
+        ///  <paramref name="toolMain"/> throwing an exception
+        /// </param>
+        /// <returns>
+        ///  The return value from <c>toolMain</c>.
+        /// </returns>
+        public static int ParseAndInvokeMain<T>(string[] argv, Specification[] specifications, ToolMain toolMain, ParseOptions parseOptions, FailureOptions failureOptions)
+        {
+            Debug.Assert(null != argv);
+            Debug.Assert(null != toolMain);
+
+            Specification[] mergedSpecs = Invoker.MergeSpecificationsForBoundType<T>(specifications);
+
+            Arguments arguments = new Arguments(argv, mergedSpecs, parseOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -458,9 +551,346 @@ namespace Clasp
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, bindingOptions);
         }
+
+        #region internal facilities
+
+        private static IList<Tuple<Specification, string>> SpecificationSectionPairsForBoundType<T>(IEnumerable<Specification> specifications)
+        {
+            List<Tuple<Specification, string>> results = new List<Tuple<Specification,string>>();
+
+            Type                type        =   typeof(T);
+            FieldInfo[]         fields      =   Util.ReflectionUtil.GetTypeFields(type);
+
+            foreach(FieldInfo fi in fields)
+            {
+                Binding.BoundEnumeratorAttribute[] enumeratorAttributes = Util.ReflectionUtil.GetAttributes<Binding.BoundEnumeratorAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
+
+                foreach(var ea in enumeratorAttributes)
+                {
+                    Specification   specification   =   Specification.Flag(ea.Alias, ea.ResolvedName, ea.HelpDescription);
+                    string          sectionName     =   ea.HelpSection;
+
+                    if(String.IsNullOrWhiteSpace(sectionName))
+                    {
+                        sectionName = "";
+                    }
+
+                    results.Add(Tuple.Create(specification, sectionName));
+                }
+
+                Binding.BoundFlagAttribute flagAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundFlagAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
+
+                if(null != flagAttribute)
+                {
+                    Specification   specification   =   Specification.Option(flagAttribute.Alias, flagAttribute.ResolvedName, flagAttribute.HelpDescription);
+                    string          sectionName     =   flagAttribute.HelpSection;
+
+                    if(String.IsNullOrWhiteSpace(sectionName))
+                    {
+                        sectionName = "";
+                    }
+
+                    results.Add(Tuple.Create(specification, sectionName));
+                }
+
+                Binding.BoundOptionAttribute optionAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundOptionAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
+
+                if(null != optionAttribute)
+                {
+                    Specification   specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
+                    string          sectionName     =   optionAttribute.HelpSection;
+
+                    if(String.IsNullOrWhiteSpace(sectionName))
+                    {
+                        sectionName = "";
+                    }
+
+                    results.Add(Tuple.Create(specification, sectionName));
+                }
+            }
+
+            return results;
+        }
+
+        private static OrderedDict<string, IList<Specification>> StructureFromSpecifications(IEnumerable<Specification> specs)
+        {
+            var                 structure       =   new OrderedDict<string, IList<Specification>>();
+
+            string              sectionName     =   null;
+
+            foreach(Specification spec in specs)
+            {
+                if(spec.IsSection)
+                {
+                    if(!structure.Contains(spec.Description))
+                    {
+                        structure.Add(spec.Description, new List<Specification>());
+                    }
+
+                    sectionName = spec.Description;
+                }
+                else
+                {
+                    if(!structure.Contains(sectionName))
+                    {
+                        structure.Add(sectionName, new List<Specification>());
+                    }
+
+                    structure[sectionName].Add(spec);
+                }
+            }
+
+            return structure;
+        }
+
+        private static Tuple<IList<Specification>, int> LookupSpecificationInStructure(OrderedDict<string, IList<Specification>> structure, Specification spec)
+        {
+            foreach(var pair in structure)
+            {
+                var k = pair.Key;
+                var v = pair.Value;
+
+                for(int i = 0; v.Count != i; ++i)
+                {
+                    Specification sp = v[i];
+
+                    if(spec.ResolvedName == sp.ResolvedName)
+                    {
+                        return Tuple.Create(v, i);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        internal static Specification[] MergeSpecificationsForBoundType<T>(IEnumerable<Specification> specifications)
+        {
+            if(specifications.Any((spec) => spec.IsSection))
+            {
+                var                     structure   =   StructureFromSpecifications(specifications);
+                var                     pairs       =   SpecificationSectionPairsForBoundType<T>(specifications);
+                IList<Specification>    firstSpecs  =   new List<Specification>();
+
+                foreach(var pair in pairs)
+                {
+                    Specification                       tspec   =   pair.Item1;
+                    Tuple<IList<Specification>, int>    tuple   =   LookupSpecificationInStructure(structure, tspec);
+
+                    // If the type's specification already exists anyway within the given specifications ...
+                    if(null != tuple)
+                    {
+                        // ... then see whether should update
+                        bool            changed     =   false;
+                        Specification   sspec       =   tuple.Item1[tuple.Item2];
+                        string          alias       =   sspec.GivenName;
+                        string          desc        =   sspec.Description;
+                        string          resolved    =   sspec.ResolvedName;
+
+                        if(String.IsNullOrWhiteSpace(alias) && !String.IsNullOrWhiteSpace(tspec.GivenName))
+                        {
+                            alias   =   tspec.GivenName;
+                            changed =   true;
+                        }
+
+                        if(String.IsNullOrWhiteSpace(desc) && !String.IsNullOrWhiteSpace(tspec.Description))
+                        {
+                            desc    =   tspec.Description;
+                            changed =   true;
+                        }
+
+                        if(changed)
+                        {
+                            switch(sspec.Type)
+                            {
+                            case ArgumentType.Flag:
+
+                                tuple.Item1[tuple.Item2] = Specification.Flag(alias, resolved, desc);
+                                break;
+                            case ArgumentType.Option:
+
+                                tuple.Item1[tuple.Item2] = Specification.Option(alias, resolved, desc, sspec.ValidValues);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // The type's specification does not exist in the given specifications
+
+                        string                  sectionName     =   pair.Item2;
+                        IList<Specification>    sectionSpecs;
+
+                        if(!structure.TryGetValue(sectionName, out sectionSpecs))
+                        {
+                            structure.Add(sectionName, new List<Specification>());
+                        }
+
+                        structure[sectionName].Add(tspec);
+                    }
+                }
+
+                // Now rebuild, taking the blanks first
+
+                List<Specification> namedSpecs  =   new List<Specification>();
+                List<Specification> emptySpecs  =   new List<Specification>();
+
+                foreach(var pair0 in structure)
+                {
+                    string                  sectionName     =   pair0.Key;
+                    IList<Specification>    sectionSpecs    =   pair0.Value;
+
+                    IList<Specification>    targetSpecs;
+
+                    if(String.IsNullOrWhiteSpace(sectionName))
+                    {
+                        targetSpecs = emptySpecs;
+                    }
+                    else
+                    {
+                        targetSpecs = namedSpecs;
+
+                        targetSpecs.Add(Specification.Section(sectionName));
+                    }
+
+                    foreach(Specification spec in sectionSpecs)
+                    {
+                        targetSpecs.Add(spec);
+                    }
+                }
+
+                List<Specification> results = new List<Specification>(emptySpecs.Count + namedSpecs.Count);
+
+                results.AddRange(emptySpecs);
+                results.AddRange(namedSpecs);
+
+                return results.ToArray();
+            }
+            else
+            {
+                List<Specification> currSpecs   =   new List<Specification>(specifications);
+                List<Specification> newSpecs    =   new List<Specification>();
+                List<Specification> lastSpecs   =   new List<Specification>(2);
+
+                var                 pairs       =   SpecificationSectionPairsForBoundType<T>(specifications);
+
+                foreach(var pair in pairs)
+                {
+                    newSpecs.Add(pair.Item1);
+                }
+
+                int? lastHelpIndex      =   null;
+                int? lastVersionIndex   =   null;
+                int? lastSectionIndex   =   null;
+
+                for(int i = 0; currSpecs.Count != i; ++i)
+                {
+                    var cs = currSpecs[i];
+
+                    switch(cs.ResolvedName)
+                    {
+                    case "--help":
+
+                        lastHelpIndex = i;
+                        break;
+                    case "--version":
+
+                        lastVersionIndex = i;
+                        break;
+                    default:
+
+                        if(cs.IsSection)
+                        {
+                            lastSectionIndex = i;
+                        }
+                        break;
+                    }
+                }
+
+                if((lastHelpIndex.HasValue && lastHelpIndex >= currSpecs.Count - 2) && (lastVersionIndex.HasValue && lastVersionIndex >= currSpecs.Count - 2))
+                {
+                    // If "--help" and "--version" were the last two ...
+
+                    lastSpecs.Insert(0, currSpecs[currSpecs.Count - 1]);
+                    currSpecs.RemoveAt(currSpecs.Count - 1);
+
+                    lastSpecs.Insert(0, currSpecs[currSpecs.Count - 1]);
+                    currSpecs.RemoveAt(currSpecs.Count - 1);
+
+                    // ... and the preceding item was a section ...
+
+                    if(lastSectionIndex.HasValue && lastSectionIndex == currSpecs.Count - 1 && (lastSectionIndex < lastHelpIndex || lastSectionIndex < lastVersionIndex))
+                    {
+                        // ... then move it to the start of the last-specs
+
+                        lastSpecs.Insert(0, currSpecs[currSpecs.Count - 1]);
+                        currSpecs.RemoveAt(currSpecs.Count - 1);
+                    }
+                }
+
+                foreach(var ns in newSpecs)
+                {
+                    int ix = currSpecs.FindIndex((cs) => cs.ResolvedName == ns.ResolvedName);
+
+                    if(ix >= 0)
+                    {
+                        var cs = currSpecs[ix];
+
+                        Specification s = null;
+
+                        if(!String.IsNullOrWhiteSpace(ns.Description))
+                        {
+                            switch(cs.Type)
+                            {
+                            case ArgumentType.Flag:
+
+                                s = Specification.Flag(cs.GivenName, cs.ResolvedName, ns.Description);
+                                break;
+                            case ArgumentType.Option:
+
+                                s = Specification.Option(cs.GivenName, cs.ResolvedName, ns.Description, cs.ValidValues);
+                                break;
+                            }
+                        }
+
+                        if(null != s)
+                        {
+                            currSpecs[ix] = s;
+                        }
+                    }
+                    else
+                    {
+                        currSpecs.Add(ns);
+                    }
+                }
+
+                currSpecs.AddRange(lastSpecs);
+
+                return currSpecs.ToArray();
+            }
+        }
+        #endregion
         #endregion
 
         #region implementation
+
+        private static ArgumentBindingOptions DeriveEffectiveBindingOptions_<T>(ArgumentBindingOptions? bindingOptions)
+        {
+            Type                        type                    =   typeof(T);
+            Binding.BoundTypeAttribute  typeAttribute           =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+
+            ArgumentBindingOptions       effectiveBindingOptions   =   bindingOptions ?? Constants.BindingOptions_Default;
+
+            if(null != typeAttribute)
+            {
+                if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
+                {
+                    effectiveBindingOptions = typeAttribute.BindingOptions;
+                }
+            }
+
+            return effectiveBindingOptions;
+        }
 
         private static ParseOptions DeriveEffectiveParseOptions_<T>(ParseOptions? parsingOptions)
         {
@@ -629,17 +1059,7 @@ namespace Clasp
             // /////////////////////
             // type & parse-options
 
-            Binding.BoundTypeAttribute  typeAttribute           =   Util.ReflectionUtil.GetFirstAttributeOrNull<Binding.BoundTypeAttribute>(type, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
-
-            ArgumentBindingOptions      effectiveBindingOptions =   bindingOptions ?? Constants.BindingOptions_Default;
-
-            if(null != typeAttribute)
-            {
-                if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
-                {
-                    effectiveBindingOptions = typeAttribute.BindingOptions;
-                }
-            }
+            ArgumentBindingOptions  effectiveBindingOptions =   DeriveEffectiveBindingOptions_<T>(bindingOptions);
 
             // ///////////////////////////////////
             // iterate the fields
@@ -691,7 +1111,7 @@ namespace Clasp
                             }
                         }
 
-                        fi.SetValue(retVal.BoundArguments, Enum.ToObject(enumerationAttribute.Type, value));
+                        fi.SetValue(retVal.BindingArgument, Enum.ToObject(enumerationAttribute.Type, value));
                     }
 
                     continue;
@@ -716,7 +1136,7 @@ namespace Clasp
 
                     bool flagSpecified = Util.ArgumentUtil.FlagSpecified(args, flagAttribute.ResolvedName);
 
-                    fi.SetValue(retVal.BoundArguments, flagSpecified);
+                    fi.SetValue(retVal.BindingArgument, flagSpecified);
 
                     continue;
                 }
@@ -801,7 +1221,7 @@ namespace Clasp
                         continue;
                     }
 
-                    fi.SetValue(retVal.BoundArguments, value);
+                    fi.SetValue(retVal.BindingArgument, value);
 
                     continue;
                 }
@@ -854,7 +1274,7 @@ namespace Clasp
                         }
                     }
 
-                    fi.SetValue(retVal.BoundArguments, value);
+                    fi.SetValue(retVal.BindingArgument, value);
                 }
 
                 // /////////////////////
@@ -897,7 +1317,7 @@ namespace Clasp
 
                     // now deal with the fact that it might be null
 
-                    object              collection_ =   fi.GetValue(retVal.BoundArguments);
+                    object              collection_ =   fi.GetValue(retVal.BindingArgument);
 
                     ICollection<string> collection  =   Util.ReflectionUtil.CastTo<ICollection<string>>(collection_);
 
@@ -954,12 +1374,12 @@ namespace Clasp
 
                         collection.CopyTo(ar, 0);
 
-                        fi.SetValue(retVal.BoundArguments, ar);
+                        fi.SetValue(retVal.BindingArgument, ar);
                     }
                     else
                     if(null == collection_)
                     {
-                        fi.SetValue(retVal.BoundArguments, collection);
+                        fi.SetValue(retVal.BindingArgument, collection);
                     }
                 }
             }
