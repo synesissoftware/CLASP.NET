@@ -10,7 +10,7 @@ Definites:
 - works with libCLImate.NET
 - elimination of single alias and 3-param Flag() method, etc.
 - move all the classes around to make the public API and common use cases simple
-- pick up usage information from bound attributes
+# pick up usage information from bound attributes
 
 # change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 # change ``Alias`` to ``Specification``

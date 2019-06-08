@@ -10,10 +10,10 @@ namespace Example.ShowVersionAndQuit
     {
         static void Main(string[] argv)
         {
-            Invoker.ParseAndInvokeMainVA(argv, null, (Arguments clargs) =>
-                {
-                    UsageUtil.ShowVersionAndQuit(clargs, Invoker.Constants.ExitCode_Success);
-                });
+            Invoker.ParseAndInvokeMainVA(argv, null, (Arguments clargs) => {
+
+                UsageUtil.ShowVersionAndQuit(clargs, Invoker.Constants.ExitCode_Success);
+            });
         }
     }
 }

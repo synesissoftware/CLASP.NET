@@ -16,6 +16,8 @@ namespace Clasp.Binding
     {
         #region fields
 
+        private ArgumentBindingOptions?     m_bindingOptions;
+        private ParseOptions?               m_parsingOptions;
         #endregion
 
         #region construction
@@ -33,12 +35,46 @@ namespace Clasp.Binding
         /// <summary>
         ///  The binding options specified with the attribute
         /// </summary>
-        public ArgumentBindingOptions BindingOptions { get; set; }
+        public ArgumentBindingOptions BindingOptions
+        {
+            get
+            {
+                return m_bindingOptions.HasValue ? m_bindingOptions.Value : ArgumentBindingOptions.Default;
+            }
+            set
+            {
+                m_bindingOptions = value;
+            }
+        }
+        internal ArgumentBindingOptions? GivenBindingOptions
+        {
+            get
+            {
+                return m_bindingOptions;
+            }
+        }
 
         /// <summary>
         ///  The parsing options specified with the attribute
         /// </summary>
-        public ParseOptions ParsingOptions { get; set; }
+        public ParseOptions ParsingOptions
+        {
+            get
+            {
+                return m_parsingOptions.HasValue ? m_parsingOptions.Value : ParseOptions.Default;
+            }
+            set
+            {
+                m_parsingOptions = value;
+            }
+        }
+        internal ParseOptions? GivenParsingOptions
+        {
+            get
+            {
+                return m_parsingOptions;
+            }
+        }
 
         /// <summary>
         ///  If <c>true</c> the attribute's parse options take precedence

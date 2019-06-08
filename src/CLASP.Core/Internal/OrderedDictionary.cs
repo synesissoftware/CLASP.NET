@@ -154,7 +154,7 @@ namespace Clasp.Internal
         {
             get
             {
-                return m_od.Count;    
+                return m_od.Count;
             }
         }
 

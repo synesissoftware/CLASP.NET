@@ -1,5 +1,5 @@
 ﻿
-namespace Example.BoundValues.cat
+namespace Example.ParseAndBind
 {
     using CatArguments = global::Clasp.Examples.Common.Programs.Cat.Arguments;
     using CatLogic = global::Clasp.Examples.Common.Programs.Cat.Logic;
@@ -14,7 +14,7 @@ namespace Example.BoundValues.cat
             {
                 var specifications = CatArguments.Constants.Specifications;
 
-                return Clasp.Invoker.ParseAndInvokeMain<CatArguments>(argv, specifications, (Clasp.Arguments clargs) => {
+                return Clasp.Invoker.ParseAndInvokeMainWithBoundArgumentOfType<CatArguments>(argv, specifications, (CatArguments prargs, Clasp.Arguments clargs) => {
 
                     if (clargs.HasFlag(Clasp.Util.UsageUtil.Help))
                     {
@@ -26,10 +26,7 @@ namespace Example.BoundValues.cat
                         return Clasp.Util.UsageUtil.ShowVersion(clargs, null);
                     }
 
-                    return Clasp.Invoker.InvokeMainWithBoundArgumentOfType<CatArguments>(clargs, (CatArguments prargs, Clasp.Arguments _) => {
-
-                        return CatLogic.Run(prargs, Console.Out, Console.Error);
-                    });
+                    return CatLogic.Run(prargs, Console.Out, Console.Error);
                 });
             }
             catch (System.OutOfMemoryException)

@@ -49,6 +49,10 @@
       <Project>{7923339F-23C3-42B8-8D9F-7D3ABC297091}</Project>
       <Name>CLASP.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\CLASP.Examples.Common\CLASP.Examples.Common.csproj">
+      <Project>{72BB5985-15D7-4830-980A-E727772635D0}</Project>
+      <Name>CLASP.Examples.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -24,9 +24,9 @@ namespace Clasp
         {
             #region fields
 
-            public bool             Succeeded;
-            public int              ExitCode;
-            private readonly object m_boundArguments;
+            public bool                     Succeeded;
+            public int                      ExitCode;
+            private readonly object         m_boundArguments;
             #endregion
 
             #region construction
@@ -112,6 +112,7 @@ namespace Clasp
         #region fields
 
         private static readonly IDictionary<Binding.BoundNumberConstraints, string> sm_bnc_names;
+        private static readonly Specification[]                                     sm_noSpecifications;
         #endregion
 
         #region construction
@@ -124,6 +125,19 @@ namespace Clasp
             sm_bnc_names[Binding.BoundNumberConstraints.MustBePositive]     =   "must be positive";
             sm_bnc_names[Binding.BoundNumberConstraints.MustBeNonNegative]  =   "must not be negative";
             sm_bnc_names[Binding.BoundNumberConstraints.MustBeNonPositive]  =   "must not be positive";
+
+            sm_noSpecifications = new Specification[0];
+        }
+        #endregion
+
+        #region properties
+
+        internal static Specification[] NoSpecifications
+        {
+            get
+            {
+                return sm_noSpecifications;
+            }
         }
         #endregion
 
@@ -666,6 +680,11 @@ namespace Clasp
 
         internal static Specification[] MergeSpecificationsForBoundType<T>(IEnumerable<Specification> specifications)
         {
+            if(null == specifications)
+            {
+                return NoSpecifications;
+            }
+
             if(specifications.Any((spec) => spec.IsSection))
             {
                 var                     structure   =   StructureFromSpecifications(specifications);
@@ -885,7 +904,10 @@ namespace Clasp
             {
                 if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
                 {
-                    effectiveBindingOptions = typeAttribute.BindingOptions;
+                    if(typeAttribute.GivenBindingOptions.HasValue)
+                    {
+                        effectiveBindingOptions = typeAttribute.GivenBindingOptions.Value;
+                    }
                 }
             }
 
@@ -903,7 +925,10 @@ namespace Clasp
             {
                 if(typeAttribute.AttributeOptionsHavePrecedence || !parsingOptions.HasValue)
                 {
-                    effectiveParseOptions = typeAttribute.ParsingOptions;
+                    if(typeAttribute.GivenParsingOptions.HasValue)
+                    {
+                        effectiveParseOptions = typeAttribute.GivenParsingOptions.Value;
+                    }
                 }
             }
 
@@ -944,7 +969,7 @@ namespace Clasp
         {
             ParseOptions effectiveParseOptions = DeriveEffectiveParseOptions_<T>(parseOptions);
 
-            return Invoker.ParseAndInvokeMain(argv, specifications, (Arguments args2) => {
+            return Invoker.ParseAndInvokeMain<T>(argv, specifications, (Arguments args2) => {
 
                 RetVal<T> r = ParseBoundArguments_<T>(args2, bindingOptions);
 

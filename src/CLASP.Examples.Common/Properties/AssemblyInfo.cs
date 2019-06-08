@@ -1,5 +1,5 @@
 ﻿
-// Created: 10th August 2009
+// Created: 7th June 2019
 // Updated: 8th June 2019
 
 #pragma warning disable 1607
@@ -8,8 +8,8 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CLASP.Util")]
-[assembly: AssemblyDescription("CLASP.NET utility API")]
+[assembly: AssemblyTitle("Clasp.Examples.Common")]
+[assembly: AssemblyDescription("CLASP.NET examples common library")]
 
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]

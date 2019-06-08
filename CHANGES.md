@@ -1,5 +1,11 @@
 #  **CLASP.NET** Changes
 
+## 0.22.152.1 - 8th June 2019
+
+* ~ adjusted response to ``BoundTypeAttribute`` recognising ``AttributeOptionsHavePrecedence`` only for properties specified, rather than all defaults
+* + added CLASP.Examples.Common, containing common code for several examples
+* + added examples Example.ParseAndBind.cat, Example.ShowBoundUsage
+
 ## 0.22.151.0 - 8th June 2019
 
 * + now supports binding of ``struct`` as well as ``class`` types
