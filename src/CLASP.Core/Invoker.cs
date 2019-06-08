@@ -54,7 +54,7 @@ namespace Clasp
 
             /// <summary>
             ///  This is required for internal assignment (via
-            ///  <see cref="System.Reflection.FieldInfo.SetValue"/>) to avoid
+            ///  <see cref="System.Reflection.FieldInfo.SetValue(object, object)"/>) to avoid
             ///  boxing-related failure (to assign bound results to the final
             ///  returned element).
             /// </summary>
