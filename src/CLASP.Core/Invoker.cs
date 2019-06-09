@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 8th June 2019
+// Updated: 9th June 2019
 
 namespace Clasp
 {
@@ -564,6 +564,30 @@ namespace Clasp
         public static int InvokeMainWithBoundArgumentOfType<T>(Arguments args, ToolMainWithBoundArguments<T> toolMain, ArgumentBindingOptions bindingOptions) where T : new()
         {
             return InvokeMainAndParseBoundArgumentOfType_<T>(args, toolMain, bindingOptions);
+        }
+
+        /// <summary>
+        ///  Allows for wrapping an operation that may fail, according to
+        ///  the given <paramref name="failureOptions"/>
+        /// </summary>
+        /// <param name="arguments">
+        ///  Arguments parameter to be passed to as argument to
+        ///  <paramref name="f"/>
+        /// </param>
+        /// <param name="failureOptions">
+        ///  Flags that control the handling of any exceptions
+        /// </param>
+        /// <param name="f">
+        ///  The function to be implemented
+        /// </param>
+        /// <returns>
+        ///  <see cref="Constants.ExitCode_Failure"/> otherwise if any
+        ///  exceptions are thrown; the return value from
+        ///  <paramref name="f"/> otherwise
+        /// </returns>
+        public static int ExecuteAroundArguments(Arguments arguments, FailureOptions failureOptions, Func<Arguments, int> f)
+        {
+            return do_invoke_(arguments, failureOptions, f);
         }
 
         #region internal facilities

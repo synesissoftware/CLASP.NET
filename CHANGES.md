@@ -1,5 +1,10 @@
 #  **CLASP.NET** Changes
 
+## 0.23.154.0 - 9th June 2019
+
+* + added ``UsageUtil.ShowBoundUsageAndQuit()`` method (overloads)
+* + added ``Invoker.ExecuteAroundArguments()`` method
+
 ## 0.22.152.1 - 8th June 2019
 
 * ~ adjusted response to ``BoundTypeAttribute`` recognising ``AttributeOptionsHavePrecedence`` only for properties specified, rather than all defaults

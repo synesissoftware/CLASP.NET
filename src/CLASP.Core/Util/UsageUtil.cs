@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 7th June 2019
+// Updated: 9th June 2019
 
 namespace Clasp.Util
 {
@@ -211,6 +211,27 @@ namespace Clasp.Util
 
         /// <summary>
         ///  Shows usage for the attached specifications and exits the process
+        ///  with the given exit code.
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated.
+        /// </param>
+        public static void ShowBoundUsageAndQuit<T>(Arguments args, int exitCode)
+        {
+            Debug.Assert(null != args);
+
+            ShowBoundUsage_<T>(args.Specifications, exitCode, null, null);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications and exits the process
         ///  with the given exit code, according to the given
         ///  <paramref name="options"/>
         /// </summary>
@@ -228,6 +249,31 @@ namespace Clasp.Util
             Debug.Assert(null != args);
 
             ShowUsage_(args.Specifications, exitCode, null, options);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications and exits the process
+        ///  with the given exit code, according to the given
+        ///  <paramref name="options"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated
+        /// </param>
+        /// <param name="options">
+        ///  Options by which the operation's behaviour will be modified
+        /// </param>
+        public static void ShowBoundUsageAndQuit<T>(Arguments args, int exitCode, IDictionary<string, object> options)
+        {
+            Debug.Assert(null != args);
+
+            ShowBoundUsage_<T>(args.Specifications, exitCode, null, options);
         }
 
         /// <summary>
@@ -257,6 +303,33 @@ namespace Clasp.Util
         ///  Shows usage for the attached specifications and exits the process
         ///  with the given exit code, according to the given
         ///  <paramref name="usageParams"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated
+        /// </param>
+        /// <param name="usageParams">
+        ///  An instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
+        ///  elements that will be used to constitute the full usage
+        ///  output
+        /// </param>
+        public static void ShowBoundUsageAndQuit<T>(Arguments args, int exitCode, UsageParams usageParams)
+        {
+            Debug.Assert(null != args);
+
+            ShowBoundUsage_<T>(args.Specifications, exitCode, usageParams, null);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications and exits the process
+        ///  with the given exit code, according to the given
+        ///  <paramref name="usageParams"/>
         ///  and
         ///  <paramref name="options"/>
         /// </summary>
@@ -279,6 +352,38 @@ namespace Clasp.Util
             Debug.Assert(null != args);
 
             ShowUsage_(args.Specifications, exitCode, usageParams, options);
+        }
+
+        /// <summary>
+        ///  Shows usage for the attached specifications and exits the process
+        ///  with the given exit code, according to the given
+        ///  <paramref name="usageParams"/>
+        ///  and
+        ///  <paramref name="options"/>
+        /// </summary>
+        /// <typeparam name="T">
+        ///  The bound type, whose help elements may be merged into the given
+        ///  <paramref name="args"/>' specifications
+        /// </typeparam>
+        /// <param name="args">
+        ///  Parsed program arguments. May not be <c>null</c>
+        /// </param>
+        /// <param name="exitCode">
+        ///  The code by which the process will be terminated
+        /// </param>
+        /// <param name="usageParams">
+        ///  A instance of the <see cref="Clasp.Util.UsageUtil.UsageParams"/> structure containing
+        ///  elements that will be used to constitute the full usage
+        ///  output
+        /// </param>
+        /// <param name="options">
+        ///  Options by which the operation's behaviour will be modified
+        /// </param>
+        public static void ShowBoundUsageAndQuit<T>(Arguments args, int exitCode, UsageParams usageParams, IDictionary<string, object> options)
+        {
+            Debug.Assert(null != args);
+
+            ShowBoundUsage_<T>(args.Specifications, exitCode, usageParams, options);
         }
 
         /// <summary>
