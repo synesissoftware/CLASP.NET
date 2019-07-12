@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 9th June 2019
+// Updated: 13th July 2019
 
 namespace Clasp
 {
@@ -608,7 +608,7 @@ namespace Clasp
                     Specification   specification   =   Specification.Flag(ea.Alias, ea.ResolvedName, ea.HelpDescription);
                     string          sectionName     =   ea.HelpSection;
 
-                    if(String.IsNullOrWhiteSpace(sectionName))
+                    if (String.IsNullOrWhiteSpace(sectionName))
                     {
                         sectionName = "";
                     }
@@ -618,12 +618,12 @@ namespace Clasp
 
                 Binding.BoundFlagAttribute flagAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundFlagAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
 
-                if(null != flagAttribute)
+                if (null != flagAttribute)
                 {
                     Specification   specification   =   Specification.Option(flagAttribute.Alias, flagAttribute.ResolvedName, flagAttribute.HelpDescription);
                     string          sectionName     =   flagAttribute.HelpSection;
 
-                    if(String.IsNullOrWhiteSpace(sectionName))
+                    if (String.IsNullOrWhiteSpace(sectionName))
                     {
                         sectionName = "";
                     }
@@ -633,12 +633,12 @@ namespace Clasp
 
                 Binding.BoundOptionAttribute optionAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundOptionAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
 
-                if(null != optionAttribute)
+                if (null != optionAttribute)
                 {
                     Specification   specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
                     string          sectionName     =   optionAttribute.HelpSection;
 
-                    if(String.IsNullOrWhiteSpace(sectionName))
+                    if (String.IsNullOrWhiteSpace(sectionName))
                     {
                         sectionName = "";
                     }
@@ -658,9 +658,9 @@ namespace Clasp
 
             foreach(Specification spec in specs)
             {
-                if(spec.IsSection)
+                if (spec.IsSection)
                 {
-                    if(!structure.Contains(spec.Description))
+                    if (!structure.Contains(spec.Description))
                     {
                         structure.Add(spec.Description, new List<Specification>());
                     }
@@ -669,7 +669,7 @@ namespace Clasp
                 }
                 else
                 {
-                    if(!structure.Contains(sectionName))
+                    if (!structure.Contains(sectionName))
                     {
                         structure.Add(sectionName, new List<Specification>());
                     }
@@ -688,11 +688,11 @@ namespace Clasp
                 var k = pair.Key;
                 var v = pair.Value;
 
-                for(int i = 0; v.Count != i; ++i)
+                for (int i = 0; v.Count != i; ++i)
                 {
                     Specification sp = v[i];
 
-                    if(spec.ResolvedName == sp.ResolvedName)
+                    if (spec.ResolvedName == sp.ResolvedName)
                     {
                         return Tuple.Create(v, i);
                     }
@@ -704,12 +704,12 @@ namespace Clasp
 
         internal static Specification[] MergeSpecificationsForBoundType<T>(IEnumerable<Specification> specifications)
         {
-            if(null == specifications)
+            if (null == specifications)
             {
                 return NoSpecifications;
             }
 
-            if(specifications.Any((spec) => spec.IsSection))
+            if (specifications.Any((spec) => spec.IsSection))
             {
                 var                     structure   =   StructureFromSpecifications(specifications);
                 var                     pairs       =   SpecificationSectionPairsForBoundType<T>(specifications);
@@ -721,7 +721,7 @@ namespace Clasp
                     Tuple<IList<Specification>, int>    tuple   =   LookupSpecificationInStructure(structure, tspec);
 
                     // If the type's specification already exists anyway within the given specifications ...
-                    if(null != tuple)
+                    if (null != tuple)
                     {
                         // ... then see whether should update
                         bool            changed     =   false;
@@ -730,19 +730,19 @@ namespace Clasp
                         string          desc        =   sspec.Description;
                         string          resolved    =   sspec.ResolvedName;
 
-                        if(String.IsNullOrWhiteSpace(alias) && !String.IsNullOrWhiteSpace(tspec.GivenName))
+                        if (String.IsNullOrWhiteSpace(alias) && !String.IsNullOrWhiteSpace(tspec.GivenName))
                         {
                             alias   =   tspec.GivenName;
                             changed =   true;
                         }
 
-                        if(String.IsNullOrWhiteSpace(desc) && !String.IsNullOrWhiteSpace(tspec.Description))
+                        if (String.IsNullOrWhiteSpace(desc) && !String.IsNullOrWhiteSpace(tspec.Description))
                         {
                             desc    =   tspec.Description;
                             changed =   true;
                         }
 
-                        if(changed)
+                        if (changed)
                         {
                             switch(sspec.Type)
                             {
@@ -764,7 +764,7 @@ namespace Clasp
                         string                  sectionName     =   pair.Item2;
                         IList<Specification>    sectionSpecs;
 
-                        if(!structure.TryGetValue(sectionName, out sectionSpecs))
+                        if (!structure.TryGetValue(sectionName, out sectionSpecs))
                         {
                             structure.Add(sectionName, new List<Specification>());
                         }
@@ -785,7 +785,7 @@ namespace Clasp
 
                     IList<Specification>    targetSpecs;
 
-                    if(String.IsNullOrWhiteSpace(sectionName))
+                    if (String.IsNullOrWhiteSpace(sectionName))
                     {
                         targetSpecs = emptySpecs;
                     }
@@ -826,7 +826,7 @@ namespace Clasp
                 int? lastVersionIndex   =   null;
                 int? lastSectionIndex   =   null;
 
-                for(int i = 0; currSpecs.Count != i; ++i)
+                for (int i = 0; currSpecs.Count != i; ++i)
                 {
                     var cs = currSpecs[i];
 
@@ -842,7 +842,7 @@ namespace Clasp
                         break;
                     default:
 
-                        if(cs.IsSection)
+                        if (cs.IsSection)
                         {
                             lastSectionIndex = i;
                         }
@@ -850,7 +850,7 @@ namespace Clasp
                     }
                 }
 
-                if((lastHelpIndex.HasValue && lastHelpIndex >= currSpecs.Count - 2) && (lastVersionIndex.HasValue && lastVersionIndex >= currSpecs.Count - 2))
+                if ((lastHelpIndex.HasValue && lastHelpIndex >= currSpecs.Count - 2) && (lastVersionIndex.HasValue && lastVersionIndex >= currSpecs.Count - 2))
                 {
                     // If "--help" and "--version" were the last two ...
 
@@ -862,7 +862,7 @@ namespace Clasp
 
                     // ... and the preceding item was a section ...
 
-                    if(lastSectionIndex.HasValue && lastSectionIndex == currSpecs.Count - 1 && (lastSectionIndex < lastHelpIndex || lastSectionIndex < lastVersionIndex))
+                    if (lastSectionIndex.HasValue && lastSectionIndex == currSpecs.Count - 1 && (lastSectionIndex < lastHelpIndex || lastSectionIndex < lastVersionIndex))
                     {
                         // ... then move it to the start of the last-specs
 
@@ -875,13 +875,13 @@ namespace Clasp
                 {
                     int ix = currSpecs.FindIndex((cs) => cs.ResolvedName == ns.ResolvedName);
 
-                    if(ix >= 0)
+                    if (ix >= 0)
                     {
                         var cs = currSpecs[ix];
 
                         Specification s = null;
 
-                        if(!String.IsNullOrWhiteSpace(ns.Description))
+                        if (!String.IsNullOrWhiteSpace(ns.Description))
                         {
                             switch(cs.Type)
                             {
@@ -896,7 +896,7 @@ namespace Clasp
                             }
                         }
 
-                        if(null != s)
+                        if (null != s)
                         {
                             currSpecs[ix] = s;
                         }
@@ -924,11 +924,11 @@ namespace Clasp
 
             ArgumentBindingOptions       effectiveBindingOptions   =   bindingOptions ?? Constants.BindingOptions_Default;
 
-            if(null != typeAttribute)
+            if (null != typeAttribute)
             {
-                if(typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
+                if (typeAttribute.AttributeOptionsHavePrecedence || !bindingOptions.HasValue)
                 {
-                    if(typeAttribute.GivenBindingOptions.HasValue)
+                    if (typeAttribute.GivenBindingOptions.HasValue)
                     {
                         effectiveBindingOptions = typeAttribute.GivenBindingOptions.Value;
                     }
@@ -945,11 +945,11 @@ namespace Clasp
 
             ParseOptions                effectiveParseOptions   =   parsingOptions ?? Constants.ParseOptions_Default;
 
-            if(null != typeAttribute)
+            if (null != typeAttribute)
             {
-                if(typeAttribute.AttributeOptionsHavePrecedence || !parsingOptions.HasValue)
+                if (typeAttribute.AttributeOptionsHavePrecedence || !parsingOptions.HasValue)
                 {
-                    if(typeAttribute.GivenParsingOptions.HasValue)
+                    if (typeAttribute.GivenParsingOptions.HasValue)
                     {
                         effectiveParseOptions = typeAttribute.GivenParsingOptions.Value;
                     }
@@ -978,12 +978,12 @@ namespace Clasp
                 return Constants.ExitCode_Success;
             });
 
-            if(0 != (FailureOptions.SetExitCodeForVV & failureOptions))
+            if (0 != (FailureOptions.SetExitCodeForVV & failureOptions))
             {
                 Environment.ExitCode = r;
             }
 
-            if(0 != (FailureOptions.InvokeExitForVV & failureOptions))
+            if (0 != (FailureOptions.InvokeExitForVV & failureOptions))
             {
                 Environment.Exit(r);
             }
@@ -997,7 +997,7 @@ namespace Clasp
 
                 RetVal<T> r = ParseBoundArguments_<T>(args2, bindingOptions);
 
-                if(!r.Succeeded)
+                if (!r.Succeeded)
                 {
                     return r.ExitCode;
                 }
@@ -1013,7 +1013,7 @@ namespace Clasp
         {
             RetVal<T> r = ParseBoundArguments_<T>(args, bindingOptions);
 
-            if(!r.Succeeded)
+            if (!r.Succeeded)
             {
                 return r.ExitCode;
             }
@@ -1023,7 +1023,7 @@ namespace Clasp
 
         private static int do_invoke_(Arguments arguments, FailureOptions failureOptions, Func<Arguments, int> f)
         {
-            if(FailureOptions.None == failureOptions)
+            if (FailureOptions.None == failureOptions)
             {
                 return f(arguments);
             }
@@ -1033,9 +1033,9 @@ namespace Clasp
                 {
                     return f(arguments);
                 }
-                catch(OutOfMemoryException /* x */)
+                catch (OutOfMemoryException /* x */)
                 {
-                    if(0 != (FailureOptions.HandleMemoryExceptions & failureOptions))
+                    if (0 != (FailureOptions.HandleMemoryExceptions & failureOptions))
                     {
                         Console.Error.WriteLine("{0}: out of memory", Arguments.ProgramName);
 
@@ -1046,9 +1046,9 @@ namespace Clasp
                         throw;
                     }
                 }
-                catch(Exceptions.UnusedArgumentException x)
+                catch (Exceptions.UnusedArgumentException x)
                 {
-                    if(0 == (FailureOptions.HandleClaspExceptions & failureOptions))
+                    if (0 == (FailureOptions.HandleClaspExceptions & failureOptions))
                     {
                         throw;
                     }
@@ -1057,9 +1057,9 @@ namespace Clasp
 
                     Console.Error.WriteLine("{0}: {1}", Arguments.ProgramName, x.Message);
                 }
-                catch(Exceptions.ClaspException x)
+                catch (Exceptions.ClaspException x)
                 {
-                    if(0 == (FailureOptions.HandleClaspExceptions & failureOptions))
+                    if (0 == (FailureOptions.HandleClaspExceptions & failureOptions))
                     {
                         throw;
                     }
@@ -1068,7 +1068,7 @@ namespace Clasp
 
                     Console.Error.WriteLine("{0}: {1}{2}", Arguments.ProgramName, x.Message, 0 != (FailureOptions.AppendStandardUsagePromptToContingentReport & failureOptions) ? Constants.StandardUsagePrompt : String.Empty);
                 }
-                catch(Exception x)
+                catch (Exception x)
                 {
                     Type x_type = x.GetType();
 
@@ -1080,7 +1080,7 @@ namespace Clasp
                         throw;
                     }
 
-                    if(0 == (FailureOptions.HandleSystemExceptions & failureOptions))
+                    if (0 == (FailureOptions.HandleSystemExceptions & failureOptions))
                     {
                         throw;
                     }
@@ -1124,11 +1124,11 @@ namespace Clasp
 
                 Binding.BoundEnumerationAttribute  enumerationAttribute   =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundEnumerationAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-                if(null != enumerationAttribute)
+                if (null != enumerationAttribute)
                 {
                     // field must be same as enumeration type
 
-                    if(enumerationAttribute.Type != fi.FieldType)
+                    if (enumerationAttribute.Type != fi.FieldType)
                     {
                         Trace.Write(String.Format("The field '{0}' of type '{1}' is marked with the attribute '{1}' of incompatible bound type '{3}' : binding is not performed for this field", fi.Name, fi.FieldType, typeof(Binding.BoundEnumerationAttribute), enumerationAttribute.Type));
                         Debug.Assert(enumerationAttribute.Type != fi.FieldType);
@@ -1141,7 +1141,7 @@ namespace Clasp
 
                     Debug.Assert(null != enumeratorAttributes);
 
-                    if(0 == enumeratorAttributes.Length)
+                    if (0 == enumeratorAttributes.Length)
                     {
                         // TODO: warn
                     }
@@ -1154,7 +1154,7 @@ namespace Clasp
                             string  flagResolvedName    =   attr.ResolvedName;
                             int     enumValue           =   attr.EnumeratorValue;
 
-                            if(args.HasFlag(flagResolvedName))
+                            if (args.HasFlag(flagResolvedName))
                             {
                                 value |= enumValue;
                             }
@@ -1171,11 +1171,11 @@ namespace Clasp
 
                 Binding.BoundFlagAttribute  flagAttribute   =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundFlagAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-                if(null != flagAttribute)
+                if (null != flagAttribute)
                 {
                     // field must be bool
 
-                    if(typeof(bool) != fi.FieldType)
+                    if (typeof(bool) != fi.FieldType)
                     {
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' which may only be applied to fields and properties of type bool (System.Boolean)", fi.Name, typeof(Binding.BoundFlagAttribute), fi.FieldType));
                         Debug.Assert(typeof(bool) == fi.FieldType);
@@ -1195,7 +1195,7 @@ namespace Clasp
 
                 Binding.BoundOptionAttribute    optionAttribute    =   Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundOptionAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-                if(null != optionAttribute)
+                if (null != optionAttribute)
                 {
                     Binding.BoundNumberConstraints  bnc     =   optionAttribute.EffectiveBoundNumberConstraints;
                     Binding.NumberTruncate          nt      =   optionAttribute.NumberTruncate;
@@ -1203,9 +1203,9 @@ namespace Clasp
                     Interfaces.IArgument            option  =   Util.ArgumentUtil.FindOption(args, optionAttribute.ResolvedName);
                     object                          value   =   null;
 
-                    if(null == option)
+                    if (null == option)
                     {
-                        if(null == optionAttribute.DefaultValue)
+                        if (null == optionAttribute.DefaultValue)
                         {
                             throw new Exceptions.MissingOptionException(optionAttribute.ResolvedName);
                         }
@@ -1216,9 +1216,9 @@ namespace Clasp
                     }
                     else
                     {
-                        if(String.IsNullOrEmpty(option.Value))
+                        if (String.IsNullOrEmpty(option.Value))
                         {
-                            if(optionAttribute.AllowEmpty)
+                            if (optionAttribute.AllowEmpty)
                             {
                                 value = String.Empty;
                             }
@@ -1280,9 +1280,9 @@ namespace Clasp
 
                 Binding.BoundValueAttribute valueAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundValueAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-                if(null != valueAttribute)
+                if (null != valueAttribute)
                 {
-                    if(typeof(string) != fi.FieldType)
+                    if (typeof(string) != fi.FieldType)
                     {
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' which may only be applied to fields and properties of type string (System.String)", fi.Name, typeof(Binding.BoundValueAttribute), fi.FieldType));
 
@@ -1291,7 +1291,7 @@ namespace Clasp
 
                     object value;
 
-                    if(valueAttribute.ValueIndex < args.Values.Count)
+                    if (valueAttribute.ValueIndex < args.Values.Count)
                     {
                         value = args.Values[valueAttribute.ValueIndex].Value;
 
@@ -1299,14 +1299,14 @@ namespace Clasp
                     }
                     else
                     {
-                        if(null == valueAttribute.DefaultValue)
+                        if (null == valueAttribute.DefaultValue)
                         {
-                            if(0 != (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
+                            if (0 != (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
                             {
                                 continue;
                             }
 
-                            if(String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
+                            if (String.IsNullOrWhiteSpace(valueAttribute.UsageLabel))
                             {
                                 throw new Exceptions.MissingValueException(valueAttribute.ValueIndex);
                             }
@@ -1331,18 +1331,18 @@ namespace Clasp
 
                 Binding.BoundValuesAttribute valuesAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundValuesAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
 
-                if(null != valuesAttribute)
+                if (null != valuesAttribute)
                 {
                     bool is_string_array = false;
 
                     Type typeOfCollectionOfStrings = typeof(ICollection<string>);
 
-                    if(fi.FieldType.FullName == "System.String[]")
+                    if (fi.FieldType.FullName == "System.String[]")
                     {
                         is_string_array = true;
                     }
                     else
-                    if(!typeOfCollectionOfStrings.IsAssignableFrom(fi.FieldType))
+                    if (!typeOfCollectionOfStrings.IsAssignableFrom(fi.FieldType))
                     {
                         Trace.Write(String.Format("The field '{0}' of type '{2}' is marked with the attribute '{1}' which may only be applied to fields and properties of types that are assignable from ICollection<string> (System.Collections.Generic<System.String>)", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
 
@@ -1351,13 +1351,13 @@ namespace Clasp
 
                     // check that we can satisfy the minimum required
 
-                    if(0 != valuesAttribute.Minimum)
+                    if (0 != valuesAttribute.Minimum)
                     {
                         int required = valuesAttribute.Base + valuesAttribute.Minimum;
 
-                        if(required > args.Values.Count)
+                        if (required > args.Values.Count)
                         {
-                            if(0 == (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
+                            if (0 == (ArgumentBindingOptions.IgnoreMissingValues & effectiveBindingOptions))
                             {
                                 throw new Exceptions.MissingValueException(required);
                             }
@@ -1370,9 +1370,9 @@ namespace Clasp
 
                     ICollection<string> collection  =   Util.ReflectionUtil.CastTo<ICollection<string>>(collection_);
 
-                    if(is_string_array)
+                    if (is_string_array)
                     {
-                        if(null != collection)
+                        if (null != collection)
                         {
                             Trace.Write(String.Format("The field '{0}' of type '{2}' (that is marked with the attribute '{1}') already has a value, which will be replaced", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
                         }
@@ -1380,9 +1380,9 @@ namespace Clasp
                         collection = new List<string>(valuesAttribute.Minimum);
                     }
                     else
-                    if(null == collection)
+                    if (null == collection)
                     {
-                        if(fi.FieldType.IsAbstract)
+                        if (fi.FieldType.IsAbstract)
                         {
                             collection = new List<string>(valuesAttribute.Minimum);
                         }
@@ -1390,7 +1390,7 @@ namespace Clasp
                         {
                             ConstructorInfo ciDefault = fi.FieldType.GetConstructor(new Type[] {});
 
-                            if(null == ciDefault)
+                            if (null == ciDefault)
                             {
                                 Trace.Write(String.Format("The field '{0}' of type '{2}' (that is marked with the attribute '{1}') does not have an accessible default constructor, and so field binding is skipped", fi.Name, typeof(Binding.BoundValuesAttribute), fi.FieldType));
 
@@ -1403,11 +1403,11 @@ namespace Clasp
                         }
                     }
 
-                    for(int i = 0; i != valuesAttribute.Maximum; ++i)
+                    for (int i = 0; i != valuesAttribute.Maximum; ++i)
                     {
                         int index = valuesAttribute.Base + i;
 
-                        if(index >= args.Values.Count)
+                        if (index >= args.Values.Count)
                         {
                             break;
                         }
@@ -1417,7 +1417,7 @@ namespace Clasp
                         usedValues[index] = true;
                     }
 
-                    if(is_string_array)
+                    if (is_string_array)
                     {
                         string[] ar = new string[collection.Count];
 
@@ -1426,7 +1426,7 @@ namespace Clasp
                         fi.SetValue(retVal.BindingArgument, ar);
                     }
                     else
-                    if(null == collection_)
+                    if (null == collection_)
                     {
                         fi.SetValue(retVal.BindingArgument, collection);
                     }
@@ -1436,21 +1436,21 @@ namespace Clasp
             // /////////////////////
             // type & options
 
-            if(0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveBindingOptions))
+            if (0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveBindingOptions))
             {
                 Util.ArgumentUtil.VerifyAllFlagsUsed(args, @"unrecognised flag");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveBindingOptions))
+            if (0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveBindingOptions))
             {
                 Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
             }
 
-            if(0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveBindingOptions))
+            if (0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveBindingOptions))
             {
-                for(int i = 0; i != usedValues.Length; ++i)
+                for (int i = 0; i != usedValues.Length; ++i)
                 {
-                    if(!usedValues[i])
+                    if (!usedValues[i])
                     {
                         throw new Exceptions.UnusedArgumentException(args.Values[i], @"too many values specified");
                     }
@@ -1464,42 +1464,42 @@ namespace Clasp
 
         private static BoundFieldType ObtainBoundFieldType(Type type)
         {
-            if(type == typeof(int))
+            if (type == typeof(int))
             {
                 return BoundFieldType.SignedInt32;
             }
 
-            if(type == typeof(long))
+            if (type == typeof(long))
             {
                 return BoundFieldType.SignedInt64;
             }
 
-            if(type == typeof(uint))
+            if (type == typeof(uint))
             {
                 return BoundFieldType.UnsignedInt32;
             }
 
-            if(type == typeof(ulong))
+            if (type == typeof(ulong))
             {
                 return BoundFieldType.UnsignedInt64;
             }
 
-            if(type == typeof(bool))
+            if (type == typeof(bool))
             {
                 return BoundFieldType.Boolean;
             }
 
-            if(type == typeof(string))
+            if (type == typeof(string))
             {
                 return BoundFieldType.String;
             }
 
-            if(type == typeof(float))
+            if (type == typeof(float))
             {
                 return BoundFieldType.Single;
             }
 
-            if(type == typeof(double))
+            if (type == typeof(double))
             {
                 return BoundFieldType.Double;
             }
@@ -1547,23 +1547,23 @@ namespace Clasp
 
             Type type = o.GetType();
 
-            if(false)
+            if (false)
             {
                 ;
             }
-            else if(typeof(Int32) == type)
+            else if (typeof(Int32) == type)
             {
                 return (Int32)o < 0;
             }
-            else if(typeof(Int64) == type)
+            else if (typeof(Int64) == type)
             {
                 return (Int64)o < 0;
             }
-            else if(typeof(Single) == type)
+            else if (typeof(Single) == type)
             {
                 return (Single)o < 0;
             }
-            else if(typeof(Double) == type)
+            else if (typeof(Double) == type)
             {
                 return (Double)o < 0;
             }
@@ -1577,31 +1577,31 @@ namespace Clasp
 
             Type type = o.GetType();
 
-            if(false)
+            if (false)
             {
                 ;
             }
-            else if(typeof(Int32) == type)
+            else if (typeof(Int32) == type)
             {
                 return (Int32)o > 0;
             }
-            else if(typeof(UInt32) == type)
+            else if (typeof(UInt32) == type)
             {
                 return (UInt32)o > 0;
             }
-            else if(typeof(Int64) == type)
+            else if (typeof(Int64) == type)
             {
                 return (Int64)o > 0;
             }
-            else if(typeof(UInt64) == type)
+            else if (typeof(UInt64) == type)
             {
                 return (UInt64)o > 0;
             }
-            else if(typeof(Single) == type)
+            else if (typeof(Single) == type)
             {
                 return (Single)o > 0;
             }
-            else if(typeof(Double) == type)
+            else if (typeof(Double) == type)
             {
                 return (Double)o > 0;
             }
@@ -1615,23 +1615,23 @@ namespace Clasp
 
             Type type = o.GetType();
 
-            if(false)
+            if (false)
             {
                 ;
             }
-            else if(typeof(Int32) == type)
+            else if (typeof(Int32) == type)
             {
                 return (Int32)o >= 0;
             }
-            else if(typeof(Int64) == type)
+            else if (typeof(Int64) == type)
             {
                 return (Int64)o >= 0;
             }
-            else if(typeof(Single) == type)
+            else if (typeof(Single) == type)
             {
                 return (Single)o >= 0;
             }
-            else if(typeof(Double) == type)
+            else if (typeof(Double) == type)
             {
                 return (Double)o >= 0;
             }
@@ -1645,31 +1645,31 @@ namespace Clasp
 
             Type type = o.GetType();
 
-            if(false)
+            if (false)
             {
                 ;
             }
-            else if(typeof(Int32) == type)
+            else if (typeof(Int32) == type)
             {
                 return (Int32)o < 1;
             }
-            else if(typeof(UInt32) == type)
+            else if (typeof(UInt32) == type)
             {
                 return (UInt32)o < 1;
             }
-            else if(typeof(Int64) == type)
+            else if (typeof(Int64) == type)
             {
                 return (Int64)o < 1;
             }
-            else if(typeof(UInt64) == type)
+            else if (typeof(UInt64) == type)
             {
                 return (UInt64)o < 1;
             }
-            else if(typeof(Single) == type)
+            else if (typeof(Single) == type)
             {
                 return (Single)o < 1;
             }
-            else if(typeof(Double) == type)
+            else if (typeof(Double) == type)
             {
                 return (Double)o < 1;
             }
@@ -1679,7 +1679,7 @@ namespace Clasp
 
         private static T ParseInteger_T_<T>(Interfaces.IArgument option, string value, Type type, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt, ParseFunc pf, CastFunc<T> cf)
         {
-            if(null == value)
+            if (null == value)
             {
                 value = option.Value;
             }
@@ -1694,11 +1694,11 @@ namespace Clasp
                 {
                     r = pf(value);
                 }
-                catch(System.FormatException x)
+                catch (System.FormatException x)
                 {
                     double d;
 
-                    if(!Double.TryParse(value, out d))
+                    if (!Double.TryParse(value, out d))
                     {
                         throw;
                     }
@@ -1746,28 +1746,28 @@ namespace Clasp
                     break;
                 case Binding.BoundNumberConstraints.MustBeNegative:
 
-                    if(!IsNegative_(r))
+                    if (!IsNegative_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBePositive:
 
-                    if(!IsPositive_(r))
+                    if (!IsPositive_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBeNonNegative:
 
-                    if(!IsNonNegative_(r))
+                    if (!IsNonNegative_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBeNonPositive:
 
-                    if(!IsNonPositive_(r))
+                    if (!IsNonPositive_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
@@ -1776,15 +1776,15 @@ namespace Clasp
 
                 return cf(r);
             }
-            catch(System.FormatException x)
+            catch (System.FormatException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
-            catch(System.InvalidCastException x)
+            catch (System.InvalidCastException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
-            catch(System.OverflowException x)
+            catch (System.OverflowException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
@@ -1792,7 +1792,7 @@ namespace Clasp
 
         private static T ParseReal_T_<T>(Interfaces.IArgument option, string value, Type type, Binding.BoundNumberConstraints bnc, Binding.NumberTruncate nt, ParseFunc pf, CastFunc<T> cf)
         {
-            if(null == value)
+            if (null == value)
             {
                 value = option.Value;
             }
@@ -1814,28 +1814,28 @@ namespace Clasp
                     break;
                 case Binding.BoundNumberConstraints.MustBeNegative:
 
-                    if(!IsNegative_(r))
+                    if (!IsNegative_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBePositive:
 
-                    if(!IsPositive_(r))
+                    if (!IsPositive_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBeNonNegative:
 
-                    if(!IsNonNegative_(r))
+                    if (!IsNonNegative_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
                     break;
                 case Binding.BoundNumberConstraints.MustBeNonPositive:
 
-                    if(!IsNonPositive_(r))
+                    if (!IsNonPositive_(r))
                     {
                         throw new Exceptions.OptionValueOutOfRangeException(sm_bnc_names[bnc], option, typeof(Int32));
                     }
@@ -1844,15 +1844,15 @@ namespace Clasp
 
                 return cf(r);
             }
-            catch(System.FormatException x)
+            catch (System.FormatException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
-            catch(System.InvalidCastException x)
+            catch (System.InvalidCastException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }
-            catch(System.OverflowException x)
+            catch (System.OverflowException x)
             {
                 throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
             }

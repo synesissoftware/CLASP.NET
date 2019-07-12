@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 9th June 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Util
 {
@@ -418,7 +418,7 @@ namespace Clasp.Util
         [Obsolete("This method is obsolete. Use ShowUsage(Arguments, UsageParams, IDictionary<string, options>) instead")]
         public static int ShowUsage(IEnumerable<Specification> specifications, TextWriter writer)
         {
-            if(null == writer)
+            if (null == writer)
             {
                 return ShowUsage_(specifications, null, null, null);
             }
@@ -451,7 +451,7 @@ namespace Clasp.Util
         [Obsolete("This method is obsolete. Use ShowUsage(Arguments, UsageParams, IDictionary<string, options>) instead")]
         public static int ShowUsage(IEnumerable<Specification> specifications, TextWriter writer, IDictionary<string, object> options)
         {
-            if(null != options)
+            if (null != options)
             {
                 options = new Dictionary<string, object>(options);
             }
@@ -708,7 +708,7 @@ namespace Clasp.Util
         /// </returns>
         public static string InferProgramName(Assembly assembly)
         {
-            if(null == assembly)
+            if (null == assembly)
             {
                 return Arguments.ProgramName;
             }
@@ -745,7 +745,7 @@ namespace Clasp.Util
 
             ShowUsage_(sups);
 
-            if(exitCode.HasValue)
+            if (exitCode.HasValue)
             {
                 Environment.Exit(exitCode.Value);
             }
@@ -779,9 +779,9 @@ namespace Clasp.Util
             string flagsAndOptions  =   sups.UsageParams.FlagsAndOptionsString;
             string usageValues      =   sups.UsageParams.ValuesString;
 
-            if(String.IsNullOrEmpty(flagsAndOptions))
+            if (String.IsNullOrEmpty(flagsAndOptions))
             {
-                if(null != sups.Specifications && sups.Specifications.GetEnumerator().MoveNext())
+                if (null != sups.Specifications && sups.Specifications.GetEnumerator().MoveNext())
                 {
                     flagsAndOptions = "[ ... flags and options ... ]";
                 }
@@ -791,16 +791,16 @@ namespace Clasp.Util
                 }
             }
 
-            if(0 != flagsAndOptions.Trim().Length)
+            if (0 != flagsAndOptions.Trim().Length)
             {
                 flagsAndOptions = " " + flagsAndOptions;
             }
 
-            if(null == usageValues)
+            if (null == usageValues)
             {
                 usageValues = "";
             }
-            if(0 != usageValues.Trim().Length)
+            if (0 != usageValues.Trim().Length)
             {
                 usageValues = " " + usageValues;
             }
@@ -808,14 +808,14 @@ namespace Clasp.Util
             sups.Stream.WriteLine("USAGE: {0}{1}{2}", sups.ProgramName, flagsAndOptions, usageValues);
             sups.Stream.WriteLine();
 
-            if(null != sups.Specifications)
+            if (null != sups.Specifications)
             {
                 string defaultIndicator = sups.UsageParams.DefaultIndicator;
-                if(null == defaultIndicator)
+                if (null == defaultIndicator)
                 {
                     defaultIndicator = "(default)";
                 }
-                if(0 == defaultIndicator.Length)
+                if (0 == defaultIndicator.Length)
                 {
                     defaultIndicator = null;
                 }
@@ -832,11 +832,11 @@ namespace Clasp.Util
                             sups.Stream.WriteLine();
                             break;
                         case ArgumentType.Flag:
-                            if(!String.IsNullOrEmpty(specification.GivenName))
+                            if (!String.IsNullOrEmpty(specification.GivenName))
                             {
                                 sups.Stream.WriteLine("{1}{0}", specification.GivenName, separator);
                             }
-                            if(!String.IsNullOrEmpty(specification.ResolvedName))
+                            if (!String.IsNullOrEmpty(specification.ResolvedName))
                             {
                                 sups.Stream.WriteLine("{1}{0}", specification.ResolvedName, separator);
                             }
@@ -844,23 +844,23 @@ namespace Clasp.Util
                             sups.Stream.WriteLine();
                             break;
                         case ArgumentType.Option:
-                            if(!String.IsNullOrEmpty(specification.GivenName))
+                            if (!String.IsNullOrEmpty(specification.GivenName))
                             {
                                 sups.Stream.WriteLine("{1}{0} <value>", specification.GivenName, separator);
                             }
-                            if(!String.IsNullOrEmpty(specification.ResolvedName))
+                            if (!String.IsNullOrEmpty(specification.ResolvedName))
                             {
                                 sups.Stream.WriteLine("{1}{0}=<value>", specification.ResolvedName, separator);
                             }
                             sups.Stream.WriteLine("{1}{1}{0}", specification.Description, separator);
-                            if(0 != specification.ValidValues.Length)
+                            if (0 != specification.ValidValues.Length)
                             {
                                 sups.Stream.WriteLine("{0}{0}where <value> one of:", separator);
                                 foreach(string value in specification.ValidValues)
                                 {
                                     OptionSpecification optionSpecification = (OptionSpecification)specification;
 
-                                    if(null != defaultIndicator && value == optionSpecification.DefaultValue)
+                                    if (null != defaultIndicator && value == optionSpecification.DefaultValue)
                                     {
                                         sups.Stream.WriteLine("{1}{1}{1}{0}{1}{2}", value, separator, defaultIndicator);
                                     }
@@ -892,7 +892,7 @@ namespace Clasp.Util
 
             ShowVersion_(sups);
 
-            if(exitCode.HasValue)
+            if (exitCode.HasValue)
             {
                 Environment.Exit(exitCode.Value);
             }
@@ -904,7 +904,7 @@ namespace Clasp.Util
         {
             FileVersionInfo fvi         =   FileVersionInfo.GetVersionInfo(sups.Assembly.Location);
 
-            if(null != sups.VersionFormat)
+            if (null != sups.VersionFormat)
             {
                 int             verMajor    =   sups.UseProductVersion ? fvi.ProductMajorPart : fvi.FileMajorPart;
                 int             verMinor    =   sups.UseProductVersion ? fvi.ProductMinorPart : fvi.FileMinorPart;
@@ -925,7 +925,7 @@ namespace Clasp.Util
 
         private static int? InferExitCode_(int? exitCode, IDictionary<string, object> options)
         {
-            if(exitCode.HasValue)
+            if (exitCode.HasValue)
             {
                 return exitCode;
             }
@@ -935,22 +935,22 @@ namespace Clasp.Util
 
         private static TextWriter InferWriter_(int? exitCode, IDictionary<string, object> options)
         {
-            if(null != options)
+            if (null != options)
             {
                 object v;
 
-                if(options.TryGetValue(Constants.OptionKeys.Writer, out v))
+                if (options.TryGetValue(Constants.OptionKeys.Writer, out v))
                 {
                     TextWriter writer = v as TextWriter;
 
-                    if(null != writer)
+                    if (null != writer)
                     {
                         return writer;
                     }
                 }
             }
 
-            if(exitCode.HasValue)
+            if (exitCode.HasValue)
             {
                 return (0 == exitCode) ? Console.Out : Console.Error;
             }
@@ -960,7 +960,7 @@ namespace Clasp.Util
 
         private static IDictionary<string, object> AddOption_(IDictionary<string, object> options, string key, object value)
         {
-            if(null == options)
+            if (null == options)
             {
                 options = new Dictionary<string, object>();
             }
@@ -972,11 +972,11 @@ namespace Clasp.Util
 
         private static bool GetOptionOrDefault_(IDictionary<string, object> options, string key, bool defaultValue)
         {
-            if(null != options)
+            if (null != options)
             {
                 object v;
 
-                if(options.TryGetValue(key, out v))
+                if (options.TryGetValue(key, out v))
                 {
                     return ParseUtil.ParseBool(v.ToString());
                 }
@@ -987,11 +987,11 @@ namespace Clasp.Util
 
         private static object GetOptionOrDefault_(IDictionary<string, object> options, string key, object defaultValue)
         {
-            if(null != options)
+            if (null != options)
             {
                 object v;
 
-                if(options.TryGetValue(key, out v))
+                if (options.TryGetValue(key, out v))
                 {
                     return v;
                 }
@@ -1002,15 +1002,15 @@ namespace Clasp.Util
 
         private static T GetOptionOrDefault_<T>(IDictionary<string, object> options, string key, T defaultValue) where T : class
         {
-            if(null != options)
+            if (null != options)
             {
                 object v;
 
-                if(options.TryGetValue(key, out v))
+                if (options.TryGetValue(key, out v))
                 {
                     T r = v as T;
 
-                    if(null != r)
+                    if (null != r)
                     {
                         return r;
                     }

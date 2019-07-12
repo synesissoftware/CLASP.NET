@@ -65,7 +65,7 @@ namespace Test.Unit.CLASP.ns_1
 
                 Assert.Fail("should not get here");
             }
-            catch(FormatException x)
+            catch (FormatException x)
             {
                 Assert.IsTrue(x.ToString().Contains("valid"));
 

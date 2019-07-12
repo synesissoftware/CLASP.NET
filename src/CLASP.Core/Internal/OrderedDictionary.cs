@@ -1,6 +1,6 @@
 ﻿
 // Created: 7th June 2019
-// Updated: 8th June 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Internal
 {
@@ -65,7 +65,7 @@ namespace Clasp.Internal
 
         public bool Remove(T_key key)
         {
-            if(m_od.Contains(key))
+            if (m_od.Contains(key))
             {
                 m_od.Remove(key);
 
@@ -77,7 +77,7 @@ namespace Clasp.Internal
 
         public bool TryGetValue(T_key key, out T_value value)
         {
-            if(m_od.Contains(key))
+            if (m_od.Contains(key))
             {
                 value = (T_value)m_od[key];
 
@@ -132,12 +132,12 @@ namespace Clasp.Internal
         {
             T_value value;
 
-            if(!TryGetValue(item.Key, out value))
+            if (!TryGetValue(item.Key, out value))
             {
                 return false;
             }
 
-            if(!Object.Equals(item.Value, value))
+            if (!Object.Equals(item.Value, value))
             {
                 return false;
             }
@@ -168,12 +168,12 @@ namespace Clasp.Internal
 
         public bool Remove(KeyValuePair<T_key, T_value> item)
         {
-            if(!m_od.Contains(item.Key))
+            if (!m_od.Contains(item.Key))
             {
                 return false;
             }
 
-            if(!Object.Equals(m_od[item.Key], item.Value))
+            if (!Object.Equals(m_od[item.Key], item.Value))
             {
                 return false;
             }

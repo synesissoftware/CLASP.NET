@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 8th June 2019
+// Updated: 13th July 2019
 
 namespace Clasp
 {
@@ -33,7 +33,7 @@ namespace Clasp
         {
             Debug.Assert(null != givenName || null != resolvedName);
 
-            if(null == validValues)
+            if (null == validValues)
             {
                 validValues =   new string[0];
             }
@@ -251,7 +251,7 @@ namespace Clasp
         {
             get
             {
-                if(m_isSection)
+                if (m_isSection)
                 {
                     Debug.Assert(String.IsNullOrWhiteSpace(ResolvedName));
                     Debug.Assert(String.IsNullOrWhiteSpace(GivenName));

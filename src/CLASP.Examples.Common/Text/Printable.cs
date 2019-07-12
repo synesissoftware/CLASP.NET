@@ -12,7 +12,7 @@ namespace Clasp.Examples.Common.Text
 
         public static string CharacterRepr(char c)
         {
-            if(Char.IsWhiteSpace(c) || Char.IsControl(c))
+            if (Char.IsWhiteSpace(c) || Char.IsControl(c))
             {
                 switch(c)
                 {

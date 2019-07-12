@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Internal
 {
@@ -153,7 +153,7 @@ namespace Clasp.Internal
 
             foreach(char ch in arg)
             {
-                if('-' == ch)
+                if ('-' == ch)
                 {
                     ++n;
                 }

@@ -62,7 +62,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                     {
                         // check '--help'
 
-                        if(args.HasFlag(UsageUtil.Help))
+                        if (args.HasFlag(UsageUtil.Help))
                         {
                             UsageUtil.UsageParams ups = new UsageUtil.UsageParams{ ValuesString = "<input-file-path>" };
 
@@ -71,7 +71,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
 
                         // check '--version'
 
-                        if(args.HasFlag(UsageUtil.Version))
+                        if (args.HasFlag(UsageUtil.Version))
                         {
                             return UsageUtil.ShowVersion();
                         }
@@ -86,7 +86,7 @@ namespace Test.Scratch.CLASP.BoundStructure.ns_2
                             });
                     });
             }
-            catch(Exception x)
+            catch (Exception x)
             {
                 Console.Error.WriteLine(@"{0}: exception ({1}): {2}", UsageUtil.InferProgramName(null), x.GetType().FullName, x.Message);
 

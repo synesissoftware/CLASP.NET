@@ -54,7 +54,7 @@ namespace Test.Unit.ExampleTestCases
             {
                 args.RequireOption("--abcd", out v);
             }
-            catch(Clasp.Exceptions.MissingOptionException x)
+            catch (Clasp.Exceptions.MissingOptionException x)
             {
                 Assert.IsTrue(x.Message.Contains("option not specified"));
                 Assert.IsTrue(x.Message.Contains("--abcd"));
@@ -68,7 +68,7 @@ namespace Test.Unit.ExampleTestCases
 
                 args.RequireOption("--verbosity", out v2);
             }
-            catch(Clasp.Exceptions.MissingOptionException x)
+            catch (Clasp.Exceptions.MissingOptionException x)
             {
                 Assert.IsTrue(x.Message.Contains("option not specified"));
                 Assert.IsTrue(x.Message.Contains("--verbosity"));
@@ -251,7 +251,7 @@ namespace Test.Unit.ExampleTestCases
 
                 Assert.Fail("should not get here");
             }
-            catch(Clasp.Exceptions.MissingOptionException x)
+            catch (Clasp.Exceptions.MissingOptionException x)
             {
                 Assert.IsTrue(x.Message.Contains("option not specified"));
                 Assert.IsTrue(x.Message.Contains("--abcd"));
@@ -270,7 +270,7 @@ namespace Test.Unit.ExampleTestCases
 
                 Assert.Fail("should not get here");
             }
-            catch(Clasp.Exceptions.InvalidOptionValueException x)
+            catch (Clasp.Exceptions.InvalidOptionValueException x)
             {
                 Assert.IsTrue(x.Message.Contains("invalid value for option"));
                 Assert.IsTrue(x.Message.Contains("--verbosity"));
@@ -287,7 +287,7 @@ namespace Test.Unit.ExampleTestCases
 
                 Assert.Fail("should not get here");
             }
-            catch(Clasp.Exceptions.MissingValueException x)
+            catch (Clasp.Exceptions.MissingValueException x)
             {
                 Assert.IsTrue(x.Message.Contains("required value not specified"));
 
@@ -321,7 +321,7 @@ namespace Test.Unit.ExampleTestCases
 
                 Assert.Fail("should not get here");
             }
-            catch(Clasp.Exceptions.InvalidValueException x)
+            catch (Clasp.Exceptions.InvalidValueException x)
             {
                 Assert.IsTrue(x.Message.Contains("invalid value for value argument"));
 

@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Util
 {
@@ -92,7 +92,7 @@ namespace Clasp.Util
 
             T[] r = new T[attributes.Length];
 
-            for(int i = 0; attributes.Length != i; ++i)
+            for (int i = 0; attributes.Length != i; ++i)
             {
                 r[i] = CastTo<T>(attributes[i]);
             }

@@ -88,7 +88,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch(ClaspExceptions.OptionValueOutOfRangeException x)
+            catch (ClaspExceptions.OptionValueOutOfRangeException x)
             {
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual(0, x.Argument.Index);
@@ -122,7 +122,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch(ClaspExceptions.InvalidOptionValueException x)
+            catch (ClaspExceptions.InvalidOptionValueException x)
             {
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual(0, x.Argument.Index);

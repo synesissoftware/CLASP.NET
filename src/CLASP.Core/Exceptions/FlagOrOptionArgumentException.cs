@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -56,30 +56,30 @@ namespace Clasp.Exceptions
 
         private static string MakeMessage_(IArgument argument, string message, string optionName, params string[] qualifiers)
         {
-            if(null != argument)
+            if (null != argument)
             {
-                if(String.IsNullOrEmpty(optionName))
+                if (String.IsNullOrEmpty(optionName))
                 {
                     optionName = argument.GivenName;
                 }
 
-                if(String.IsNullOrEmpty(optionName))
+                if (String.IsNullOrEmpty(optionName))
                 {
                     optionName = argument.ResolvedName;
                 }
 
-                if(String.IsNullOrEmpty(optionName))
+                if (String.IsNullOrEmpty(optionName))
                 {
                     optionName = argument.Value;
                 }
             }
 
-            if(!String.IsNullOrEmpty(optionName))
+            if (!String.IsNullOrEmpty(optionName))
             {
                 message = String.Format(@"{0}: {1}", message, optionName);
             }
 
-            if(0 != qualifiers.Length)
+            if (0 != qualifiers.Length)
             {
                 message = message + ": " + String.Join(": ", qualifiers);
             }

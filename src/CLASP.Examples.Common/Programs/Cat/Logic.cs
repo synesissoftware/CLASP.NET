@@ -15,22 +15,22 @@ namespace Clasp.Examples.Common.Programs.Cat
         public static int Run(Arguments prargs, TextWriter nout, TextWriter crout)
         {
             nout.WriteLine("Display (from flags):");
-            if(0 != (CatOptions.NumberNonBlankLines & prargs.Options))
+            if (0 != (CatOptions.NumberNonBlankLines & prargs.Options))
             {
                 nout.WriteLine("\twill number non-blank lines");
             }
-            else if(0 != (CatOptions.NumberLines & prargs.Options))
+            else if (0 != (CatOptions.NumberLines & prargs.Options))
             {
                 nout.WriteLine("\twill number lines");
             }
-            if(0 != (CatOptions.SqueezeEmptyAdjacentLines & prargs.Options))
+            if (0 != (CatOptions.SqueezeEmptyAdjacentLines & prargs.Options))
             {
                 nout.WriteLine("\twill squeeze empty adjacent lines");
             }
             nout.WriteLine();
 
             nout.WriteLine("Behaviour (from options):");
-            if(!String.IsNullOrWhiteSpace(prargs.EolSequence))
+            if (!String.IsNullOrWhiteSpace(prargs.EolSequence))
             {
                 nout.WriteLine("\tEOL sequence: {0}", String.Join(", ", prargs.EolSequence.Select((ch) => Printable.CharacterRepr(ch))));
             }
@@ -39,7 +39,7 @@ namespace Clasp.Examples.Common.Programs.Cat
             nout.WriteLine("Sources:");
             foreach(string path in prargs.InputPaths)
             {
-                if("-" == path)
+                if ("-" == path)
                 {
                     nout.WriteLine("\tsource: would read from standard input stream");
                 }

@@ -3,7 +3,7 @@
  * File:        SolutionInfo.cs
  *
  * Created:     17th July 2009
- * Updated:     9th June 2019
+ * Updated:     13th July 2019
  *
  * Home:        http://pantheios.org/
  *
@@ -46,7 +46,7 @@ using System.Reflection;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyInformationalVersion("0.23.154.0")]
+[assembly: AssemblyInformationalVersion("0.23.155.0")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

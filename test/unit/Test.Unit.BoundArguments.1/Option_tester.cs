@@ -195,7 +195,7 @@ namespace Test.Unit.BoundArguments.ns_1
 
                 Assert.Fail("should not get here");
             }
-            catch(ClaspExceptions.MissingOptionValueException x)
+            catch (ClaspExceptions.MissingOptionValueException x)
             {
                 Assert.IsTrue(x.Message.Contains("missing option value"));
                 Assert.IsTrue(x.Message.Contains("--verbosity"));
@@ -277,7 +277,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch(ClaspExceptions.MissingOptionException x)
+            catch (ClaspExceptions.MissingOptionException x)
             {
                 Assert.IsTrue(x.Message.Contains("option not specified"));
                 Assert.IsTrue(x.Message.Contains("--verbosity"));
@@ -338,7 +338,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch(ClaspExceptions.UnusedArgumentException x)
+            catch (ClaspExceptions.UnusedArgumentException x)
             {
                 Assert.IsTrue(x.Message.Contains("unrecognised option"));
                 Assert.IsTrue(x.Message.Contains("--xyz"));
@@ -493,7 +493,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch(ClaspExceptions.OptionValueOutOfRangeException x)
+            catch (ClaspExceptions.OptionValueOutOfRangeException x)
             {
                 Assert.IsNotNull(x.Argument);
             }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp
 {
@@ -127,41 +127,41 @@ namespace Clasp
             List<string>    wildargs            =   new List<string>();
             string          cwd                 =   Environment.CurrentDirectory;
 
-            for(int i = 0; i != argv.Length; ++i)
+            for (int i = 0; i != argv.Length; ++i)
             {
                 string  arg         =   TrimSingleQuotes(argv[i]);
                 int     numHyphens  =   Argument.CountHyphens(arg);
 
                 // 1. Ignore null/empty arguments
 
-                if(null == arg)
+                if (null == arg)
                 {
                     continue;
                 }
-                if("" == arg)
+                if ("" == arg)
                 {
                     continue;
                 }
 
-                if("--" == arg)
+                if ("--" == arg)
                 {
-                    if(!treatAllAsValues)
+                    if (!treatAllAsValues)
                     {
                         treatAllAsValues = true;
                         continue;
                     }
                 }
 
-                if(null != lastOption)
+                if (null != lastOption)
                 {
                     lastOption.Value = arg;
                     lastOption = null;
                 }
-                else if(!treatAllAsValues && 0 != numHyphens)
+                else if (!treatAllAsValues && 0 != numHyphens)
                 {
 #if NON_EXISTENT
 
-                    if(2 == numHyphens && 2 == arg.Length)
+                    if (2 == numHyphens && 2 == arg.Length)
                     {
                         // "--"
 
@@ -179,11 +179,11 @@ namespace Clasp
                         // 5. If have specifications, treat each character in a one-hyphen argument as a flag, and process its alias (if defined), else
                         // 6. Treat as flag
 
-                        if("-" == arg)
+                        if ("-" == arg)
                         {
                             // 1. If "-", then OptionSpecification
 
-                            if(0 != (ParseOptions.TreatSinglehyphenAsValue & options))
+                            if (0 != (ParseOptions.TreatSinglehyphenAsValue & options))
                             {
                                 AddValue(Argument.NewValue("-", i));
                             }
@@ -196,7 +196,7 @@ namespace Clasp
                         {
                             int equal = arg.IndexOf('=');
 
-                            if(equal >= 0)
+                            if (equal >= 0)
                             {
                                 // 2. Contains '=', so OptionSpecification
 
@@ -205,15 +205,15 @@ namespace Clasp
 
                                 Specification spec = FindSpecification_(specifications, name);
 
-                                if(null != spec)
+                                if (null != spec)
                                 {
-                                    if(String.IsNullOrEmpty(value))
+                                    if (String.IsNullOrEmpty(value))
                                     {
                                         OptionSpecification optionSpec = spec as OptionSpecification;
 
-                                        if(null != optionSpec)
+                                        if (null != optionSpec)
                                         {
-                                            if(!String.IsNullOrEmpty(optionSpec.DefaultValue))
+                                            if (!String.IsNullOrEmpty(optionSpec.DefaultValue))
                                             {
                                                 value = optionSpec.DefaultValue;
                                             }
@@ -231,11 +231,11 @@ namespace Clasp
                             {
                                 Specification spec = FindSpecification_(specifications, arg);
 
-                                if(null != spec)
+                                if (null != spec)
                                 {
                                     equal = (null == spec.ResolvedName) ? -1 : spec.ResolvedName.IndexOf('=');
 
-                                    if(equal >= 0)
+                                    if (equal >= 0)
                                     {
                                         // An option
                                         string name     =   spec.ResolvedName.Substring(0, equal);
@@ -243,7 +243,7 @@ namespace Clasp
 
                                         Specification spec2 = FindSpecification_(specifications, name);
 
-                                        if(null != spec2)
+                                        if (null != spec2)
                                         {
                                             spec = spec2;
                                         }
@@ -252,9 +252,9 @@ namespace Clasp
                                     }
                                     else
                                     {
-                                        if(ArgumentType.Option == spec.Type)
+                                        if (ArgumentType.Option == spec.Type)
                                         {
-                                            if(null == spec.ResolvedName)
+                                            if (null == spec.ResolvedName)
                                             {
                                                 lastOption = AddOption(Argument.NewOption(spec, arg, arg, null, i));
                                             }
@@ -264,9 +264,9 @@ namespace Clasp
                                             }
                                         }
                                         else
-                                        if(ArgumentType.Flag == spec.Type)
+                                        if (ArgumentType.Flag == spec.Type)
                                         {
-                                            if(null == spec.ResolvedName)
+                                            if (null == spec.ResolvedName)
                                             {
                                                 AddFlag(Argument.NewFlag(spec, arg, arg, i));
                                             }
@@ -277,14 +277,14 @@ namespace Clasp
                                         }
                                     }
                                 }
-                                else if(null != specifications && 1 == numHyphens)
+                                else if (null != specifications && 1 == numHyphens)
                                 {
                                     // 5. Treat each character in the argument as a flag, and process its alias (if defined)
                                     char[] flag = new char[2];
 
                                     flag[0] = '-';
 
-                                    for(int j = 1; j != arg.Length; ++j)
+                                    for (int j = 1; j != arg.Length; ++j)
                                     {
                                         flag[1] = arg[j];
 
@@ -292,18 +292,18 @@ namespace Clasp
 
                                         Specification spec2 = FindSpecification_(specifications, arg2);
 
-                                        if(null != spec2)
+                                        if (null != spec2)
                                         {
                                             int equal3 = spec2.ResolvedName.IndexOf('=');
 
-                                            if(equal3 >= 0)
+                                            if (equal3 >= 0)
                                             {
                                                 string name2    =   spec2.ResolvedName.Substring(0, equal3);
                                                 string value2   =   spec2.ResolvedName.Substring(1 + equal3);
 
                                                 Specification spec3 = FindSpecification_(specifications, name2);
 
-                                                if(null != spec3)
+                                                if (null != spec3)
                                                 {
                                                     spec2 = spec3;
                                                 }
@@ -312,12 +312,12 @@ namespace Clasp
                                             }
                                             else
                                             {
-                                                if(ArgumentType.Option == spec2.Type)
+                                                if (ArgumentType.Option == spec2.Type)
                                                 {
                                                     lastOption = AddOption(Argument.NewOption(spec2, arg, spec2.ResolvedName, null, i));
                                                 }
                                                 else
-                                                if(ArgumentType.Flag == spec2.Type)
+                                                if (ArgumentType.Flag == spec2.Type)
                                                 {
                                                     AddFlag(Argument.NewFlag(spec2, arg, spec2.ResolvedName, i));
                                                 }
@@ -343,11 +343,11 @@ namespace Clasp
                 {
                     wildargs.Clear();
 
-                    if(0 == (options & ParseOptions.DontExpandWildcardsOnWindows))
+                    if (0 == (options & ParseOptions.DontExpandWildcardsOnWindows))
                     {
-                        if(PlatformIsWindows)
+                        if (PlatformIsWindows)
                         {
-                            if(arg.IndexOfAny(WildcardCharacters) >= 0 && arg.IndexOfAny(InvalidCharacters) < 0)
+                            if (arg.IndexOfAny(WildcardCharacters) >= 0 && arg.IndexOfAny(InvalidCharacters) < 0)
                             {
                                 // There's a "vulnerability" in DirectoryInfo.GetFileSystemInfos() insofar
                                 // as it cannot accept a non-relative path - it throws ArgumentException -
@@ -367,7 +367,7 @@ namespace Clasp
                                     {
                                         string  path        =   info.FullName;
 
-                                        if(0 == String.Compare(cwd, 0, path, 0, cwd.Length))
+                                        if (0 == String.Compare(cwd, 0, path, 0, cwd.Length))
                                         {
                                             int len = cwd.Length;
 
@@ -387,17 +387,17 @@ namespace Clasp
                                         wildargs.Add(path);
                                     }
                                 }
-                                catch(System.IO.PathTooLongException)
+                                catch (System.IO.PathTooLongException)
                                 {}
-                                catch(System.ArgumentException)
+                                catch (System.ArgumentException)
                                 {}
-                                catch(System.NotSupportedException)
+                                catch (System.NotSupportedException)
                                 {}
                             }
                         }
                     }
 
-                    if(0 == wildargs.Count)
+                    if (0 == wildargs.Count)
                     {
                         AddValue(Argument.NewValue(arg, i));
                     }
@@ -411,11 +411,11 @@ namespace Clasp
                 }
             }
 
-            if(null != lastOption)
+            if (null != lastOption)
             {
                 OptionSpecification optionSpec = lastOption.Specification as OptionSpecification;
 
-                if(null != optionSpec)
+                if (null != optionSpec)
                 {
                     Debug.Assert(String.IsNullOrEmpty(lastOption.Value));
 
@@ -517,7 +517,7 @@ namespace Clasp
 
             foreach(IArgument arg in this.flags)
             {
-                if(arg.ResolvedName == resolvedName)
+                if (arg.ResolvedName == resolvedName)
                 {
                     int v0  =   FromEnum(flag);
                     int v1  =   FromEnum(variable);
@@ -556,7 +556,7 @@ namespace Clasp
         {
             IArgument arg = FindOption_(resolvedName);
 
-            if(null != arg)
+            if (null != arg)
             {
                 value = arg.Value;
 
@@ -599,14 +599,14 @@ namespace Clasp
         {
             IArgument arg = FindOption_(resolvedName);
 
-            if(null != arg)
+            if (null != arg)
             {
-                if(String.IsNullOrEmpty(arg.Value))
+                if (String.IsNullOrEmpty(arg.Value))
                 {
                     throw new MissingOptionValueException(arg);
                 }
 
-                if(!int.TryParse(arg.Value, out value))
+                if (!int.TryParse(arg.Value, out value))
                 {
                     throw new InvalidOptionValueException(arg, typeof(int));
                 }
@@ -638,7 +638,7 @@ namespace Clasp
         /// </exception>
         public void RequireOption(string resolvedName, out string value)
         {
-            if(!CheckOption(resolvedName, out value))
+            if (!CheckOption(resolvedName, out value))
             {
                 throw new MissingOptionException(resolvedName);
             }
@@ -668,7 +668,7 @@ namespace Clasp
         /// </exception>
         public void RequireOption(string resolvedName, out int value)
         {
-            if(!CheckOption(resolvedName, out value))
+            if (!CheckOption(resolvedName, out value))
             {
                 throw new MissingOptionException(resolvedName);
             }
@@ -688,7 +688,7 @@ namespace Clasp
         {
             foreach(IArgument arg in this.flags)
             {
-                if(arg.ResolvedName == resolvedName)
+                if (arg.ResolvedName == resolvedName)
                 {
                     arg.Use();
 
@@ -731,12 +731,12 @@ namespace Clasp
         /// </exception>
         public void RequireValue(int index, out string value)
         {
-            if(index < 0)
+            if (index < 0)
             {
                 throw new System.ArgumentOutOfRangeException("index", index, "index must be non-negative");
             }
 
-            if(!(index < Values.Count))
+            if (!(index < Values.Count))
             {
                 throw new MissingValueException(index);
             }
@@ -765,7 +765,7 @@ namespace Clasp
 
             RequireValue(index, out s);
 
-            if(!int.TryParse(s, out value))
+            if (!int.TryParse(s, out value))
             {
                 throw new InvalidValueException(Values[index], typeof(int));
             }
@@ -866,7 +866,7 @@ namespace Clasp
         {
             foreach(IArgument arg in this.options)
             {
-                if(arg.ResolvedName == resolvedName)
+                if (arg.ResolvedName == resolvedName)
                 {
                     return arg;
                 }
@@ -906,7 +906,7 @@ namespace Clasp
         {
             Debug.Assert(null != name);
 
-            if(null == specifications)
+            if (null == specifications)
             {
                 return null;
             }
@@ -914,7 +914,7 @@ namespace Clasp
             {
                 foreach(Specification specification in specifications)
                 {
-                    if(specification.GivenName == name)
+                    if (specification.GivenName == name)
                     {
                         return specification;
                     }
@@ -922,7 +922,7 @@ namespace Clasp
 
                 foreach(Specification specification in specifications)
                 {
-                    if(specification.ResolvedName == name)
+                    if (specification.ResolvedName == name)
                     {
                         return specification;
                     }
@@ -946,11 +946,11 @@ namespace Clasp
 
         private string TrimSingleQuotes(string s)
         {
-            if(!String.IsNullOrEmpty(s))
+            if (!String.IsNullOrEmpty(s))
             {
-                if(s.Length > 1)
+                if (s.Length > 1)
                 {
-                    if('\'' == s[0] && '\'' == s[s.Length - 1])
+                    if ('\'' == s[0] && '\'' == s[s.Length - 1])
                     {
                         return s.Substring(1, s.Length - 2);
                     }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th June 2017
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Extensions
 {
@@ -41,7 +41,7 @@ namespace Clasp.Extensions
         {
             object v;
 
-            if(options.TryGetValue(key, out v))
+            if (options.TryGetValue(key, out v))
             {
                 return v;
             }
@@ -78,7 +78,7 @@ namespace Clasp.Extensions
         {
             object v;
 
-            if(options.TryGetValue(key, out v))
+            if (options.TryGetValue(key, out v))
             {
                 return Util.ParseUtil.ParseBool(v.ToString());
             }
@@ -118,7 +118,7 @@ namespace Clasp.Extensions
         {
             object v;
 
-            if(options.TryGetValue(key, out v))
+            if (options.TryGetValue(key, out v))
             {
                 return (T)v;
             }

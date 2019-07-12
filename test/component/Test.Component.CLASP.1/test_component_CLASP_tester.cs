@@ -20,11 +20,11 @@ namespace test_component_CLASP_1
             {
                 action(arg0);
             }
-            catch(Exception x)
+            catch (Exception x)
             {
                 string function = null;
 
-                if(null != action.Target)
+                if (null != action.Target)
                 {
                     function = String.Format("{0}.{1}", action.Target.GetType(), action.Method);
                 }

@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Util
 {
@@ -34,7 +34,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Flags)
             {
-                if(flagName == arg.ResolvedName)
+                if (flagName == arg.ResolvedName)
                 {
                     arg.Used = true;
 
@@ -64,7 +64,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Options)
             {
-                if(optionName == arg.ResolvedName)
+                if (optionName == arg.ResolvedName)
                 {
                     arg.Used = true;
 
@@ -264,7 +264,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.FlagsAndOptions)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg);
                 }
@@ -288,7 +288,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.FlagsAndOptions)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg, message);
                 }
@@ -308,7 +308,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Flags)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg);
                 }
@@ -332,7 +332,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Flags)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg, message);
                 }
@@ -352,7 +352,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Options)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg);
                 }
@@ -376,7 +376,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Options)
             {
-                if(!arg.Used)
+                if (!arg.Used)
                 {
                     throw new UnusedArgumentException(arg, message);
                 }
@@ -392,7 +392,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Options)
             {
-                if(optionName == arg.ResolvedName)
+                if (optionName == arg.ResolvedName)
                 {
                     arg.Used = true;
 
@@ -400,7 +400,7 @@ namespace Clasp.Util
                     {
                         return f(arg);
                     }
-                    catch(System.FormatException x)
+                    catch (System.FormatException x)
                     {
                         throw new InvalidOptionValueException(arg, typeof(T), x);
                     }
@@ -414,7 +414,7 @@ namespace Clasp.Util
         {
             foreach(Argument arg in args.Options)
             {
-                if(optionName == arg.ResolvedName)
+                if (optionName == arg.ResolvedName)
                 {
                     arg.Used = true;
 
@@ -422,7 +422,7 @@ namespace Clasp.Util
                     {
                         return f(arg);
                     }
-                    catch(System.FormatException x)
+                    catch (System.FormatException x)
                     {
                         throw new InvalidOptionValueException(arg, typeof(T), x);
                     }

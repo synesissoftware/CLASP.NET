@@ -1,6 +1,6 @@
 ﻿
 // Created: 10th August 2009
-// Updated: 18th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Util
 {
@@ -80,7 +80,7 @@ namespace Clasp.Util
 
             foreach(IArgument value in values)
             {
-                if(value.Value.IndexOfAny(WILDCARD_CHARACTERS) >= 0)
+                if (value.Value.IndexOfAny(WILDCARD_CHARACTERS) >= 0)
                 {
                     patterns.Add(value.Value);
                 }
@@ -88,13 +88,13 @@ namespace Clasp.Util
                 {
                     IEntry entry = Recls.FileSearcher.Stat(value.Value);
 
-                    if(null == entry)
+                    if (null == entry)
                     {
                         patterns.Add(value.Value);
                     }
-                    else if(entry.IsDirectory)
+                    else if (entry.IsDirectory)
                     {
-                        if(0 != patterns.Count)
+                        if (0 != patterns.Count)
                         {
                             // Already have specified directory/files, so need to
                             // push them into 
@@ -110,18 +110,18 @@ namespace Clasp.Util
                     }
                 }
             }
-            if(0 != patterns.Count)
+            if (0 != patterns.Count)
             {
                 specs.Add(new SearchSpec(directory, JoinPatterns(patterns)));
             }
-            else if(null != directory)
+            else if (null != directory)
             {
                 specs.Add(new SearchSpec(directory, FileSearcher.WildcardsAll));
             }
 
-            if(0 == specs.Count)
+            if (0 == specs.Count)
             {
-                if(GatherOptions.AddSearchAllSpecToEmptyList == (options & GatherOptions.AddSearchAllSpecToEmptyList))
+                if (GatherOptions.AddSearchAllSpecToEmptyList == (options & GatherOptions.AddSearchAllSpecToEmptyList))
                 {
                     specs.Add(new SearchSpec(".", FileSearcher.WildcardsAll));
                 }

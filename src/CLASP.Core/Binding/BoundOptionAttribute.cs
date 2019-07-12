@@ -1,6 +1,6 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 29th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Binding
 {
@@ -67,14 +67,14 @@ namespace Clasp.Binding
         {
             get
             {
-                if(BoundNumberConstraints.None != m_numberConstraints)
+                if (BoundNumberConstraints.None != m_numberConstraints)
                 {
-                    if(0 != (BoundNumberConstraints.MustBePositive & m_numberConstraints))
+                    if (0 != (BoundNumberConstraints.MustBePositive & m_numberConstraints))
                     {
                         return false;
                     }
 
-                    if(0 != (BoundNumberConstraints.MustBeNonNegative & m_numberConstraints))
+                    if (0 != (BoundNumberConstraints.MustBeNonNegative & m_numberConstraints))
                     {
                         return false;
                     }
@@ -101,9 +101,9 @@ namespace Clasp.Binding
         {
             get
             {
-                if(BoundNumberConstraints.None != m_numberConstraints)
+                if (BoundNumberConstraints.None != m_numberConstraints)
                 {
-                    if(0 != (BoundNumberConstraints.MustBeIntegral & m_numberConstraints))
+                    if (0 != (BoundNumberConstraints.MustBeIntegral & m_numberConstraints))
                     {
                         return false;
                     }
@@ -111,7 +111,7 @@ namespace Clasp.Binding
                     return true;
                 }
 
-                if(NumberTruncate.None != m_truncationOperation)
+                if (NumberTruncate.None != m_truncationOperation)
                 {
                     return false;
                 }
@@ -161,12 +161,12 @@ namespace Clasp.Binding
         {
             get
             {
-                if(BoundNumberConstraints.None != m_numberConstraints)
+                if (BoundNumberConstraints.None != m_numberConstraints)
                 {
                     return m_numberConstraints;
                 }
 
-                if(m_requirePositive)
+                if (m_requirePositive)
                 {
                     return BoundNumberConstraints.MustBePositive;
                 }

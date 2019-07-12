@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Util
 {
@@ -52,7 +52,7 @@ namespace Clasp.Util
 
             bool v;
 
-            if(!TryParseBool(s, out v))
+            if (!TryParseBool(s, out v))
             {
                 throw new System.FormatException("String was not recognised as a valid Boolean");
             }
@@ -102,7 +102,7 @@ namespace Clasp.Util
 
             foreach(string trueForm in trueForms)
             {
-                if(0 == String.Compare(s, trueForm, comparisonType))
+                if (0 == String.Compare(s, trueForm, comparisonType))
                 {
                     value = true;
 
@@ -112,7 +112,7 @@ namespace Clasp.Util
 
             foreach(string falseForm in falseForms)
             {
-                if(0 == String.Compare(s, falseForm, comparisonType))
+                if (0 == String.Compare(s, falseForm, comparisonType))
                 {
                     value = false;
 
