@@ -49,6 +49,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="EmptyStructure_tester.cs" />
+    <Compile Include="multiple_bound_values_tester.cs" />
     <Compile Include="NumberConstraint_tester.cs" />
     <Compile Include="Option_tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
