@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th May 2019
-// Updated: 17th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -9,7 +9,8 @@ namespace Clasp.Exceptions
     using global::System;
 
     /// <summary>
-    ///  .
+    ///  Exception thrown when a value cannot be elicited as a
+    ///  given type.
     /// </summary>
     public class InvalidValueException
         : ArgumentException

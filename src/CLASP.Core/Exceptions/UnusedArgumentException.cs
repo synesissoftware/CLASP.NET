@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 5th May 2019
+// Updated: 13th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -51,7 +51,7 @@ namespace Clasp.Exceptions
         ///  The argument that is not used.
         /// </param>
         /// <param name="message">
-        ///  The message to be associated with the exception
+        ///  The prefix of the message to be associated with the exception
         /// </param>
         public UnusedArgumentException(IArgument arg, string message)
             : base(arg, String.IsNullOrWhiteSpace(message) ? Constants.DefaultMessage : message, null, null)
