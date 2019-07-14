@@ -390,7 +390,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
-            Assert.AreEqual(specifications[0], option0.Specification);
+            Assert.AreSame(specifications[0], option0.Specification);
         }
 
         [TestMethod]
@@ -415,7 +415,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
-            Assert.AreEqual(specifications[0], option0.Specification);
+            Assert.AreSame(specifications[0], option0.Specification);
         }
 
         [TestMethod]
@@ -444,10 +444,7 @@ namespace Test.Unit.CLASP.ns_1
             Assert.AreEqual(0, option0.Index);
             Assert.AreEqual("10", option0.Value);
             Assert.AreEqual("--width=10", option0.ToString());
-#if NON_EXISTENT
-
-            Assert.AreEqual(specifications[0], option0.Specification);
-#endif
+            Assert.AreSame(specifications[1], option0.Specification);
         }
         #endregion
 

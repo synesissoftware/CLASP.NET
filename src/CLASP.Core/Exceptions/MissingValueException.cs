@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 5th May 2019
+// Updated: 14th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -10,23 +10,8 @@ namespace Clasp.Exceptions
     ///  Exception thrown to indicate a missing option.
     /// </summary>
     public class MissingValueException
-        : ArgumentException
+        : MissingArgumentException
     {
-        #region constants
-
-        /// <summary>
-        ///  Constants class
-        /// </summary>
-        public static class Constants
-        {
-            /// <summary>
-            ///  The default message used by
-            ///  <see cref="Clasp.Exceptions.MissingValueException"/>
-            /// </summary>
-            public const string     DefaultMessage  =   @"required value not specified";
-        }
-        #endregion
-
         #region fields
 
         private readonly int    m_indexNotSatisfied;
@@ -35,8 +20,7 @@ namespace Clasp.Exceptions
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the exception type from the given
-        ///  index.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="indexNotSatisfied">
         ///  The value index that was required but not satisfied
@@ -47,8 +31,7 @@ namespace Clasp.Exceptions
         }
 
         /// <summary>
-        ///  Constructs an instance of the exception type from the given
-        ///  index and message.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="indexNotSatisfied">
         ///  The value index that was required but not satisfied
@@ -57,7 +40,7 @@ namespace Clasp.Exceptions
         ///  The message associated with the exception
         /// </param>
         public MissingValueException(int indexNotSatisfied, string message)
-            : base(null, String.IsNullOrWhiteSpace(message) ? Constants.DefaultMessage : message, null)
+            : base(MakeMessage_(indexNotSatisfied, message))
         {
             m_indexNotSatisfied = indexNotSatisfied;
         }
@@ -79,6 +62,15 @@ namespace Clasp.Exceptions
 
         #region implementation
 
+        private static string MakeMessage_(int indexNotSatisfied, string message)
+        {
+            if (String.IsNullOrWhiteSpace(message))
+            {
+                return String.Format("required value at index {0} not specified", indexNotSatisfied);
+            }
+
+            return message;
+        }
         #endregion
     }
 }

@@ -1,35 +1,22 @@
 ﻿
 // Created: 17th May 2019
-// Updated: 13th July 2019
+// Updated: 14th July 2019
 
 namespace Clasp.Exceptions
 {
     using global::Clasp.Interfaces;
+    using ExceptionUtil = global::Clasp.Internal.ExceptionUtil;
 
     using global::System;
+    using global::System.Text;
 
     /// <summary>
     ///  Exception thrown when a value cannot be elicited as a
     ///  given type.
     /// </summary>
     public class InvalidValueException
-        : ArgumentException
+        : InvalidArgumentException
     {
-        #region constants
-
-        /// <summary>
-        ///  Constants class
-        /// </summary>
-        public static class Constants
-        {
-            /// <summary>
-            ///  The default message used by
-            ///  <see cref="Clasp.Exceptions.MissingValueException"/>
-            /// </summary>
-            public const string     DefaultMessage  =   @"invalid value for value argument";
-        }
-        #endregion
-
         #region fields
 
         private readonly Type   m_expectedType;
@@ -38,7 +25,7 @@ namespace Clasp.Exceptions
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="value">
         ///  The value argument associated with the condition that caused
@@ -52,7 +39,7 @@ namespace Clasp.Exceptions
         {}
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="value">
         ///  The value argument associated with the condition that caused
@@ -61,11 +48,15 @@ namespace Clasp.Exceptions
         /// <param name="expectedType">
         ///  The expected type.
         /// </param>
-        /// <param name="message">
-        ///  The string associated with the exception
+        /// <param name="innerException">
+        ///  Inner exception, or <c>null</c>.
         /// </param>
-        private InvalidValueException(IArgument value, Type expectedType, string message)
-            : base(value, String.IsNullOrWhiteSpace(message) ? Constants.DefaultMessage : message, null)
+        /// <param name="qualifiers">
+        ///  0+ qualifier strings, each to be separated from the evaluated
+        ///  message and each other by the separator <c>": "</c>
+        /// </param>
+        public InvalidValueException(IArgument value, Type expectedType, Exception innerException, params string[] qualifiers)
+            : base(value, MakeMessage_(value, expectedType, innerException, qualifiers), null)
         {
             m_expectedType = expectedType;
         }
@@ -93,6 +84,42 @@ namespace Clasp.Exceptions
             {
                 return m_expectedType;
             }
+        }
+        #endregion
+
+        #region implementation
+
+        private static string MakeMessage_(IArgument arg, Type expectedType, Exception innerException, string[] qualifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (0 == qualifiers.Length)
+            {
+                sb.AppendFormat(@"invalid value '{0}'", arg.Value);
+            }
+            else
+            {
+                sb.Append(@"invalid value");
+            }
+
+            if (null != innerException)
+            {
+                string xmsg = ExceptionUtil.PrettifyExceptionMessage(innerException);
+
+                if (!String.IsNullOrWhiteSpace(xmsg))
+                {
+                    sb.Append(@": ");
+                    sb.Append(xmsg);
+                }
+            }
+
+            foreach (string qualifier in qualifiers)
+            {
+                sb.Append(@": ");
+                sb.Append(qualifier);
+            }
+
+            return sb.ToString();
         }
         #endregion
     }

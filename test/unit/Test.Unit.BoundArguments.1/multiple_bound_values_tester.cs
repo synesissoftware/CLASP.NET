@@ -105,7 +105,7 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Clasp.Exceptions.UnusedArgumentException))]
+        [ExpectedException(typeof(Clasp.Exceptions.UnusedValueException))]
         public void test_superfluous_values_present_throw()
         {
             string[] argv =

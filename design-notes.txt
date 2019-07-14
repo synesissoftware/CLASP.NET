@@ -7,14 +7,15 @@ Definites:
 
 - ``Required`` attribute
 - works with libCLImate.NET
+- have bound types fully inform usage generation
 - elimination of single alias and 3-param Flag() method, etc.
 - move all the classes around to make the public API and common use cases simple
-# pick up usage information from bound attributes
 
+# pick up usage information from bound attributes
+# sorting exception hierarchy
 # change namespace from SynesisSoftware.SystemTools.Clasp to Clasp
 # change ``Alias`` to ``Specification``
 # rename ``Flag`` to ``FlagSpecification``, ``Option`` to ``OptionSpecification``
-
 # highlighting 'default' value in ShowUsage()
 # dependency libraries - RubLE4, Diagnosticism - are in NuGet
 # enumerator/enumeration flag binding
@@ -27,3 +28,76 @@ Maybes:
 - read from resources
 - read from config file (JSON, YAML, properties, ...)
 - Require groups
+
+
+Exceptions:
+===========
+
+pre-0.24:
+---------
+
+System.Exception
+	|
+	+- ClaspException [==] #
+			|
+			+- ArgumentException [==] #
+					|
+					+- FlagOrOptionArgumentException [-]
+					|		|
+					|		+- InvalidOptionValueException [~ parent]
+					|		|		|
+					|		|		+- OptionValueOutOfRangeException [==]
+					|		|
+					|		+- MissingOptionException [~ parent]
+					|		|
+					|		+- MissingOptionValueException [~ parent]
+					|		|
+					|		+- UnusedArgumentException [~ parent]
+					|
+					+- InvalidValueException [~ parent]
+					|
+					+- MissingValueException [~ parent]
+
+0.24+:
+------
+
+System.Exception
+	|
+	+- ClaspException @ [==]
+			|
+			+- ArgumentException @ [==]
+					|
+					+- InvalidArgumentException @ [+]
+					|		|
+					|		+- InvalidFlagOrOptionException @ [+]
+					|		|		|
+					|		|		+- InvalidOptionException @ [+]
+					|		|				|
+					|		|				+- InvalidOptionValueException [~ parent]
+					|		|				|		|
+					|		|				|		+- OptionValueOutOfRangeException [==]
+					|		|				|
+					|		|				+- MissingOptionValueException [~ parent]
+					|		|
+					|		+- InvalidValueException [~ parent]
+					|
+					+- MissingArgumentException @ [+]
+					|		|
+					|		+- MissingFlagOrOptionException @ [+]
+					|		|		|
+					|		|		+- MissingFlagException [+]
+					|		|		|
+					|		|		+- MissingOptionException [~ parent]
+					|		|
+					|		+- MissingValueException [~ parent]
+					|
+					+- UnusedArgumentException @ [~ parent]
+							|
+							+- UnusedFlagOrOptionException @ [+]
+							|		|
+							|		+- UnusedFlagException [+]
+							|		|
+							|		+- UnusedOptionException [+]
+							|
+							+- UnusedValueException [+]
+

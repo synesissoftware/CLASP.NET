@@ -106,12 +106,12 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new InvalidOptionValueException(new Argument(ArgumentType.Flag, -1, "--before", "-b", null), typeof(DateTime));
 
-            Assert.AreEqual("invalid value for option argument: -b", x.Message);
+            Assert.AreEqual("invalid value '' for option --before", x.Message);
 
 
-            x = new InvalidOptionValueException(new Argument(ArgumentType.Flag, -1, "--before", null, null), typeof(DateTime));
+            x = new InvalidOptionValueException(new Argument(ArgumentType.Flag, -1, "--before", null, "xyz"), typeof(DateTime));
 
-            Assert.AreEqual("invalid value for option argument: --before", x.Message);
+            Assert.AreEqual("invalid value 'xyz' for option --before", x.Message);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new MissingOptionException("--height");
 
-            Assert.AreEqual("option not specified: --height", x.Message);
+            Assert.AreEqual("required option --height not specified", x.Message);
         }
 
         [TestMethod]
@@ -131,12 +131,12 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new MissingOptionValueException(new Argument(ArgumentType.Flag, -1, "--length", "-l", null));
 
-            Assert.AreEqual("missing option value: -l", x.Message);
+            Assert.AreEqual("missing value for option --length", x.Message);
 
 
             x = new MissingOptionValueException(new Argument(ArgumentType.Flag, -1, "--length", null, null));
 
-            Assert.AreEqual("missing option value: --length", x.Message);
+            Assert.AreEqual("missing value for option --length", x.Message);
         }
 
         [TestMethod]
@@ -146,27 +146,30 @@ namespace Test.Unit.CLASP.ns_1
 
             x = new MissingValueException(1);
 
-            Assert.AreEqual("required value not specified", x.Message);
+            Assert.AreEqual("required value at index 1 not specified", x.Message);
         }
 
+#if NON_EXISTENT
+
         [TestMethod]
-        public void Test_UnusedArgumentException()
+        public void Test_UnusedFlagOrOptionException()
         {
             Exception x;
 
-            x = new UnusedArgumentException(new Argument(ArgumentType.Flag, -1, "--verbose", "-v", null));
+            x = new UnusedFlagOrOptionException(new Argument(ArgumentType.Flag, -1, "--verbose", "-v", null));
 
             Assert.AreEqual("unused argument: -v", x.Message);
 
 
-            x = new UnusedArgumentException(new Argument(ArgumentType.Flag, -1, "--verbose", null, null));
+            x = new UnusedFlagOrOptionException(new Argument(ArgumentType.Flag, -1, "--verbose", null, null));
 
             Assert.AreEqual("unused argument: --verbose", x.Message);
 
 
-            x = new UnusedArgumentException(new Argument(ArgumentType.Flag, -1, null, null, "file-path"));
+            x = new UnusedFlagOrOptionException(new Argument(ArgumentType.Flag, -1, null, null, "file-path"));
 
             Assert.AreEqual("unused argument: file-path", x.Message);
         }
+#endif
     }
 }

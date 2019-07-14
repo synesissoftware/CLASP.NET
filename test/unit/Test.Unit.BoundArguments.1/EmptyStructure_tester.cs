@@ -69,7 +69,7 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exceptions.UnusedArgumentException))]
+        [ExpectedException(typeof(Exceptions.UnusedFlagException))]
         public void Test_EmptyStructure_with_extra_flag()
         {
             string[] argv =
@@ -121,7 +121,7 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exceptions.UnusedArgumentException))]
+        [ExpectedException(typeof(Exceptions.UnusedOptionException))]
         public void Test_EmptyStructure_with_extra_option()
         {
             string[] argv =
@@ -174,7 +174,7 @@ namespace Test.Unit.BoundArguments.ns_1
         #endregion
 
         [TestMethod]
-        [ExpectedException(typeof(Exceptions.UnusedArgumentException))]
+        [ExpectedException(typeof(Exceptions.UnusedValueException))]
         public void Test_EmptyStructure_with_extra_value()
         {
             string[] argv =

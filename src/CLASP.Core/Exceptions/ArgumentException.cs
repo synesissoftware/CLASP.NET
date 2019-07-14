@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd June 2010
-// Updated: 5th May 2019
+// Updated: 14th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -21,20 +21,20 @@ namespace Clasp.Exceptions
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
-        /// <param name="argument">
+        /// <param name="arg">
         ///  The argument associated with the condition that caused the
-        ///  exception to be thrown. May be <c>null</c>.
+        ///  exception to be thrown. May be <c>null</c>
         /// </param>
         /// <param name="message">
-        ///  The human-readable message to be associated with the exception.
+        ///  The human-readable message to be associated with the exception
         /// </param>
         /// <param name="innerException">
         ///  Inner exception, or <c>null</c>.
         /// </param>
-        protected ArgumentException(IArgument argument, string message, Exception innerException)
-            : base(argument, message, innerException)
+        protected ArgumentException(IArgument arg, string message, Exception innerException)
+            : base(arg, message, innerException)
         {
         }
         #endregion

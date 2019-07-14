@@ -1,12 +1,15 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 13th July 2019
+// Updated: 14th July 2019
 
 namespace Clasp.Util
 {
     using global::Clasp.Exceptions;
     using global::Clasp.Internal;
     using global::Clasp.Interfaces;
+
+    using global::System;
+    using global::System.Diagnostics;
 
     /// <summary>
     ///  Utility class for additional CLASP-related functionality.
@@ -257,18 +260,12 @@ namespace Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedFlagOrOptionException">
         ///  Thrown if any flags/options are not used.
         /// </exception>
         public static void VerifyAllFlagsAndOptionsUsed(Arguments args)
         {
-            foreach(Argument arg in args.FlagsAndOptions)
-            {
-                if (!arg.Used)
-                {
-                    throw new UnusedArgumentException(arg);
-                }
-            }
+            VerifyAllFlagsAndOptionsUsed(args, null);
         }
 
         /// <summary>
@@ -281,7 +278,7 @@ namespace Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedFlagOrOptionException">
         ///  Thrown if any flags/options are not used.
         /// </exception>
         public static void VerifyAllFlagsAndOptionsUsed(Arguments args, string message)
@@ -290,7 +287,19 @@ namespace Clasp.Util
             {
                 if (!arg.Used)
                 {
-                    throw new UnusedArgumentException(arg, message);
+                    switch (arg.Type)
+                    {
+                    case ArgumentType.Flag:
+
+                        throw new UnusedFlagException(arg, args.FailureOptions, message);
+                    case ArgumentType.Option:
+
+                        throw new UnusedOptionException(arg, args.FailureOptions, message);
+                    default:
+
+                        Trace.WriteLine(String.Format("Argument of unexpected type '{0}' in FlagsAndOptions", arg.Type));
+                        break;
+                    }
                 }
             }
         }
@@ -301,18 +310,12 @@ namespace Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedFlagException">
         ///  Thrown if any flags are not used.
         /// </exception>
         public static void VerifyAllFlagsUsed(Arguments args)
         {
-            foreach(Argument arg in args.Flags)
-            {
-                if (!arg.Used)
-                {
-                    throw new UnusedArgumentException(arg);
-                }
-            }
+            VerifyAllFlagsUsed(args, null);
         }
 
         /// <summary>
@@ -325,7 +328,7 @@ namespace Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedFlagException">
         ///  Thrown if any flags are not used.
         /// </exception>
         public static void VerifyAllFlagsUsed(Arguments args, string message)
@@ -334,7 +337,7 @@ namespace Clasp.Util
             {
                 if (!arg.Used)
                 {
-                    throw new UnusedArgumentException(arg, message);
+                    throw new UnusedFlagException(arg, args.FailureOptions, message);
                 }
             }
         }
@@ -345,18 +348,12 @@ namespace Clasp.Util
         /// <param name="args">
         ///  The arguments object
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedOptionException">
         ///  Thrown if any options are not used.
         /// </exception>
         public static void VerifyAllOptionsUsed(Arguments args)
         {
-            foreach(Argument arg in args.Options)
-            {
-                if (!arg.Used)
-                {
-                    throw new UnusedArgumentException(arg);
-                }
-            }
+            VerifyAllOptionsUsed(args, null);
         }
 
         /// <summary>
@@ -369,7 +366,7 @@ namespace Clasp.Util
         /// <param name="message">
         ///  The message to be associated with the exception if thrown
         /// </param>
-        /// <exception cref="Clasp.Exceptions.UnusedArgumentException">
+        /// <exception cref="Clasp.Exceptions.UnusedOptionException">
         ///  Thrown if any options are not used.
         /// </exception>
         public static void VerifyAllOptionsUsed(Arguments args, string message)
@@ -378,7 +375,7 @@ namespace Clasp.Util
             {
                 if (!arg.Used)
                 {
-                    throw new UnusedArgumentException(arg, message);
+                    throw new UnusedOptionException(arg, args.FailureOptions, message);
                 }
             }
         }

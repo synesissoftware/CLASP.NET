@@ -56,8 +56,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.MissingOptionException x)
             {
-                Assert.IsTrue(x.Message.Contains("option not specified"));
-                Assert.IsTrue(x.Message.Contains("--abcd"));
+                Assert.AreEqual("required option --abcd not specified", x.Message);
 
                 Assert.IsNull(x.Argument);
             }
@@ -70,8 +69,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.MissingOptionException x)
             {
-                Assert.IsTrue(x.Message.Contains("option not specified"));
-                Assert.IsTrue(x.Message.Contains("--verbosity"));
+                Assert.AreEqual("required option --verbosity not specified", x.Message);
 
                 Assert.IsNull(x.Argument);
             }
@@ -253,8 +251,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.MissingOptionException x)
             {
-                Assert.IsTrue(x.Message.Contains("option not specified"));
-                Assert.IsTrue(x.Message.Contains("--abcd"));
+                Assert.AreEqual("required option --abcd not specified", x.Message);
 
                 Assert.IsNull(x.Argument);
             }
@@ -272,8 +269,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.InvalidOptionValueException x)
             {
-                Assert.IsTrue(x.Message.Contains("invalid value for option"));
-                Assert.IsTrue(x.Message.Contains("--verbosity"));
+                Assert.AreEqual("invalid value for option --verbosity: 'silent' is not a number", x.Message);
 
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual("--verbosity", x.Argument.ResolvedName);
@@ -289,7 +285,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.MissingValueException x)
             {
-                Assert.IsTrue(x.Message.Contains("required value not specified"));
+                Assert.AreEqual("required value at index 0 not specified", x.Message);
 
                 Assert.IsNull(x.Argument);
             }
@@ -323,7 +319,7 @@ namespace Test.Unit.ExampleTestCases
             }
             catch (Clasp.Exceptions.InvalidValueException x)
             {
-                Assert.IsTrue(x.Message.Contains("invalid value for value argument"));
+                Assert.AreEqual("invalid value at index 2: 'a456' is not a number", x.Message);
 
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual(2, x.Argument.Index);

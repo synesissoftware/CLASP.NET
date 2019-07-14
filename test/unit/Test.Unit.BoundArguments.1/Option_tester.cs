@@ -197,8 +197,7 @@ namespace Test.Unit.BoundArguments.ns_1
             }
             catch (ClaspExceptions.MissingOptionValueException x)
             {
-                Assert.IsTrue(x.Message.Contains("missing option value"));
-                Assert.IsTrue(x.Message.Contains("--verbosity"));
+                Assert.AreEqual("missing value for option --verbosity", x.Message);
 
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual(ArgumentType.Option, x.Argument.Type);
@@ -279,8 +278,7 @@ namespace Test.Unit.BoundArguments.ns_1
             }
             catch (ClaspExceptions.MissingOptionException x)
             {
-                Assert.IsTrue(x.Message.Contains("option not specified"));
-                Assert.IsTrue(x.Message.Contains("--verbosity"));
+                Assert.AreEqual("required option --verbosity not specified", x.Message);
 
                 Assert.IsNull(x.Argument);
             }
@@ -338,10 +336,50 @@ namespace Test.Unit.BoundArguments.ns_1
                 , FailureOptions.None
                 );
             }
-            catch (ClaspExceptions.UnusedArgumentException x)
+            catch (ClaspExceptions.UnusedFlagOrOptionException x)
             {
-                Assert.IsTrue(x.Message.Contains("unrecognised option"));
-                Assert.IsTrue(x.Message.Contains("--xyz"));
+                Assert.AreEqual("unrecognised option --xyz", x.Message);
+
+                Assert.IsNotNull(x.Argument);
+                Assert.AreEqual(ArgumentType.Option, x.Argument.Type);
+                Assert.AreEqual("--xyz", x.Argument.ResolvedName);
+                Assert.AreEqual("123", x.Argument.Value);
+            }
+
+            Assert.IsFalse(enteredMain);
+            Assert.AreEqual(Int32.MinValue, r);
+        }
+
+        [TestMethod]
+        public void Test_1_pass_surplus_testing_exception_UnusedAsUnused()
+        {
+            string[] argv =
+            {
+                @"--verbosity=silent",
+                @"--xyz=123",
+            };
+
+            bool enteredMain = false;
+
+            int r = Int32.MinValue;
+
+            try
+            {
+                Invoker.ParseAndInvokeMainWithBoundArgumentOfType<SimpleOptionStructure>(argv, null, (SimpleOptionStructure ss, Arguments args_UNUSED) =>
+                {
+
+                    enteredMain = true;
+
+                    return 12345;
+                }
+                , ArgumentBindingOptions.None
+                , ParseOptions.None
+                , FailureOptions.ReportUnusedAsUnused
+                );
+            }
+            catch (ClaspExceptions.UnusedFlagOrOptionException x)
+            {
+                Assert.AreEqual("given option --xyz not used", x.Message);
 
                 Assert.IsNotNull(x.Argument);
                 Assert.AreEqual(ArgumentType.Option, x.Argument.Type);

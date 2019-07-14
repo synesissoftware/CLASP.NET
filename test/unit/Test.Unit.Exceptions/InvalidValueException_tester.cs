@@ -33,8 +33,7 @@ namespace Test.Unit.Exceptions
             InvalidValueException x = new InvalidValueException(arg, typeof(int));
 
             Assert.AreSame(arg, x.Argument);
-            Assert.AreEqual("invalid value for value argument", x.Message);
-            //Assert.AreEqual("invalid value for option --opt1: number expected", x.Message);
+            Assert.AreEqual("invalid value 'val1'", x.Message);
         }
     }
 }

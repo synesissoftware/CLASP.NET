@@ -1,5 +1,5 @@
 ﻿
-// Created: 23rd June 2010
+// Created: 13th July 2019
 // Updated: 14th July 2019
 
 namespace Clasp.Exceptions
@@ -7,13 +7,12 @@ namespace Clasp.Exceptions
     using global::Clasp.Interfaces;
 
     using global::System;
-    using global::System.Diagnostics;
 
     /// <summary>
-    ///  Exception thrown to indicate an unused flag/option.
+    ///  Representing invalid options
     /// </summary>
-    public abstract class UnusedArgumentException
-        : ArgumentException
+    public abstract class InvalidOptionException
+        : InvalidFlagOrOptionException
     {
         #region construction
 
@@ -22,15 +21,17 @@ namespace Clasp.Exceptions
         /// </summary>
         /// <param name="arg">
         ///  The argument associated with the condition that caused the
-        ///  exception to be thrown. May not be <c>null</c>.
+        ///  exception to be thrown. May be <c>null</c>
         /// </param>
         /// <param name="message">
         ///  The human-readable message to be associated with the exception
         /// </param>
-        protected UnusedArgumentException(IArgument arg, string message)
-            : base(arg, message, null)
+        /// <param name="innerException">
+        ///  Inner exception, or <c>null</c>.
+        /// </param>
+        public InvalidOptionException(IArgument arg, string message, Exception innerException)
+            : base(arg, message, innerException)
         {
-            Debug.Assert(null != arg);
         }
         #endregion
     }

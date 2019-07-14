@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 13th July 2019
+// Updated: 14th July 2019
 
 namespace Clasp.Exceptions
 {
@@ -11,25 +11,25 @@ namespace Clasp.Exceptions
     /// <summary>
     ///  Root exception for argument-related exceptions.
     /// </summary>
+    [Obsolete("This exception is obsolete, no longer has any children, and will be removed in a future release")]
     public abstract class FlagOrOptionArgumentException
         : ArgumentException
     {
         #region fields
 
-        private readonly string m_optionName;
         #endregion
 
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="argument">
         ///  The argument associated with the condition that caused the
-        ///  exception to be thrown. May be <c>null</c>.
+        ///  exception to be thrown. May be <c>null</c>
         /// </param>
         /// <param name="message">
-        ///  The human-readable message to be associated with the exception.
+        ///  The human-readable message to be associated with the exception
         /// </param>
         /// <param name="optionName">
         ///  The name of the flag/option.
@@ -42,9 +42,8 @@ namespace Clasp.Exceptions
         ///  message and each other by the separator <c>": "</c>
         /// </param>
         protected FlagOrOptionArgumentException(IArgument argument, string message, string optionName, Exception innerException, params string[] qualifiers)
-            : base(argument, MakeMessage_(argument, message, optionName, qualifiers), innerException)
+            : base(argument, "", null)
         {
-            m_optionName = optionName;
         }
         #endregion
 
@@ -54,38 +53,6 @@ namespace Clasp.Exceptions
 
         #region implementation
 
-        private static string MakeMessage_(IArgument argument, string message, string optionName, params string[] qualifiers)
-        {
-            if (null != argument)
-            {
-                if (String.IsNullOrEmpty(optionName))
-                {
-                    optionName = argument.GivenName;
-                }
-
-                if (String.IsNullOrEmpty(optionName))
-                {
-                    optionName = argument.ResolvedName;
-                }
-
-                if (String.IsNullOrEmpty(optionName))
-                {
-                    optionName = argument.Value;
-                }
-            }
-
-            if (!String.IsNullOrEmpty(optionName))
-            {
-                message = String.Format(@"{0}: {1}", message, optionName);
-            }
-
-            if (0 != qualifiers.Length)
-            {
-                message = message + ": " + String.Join(": ", qualifiers);
-            }
-
-            return message;
-        }
         #endregion
     }
 }

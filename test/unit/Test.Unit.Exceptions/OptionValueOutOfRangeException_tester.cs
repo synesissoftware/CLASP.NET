@@ -33,7 +33,7 @@ namespace Test.Unit.Exceptions
             OptionValueOutOfRangeException x = new OptionValueOutOfRangeException("must not be negative", arg, typeof(int));
 
             Assert.AreSame(arg, x.Argument);
-            Assert.AreEqual("invalid value for option argument: --opt1: must not be negative", x.Message);
+            Assert.AreEqual("invalid value for option --opt1: must not be negative", x.Message);
         }
     }
 }

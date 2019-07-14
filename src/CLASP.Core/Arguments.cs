@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 13th July 2019
+// Updated: 14th July 2019
 
 namespace Clasp
 {
@@ -13,6 +13,7 @@ namespace Clasp
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     ///  This class, the main API class for the library, represents a parsed
@@ -58,6 +59,8 @@ namespace Clasp
         readonly List<IArgument>            options         =   new List<IArgument>();
         readonly List<IArgument>            flagsAndOptions =   new List<IArgument>();
         readonly List<IArgument>            values          =   new List<IArgument>();
+        readonly ParseOptions               m_parseOptions;
+        readonly FailureOptions             m_failureOptions;
         #endregion
 
         #region construction
@@ -70,7 +73,7 @@ namespace Clasp
         ///  The program arguments
         /// </param>
         public Arguments(string[] argv)
-            : this(argv, null, ParseOptions.None)
+            : this(argv, null, ParseOptions.None, FailureOptions.Default)
         {}
         /// <summary>
         ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
@@ -85,7 +88,7 @@ namespace Clasp
         ///  control the parsing behaviour
         /// </param>
         public Arguments(string[] argv, ParseOptions options)
-            : this(argv, null, options)
+            : this(argv, null, options, FailureOptions.Default)
         {}
         /// <summary>
         ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
@@ -100,14 +103,15 @@ namespace Clasp
         ///  arguments
         /// </param>
         public Arguments(string[] argv, ICollection<Specification> specifications)
-            : this(argv, specifications, ParseOptions.None)
+            : this(argv, specifications, ParseOptions.None, FailureOptions.Default)
         {}
+
         /// <summary>
         ///  Constructs an <see cref="Clasp.Arguments"/> collection from the given
         ///  program arguments, according to the given
         ///  <paramref name="specifications"/>
         ///  and
-        ///  <paramref name="options"/>
+        ///  <paramref name="parseOptions"/>
         /// </summary>
         /// <param name="argv">
         ///  The program arguments
@@ -116,11 +120,14 @@ namespace Clasp
         ///  Zero or more specifications that control the interpretation of the
         ///  arguments
         /// </param>
-        /// <param name="options">
+        /// <param name="parseOptions">
         ///  A combination of <see cref="Clasp.ParseOptions">options</see> that
         ///  control the parsing behaviour
         /// </param>
-        public Arguments(string[] argv, ICollection<Specification> specifications, ParseOptions options)
+        /// <param name="failureOptions">
+        ///  A combination of <see cref="Clasp.FailureOptions">options</see>
+        /// </param>
+        public Arguments(string[] argv, ICollection<Specification> specifications, ParseOptions parseOptions, FailureOptions failureOptions)
         {
             bool            treatAllAsValues    =   false;
             Argument        lastOption          =   null;
@@ -183,7 +190,7 @@ namespace Clasp
                         {
                             // 1. If "-", then OptionSpecification
 
-                            if (0 != (ParseOptions.TreatSinglehyphenAsValue & options))
+                            if (0 != (ParseOptions.TreatSinglehyphenAsValue & parseOptions))
                             {
                                 AddValue(Argument.NewValue("-", i));
                             }
@@ -343,7 +350,7 @@ namespace Clasp
                 {
                     wildargs.Clear();
 
-                    if (0 == (options & ParseOptions.DontExpandWildcardsOnWindows))
+                    if (0 == (parseOptions & ParseOptions.DontExpandWildcardsOnWindows))
                     {
                         if (PlatformIsWindows)
                         {
@@ -424,6 +431,9 @@ namespace Clasp
             }
 
             this.specifications = specifications;
+
+            this.m_parseOptions = parseOptions;
+            this.m_failureOptions = failureOptions;
         }
         #endregion
 
@@ -608,7 +618,18 @@ namespace Clasp
 
                 if (!int.TryParse(arg.Value, out value))
                 {
-                    throw new InvalidOptionValueException(arg, typeof(int));
+                    string n_msg;
+
+                    if (Regex.IsMatch(arg.Value, @"^[-+]?\d+$"))
+                    {
+                        n_msg = "is not a number, or is too large";
+                    }
+                    else
+                    {
+                        n_msg = "is not a number";
+                    }
+
+                    throw new InvalidOptionValueException(arg, typeof(int), null, String.Format("'{0}' {1}", arg.Value, n_msg));
                 }
 
                 arg.Use();
@@ -765,9 +786,13 @@ namespace Clasp
 
             RequireValue(index, out s);
 
-            if (!int.TryParse(s, out value))
+            try
             {
-                throw new InvalidValueException(Values[index], typeof(int));
+                value = int.Parse(s);
+            }
+            catch (System.FormatException x)
+            {
+                throw new InvalidOptionValueException(Values[index], typeof(int), x);
             }
         }
 
@@ -791,6 +816,28 @@ namespace Clasp
             get
             {
                 return Process.GetCurrentProcess().ProcessName;
+            }
+        }
+
+        /// <summary>
+        ///  Failure options
+        /// </summary>
+        public FailureOptions FailureOptions
+        {
+            get
+            {
+                return m_failureOptions;
+            }
+        }
+
+        /// <summary>
+        ///  Parse options
+        /// </summary>
+        public ParseOptions ParseOptions
+        {
+            get
+            {
+                return m_parseOptions;
             }
         }
 

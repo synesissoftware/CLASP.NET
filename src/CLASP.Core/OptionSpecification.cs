@@ -17,7 +17,7 @@ namespace Clasp
         #region construction
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="givenName">
         ///  The given name of the flag. May be <c>null</c> except
@@ -39,7 +39,7 @@ namespace Clasp
         }
 
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="shortName">
         ///  The given name of the flag. May be <c>null</c> except

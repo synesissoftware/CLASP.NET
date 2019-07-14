@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.24.156.0 - 14th July 2019
+
+* ~ refactored the exception hierarchy
+
 ## 0.23.154.0 - 9th June 2019
 
 * + added ``UsageUtil.ShowBoundUsageAndQuit()`` method (overloads)

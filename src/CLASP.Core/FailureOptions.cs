@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 5th May 2019
+// Updated: 14th July 2019
 
 namespace Clasp
 {
@@ -49,6 +49,13 @@ namespace Clasp
         ///  to contingent reports
         /// </summary>
         AppendStandardUsagePromptToContingentReport =   0x00000100,
+
+        /// <summary>
+        ///  If specified, causes unused messages to use the term
+        ///  "unused", rather than "unrecognised", for flags and
+        ///  options
+        /// </summary>
+        ReportUnusedAsUnused                        =   0x00000200,
 
         /// <summary>
         ///  Default flags used in

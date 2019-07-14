@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 13th July 2019
+// Updated: 14th July 2019
 
 namespace Clasp
 {
@@ -273,7 +273,7 @@ namespace Clasp
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, specifications, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions, failureOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -317,7 +317,7 @@ namespace Clasp
 
             Specification[] mergedSpecs = Invoker.MergeSpecificationsForBoundType<T>(specifications);
 
-            Arguments arguments = new Arguments(argv, mergedSpecs, parseOptions);
+            Arguments arguments = new Arguments(argv, mergedSpecs, parseOptions, failureOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -333,7 +333,7 @@ namespace Clasp
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, specifications, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions, failureOptions);
 
             return Do_ParseAndInvokeMain_IA_(toolMain, arguments, failureOptions);
         }
@@ -370,7 +370,7 @@ namespace Clasp
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, specifications, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions, failureOptions);
 
             Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
         }
@@ -384,7 +384,7 @@ namespace Clasp
             Debug.Assert(null != argv);
             Debug.Assert(null != toolMain);
 
-            Arguments arguments = new Arguments(argv, specifications, parseOptions);
+            Arguments arguments = new Arguments(argv, specifications, parseOptions, failureOptions);
 
             Do_ParseAndInvokeMain_VA_(toolMain, arguments, failureOptions);
         }
@@ -1438,12 +1438,12 @@ namespace Clasp
 
             if (0 == (ArgumentBindingOptions.IgnoreOtherFlags & effectiveBindingOptions))
             {
-                Util.ArgumentUtil.VerifyAllFlagsUsed(args, @"unrecognised flag");
+                Util.ArgumentUtil.VerifyAllFlagsUsed(args);
             }
 
             if (0 == (ArgumentBindingOptions.IgnoreOtherOptions & effectiveBindingOptions))
             {
-                Util.ArgumentUtil.VerifyAllOptionsUsed(args, @"unrecognised option");
+                Util.ArgumentUtil.VerifyAllOptionsUsed(args);
             }
 
             if (0 == (ArgumentBindingOptions.IgnoreExtraValues & effectiveBindingOptions))
@@ -1452,7 +1452,7 @@ namespace Clasp
                 {
                     if (!usedValues[i])
                     {
-                        throw new Exceptions.UnusedArgumentException(args.Values[i], @"too many values specified");
+                        throw new Exceptions.UnusedValueException(args.Values[i], @"too many values specified");
                     }
                 }
             }
@@ -1694,7 +1694,7 @@ namespace Clasp
                 {
                     r = pf(value);
                 }
-                catch (System.FormatException x)
+                catch (System.FormatException /* x */)
                 {
                     double d;
 
@@ -1712,7 +1712,7 @@ namespace Clasp
                             break;
                         case Binding.NumberTruncate.None:
 
-                            throw new Exceptions.InvalidOptionValueException(option, type, x, "whole number required");
+                            throw new Exceptions.InvalidOptionValueException(option, type, null, "whole number required");
                         case Binding.NumberTruncate.ToCeiling:
 
                             d = Math.Ceiling(d);
@@ -1778,15 +1778,15 @@ namespace Clasp
             }
             catch (System.FormatException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
             catch (System.InvalidCastException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
             catch (System.OverflowException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
         }
 
@@ -1846,15 +1846,15 @@ namespace Clasp
             }
             catch (System.FormatException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
             catch (System.InvalidCastException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
             catch (System.OverflowException x)
             {
-                throw new Exceptions.InvalidOptionValueException(option, type, x, x.Message);
+                throw new Exceptions.InvalidOptionValueException(option, type, x);
             }
         }
         #endregion

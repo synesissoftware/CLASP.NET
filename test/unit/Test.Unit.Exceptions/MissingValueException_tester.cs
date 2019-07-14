@@ -25,7 +25,7 @@ namespace Test.Unit.Exceptions
 
             Assert.IsNull(x.Argument);
             Assert.AreEqual(1, x.IndexNotSatisfied);
-            Assert.AreEqual("required value not specified", x.Message);
+            Assert.AreEqual("required value at index 1 not specified", x.Message);
         }
 
         [TestMethod]

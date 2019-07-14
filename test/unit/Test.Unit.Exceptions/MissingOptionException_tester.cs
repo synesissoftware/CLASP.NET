@@ -23,7 +23,7 @@ namespace Test.Unit.Exceptions
             MissingOptionException x = new MissingOptionException("--abc");
 
             Assert.IsNull(x.Argument);
-            Assert.AreEqual("option not specified: --abc", x.Message);
+            Assert.AreEqual("required option --abc not specified", x.Message);
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace Test.Unit.Exceptions
             MissingOptionException x = new MissingOptionException("--abc", "Missing required option");
 
             Assert.IsNull(x.Argument);
-            Assert.AreEqual("Missing required option: --abc", x.Message);
+            Assert.AreEqual("Missing required option", x.Message);
         }
     }
 }

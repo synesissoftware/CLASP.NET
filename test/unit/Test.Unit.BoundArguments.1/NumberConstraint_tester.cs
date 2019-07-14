@@ -67,6 +67,41 @@ namespace Test.Unit.BoundArguments.ns_1
         }
 
         [TestMethod]
+        public void Test_whole_Rectangle_with_invalid_height()
+        {
+            string[] argv =
+            {
+                "--height=-12b",
+                "--width=34",
+            };
+
+            try
+            {
+                Invoker.ParseAndInvokeMainWithBoundArgumentOfType<Rectangle_non_negative_whole_numbers>(argv, null, (Rectangle_non_negative_whole_numbers rect, Arguments clargs) => {
+
+                    Assert.Fail("should not get here");
+
+                    return 0;
+                }
+                , ArgumentBindingOptions.Default
+                , ParseOptions.Default
+                , FailureOptions.None
+                );
+            }
+            catch (ClaspExceptions.InvalidOptionValueException x)
+            {
+                Assert.IsNotNull(x.Argument);
+                Assert.AreEqual(0, x.Argument.Index);
+                Assert.AreEqual("--height", x.Argument.ResolvedName);
+
+                Assert.IsNotNull(x.ExpectedType);
+                Assert.AreEqual(typeof(int), x.ExpectedType);
+
+                Assert.IsTrue(x.Message.StartsWith("invalid value '-12b' for option --height: "));
+            }
+        }
+
+        [TestMethod]
         public void Test_whole_Rectangle_with_negative_height()
         {
             string[] argv =
@@ -97,7 +132,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 Assert.IsNotNull(x.ExpectedType);
                 Assert.AreEqual(typeof(int), x.ExpectedType);
 
-                Assert.AreEqual("invalid value for option argument: --height: must not be negative", x.Message);
+                Assert.AreEqual("invalid value for option --height: must not be negative", x.Message);
             }
         }
 
@@ -131,7 +166,7 @@ namespace Test.Unit.BoundArguments.ns_1
                 Assert.IsNotNull(x.ExpectedType);
                 Assert.AreEqual(typeof(int), x.ExpectedType);
 
-                Assert.AreEqual("invalid value for option argument: --height: whole number required", x.Message);
+                Assert.AreEqual("invalid value for option --height: whole number required", x.Message);
             }
         }
 

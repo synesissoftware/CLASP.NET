@@ -33,7 +33,7 @@ namespace Test.Unit.Exceptions
             MissingOptionValueException x = new MissingOptionValueException(arg);
 
             Assert.AreSame(arg, x.Argument);
-            Assert.AreEqual("missing option value: --opt1", x.Message);
+            Assert.AreEqual("missing value for option --opt1", x.Message);
         }
     }
 }

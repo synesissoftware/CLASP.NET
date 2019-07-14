@@ -11,7 +11,7 @@ namespace Clasp
         : Specification
     {
         /// <summary>
-        ///  Constructs an instance of the class.
+        ///  Constructs an instance of the class
         /// </summary>
         /// <param name="givenName">
         ///  The given name of the flag. May be <c>null</c> except

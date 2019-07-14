@@ -30,10 +30,10 @@ namespace Test.Unit.Exceptions
 
             IArgument arg = arguments.Options[0];
 
-            InvalidOptionValueException x = new InvalidOptionValueException(arg, typeof(int));
+            InvalidOptionValueException x = new InvalidOptionValueException(arg, typeof(int), null, "'val1' isn't a number");
 
             Assert.AreSame(arg, x.Argument);
-            Assert.AreEqual("invalid value for option argument: --opt1", x.Message);
+            Assert.AreEqual("invalid value for option --opt1: 'val1' isn't a number", x.Message);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Test.Unit.Exceptions
             InvalidOptionValueException x = new InvalidOptionValueException(arg, typeof(int), new SystemException("blah"));
 
             Assert.AreSame(arg, x.Argument);
-            Assert.AreEqual("invalid value for option argument: --opt1", x.Message);
+            Assert.AreEqual("invalid value 'val1' for option --opt1: blah", x.Message);
         }
     }
 }
