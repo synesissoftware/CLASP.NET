@@ -1,6 +1,6 @@
 ﻿
 // Created: 8th June 2015
-// Updated: 5th May 2019
+// Updated: 15th July 2019
 
 namespace Clasp
 {
@@ -12,6 +12,7 @@ namespace Clasp
     {
         #region fields
 
+        private readonly string[]                       m_validValues;
         #endregion
 
         #region construction
@@ -34,8 +35,14 @@ namespace Clasp
         ///  Zero or more valid option values.
         /// </param>
         public OptionSpecification(string givenName, string resolvedName, string description, params string[] validValues)
-            : base(ArgumentType.Option, givenName, resolvedName, description, validValues)
+            : base(ArgumentType.Option, givenName, resolvedName, description)
         {
+            if (null == validValues)
+            {
+                validValues =   new string[0];
+            }
+
+            m_validValues   =   validValues;
         }
 
         /// <summary>
@@ -50,12 +57,26 @@ namespace Clasp
         ///  unless <c>shortName</c> is non-<c>null</c>.
         /// </param>
         public OptionSpecification(string shortName, string longName)
-            : base(ArgumentType.Option, shortName, longName)
+            : this(shortName, longName, null)
         {
         }
         #endregion
 
         #region properties
+
+        /// <summary>
+        ///  The valid values for an option.
+        /// </summary>
+        /// <remarks>
+        ///  Will <b>never</b> be <b>null</b>
+        /// </remarks>
+        public string[] ValidValues
+        {
+            get
+            {
+                return m_validValues;
+            }
+        }
 
         /// <summary>
         ///  Default value for the option

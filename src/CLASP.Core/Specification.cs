@@ -1,6 +1,6 @@
 ﻿
 // Created: 23rd July 2009
-// Updated: 13th July 2019
+// Updated: 15th July 2019
 
 namespace Clasp
 {
@@ -19,7 +19,6 @@ namespace Clasp
         private readonly string                         m_givenName;
         private readonly string                         m_resolvedName;
         private readonly string                         m_description;
-        private readonly string[]                       m_validValues;
         private readonly bool                           m_isSection;
         private readonly IDictionary<string, object>    m_extras;
         #endregion
@@ -29,20 +28,14 @@ namespace Clasp
         /// <summary>
         ///  [INTERNAL]
         /// </summary>
-        protected internal Specification(ArgumentType type, string givenName, string resolvedName, string description, params string[] validValues)
+        protected internal Specification(ArgumentType type, string givenName, string resolvedName, string description)
         {
             Debug.Assert(null != givenName || null != resolvedName);
-
-            if (null == validValues)
-            {
-                validValues =   new string[0];
-            }
 
             m_argumentType  =   type;
             m_givenName     =   givenName;
             m_resolvedName  =   resolvedName;
             m_description   =   description;
-            m_validValues   =   validValues;
             m_isSection     =   false;
 
             m_extras        =   new Dictionary<string, object>();
@@ -67,7 +60,6 @@ namespace Clasp
             m_givenName     =   null;
             m_resolvedName  =   null;
             m_description   =   description;
-            m_validValues   =   new string[0];
             m_isSection     =   true;
         }
         #endregion
@@ -219,17 +211,6 @@ namespace Clasp
             get
             {
                 return m_description;
-            }
-        }
-
-        /// <summary>
-        ///  The valid values for an option.
-        /// </summary>
-        public string[] ValidValues
-        {
-            get
-            {
-                return m_validValues;
             }
         }
 

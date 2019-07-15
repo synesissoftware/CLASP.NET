@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.24.157.1 - 15th July 2019
+
+* ~ moved ValidValues from Specification to OptionSpecification
+
 ## 0.24.156.0 - 14th July 2019
 
 * ~ refactored the exception hierarchy

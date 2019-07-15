@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 14th July 2019
+// Updated: 15th July 2019
 
 namespace Clasp
 {
@@ -752,7 +752,9 @@ namespace Clasp
                                 break;
                             case ArgumentType.Option:
 
-                                tuple.Item1[tuple.Item2] = Specification.Option(alias, resolved, desc, sspec.ValidValues);
+                                OptionSpecification sspec_o = (OptionSpecification)sspec;
+
+                                tuple.Item1[tuple.Item2] = Specification.Option(alias, resolved, desc, sspec_o.ValidValues);
                                 break;
                             }
                         }
@@ -891,7 +893,9 @@ namespace Clasp
                                 break;
                             case ArgumentType.Option:
 
-                                s = Specification.Option(cs.GivenName, cs.ResolvedName, ns.Description, cs.ValidValues);
+                                OptionSpecification cs_o = (OptionSpecification)cs;
+
+                                s = Specification.Option(cs.GivenName, cs.ResolvedName, ns.Description, cs_o.ValidValues);
                                 break;
                             }
                         }

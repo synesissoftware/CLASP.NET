@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 13th July 2019
+// Updated: 15th July 2019
 
 namespace Clasp.Util
 {
@@ -853,13 +853,13 @@ namespace Clasp.Util
                                 sups.Stream.WriteLine("{1}{0}=<value>", specification.ResolvedName, separator);
                             }
                             sups.Stream.WriteLine("{1}{1}{0}", specification.Description, separator);
-                            if (0 != specification.ValidValues.Length)
+
+                            OptionSpecification optionSpecification = (OptionSpecification)specification;
+                            if (0 != optionSpecification.ValidValues.Length)
                             {
                                 sups.Stream.WriteLine("{0}{0}where <value> one of:", separator);
-                                foreach(string value in specification.ValidValues)
+                                foreach(string value in optionSpecification.ValidValues)
                                 {
-                                    OptionSpecification optionSpecification = (OptionSpecification)specification;
-
                                     if (null != defaultIndicator && value == optionSpecification.DefaultValue)
                                     {
                                         sups.Stream.WriteLine("{1}{1}{1}{0}{1}{2}", value, separator, defaultIndicator);
