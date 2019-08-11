@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.25.160.0 - 11th August 2019
+
+* + now takes ValuesString from a bound type's fields (if they have BoundValueAttribute or BoundValuesAttribute)
+
 ## 0.24.159.3 - 11th August 2019
 
 * ~ some preparatory mods
