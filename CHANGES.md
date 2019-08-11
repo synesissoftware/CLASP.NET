@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.24.159.3 - 11th August 2019
+
+* ~ some preparatory mods
+
 ## 0.24.158.2 - 11th August 2019
 
 * + ensuring that XML documentation required for all libraries

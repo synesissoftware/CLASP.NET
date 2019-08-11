@@ -623,12 +623,10 @@ namespace Clasp
                     Specification   specification   =   Specification.Option(flagAttribute.Alias, flagAttribute.ResolvedName, flagAttribute.HelpDescription);
                     string          sectionName     =   flagAttribute.HelpSection;
 
-                    if (String.IsNullOrWhiteSpace(sectionName))
+                    if (!String.IsNullOrWhiteSpace(sectionName))
                     {
-                        sectionName = "";
+                        results.Add(Tuple.Create(specification, sectionName));
                     }
-
-                    results.Add(Tuple.Create(specification, sectionName));
                 }
 
                 Binding.BoundOptionAttribute optionAttribute = Util.ReflectionUtil.GetOnlyAttributeOrNull<Binding.BoundOptionAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
@@ -638,12 +636,10 @@ namespace Clasp
                     Specification   specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
                     string          sectionName     =   optionAttribute.HelpSection;
 
-                    if (String.IsNullOrWhiteSpace(sectionName))
+                    if (!String.IsNullOrWhiteSpace(sectionName))
                     {
-                        sectionName = "";
+                        results.Add(Tuple.Create(specification, sectionName));
                     }
-
-                    results.Add(Tuple.Create(specification, sectionName));
                 }
             }
 
@@ -706,7 +702,7 @@ namespace Clasp
         {
             if (null == specifications)
             {
-                return NoSpecifications;
+                specifications = (Specification[])NoSpecifications.Clone();
             }
 
             if (specifications.Any((spec) => spec.IsSection))
