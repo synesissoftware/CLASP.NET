@@ -13,7 +13,7 @@ namespace Test.Unit.ExampleTestCases
     using System.Linq;
 
     [TestClass]
-    public class _1_tester
+    public class Case_1_tester
     {
         Clasp.Specification[] Specifications =
         {

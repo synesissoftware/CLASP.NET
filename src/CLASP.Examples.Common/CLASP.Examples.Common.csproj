@@ -29,6 +29,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CLASP.NET.Examples.Common.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="recls.NET.Core, Version=2.3.1110.1, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
@@ -49,13 +51,13 @@
     <Compile Include="Text\Printable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CLASP.Core\CLASP.Core.csproj">
       <Project>{7923339F-23C3-42B8-8D9F-7D3ABC297091}</Project>
       <Name>CLASP.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

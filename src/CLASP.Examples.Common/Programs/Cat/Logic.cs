@@ -12,6 +12,20 @@ namespace Clasp.Examples.Common.Programs.Cat
     /// </summary>
     public static class Logic
     {
+        /// <summary>
+        ///  "Runs" the example
+        /// </summary>
+        /// <param name="prargs">
+        ///  The program arguments (of type
+        ///  <see cref="Clasp.Examples.Common.Programs.Cat.Arguments"/>)
+        /// </param>
+        /// <param name="nout">
+        ///  Normative output stream
+        /// </param>
+        /// <param name="crout">
+        ///  Contingent report output stream
+        /// </param>
+        /// <returns></returns>
         public static int Run(Arguments prargs, TextWriter nout, TextWriter crout)
         {
             nout.WriteLine("Display (from flags):");

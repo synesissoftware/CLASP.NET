@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.24.158.2 - 11th August 2019
+
+* + ensuring that XML documentation required for all libraries
+
 ## 0.24.157.1 - 15th July 2019
 
 * ~ moved ValidValues from Specification to OptionSpecification
