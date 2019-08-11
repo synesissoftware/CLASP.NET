@@ -10,17 +10,35 @@ namespace Clasp.Examples.Common.Programs.Cat
     {
         #region constants
 
+        /// <summary>
+        ///  Constants
+        /// </summary>
         public static class Constants
         {
+            /// <summary>
+            ///  Sections
+            /// </summary>
             public static class Sections
             {
+                /// <summary>
+                ///  "behaviour:"
+                /// </summary>
                 public const string Behaviour   =   "behaviour:";
 
+                /// <summary>
+                ///  "display:"
+                /// </summary>
                 public const string Display     =   "display:";
 
+                /// <summary>
+                ///  "standard:"
+                /// </summary>
                 public const string Standard    =   "standard:";
             }
 
+            /// <summary>
+            ///  Specifications
+            /// </summary>
             public static readonly Clasp.Specification[] Specifications = {
 
                 Clasp.Specification.Section(Constants.Sections.Display),
