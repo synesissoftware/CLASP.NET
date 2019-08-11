@@ -58,6 +58,18 @@ namespace Clasp.Binding
         ///  in thrown exception.
         /// </summary>
         public string UsageLabel { get; set; }
+
+        /// <summary>
+        ///  String fragment representing the value in the usage's
+        ///  values-string
+        /// </summary>
+        /// <remarks>
+        ///  If, say, the attribute is used to represent a source-file
+        ///  in a program that does some source/destination processing, a
+        ///  suitable value for this property would be
+        ///  <b>"&lt;source-path>"</b>
+        /// </remarks>
+        public string ValuesStringFragment { get; set; }
         #endregion
     }
 }

@@ -912,6 +912,52 @@ namespace Clasp
                 return currSpecs.ToArray();
             }
         }
+
+        internal static void MergeUsageParamsAndOptionsForBoundType<T>(Util.UsageUtil.UsageParams? usageParams, IDictionary<string, object> options, out Util.UsageUtil.UsageParams? mergedUsageParams, out IDictionary<string, object> mergedOptions)
+        {
+            mergedOptions = options;
+
+            if (usageParams.HasValue && !String.IsNullOrWhiteSpace(usageParams.Value.ValuesString))
+            {
+                mergedUsageParams = usageParams;
+            }
+            else
+            {
+                if (usageParams.HasValue)
+                {
+                    mergedUsageParams = usageParams.Value;
+                }
+                else
+                {
+                    mergedUsageParams = new Util.UsageUtil.UsageParams();
+                }
+
+                Type                        type    =   typeof(T);
+                FieldInfo[]                 fields  =   Util.ReflectionUtil.GetTypeFields(type);
+                List<Tuple<int, string>>    values  =   new List<Tuple<int, string>>();
+
+                foreach (var fi in fields)
+                {
+                    Binding.BoundValuesAttribute[] valuesAttributes = Util.ReflectionUtil.GetAttributes<Binding.BoundValuesAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+
+                    values.AddRange(valuesAttributes.Select((va) => Tuple.Create(va.Minimum, va.ValuesStringFragment)));
+
+                    Binding.BoundValueAttribute[] valueAttributes = Util.ReflectionUtil.GetAttributes<Binding.BoundValueAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeAndAncestors);
+
+                    values.AddRange(valueAttributes.Select((va) => Tuple.Create(va.ValueIndex, va.ValuesStringFragment)));
+                }
+
+                values.Sort((va1, va2) => (va1.Item1 - va2.Item1));
+
+                string valuesString = String.Join(" ", values.Select((v) => v.Item2.Trim()).Where((v) => 0 != v.Length));
+
+                Util.UsageUtil.UsageParams up = mergedUsageParams.Value;
+
+                up.ValuesString = valuesString;
+
+                mergedUsageParams = up;
+            }
+        }
         #endregion
         #endregion
 

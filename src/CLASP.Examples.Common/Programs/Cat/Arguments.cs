@@ -57,7 +57,7 @@ namespace Clasp.Examples.Common.Programs.Cat
         ///  Array of input paths, which will be non-<c>null</c> and will
         ///  have at least one element
         /// </summary>
-        [Clasp.Binding.BoundValues(Minimum=1)]
+        [Clasp.Binding.BoundValues(Minimum=1, ValuesStringFragment="<path-1> [ ... <path-N> ]")]
         public string[] InputPaths;
 
         /// <summary>

@@ -105,6 +105,9 @@
       <Link>Synsoft.public.snk</Link>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Internal\CollectionUtil.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)/scripts/register_for_skipped_verification.cmd "$(TargetPath)" "$(Configuration)"</PostBuildEvent>

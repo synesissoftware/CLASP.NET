@@ -10,6 +10,7 @@ namespace Clasp.Util
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
 
     /// <summary>
@@ -725,7 +726,12 @@ namespace Clasp.Util
         {
             Specification[] mergedSpecs = Invoker.MergeSpecificationsForBoundType<T>(specs);
 
-            return ShowUsage_(mergedSpecs, exitCode, usageParams, options);
+            UsageParams?                mergedUsageParams;
+            IDictionary<string, object> mergedOptions;
+
+            Invoker.MergeUsageParamsAndOptionsForBoundType<T>(usageParams, options, out mergedUsageParams, out mergedOptions);
+
+            return ShowUsage_(mergedSpecs, exitCode, mergedUsageParams, mergedOptions);
         }
 
         private static int ShowUsage_(IEnumerable<Specification> specs, int? exitCode, UsageParams? usageParams, IDictionary<string, object> options)
@@ -776,12 +782,13 @@ namespace Clasp.Util
                 }
             }
 
-            string flagsAndOptions  =   sups.UsageParams.FlagsAndOptionsString;
-            string usageValues      =   sups.UsageParams.ValuesString;
+            string  flagsAndOptions =   sups.UsageParams.FlagsAndOptionsString;
+            string  usageValues     =   sups.UsageParams.ValuesString;
+            bool    hasSpecs        =   (null == sups.Specifications) ? false : sups.Specifications.GetEnumerator().MoveNext();
 
             if (String.IsNullOrEmpty(flagsAndOptions))
             {
-                if (null != sups.Specifications && sups.Specifications.GetEnumerator().MoveNext())
+                if (null != sups.Specifications && hasSpecs)
                 {
                     flagsAndOptions = "[ ... flags and options ... ]";
                 }
@@ -820,13 +827,15 @@ namespace Clasp.Util
                     defaultIndicator = null;
                 }
 
-                sups.Stream.WriteLine("flags/options:");
-                sups.Stream.WriteLine();
-
-                foreach(Specification specification in sups.Specifications)
+                if (hasSpecs)
                 {
-                    switch(specification.Type)
+                    sups.Stream.WriteLine("flags/options:");
+                    sups.Stream.WriteLine();
+
+                    foreach (Specification specification in sups.Specifications)
                     {
+                        switch (specification.Type)
+                        {
                         case ArgumentType.None:
                             sups.Stream.WriteLine("{1}{0}", specification.Description, separator);
                             sups.Stream.WriteLine();
@@ -858,7 +867,7 @@ namespace Clasp.Util
                             if (0 != optionSpecification.ValidValues.Length)
                             {
                                 sups.Stream.WriteLine("{0}{0}where <value> one of:", separator);
-                                foreach(string value in optionSpecification.ValidValues)
+                                foreach (string value in optionSpecification.ValidValues)
                                 {
                                     if (null != defaultIndicator && value == optionSpecification.DefaultValue)
                                     {
@@ -872,10 +881,10 @@ namespace Clasp.Util
                             }
                             sups.Stream.WriteLine();
                             break;
+                        }
                     }
                 }
             }
-
             sups.Stream.Flush();
         }
 

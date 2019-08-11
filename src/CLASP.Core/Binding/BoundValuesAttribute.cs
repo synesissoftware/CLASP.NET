@@ -60,6 +60,18 @@ namespace Clasp.Binding
         ///  The maximum number of values to obtain
         /// </summary>
         public int Maximum { get; set; }
+
+        /// <summary>
+        ///  String fragment representing the value(s) in the usage's
+        ///  values-string
+        /// </summary>
+        /// <remarks>
+        ///  If, say, the attribute is used to represent a number of paths
+        ///  in a program that does some file processing, a suitable value
+        ///  for this property would be
+        ///  <b>"&lt;input-path-1> ... [ &lt;input-path-N> ]"</b>
+        /// </remarks>
+        public string ValuesStringFragment { get; set; }
         #endregion
     }
 }

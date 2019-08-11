@@ -241,6 +241,26 @@ namespace Clasp
                 return m_isSection;
             }
         }
+
+        /// <summary>
+        ///  Indicates whether it is a flag or an option
+        /// </summary>
+        internal bool IsFlagOrOption
+        {
+            get
+            {
+                switch (m_argumentType)
+                {
+                case ArgumentType.Flag:
+                case ArgumentType.Option:
+
+                    return true;
+                default:
+
+                    return false;
+                }
+            }
+        }
         #endregion
     }
 }
