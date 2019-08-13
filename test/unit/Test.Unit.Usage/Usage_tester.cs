@@ -384,6 +384,7 @@ namespace Test.Unit.Usage
                     "   normal",
                     "   chatty (default)",
                     "   verbose",
+                    "  and <value> defaults to: chatty",
                     " Standard:",
                     " --help",
                     "  shows this help and terminates",
@@ -456,6 +457,7 @@ namespace Test.Unit.Usage
                     "   normal",
                     "   chatty **DEFAULT**",
                     "   verbose",
+                    "  and <value> defaults to: chatty",
                     " Standard:",
                     " --help",
                     "  shows this help and terminates",
@@ -528,6 +530,7 @@ namespace Test.Unit.Usage
                     "   normal",
                     "   chatty",
                     "   verbose",
+                    "  and <value> defaults to: chatty",
                     " Standard:",
                     " --help",
                     "  shows this help and terminates",
@@ -535,6 +538,73 @@ namespace Test.Unit.Usage
                     "  shows version information and terminates",
                 }
             ,   actual
+            );
+        }
+
+        [TestMethod]
+        public void Test_specs_with_custom_usage_info_without_values_for_option_with_default_value_with_suppressed_default_indicator()
+        {
+            Clasp.OptionSpecification Option_Verbose = new Clasp.OptionSpecification(@"-v", @"--verbosity", @"sets program verbosity").WithDefaultValue("chatty");
+
+            Clasp.Specification[] specifications =
+            {
+                Clasp.Specification.Section("Custom:"),
+                Option_Verbose,
+
+                Clasp.Specification.Section("Standard:"),
+                UsageUtil.Help,
+                UsageUtil.Version,
+            };
+
+            string[] info_lines =
+            {
+                "CLASP.NET examples",
+                null,
+                ":version:",
+                "",
+            };
+
+            string[] argv =
+            {
+                "--help",
+            };
+
+            Clasp.Arguments args = new Clasp.Arguments(argv, specifications);
+
+            string s = Diagnosticism.Testing.Assist.ExecuteAroundWriter((writer) => {
+
+                Dictionary<string, object> options = new Dictionary<string, object>();
+
+                options[UsageUtil.Constants.OptionKeys.Writer] = writer;
+                options[UsageUtil.Constants.OptionKeys.Assembly] = assembly;
+                options[UsageUtil.Constants.OptionKeys.Separator] = " ";
+                options[UsageUtil.Constants.OptionKeys.ProgramName] = "myprog";
+
+                UsageUtil.ShowUsage(args, new UsageUtil.UsageParams { InfoLines = info_lines, DefaultIndicator = "" }, options);
+            });
+
+            string[] lines = s.Split(Environment.NewLine.ToCharArray());
+
+            var actual = lines.Where((line) => 0 != line.Length).ToArray();
+
+            CollectionAssert.AreEqual(
+                new string[]{
+                    "CLASP.NET examples",
+                    "myprog version 0.1.2 (build 3)",
+                    "USAGE: myprog [ ... flags and options ... ]",
+                    "flags/options:",
+                    " Custom:",
+                    " -v <value>",
+                    " --verbosity=<value>",
+                    "  sets program verbosity",
+                    "  where <value> defaults to: chatty",
+                    " Standard:",
+                    " --help",
+                    "  shows this help and terminates",
+                    " --version",
+                    "  shows version information and terminates",
+                }
+            , actual
             );
         }
     }

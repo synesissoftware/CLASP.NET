@@ -1,16 +1,13 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 15th July 2019
+// Updated: 14th August 2019
 
 namespace Clasp.Util
 {
-    using global::Clasp;
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
 
     /// <summary>
@@ -749,7 +746,7 @@ namespace Clasp.Util
             sups.UseProductVersion  =   GetOptionOrDefault_(options, Constants.OptionKeys.UseProductVersion, false);
             sups.VersionFormat      =   GetOptionOrDefault_(options, Constants.OptionKeys.VersionFormat, Constants.UsageVersionFormat_Default);
 
-            ShowUsage_(sups);
+            ShowUsage_(sups, options);
 
             if (exitCode.HasValue)
             {
@@ -759,7 +756,7 @@ namespace Clasp.Util
             return Invoker.Constants.ExitCode_Success;
         }
 
-        private static void ShowUsage_(ShowUsageParams sups)
+        private static void ShowUsage_(ShowUsageParams sups, IDictionary<string, object> options)
         {
             Debug.Assert(null != sups.Stream);
 
@@ -877,6 +874,17 @@ namespace Clasp.Util
                                     {
                                         sups.Stream.WriteLine("{1}{1}{1}{0}", value, separator);
                                     }
+                                }
+                                if (!String.IsNullOrWhiteSpace(optionSpecification.DefaultValue))
+                                {
+                                    sups.Stream.WriteLine("{0}{0}and <value> defaults to: {1}", separator, optionSpecification.DefaultValue);
+                                }
+                            }
+                            else
+                            {
+                                if (!String.IsNullOrWhiteSpace(optionSpecification.DefaultValue))
+                                {
+                                    sups.Stream.WriteLine("{0}{0}where <value> defaults to: {1}", separator, optionSpecification.DefaultValue);
                                 }
                             }
                             sups.Stream.WriteLine();

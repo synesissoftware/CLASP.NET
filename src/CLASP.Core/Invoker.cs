@@ -620,12 +620,12 @@ namespace Clasp
 
                 if (null != flagAttribute)
                 {
-                    Specification   specification   =   Specification.Option(flagAttribute.Alias, flagAttribute.ResolvedName, flagAttribute.HelpDescription);
-                    string          sectionName     =   flagAttribute.HelpSection;
+                    FlagSpecification   specification   =   Specification.Flag(flagAttribute.Alias, flagAttribute.ResolvedName, flagAttribute.HelpDescription);
+                    string              sectionName     =   flagAttribute.HelpSection;
 
                     if (!String.IsNullOrWhiteSpace(sectionName))
                     {
-                        results.Add(Tuple.Create(specification, sectionName));
+                        results.Add(Tuple.Create(specification as Specification, sectionName));
                     }
                 }
 
@@ -633,12 +633,17 @@ namespace Clasp
 
                 if (null != optionAttribute)
                 {
-                    Specification   specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
-                    string          sectionName     =   optionAttribute.HelpSection;
+                    OptionSpecification specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
+                    string              sectionName     =   optionAttribute.HelpSection;
+
+                    if (null != optionAttribute.DefaultValue)
+                    {
+                        specification.DefaultValue = optionAttribute.DefaultValue.ToString();
+                    }
 
                     if (!String.IsNullOrWhiteSpace(sectionName))
                     {
-                        results.Add(Tuple.Create(specification, sectionName));
+                        results.Add(Tuple.Create(specification as Specification, sectionName));
                     }
                 }
             }
