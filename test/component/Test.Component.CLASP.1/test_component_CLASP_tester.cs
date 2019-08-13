@@ -100,9 +100,9 @@ namespace test_component_CLASP_1
         {
             string path = Path.Combine(dir, file);
 
-            using(FileStream stm = new FileStream(path, FileMode.CreateNew, FileAccess.Write))
+            using (FileStream stm = new FileStream(path, FileMode.CreateNew, FileAccess.Write))
             {
-                using(StreamWriter writer = new StreamWriter(stm))
+                using (StreamWriter writer = new StreamWriter(stm))
                 {
                     writer.Write(contents);
                 }
@@ -112,7 +112,7 @@ namespace test_component_CLASP_1
         [TestInitialize]
         public void Setup()
         {
-            using(new MethodRecorder("Setup"))
+            using (new MethodRecorder("Setup"))
             {
                 cwd = Environment.CurrentDirectory;
                 dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"SynesisSoftware.SystemTools.Clasp\test_component_Clasp_tester");
@@ -142,7 +142,7 @@ namespace test_component_CLASP_1
         [TestCleanup]
         public void Teardown()
         {
-            using(new MethodRecorder("Teardown"))
+            using (new MethodRecorder("Teardown"))
             {
                 //System.Threading.Thread.Sleep(15000);
 
@@ -157,7 +157,7 @@ namespace test_component_CLASP_1
         [TestMethod]
         public void Test_Wildcards_1()
         {
-            using(new MethodRecorder("Test_Wildcards_1"))
+            using (new MethodRecorder("Test_Wildcards_1"))
             {
                 Arguments args = new Arguments(new string[] { "abc.txt", "x.txt" });
 
@@ -170,7 +170,7 @@ namespace test_component_CLASP_1
         [TestMethod]
         public void Test_Wildcards_2()
         {
-            using(new MethodRecorder("Test_Wildcards_1"))
+            using (new MethodRecorder("Test_Wildcards_1"))
             {
                 Arguments args = new Arguments(new string[] { "*.txt" }, ParseOptions.DontExpandWildcardsOnWindows);
 
@@ -182,7 +182,7 @@ namespace test_component_CLASP_1
         [TestMethod]
         public void Test_Wildcards_3()
         {
-            using(new MethodRecorder("Test_Wildcards_1"))
+            using (new MethodRecorder("Test_Wildcards_1"))
             {
                 Arguments args = new Arguments(new string[] { "*.txt" });
 
@@ -195,7 +195,7 @@ namespace test_component_CLASP_1
         [TestMethod]
         public void Test_Wildcards_4()
         {
-            using(new MethodRecorder("Test_Wildcards_1"))
+            using (new MethodRecorder("Test_Wildcards_1"))
             {
                 Arguments args = new Arguments(new string[] { @"dir2\*.txt" });
 

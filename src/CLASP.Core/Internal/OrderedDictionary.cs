@@ -1,6 +1,6 @@
 ﻿
 // Created: 7th June 2019
-// Updated: 13th July 2019
+// Updated: 13th August 2019
 
 namespace Clasp.Internal
 {

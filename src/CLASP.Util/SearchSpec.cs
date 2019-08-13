@@ -1,6 +1,6 @@
 ﻿
 // Created: 10th August 2009
-// Updated: 13th July 2019
+// Updated: 13th August 2019
 
 namespace Clasp.Util
 {
