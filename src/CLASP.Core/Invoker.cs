@@ -1024,12 +1024,12 @@ namespace Clasp
                 return Constants.ExitCode_Success;
             });
 
-            if (0 != (FailureOptions.SetExitCodeForVV & failureOptions))
+            if (0 != (FailureOptions.SetExitCodeForVA & failureOptions))
             {
                 Environment.ExitCode = r;
             }
 
-            if (0 != (FailureOptions.InvokeExitForVV & failureOptions))
+            if (0 != (FailureOptions.InvokeExitForVA & failureOptions))
             {
                 Environment.Exit(r);
             }

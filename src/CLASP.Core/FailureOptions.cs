@@ -1,6 +1,6 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 14th July 2019
+// Updated: 14th August 2019
 
 namespace Clasp
 {
@@ -34,14 +34,28 @@ namespace Clasp
         HandleSystemExceptions                      =   0x00000004,
 
         /// <summary>
-        ///  Invokes exit for VV overloads
+        ///  Invokes exit for VA overloads
         /// </summary>
-        InvokeExitForVV                             =   0x00010000,
+        /// <remarks>
+        ///  When using VA overloads of the
+        ///  <see cref="Clasp.Invoker"/> class with a
+        ///  <c>void Main(string[] argv)</c>, this flag causes
+        ///  <see cref="System.Environment.Exit()"/> to be called
+        ///  when the delegate is complete.
+        /// </remarks>
+        InvokeExitForVA                             =   0x00010000,
 
         /// <summary>
-        ///  Causes exit code to be set for VV overloads
+        ///  Causes exit code to be set for VA overloads
         /// </summary>
-        SetExitCodeForVV                            =   0x00020000,
+        /// <remarks>
+        ///  When using VA overloads of the
+        ///  <see cref="Clasp.Invoker"/> class with a
+        ///  <c>void Main(string[] argv)</c>, this flag causes
+        ///  <see cref="System.Environment.ExitCode"/> to be set
+        ///  when the delegate is complete.
+        /// </remarks>
+        SetExitCodeForVA = 0x00020000,
 
         /// <summary>
         ///  Appends the string
@@ -61,6 +75,18 @@ namespace Clasp
         ///  Default flags used in
         ///  <see cref="Clasp.Invoker"/>
         /// </summary>
-        Default                                     =   HandleClaspExceptions | SetExitCodeForVV | AppendStandardUsagePromptToContingentReport,
+        Default                                     =   HandleClaspExceptions | SetExitCodeForVA | AppendStandardUsagePromptToContingentReport,
+
+        /// <summary>
+        ///  [OBSOLETE] Instead, use InvokeExitForVA
+        /// </summary>
+        [Obsolete]
+        InvokeExitForVV                             =   InvokeExitForVA,
+
+        /// <summary>
+        ///  [OBSOLETE] Instead, use SetExitCodeForVA
+        /// </summary>
+        [Obsolete]
+        SetExitCodeForVV                            =   SetExitCodeForVA,
     }
 }
