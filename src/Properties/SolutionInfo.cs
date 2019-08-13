@@ -46,7 +46,7 @@ using System.Reflection;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyInformationalVersion("0.25.161.1")]
+[assembly: AssemblyInformationalVersion("0.26.163.0")]
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

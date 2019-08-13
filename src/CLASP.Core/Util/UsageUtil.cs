@@ -1,16 +1,13 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 15th July 2019
+// Updated: 14th August 2019
 
 namespace Clasp.Util
 {
-    using global::Clasp;
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
 
     /// <summary>

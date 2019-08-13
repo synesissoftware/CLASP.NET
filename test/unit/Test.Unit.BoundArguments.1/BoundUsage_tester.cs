@@ -24,7 +24,7 @@ namespace Test.Unit.BoundArguments.ns_1
         [BoundType]
         internal class PathAndVerboseArguments
         {
-            [BoundFlag(@"--verbose", Alias=@"-v", HelpDescription=@"specifies the verbosity", HelpSection=@"behaviour")]
+            [BoundFlag(@"--verbose", Alias = @"-v", HelpDescription = @"runs with verbose output", HelpSection = @"behaviour")]
             public bool Verbose;
 
             [BoundValue(0, ValuesStringFragment="<path>")]
@@ -114,9 +114,9 @@ namespace Test.Unit.BoundArguments.ns_1
                 new string[]{
                     "USAGE: myprog [ ... flags and options ... ] <path>",
                     "flags/options:",
-                    "-v <value>",
-                    "--verbose=<value>",
-                    "specifies the verbosity",
+                    "-v",
+                    "--verbose",
+                    "runs with verbose output",
                 }
             ,   actual
             );

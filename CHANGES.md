@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.26.163.0 - 14th August 2019
+
+* + added support for inferring binding information for flags and options from the public constant fields of static classes (to support DRY, and transparency)
+
 ## 0.25.160.0 - 11th August 2019
 
 * + now takes ValuesString from a bound type's fields (if they have BoundValueAttribute or BoundValuesAttribute)

@@ -1,12 +1,12 @@
 ﻿
 // Created: 19th June 2017
-// Updated: 13th July 2019
+// Updated: 14th August 2019
 
 namespace Clasp.Util
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
 
     /// <summary>
@@ -29,6 +29,16 @@ namespace Clasp.Util
     /// </summary>
     public static class ReflectionUtil
     {
+        #region constants
+
+        /// <summary>
+        ///  [INTERNAL]
+        /// </summary>
+        internal static class Constants
+        {
+        }
+        #endregion
+
         #region conversion operations
 
         /// <summary>
@@ -158,6 +168,36 @@ namespace Clasp.Util
         internal static FieldInfo[] GetTypeFields(Type type)
         {
             return type.GetFields();
+        }
+        #endregion
+
+        #region field operations
+
+        /// <summary>
+        ///  [INTERNAL] Obtains the public constant fields - constants and
+        ///  readonly static fields - of the given type
+        /// </summary>
+        /// <param name="type">
+        ///  The type to be examined
+        /// </param>
+        /// <param name="reflectionLookup">
+        ///  Flags that control the lookup
+        /// </param>
+        /// <returns>
+        ///  An array, which may be empty, of fields
+        /// </returns>
+        internal static FieldInfo[] GetPublicConstantFields(Type type, ReflectionLookup reflectionLookup)
+        {
+            BindingFlags flags = BindingFlags.Public | BindingFlags.Static;
+
+            if (ReflectionLookup.FromQueriedTypeAndAncestors == reflectionLookup)
+            {
+                flags |= BindingFlags.FlattenHierarchy;
+            }
+
+            FieldInfo[] fields = type.GetFields(flags);
+
+            return fields.Where((fi) => fi.IsLiteral || fi.IsStatic).ToArray();
         }
         #endregion
     }

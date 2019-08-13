@@ -96,6 +96,7 @@
     <Compile Include="SectionSeparator.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="Util\ArgumentUtil.cs" />
+    <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ParseUtil.cs" />
     <Compile Include="Util\ReflectionUtil.cs" />
     <Compile Include="Util\UsageUtil.cs" />

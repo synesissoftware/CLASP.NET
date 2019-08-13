@@ -40,7 +40,7 @@ namespace Clasp
         ///  When using VA overloads of the
         ///  <see cref="Clasp.Invoker"/> class with a
         ///  <c>void Main(string[] argv)</c>, this flag causes
-        ///  <see cref="System.Environment.Exit()"/> to be called
+        ///  <see cref="System.Environment.Exit"/> to be called
         ///  when the delegate is complete.
         /// </remarks>
         InvokeExitForVA                             =   0x00010000,

@@ -1,9 +1,11 @@
 ﻿
 // Created: 18th June 2017
-// Updated: 13th July 2019
+// Updated: 14th August 2019
 
 namespace Clasp.Binding
 {
+    using global::Clasp.Util;
+
     using System;
 
     /// <summary>
@@ -36,6 +38,42 @@ namespace Clasp.Binding
         public BoundOptionAttribute(string optionName)
             : base(optionName)
         {
+        }
+
+        /// <summary>
+        ///  Constructs an instance of the attribute from the given type,
+        ///  whose public constant fields - <c>const</c>; <c>static</c> +
+        ///  <c>readonly</c> - are used to
+        /// </summary>
+        /// <param name="type">
+        /// </param>
+        ///
+        /// <seealso cref="Clasp.Util.Constants"/>
+        public BoundOptionAttribute(Type type)
+            : base(type)
+        {
+            bool b;
+            object o;
+
+            if (LookupPublicConstantField<bool>(type, Constants.Arguments.AllowEmpty, out b))
+            {
+                this.AllowEmpty = b;
+            }
+
+            if (LookupPublicConstantField(type, Constants.Arguments.AllowFraction, out b))
+            {
+                this.AllowFraction = b;
+            }
+
+            if (LookupPublicConstantField(type, Constants.Arguments.AllowNegative, out b))
+            {
+                this.AllowNegative = b;
+            }
+
+            if (LookupPublicConstantField<object>(type, Constants.Arguments.DefaultValue, out o))
+            {
+                this.DefaultValue = o;
+            }
         }
         #endregion
 

@@ -56,6 +56,7 @@
     <Compile Include="..\..\..\src\Properties\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="bound_from_public_constant_fields_tester.cs" />
     <Compile Include="EmptyStructure_tester.cs" />
     <Compile Include="multiple_bound_values_tester.cs" />
     <Compile Include="NumberConstraint_tester.cs" />
