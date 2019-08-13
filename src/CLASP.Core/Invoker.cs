@@ -599,11 +599,11 @@ namespace Clasp
             Type                type        =   typeof(T);
             FieldInfo[]         fields      =   Util.ReflectionUtil.GetTypeFields(type);
 
-            foreach(FieldInfo fi in fields)
+            foreach (FieldInfo fi in fields)
             {
                 Binding.BoundEnumeratorAttribute[] enumeratorAttributes = Util.ReflectionUtil.GetAttributes<Binding.BoundEnumeratorAttribute>(fi, Util.ReflectionLookup.FromQueriedTypeOnly);
 
-                foreach(var ea in enumeratorAttributes)
+                foreach (var ea in enumeratorAttributes)
                 {
                     Specification   specification   =   Specification.Flag(ea.Alias, ea.ResolvedName, ea.HelpDescription);
                     string          sectionName     =   ea.HelpSection;
@@ -652,7 +652,7 @@ namespace Clasp
 
             string              sectionName     =   null;
 
-            foreach(Specification spec in specs)
+            foreach (Specification spec in specs)
             {
                 if (spec.IsSection)
                 {
@@ -679,7 +679,7 @@ namespace Clasp
 
         private static Tuple<IList<Specification>, int> LookupSpecificationInStructure(OrderedDict<string, IList<Specification>> structure, Specification spec)
         {
-            foreach(var pair in structure)
+            foreach (var pair in structure)
             {
                 var k = pair.Key;
                 var v = pair.Value;
@@ -711,7 +711,7 @@ namespace Clasp
                 var                     pairs       =   SpecificationSectionPairsForBoundType<T>(specifications);
                 IList<Specification>    firstSpecs  =   new List<Specification>();
 
-                foreach(var pair in pairs)
+                foreach (var pair in pairs)
                 {
                     Specification                       tspec   =   pair.Item1;
                     Tuple<IList<Specification>, int>    tuple   =   LookupSpecificationInStructure(structure, tspec);
@@ -776,7 +776,7 @@ namespace Clasp
                 List<Specification> namedSpecs  =   new List<Specification>();
                 List<Specification> emptySpecs  =   new List<Specification>();
 
-                foreach(var pair0 in structure)
+                foreach (var pair0 in structure)
                 {
                     string                  sectionName     =   pair0.Key;
                     IList<Specification>    sectionSpecs    =   pair0.Value;
@@ -794,7 +794,7 @@ namespace Clasp
                         targetSpecs.Add(Specification.Section(sectionName));
                     }
 
-                    foreach(Specification spec in sectionSpecs)
+                    foreach (Specification spec in sectionSpecs)
                     {
                         targetSpecs.Add(spec);
                     }
@@ -815,7 +815,7 @@ namespace Clasp
 
                 var                 pairs       =   SpecificationSectionPairsForBoundType<T>(specifications);
 
-                foreach(var pair in pairs)
+                foreach (var pair in pairs)
                 {
                     newSpecs.Add(pair.Item1);
                 }
@@ -869,7 +869,7 @@ namespace Clasp
                     }
                 }
 
-                foreach(var ns in newSpecs)
+                foreach (var ns in newSpecs)
                 {
                     int ix = currSpecs.FindIndex((cs) => cs.ResolvedName == ns.ResolvedName);
 
@@ -1159,7 +1159,7 @@ namespace Clasp
             // ///////////////////////////////////
             // iterate the fields
 
-            foreach(var fi in fields)
+            foreach (var fi in fields)
             {
                 // since we can't prevent BoundFlagAttribute and
                 // BoundOptionAttribute being applied to the same field, we
@@ -1195,7 +1195,7 @@ namespace Clasp
                     {
                         int value = 0;
 
-                        foreach(Binding.BoundEnumeratorAttribute attr in enumeratorAttributes)
+                        foreach (Binding.BoundEnumeratorAttribute attr in enumeratorAttributes)
                         {
                             string  flagResolvedName    =   attr.ResolvedName;
                             int     enumValue           =   attr.EnumeratorValue;

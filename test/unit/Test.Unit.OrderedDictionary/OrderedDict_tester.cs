@@ -26,7 +26,7 @@ namespace Test.Unit.OrderedDictionary
 
             List<Tuple<string, string>> results = new List<Tuple<string, string>>(d.Count);
 
-            foreach(var pair in d)
+            foreach (var pair in d)
             {
                 string k = pair.Key as string;
                 string v = pair.Value as string;
@@ -61,7 +61,7 @@ namespace Test.Unit.OrderedDictionary
 
             List<Tuple<string, string>> results = new List<Tuple<string, string>>(d.Count);
 
-            foreach(DictionaryEntry pair in d)
+            foreach (DictionaryEntry pair in d)
             {
                 string k = pair.Key as string;
                 string v = pair.Value as string;
@@ -98,7 +98,7 @@ namespace Test.Unit.OrderedDictionary
 
             List<Tuple<string, string>> results = new List<Tuple<string, string>>(d.Count);
 
-            foreach(var pair in d)
+            foreach (var pair in d)
             {
                 string k = pair.Key as string;
                 string v = pair.Value as string;

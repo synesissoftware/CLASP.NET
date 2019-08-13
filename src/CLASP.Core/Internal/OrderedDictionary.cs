@@ -54,7 +54,7 @@ namespace Clasp.Internal
             {
                 var keys = new List<T_key>(m_od.Keys.Count);
 
-                foreach(T_key key in m_od.Keys)
+                foreach (T_key key in m_od.Keys)
                 {
                     keys.Add(key);
                 }
@@ -97,7 +97,7 @@ namespace Clasp.Internal
             {
                 var values = new List<T_value>(m_od.Values.Count);
 
-                foreach(T_value value in m_od.Values)
+                foreach (T_value value in m_od.Values)
                 {
                     values.Add(value);
                 }
@@ -278,7 +278,7 @@ namespace Clasp.Internal
 
         private IEnumerator<KeyValuePair<T_key, T_value>> GetEnumerator_()
         {
-            foreach(DictionaryEntry pair in m_od)
+            foreach (DictionaryEntry pair in m_od)
             {
                 yield return new KeyValuePair<T_key, T_value>((T_key)pair.Key, (T_value)pair.Value);
             }

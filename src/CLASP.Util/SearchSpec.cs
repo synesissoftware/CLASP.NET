@@ -78,7 +78,7 @@ namespace Clasp.Util
             string directory = null;
             List<string> patterns = new List<string>();
 
-            foreach(IArgument value in values)
+            foreach (IArgument value in values)
             {
                 if (value.Value.IndexOfAny(WILDCARD_CHARACTERS) >= 0)
                 {
@@ -159,7 +159,7 @@ namespace Clasp.Util
         {
             Debug.Assert(null != action);
 
-            foreach(SearchSpec spec in specs)
+            foreach (SearchSpec spec in specs)
             {
                 action(spec);
             }

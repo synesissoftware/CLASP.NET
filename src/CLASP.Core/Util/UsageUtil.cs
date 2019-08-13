@@ -766,7 +766,7 @@ namespace Clasp.Util
             string[]    infoLines   =   (null != sups.UsageParams.InfoLines) ? sups.UsageParams.InfoLines : new string[0];
             string      separator   =   (null != sups.Separator) ? sups.Separator : "\t";
 
-            foreach(string infoLine in infoLines)
+            foreach (string infoLine in infoLines)
             {
                 switch(infoLine)
                 {

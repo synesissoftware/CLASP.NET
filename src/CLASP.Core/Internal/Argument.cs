@@ -151,7 +151,7 @@ namespace Clasp.Internal
         {
             int n = 0;
 
-            foreach(char ch in arg)
+            foreach (char ch in arg)
             {
                 if ('-' == ch)
                 {

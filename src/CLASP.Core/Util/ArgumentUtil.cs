@@ -35,7 +35,7 @@ namespace Clasp.Util
         /// </remarks>
         public static bool FlagSpecified(Arguments args, string flagName)
         {
-            foreach(Argument arg in args.Flags)
+            foreach (Argument arg in args.Flags)
             {
                 if (flagName == arg.ResolvedName)
                 {
@@ -65,7 +65,7 @@ namespace Clasp.Util
         /// </remarks>
         public static IArgument FindOption(Arguments args, string optionName)
         {
-            foreach(Argument arg in args.Options)
+            foreach (Argument arg in args.Options)
             {
                 if (optionName == arg.ResolvedName)
                 {
@@ -283,7 +283,7 @@ namespace Clasp.Util
         /// </exception>
         public static void VerifyAllFlagsAndOptionsUsed(Arguments args, string message)
         {
-            foreach(Argument arg in args.FlagsAndOptions)
+            foreach (Argument arg in args.FlagsAndOptions)
             {
                 if (!arg.Used)
                 {
@@ -333,7 +333,7 @@ namespace Clasp.Util
         /// </exception>
         public static void VerifyAllFlagsUsed(Arguments args, string message)
         {
-            foreach(Argument arg in args.Flags)
+            foreach (Argument arg in args.Flags)
             {
                 if (!arg.Used)
                 {
@@ -371,7 +371,7 @@ namespace Clasp.Util
         /// </exception>
         public static void VerifyAllOptionsUsed(Arguments args, string message)
         {
-            foreach(Argument arg in args.Options)
+            foreach (Argument arg in args.Options)
             {
                 if (!arg.Used)
                 {
@@ -387,7 +387,7 @@ namespace Clasp.Util
 
         private static T SearchOption<T>(Arguments args, string optionName, Translate<T> f)
         {
-            foreach(Argument arg in args.Options)
+            foreach (Argument arg in args.Options)
             {
                 if (optionName == arg.ResolvedName)
                 {
@@ -409,7 +409,7 @@ namespace Clasp.Util
 
         private static T SearchOptionOrDefault<T>(Arguments args, string optionName, T defaultValue, Translate<T> f)
         {
-            foreach(Argument arg in args.Options)
+            foreach (Argument arg in args.Options)
             {
                 if (optionName == arg.ResolvedName)
                 {
