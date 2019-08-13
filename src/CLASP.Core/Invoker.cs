@@ -636,6 +636,11 @@ namespace Clasp
                     OptionSpecification specification   =   Specification.Option(optionAttribute.Alias, optionAttribute.ResolvedName, optionAttribute.HelpDescription);
                     string              sectionName     =   optionAttribute.HelpSection;
 
+                    if (null != optionAttribute.DefaultValue)
+                    {
+                        specification.DefaultValue = optionAttribute.DefaultValue.ToString();
+                    }
+
                     if (!String.IsNullOrWhiteSpace(sectionName))
                     {
                         results.Add(Tuple.Create(specification as Specification, sectionName));

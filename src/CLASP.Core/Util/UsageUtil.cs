@@ -875,6 +875,17 @@ namespace Clasp.Util
                                         sups.Stream.WriteLine("{1}{1}{1}{0}", value, separator);
                                     }
                                 }
+                                if (!String.IsNullOrWhiteSpace(optionSpecification.DefaultValue))
+                                {
+                                    sups.Stream.WriteLine("{0}{0}and <value> defaults to: {1}", separator, optionSpecification.DefaultValue);
+                                }
+                            }
+                            else
+                            {
+                                if (!String.IsNullOrWhiteSpace(optionSpecification.DefaultValue))
+                                {
+                                    sups.Stream.WriteLine("{0}{0}where <value> defaults to: {1}", separator, optionSpecification.DefaultValue);
+                                }
                             }
                             sups.Stream.WriteLine();
                             break;

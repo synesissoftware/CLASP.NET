@@ -1,5 +1,9 @@
 #  **CLASP.NET** Changes
 
+## 0.26.165.1 - 14th August 2019
+
+* ~ fixed missing DefaultValue support in bound inference
+
 ## 0.26.164.0 - 14th August 2019
 
 * + added support for inferring binding information for flags and options from the public constant fields of static classes (to support DRY, and transparency)
