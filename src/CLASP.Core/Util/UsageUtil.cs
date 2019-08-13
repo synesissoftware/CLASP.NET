@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 15th July 2019
+// Updated: 13th August 2019
 
 namespace Clasp.Util
 {
@@ -766,7 +766,7 @@ namespace Clasp.Util
             string[]    infoLines   =   (null != sups.UsageParams.InfoLines) ? sups.UsageParams.InfoLines : new string[0];
             string      separator   =   (null != sups.Separator) ? sups.Separator : "\t";
 
-            foreach(string infoLine in infoLines)
+            foreach (string infoLine in infoLines)
             {
                 switch(infoLine)
                 {

@@ -1,6 +1,6 @@
 ﻿
 // Created: 17th July 2009
-// Updated: 14th July 2019
+// Updated: 13th August 2019
 
 namespace Clasp
 {
@@ -370,7 +370,7 @@ namespace Clasp
 
                                     FileSystemInfo[]    matches     =   di.GetFileSystemInfos(fileName);
 
-                                    foreach(FileSystemInfo info in matches)
+                                    foreach (FileSystemInfo info in matches)
                                     {
                                         string  path        =   info.FullName;
 
@@ -410,7 +410,7 @@ namespace Clasp
                     }
                     else
                     {
-                        foreach(string warg in wildargs)
+                        foreach (string warg in wildargs)
                         {
                             AddValue(Argument.NewValue(warg, i));
                         }
@@ -525,7 +525,7 @@ namespace Clasp
         {
             Debug.Assert(typeof(T).IsEnum, "flag and variable arguments must both be of enumeration type!");
 
-            foreach(IArgument arg in this.flags)
+            foreach (IArgument arg in this.flags)
             {
                 if (arg.ResolvedName == resolvedName)
                 {
@@ -707,7 +707,7 @@ namespace Clasp
         /// </returns>
         public bool HasFlag(string resolvedName)
         {
-            foreach(IArgument arg in this.flags)
+            foreach (IArgument arg in this.flags)
             {
                 if (arg.ResolvedName == resolvedName)
                 {
@@ -911,7 +911,7 @@ namespace Clasp
 
         private IArgument FindOption_(string resolvedName)
         {
-            foreach(IArgument arg in this.options)
+            foreach (IArgument arg in this.options)
             {
                 if (arg.ResolvedName == resolvedName)
                 {
@@ -959,7 +959,7 @@ namespace Clasp
             }
             else
             {
-                foreach(Specification specification in specifications)
+                foreach (Specification specification in specifications)
                 {
                     if (specification.GivenName == name)
                     {
@@ -967,7 +967,7 @@ namespace Clasp
                     }
                 }
 
-                foreach(Specification specification in specifications)
+                foreach (Specification specification in specifications)
                 {
                     if (specification.ResolvedName == name)
                     {

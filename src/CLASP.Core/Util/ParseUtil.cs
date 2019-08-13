@@ -1,6 +1,6 @@
 ﻿
 // Created: 22nd June 2010
-// Updated: 13th July 2019
+// Updated: 13th August 2019
 
 namespace Clasp.Util
 {
@@ -100,7 +100,7 @@ namespace Clasp.Util
             Debug.Assert(null != falseForms);
             Debug.Assert(null != s);
 
-            foreach(string trueForm in trueForms)
+            foreach (string trueForm in trueForms)
             {
                 if (0 == String.Compare(s, trueForm, comparisonType))
                 {
@@ -110,7 +110,7 @@ namespace Clasp.Util
                 }
             }
 
-            foreach(string falseForm in falseForms)
+            foreach (string falseForm in falseForms)
             {
                 if (0 == String.Compare(s, falseForm, comparisonType))
                 {

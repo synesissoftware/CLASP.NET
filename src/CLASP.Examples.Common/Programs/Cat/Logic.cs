@@ -51,7 +51,7 @@ namespace Clasp.Examples.Common.Programs.Cat
             nout.WriteLine();
 
             nout.WriteLine("Sources:");
-            foreach(string path in prargs.InputPaths)
+            foreach (string path in prargs.InputPaths)
             {
                 if ("-" == path)
                 {

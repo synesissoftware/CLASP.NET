@@ -22,9 +22,9 @@ namespace Test.Unit.CLASP.ns_1
             ArgumentType[]  types = { ArgumentType.None, ArgumentType.Flag, ArgumentType.Option, ArgumentType.Value };
             string[]        names = { "-a|--argument|some argument", "--long-arg|--long-arg|a long argument with", "-x||a short argument without a long-name explicitly given" };
 
-            foreach(ArgumentType argType in types)
+            foreach (ArgumentType argType in types)
             {
-                foreach(string name in names)
+                foreach (string name in names)
                 {
                     string[] splits = name.Split('|');
 
