@@ -111,7 +111,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)/scripts/register_for_skipped_verification.cmd "$(TargetPath)" "$(Configuration)"</PostBuildEvent>
+    <PostBuildEvent>
+IF EXIST "$(SolutionDir)scripts/register_for_skipped_verification.cmd" (
+  "$(SolutionDir)scripts/register_for_skipped_verification.cmd" "$(TargetPath)" "$(Configuration)"
+ELSE (
+  IF EXIST "$(ProjectDir)../../scripts/register_for_skipped_verification.cmd" (
+    "$(ProjectDir)../../scripts/register_for_skipped_verification.cmd" "$(TargetPath)" "$(Configuration)"
+  ) ELSE (
+    ECHO registration script not found in "$(SolutionDir)scripts/" or "$(ProjectDir)../../scripts/"
+  )
+)
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
