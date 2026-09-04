@@ -1,4 +1,4 @@
-# CLASP.NET Example - **Example.ShowVersion**
+# CLASP.NET - Example - **Example.ShowVersion**
 
 ## Summary
 

@@ -1,13 +1,22 @@
-# CLASP.NET
+# CLASP.NET <!-- omit in toc -->
+
 **C**ommand-**L**ine **A**rgument **S**orting and **P**arsing, in .NET
 
-## Table of Contents
+![Language](https://img.shields.io/badge/.NET-512BD4?style=flat&logo=.net&logoColor=white)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![NuGet Version](https://img.shields.io/nuget/v/CLASP.NET.svg)](https://www.nuget.org/packages/CLASP.NET)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/CLASP.NET.svg)](https://www.nuget.org/packages/CLASP.NET)
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/CLASP.NET.svg)](https://github.com/synesissoftware/CLASP.NET/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/CLASP.NET)](https://github.com/synesissoftware/CLASP.NET/commits/master)
 
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Components](#components)
-4. [Examples](#examples)
-5. [Project Information](#project-information)
+
+## Table of Contents <>
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Components](#components)
+- [Examples](#examples)
+- [Project Information](#project-information)
 
 ## Introduction
 
@@ -24,7 +33,7 @@ All CLASP libraries provide the facilities to **C**ommand **L**ine
 Install via **Nuget** as in:
 
 ```
-	nuget install CLASP.NET
+  nuget install CLASP.NET
 ```
 
 ## Components

@@ -1,4 +1,4 @@
-#  **CLASP.NET** Changes
+# CLASP.NET - Changes <!-- omit in toc -->
 
 ## 0.26.165.1 - 14th August 2019
 

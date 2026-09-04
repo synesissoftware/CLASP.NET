@@ -1,4 +1,4 @@
-# CLASP.NET Examples
+# CLASP.NET - Examples <!-- omit in toc -->
 
 |Name|Source & Description|Summary|
 |---|---|---|

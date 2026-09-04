@@ -1,4 +1,4 @@
-# CLASP.NET Example - **Example.ShowUsageAndQuit**
+# CLASP.NET - Example - **Example.ShowUsageAndQuit**
 
 ## Summary
 

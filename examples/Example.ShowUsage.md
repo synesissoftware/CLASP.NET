@@ -1,4 +1,4 @@
-# CLASP.NET Example - **Example.ShowUsage**
+# CLASP.NET - Example - **Example.ShowUsage**
 
 ## Summary
 
