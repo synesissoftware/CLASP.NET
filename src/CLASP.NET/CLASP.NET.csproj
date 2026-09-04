@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(NetLibVersion);$(NetStandardLibVersion)</TargetFrameworks>
+    <RootNamespace>Clasp</RootNamespace>
+    <AssemblyName>CLASP</AssemblyName>
+
+    <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <PackageId>CLASP.NET</PackageId>
+    <Title>CLASP.NET</Title>
+    <Description>Command-Line Argument Sorting and Parsing for .NET</Description>
+    <PackageTags>CLASP;CLI;command-line;dotnet;Synesis</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/synesissoftware/CLASP.NET</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/synesissoftware/CLASP.NET/blob/master/CHANGES.md</PackageReleaseNotes>
+
+    <!--
+      Framework-era sources: full nullable + file-scoped + AOT hygiene is
+      follow-on debt (see TODO.md). Keep Directory.Build.props defaults for
+      new files / tests / samples.
+    -->
+    <Nullable>disable</Nullable>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <IsAotCompatible>false</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="All" />
+    <InternalsVisibleTo Include="CLASP.NET.Tests" />
+  </ItemGroup>
+
+</Project>
