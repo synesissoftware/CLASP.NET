@@ -42,7 +42,6 @@ autocmd BufWritePre * %s/\s\+$//e
 
 augroup sis_dotnet
   autocmd!
-
   " [bat] / [dosbatch]
   autocmd FileType bat,dosbatch setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=60,76
 
@@ -56,11 +55,12 @@ augroup sis_dotnet
   autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=60,76
 
   " [shellscript]
-  autocmd FileType sh,bash,zsh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=60,76
+  autocmd FileType bash,sh,zsh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2 colorcolumn=60,76
 
   " [toml]
   autocmd FileType toml setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
 
   " [xml] — SDK-style .csproj / .props / .targets use 2-space indent
   autocmd FileType xml setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
 augroup END

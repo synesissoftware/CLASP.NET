@@ -1,64 +1,44 @@
 root = true
 
+# Language indent/EOL/charset overlap with .vscode/settings.json.
+# Rulers, renderWhitespace, detectIndentation, mergeEditor, and
+# language-server settings cannot be expressed here — they stay in
+# settings.json.
+
 [*]
 charset = utf-8
 end_of_line = lf
-insert_final_newline = true
 indent_size = 2
 indent_style = tab
+insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{cs,csx,vb,vbx}]
+# [csharp]
+[*.{cs,csx}]
 indent_size = 4
 indent_style = space
 
-[*.{json}]
-indent_size = 2
-indent_style = tab
-
-[*.{yml,yaml}]
-indent_size = 2
-indent_style = tab
-
-[*.{py}]
+# [json]
+[*.json]
 indent_size = 2
 indent_style = space
 
-[*.{rb}]
-indent_size = 2
-indent_style = space
-
-[*.{toml}]
-indent_size = 2
-indent_style = tab
-
+# [markdown]
 [*.md]
-trim_trailing_whitespace = true
+indent_size = 2
+indent_style = space
 
-[*.cs]
-# Organize usings
-dotnet_sort_system_directives_first = true
-dotnet_separate_import_directive_groups = false
+# [shellscript]
+[*.{bash,sh,zsh}]
+indent_size = 2
+indent_style = space
 
-# this. preferences
-dotnet_style_qualification_for_field = false:warning
-dotnet_style_qualification_for_property = false:warning
-dotnet_style_qualification_for_method = false:warning
-dotnet_style_qualification_for_event = false:warning
+# [xml] — SDK-style .csproj / .props / .targets
+[*.{csproj,props,targets,xml}]
+indent_size = 2
+indent_style = space
 
-# Language preferences
-csharp_prefer_braces = true:warning
-csharp_prefer_simple_using_statement = true:suggestion
-csharp_style_namespace_declarations = file_scoped:warning
-csharp_style_prefer_primary_constructors = true:suggestion
-
-# Naming conventions
-dotnet_naming_rule.interfaces_should_be_prefixed_with_i.severity = warning
-dotnet_naming_rule.interfaces_should_be_prefixed_with_i.symbols = interface
-dotnet_naming_rule.interfaces_should_be_prefixed_with_i.style = begins_with_i
-
-dotnet_naming_symbols.interface.applicable_kinds = interface
-dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-
-dotnet_naming_style.begins_with_i.required_prefix = I
-dotnet_naming_style.begins_with_i.capitalization = pascal_case
+# [yaml]
+[*.{yaml,yml}]
+indent_size = 2
+indent_style = space
