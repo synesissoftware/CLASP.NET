@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - boilerplate
+      - idiomatic
+      - rc1
+      - rc2
+      - rc3
+      - skeleton
+  pull_request:
+  workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  CI: true
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore CLASP.NET.sln
+
+      - name: Build
+        run: dotnet build CLASP.NET.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test CLASP.NET.sln --configuration Release --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: "**/TestResults/*.trx"
+          if-no-files-found: ignore
+
+  pack:
+    name: Pack NuGet
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Pack
+        run: dotnet pack src/CLASP.NET/CLASP.NET.csproj --configuration Release --output artifacts/packages
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/packages/*.nupkg
+
+      - name: Upload symbol packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-symbol-packages
+          path: artifacts/packages/*.snupkg
+          if-no-files-found: ignore

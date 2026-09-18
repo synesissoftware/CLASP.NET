@@ -1,55 +1,44 @@
+# Synesis Information Systems .gitignore for .NET / C# libraries
+
 
 # directories (by name)
 
-build/
-buildsrc/
-keys/
-scripts/
+/.idea/
+/.vs/
+/TestResults/
+/artifacts/
+/bin/
+/obj/
+/scratch/
+[Bb]in/
+[Oo]bj/
 
-bin/
-obj/
-
-TestResults/
 
 # directories (by pattern)
 
-/packages/
+**/[Pp]ackages/*
+
 
 # files (by name)
 
-!.gitignore
+.DS_Store
 
-build.cmd
-
-Local.testsettings
-TraceAndTestImpact.testsettings
-
-project.lock.json
-project.assets.json
 
 # files (by pattern)
 
 *~
-*.*~
-*.dis
+*.coverage
+*.coveragexml
 *.nupkg
-*.opensdf
-*.org
-*.pkg
-*.proj
-*.scc
-*.sdf
+*.snupkg
 *.suo
-*.swp
+*.sw[pon]
 *.tmp
+*.trx
+*.user
 *.zip
+project.lock.json
 
-*.nuget.props
-*.nuget.targets
 
-*.csproj*.user
-*.vcproj.user
-*.vcxproj.user
-TestResult*.xml
-UpgradeLog*.XML
-
+# Local Framework-era tree kept during SDK modernisation
+_legacy/

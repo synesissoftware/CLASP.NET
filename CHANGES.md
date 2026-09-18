@@ -1,4 +1,18 @@
-#  **CLASP.NET** Changes
+# CLASP.NET - Changes <!-- omit in toc -->
+
+
+## 0.27.0 - 4th September 2026
+
+* SDK-style cross-platform packaging: multi-target library (`net8.0`, `netstandard2.0`), xUnit tests, QuickStart sample;
+* Synesis markdown set (**AUTHORS.md**, **CHANGES.md**, **CONTRIBUTING.md**, **EXAMPLES.md**, **FAQ.md**, **INSTALL.md**, **NEWS.md**, **README.md**, **TODO.md**);
+* GitHub Actions **ci.yml** (Ubuntu, Windows, macOS) and **release.yml** NuGet publish workflow;
+* NuGet packaging id **CLASP.NET** with portable PDB symbol packages (`.snupkg`) and Source Link;
+* Synesis-standard build scripts (**build.sh**, **build.ps1**) and **.sis/** project identity;
+* SemVer **0.27.0** continues after Framework-era **0.26.165.1** (4-part assembly versions collapsed to SemVer);
+* Ported **Clasp** / **Clasp.Util** / **Clasp.Binding** / **Clasp.Exceptions** / **Clasp.Interfaces** API surface into **src/CLASP.NET/** (public namespaces unchanged for **libCLImate.NET** Climate);
+* Public **Clasp.LibraryVersion** (`Major` / `Minor` / `Patch` / `VersionString`);
+* Deferred for a later pass: file-scoped namespaces, full nullable annotations, AOT trim annotations, Recls-backed **Clasp.Util.SearchSpec** / **GatherOptions**, full xUnit remapping of Framework MSTest suites;
+
 
 ## 0.26.165.1 - 14th August 2019
 
@@ -176,3 +190,4 @@
 T.B.C.
 
 
+<!-- ########################### end of file ########################### -->
